@@ -3,5 +3,7 @@
  */
 module.exports = {
   appName: 'blog',
-  mongoURL: 'mongodb://localhost:27017/blog',
+  mongoHost: 'mongodb://localhost',
+  mongoDataBase: 'blog',
+  mongoPort: 27017
 };

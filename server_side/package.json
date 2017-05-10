@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.1.1",
     "log4js": "^1.1.1",
     "mongoose": "^4.9.8"
   }

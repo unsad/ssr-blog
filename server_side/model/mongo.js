@@ -5,7 +5,8 @@ const config = require('../conf/config');
 const mongoose = require('mongoose');
 const log = require('../utils/log');
 
-mongoose.connect('mongodb://localhost:27017/test');
+let mongoUrl = '127.0.0.1:27017/koa_rest_mongoose';
+mongoose.connect(mongoUrl);
 
 let db = mongoose.connection; // 监控数据库变化
 db.on('error', log.error.bind(log, 'connect error:'));
@@ -17,7 +18,7 @@ let ObjectId = Schema.ObjectId;
 let post = new Schema({
   visits: {type: Number, default: 0},
   // 0为文章，1为页面
-  type: {type: ObjectId, default: 0},
+  type: {type: String, default: 0},
   // 0为草稿，1为发布
   status: {type: Number, default: 0},
   title: String,

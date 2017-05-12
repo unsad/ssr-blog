@@ -24,6 +24,17 @@ module.exports = function generateActions(model) {
         error = _error;
         return this.body = error;
       }
+    },
+    findById: async function(next) {
+      await next;
+      let error, result;
+      try {
+        result = await model.findById(this.params.id).exec();
+        return this.body = result;
+      } catch (_error) {
+        error = _error;
+        return this.body = error;
+      }
     }
   }
 };

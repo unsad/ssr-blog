@@ -35,6 +35,53 @@ module.exports = function generateActions(model) {
         error = _error;
         return this.body = error;
       }
+    },
+    deleteById: async function(next) {
+      await next;
+      let error, result;
+      try {
+        result = await model.findByIdAndRemove(this.params.id).exec();
+        return this.body = result;
+      } catch (_error) {
+        error = _error;
+        return this.body = error;
+      }
+    },
+    replaceById: async function(next) {
+      await next;
+      let error, newDocument, result;
+      try {
+        await model.findByIdAndRemove(this.params.id).exec();
+        newDocument = this.request.body;
+        newDocument._id = this.params.id;
+        result = await model.create(newDocument);
+        return this.body = result;
+      } catch (_error) {
+        return this.body = error;
+      }
+    },
+    updateById: async function(next) {
+      await next;
+      let error, result;
+      try {
+        result = await model.findByIdAndUpdate(this.params.id, this.request.body, {new: true}).exec();
+        return this.body = result;
+      } catch (_error) {
+        error = _error;
+        return this.body = error;
+      }
+    },
+    create: async function(next) {
+      await next;
+      let error, result;
+      try {
+        result = await model.create(this.request.body);
+        this.status = 201;
+        return this.body = result;
+      } catch (_error) {
+        error = _error;
+        return this.body = error;
+      }
     }
   }
 };

@@ -18,7 +18,7 @@ let ObjectId = Schema.ObjectId;
 let post = new Schema({
   visits: {type: Number, default: 0},
   // 0为文章，1为页面
-  type: {type: String, default: 0},
+  type: {type: String, default: ''},
   // 0为草稿，1为发布
   status: {type: Number, default: 0},
   title: String,
@@ -27,8 +27,8 @@ let post = new Schema({
   content: {type: String},
   // 1为允许， 0为不允许
   allowComment: {type: Number, default: 1},
-  createdAt: Date,
-  updateAt: Date,
+  createdAt: {type: Number, default: 0},
+  updateAt: {type: Number, default: 0},
   // 1为公开，0为不公开
   isPubilc: {type: Number, default: 1},
   commentNum: Number,
@@ -67,7 +67,7 @@ let user = new Schema({
   displayName: String,
   password: String,
   email: String,
-  createdAt: Date,
+  createdAt: {type: Number, default: 0},
   createdIP: String,
   lastLoginTime: Date,
   lastLoginIP: String

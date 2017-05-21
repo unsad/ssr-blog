@@ -7,7 +7,7 @@
       <li>首页</li>
       <li>归档</li>
       <li>标签</li>
-      <li>关于</li>
+      <li><router-link to="/about">关于</router-link></li>
     </ul>
   </nav>
 </template>

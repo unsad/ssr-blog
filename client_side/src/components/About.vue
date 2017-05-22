@@ -1,10 +1,13 @@
 <template>
-  <div>
+  <div id="main">
+    <article class="post page">
     {{html}}
+    </article>
+  <my-footer></my-footer>
   </div>
 </template>
-
 <script>
+  import myFooter from './Footer.vue';
   export default {
     name: 'about',
     data() {
@@ -16,6 +19,9 @@
           console.log('response error', err)
         })
       }
+    },
+    components: {
+      myFooter
     }
   }
 </script>

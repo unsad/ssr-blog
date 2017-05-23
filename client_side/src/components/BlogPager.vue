@@ -14,7 +14,7 @@
   import myFooter from './Footer.vue';
 
   export default {
-    name: 'BlogPager',
+    name: 'blogPager',
     data() {
       return {
         items: store.fetchBlogByPage(this, 0).then(items => this.items = items)

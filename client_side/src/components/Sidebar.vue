@@ -14,7 +14,7 @@
 
 <script>
   export default {
-    name: 'sidebar'
+    name: 'sideBar'
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">

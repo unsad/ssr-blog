@@ -1,9 +1,10 @@
 <template>
   <div id="main">
     <section id="page-index">
-      <li v-for="item in items">
-        {{item.title}}
-      </li>
+        <blog-summary v-for="item of items" :article="item">
+
+        </blog-summary>
+        <pagination :next=2 :prev=1></pagination>
     </section>
     <my-footer></my-footer>
   </div>
@@ -12,6 +13,8 @@
 <script>
   import store from '../store/index';
   import myFooter from './Footer.vue';
+  import blogSummary from './BlogSummary.vue';
+  import pagination from './Pagination.vue'
 
   export default {
     name: 'blogPager',
@@ -21,7 +24,9 @@
       }
     },
     components: {
-      myFooter
+      myFooter,
+      blogSummary,
+      pagination
     }
   }
 </script>

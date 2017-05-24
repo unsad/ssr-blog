@@ -10,7 +10,10 @@ let router =  new Router({
     {
       path: '/',
       name: 'main',
-      component: BlogPager
+      component: BlogPager,
+      params: {
+        page: 1
+      }
     },
     {
       path: '/about',

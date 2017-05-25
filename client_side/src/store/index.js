@@ -30,3 +30,14 @@ store.fetchBlogByPage = (vue, page = 0, perPage = 10) => {
     console.log('response error', err);
   })
 };
+
+store.fetchBlogCount = (vue, page = 0, perPage = 10) => {
+  let api = `/proxyPrefix/api/post?count=1`;
+
+  return vue.$http.get(api).then((response) => {
+    let totalPage = Math.ceil(parseInt(response.body) / perPage);
+    return totalPage;
+  }, (err) => {
+    console.log('response error', err);
+  })
+};

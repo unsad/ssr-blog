@@ -4,7 +4,7 @@
         <blog-summary v-for="item of items" :article="item">
 
         </blog-summary>
-        <pagination :page='page' :has-prev="false" :has-next="true"></pagination>
+        <pagination :page='page' :total-page="totalPage"></pagination>
     </section>
     <my-footer></my-footer>
   </div>
@@ -24,7 +24,8 @@
           this.items = items;
           window.scrollTo(0, 0)
         }),
-        page: 1
+        page: 1,
+        totalPage: store.fetchBlogCount(this).then(totalPage => this.totalPage = totalPage)
       }
     },
     watch: {

@@ -5,6 +5,11 @@ const Koa = require('koa');
 const log = require('./utils/log');
 
 const app = new Koa();
+const router = require('koa-router')();
+
+const koa2RestMongoose = require('./mongo_rest/index');
+
+const models = require('./model/mongo');
 
 app.use(async (ctx, next) => {
   const start = new Date();
@@ -13,12 +18,11 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
-// response
-app.use(ctx => {
-  ctx.body = 'hello koa';
+Object.keys(models).forEach(value => {
+  if (value !== 'db') {
+    koa2RestMongoose(app, router, models[value], '/api');
+  }
 });
-
-require('./model/mongo');
 
 app.listen(3000);
 

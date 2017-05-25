@@ -11,7 +11,7 @@
 </template>
 <script>
   import myFooter from './Footer.vue';
-  import store from '../store/index';
+  import store from '../../store/index';
 
   export default {
     name: 'about',

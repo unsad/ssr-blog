@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import store from '../store/index';
+  import store from '../../store/index';
   import myFooter from './Footer.vue';
   import blogSummary from './BlogSummary.vue';
   import pagination from './Pagination.vue'

@@ -21,11 +21,10 @@ store.fetchAbout = (vue) => {
 store.fetchBlogByPage = (vue, page = 0, perPage = 10) => {
   return vue.$http.get(blogAPI, {
     params: {
-      conditions: {
-        type: 0
-      },
+      type: '0',
       limit: perPage,
-      skip: page * perPage
+      skip: page * perPage,
+      sort: '1'
     }
   }).then((response) => {
     console.log(response.body[0].title);
@@ -38,14 +37,25 @@ store.fetchBlogByPage = (vue, page = 0, perPage = 10) => {
 store.fetchBlogCount = (vue, page = 0, perPage = 10) => {
   return vue.$http.get(blogAPI, {
     params: {
-      conditions: {
-        type: 0
-      },
+      type: '0',
       count: 1
     }
   }).then((response) => {
     return Math.ceil(parseInt(response.body) / perPage);
   }, (err) => {
     console.log('response error', err);
+  })
+};
+
+store.fetchAllBlog = (vue, page = 0, perPage = 10) => {
+  return vue.$http.get(blogAPI, {
+    params: {
+      type: '0',
+      sort: '1'
+    }
+  }).then((response) => {
+    return response.body;
+  }, (err) => {
+    console.log(err);
   })
 };

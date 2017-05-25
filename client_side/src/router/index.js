@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import BlogPager from '@/components/BlogPager'
-import About from '@/components/About'
+import BlogPager from '@/components/home/BlogPager'
+import About from '@/components/home/About'
+import Archive from '@/components/home/Archive'
 
 Vue.use(Router);
 
@@ -14,8 +15,13 @@ let router =  new Router({
     },
     {
       path: '/about',
-      name: 'About',
+      name: 'about',
       component: About
+    },
+    {
+      path: '/archive',
+      name: 'archive',
+      component: Archive
     },
     {
       path: '*',

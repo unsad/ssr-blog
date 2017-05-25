@@ -12,12 +12,18 @@ module.exports = function generateActions(model) {
         if (query.conditions) {
           conditions = JSON.parse(query.conditions);
         }
+        if (typeof query.type !== 'undefined') {
+          conditions.type = query.type;
+        }
         let builder = model.find(conditions);
         ['limit', 'skip', 'sort', 'count'].forEach(function(key) {
           if (query[key]) {
             let arg = query[key];
             if (key === 'limit' || key === 'skip') {
               arg = parseInt(arg);
+            }
+            if (key === 'sort') {
+              arg = {"_id": "desc"};
             }
             if (key !== 'count') {
               builder[key](arg);

@@ -4,7 +4,7 @@
         <blog-summary v-for="item of items" :article="item">
 
         </blog-summary>
-        <pagination :next=2 :prev=1></pagination>
+        <pagination :page='page' :has-prev="false" :has-next="true"></pagination>
     </section>
     <my-footer></my-footer>
   </div>
@@ -20,7 +20,24 @@
     name: 'blogPager',
     data() {
       return {
-        items: store.fetchBlogByPage(this, 0).then(items => this.items = items)
+        items: store.fetchBlogByPage(this, 0).then(items => {
+          this.items = items;
+          window.scrollTo(0, 0)
+        }),
+        page: 1
+      }
+    },
+    watch: {
+      page() {
+        this.getItems();
+      }
+    },
+    methods: {
+      getItems() {
+        store.fetchBlogByPage(this, this.page - 1).then(items => {
+          this.items = items;
+          window.scrollTo(0, 0)
+        })
       }
     },
     components: {

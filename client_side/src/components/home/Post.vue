@@ -22,18 +22,21 @@
         </p>
         <div class="post-info">
           <p>发表于
-            <time>占位</time>
+            <time>{{article.createAt}}</time>
             ，添加在分类
             <a href="/cate/Node.js" data-cate="Node.js">Node.js</a>
             下，并被添加[
             <a href="/tags/JavaScript" data-tag="JavaScript"><code class="notebook">JavaScript</code></a>
             ]标签下，
             最后修改于
-            <time>占位</time>
+            <time>{{article.updatedAt}}</time>
           </p>
         </div>
       </article>
-      <nav class="pagination"><a href="/post/exam.html" class="prev">&laquo;翻页占位</a></nav>
+      <nav class="pagination">
+        <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'" class="prev">&laquo;{{prev.title}}</router-link>
+        <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof prev.pathName !== 'undefined'" class="next">&laquo;{{next.title}}</router-link>
+      </nav>
     </div>
   </div>
 </template>
@@ -45,7 +48,11 @@
     name: 'Post',
     data() {
       return {
-        article: {}
+        article: {},
+        cates: [],
+        tags: [],
+        prev: {},
+        next: {}
       }
     }
   }

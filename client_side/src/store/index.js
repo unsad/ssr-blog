@@ -5,6 +5,7 @@ import { EventEmitter } from 'events';
 const aboutAPI = `/proxyPrefix/api/post/57dbe47c2993f70dc6d6b12c`;
 const blogAPI = `/proxyPrefix/api/post`;
 const tagAPI = `/proxyPrefix/api/tag`;
+const postTagAPI =`/proxyPrefix/api/postTag`;
 
 const store = new EventEmitter();
 
@@ -16,7 +17,7 @@ store.fetchAbout = (vue) => {
     return response.body;
   }, (err) => {
     console.log('response error', err);
-  })
+  });
 };
 
 store.fetchBlogByPage = (vue, page = 0, perPage = 10) => {
@@ -32,7 +33,7 @@ store.fetchBlogByPage = (vue, page = 0, perPage = 10) => {
     return response.body;
   }, (err) => {
     console.log('response error', err);
-  })
+  });
 };
 
 store.fetchBlogCount = (vue, page = 0, perPage = 10) => {
@@ -45,7 +46,7 @@ store.fetchBlogCount = (vue, page = 0, perPage = 10) => {
     return Math.ceil(parseInt(response.body) / perPage);
   }, (err) => {
     console.log('response error', err);
-  })
+  });
 };
 
 store.fetchAllBlog = (vue) => {
@@ -58,7 +59,7 @@ store.fetchAllBlog = (vue) => {
     return response.body;
   }, (err) => {
     console.log(err);
-  })
+  });
 };
 
 store.fetchTags = (vue) => {
@@ -66,5 +67,13 @@ store.fetchTags = (vue) => {
     return response.body;
   }, (err) => {
     console.log(err);
-  })
+  });
+};
+
+store.fetchPostTags = (vue) => {
+  return vue.$http.get(postTagAPI).then((response) => {
+    return response.body;
+  }, (err) => {
+    console.log(err);
+  });
 };

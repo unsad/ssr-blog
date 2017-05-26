@@ -4,7 +4,7 @@
       <h1 class="title">{{title}}</h1>
       <div class="entry-content">
         <section>
-          <a v-for="item of items" :href="`/tags/${item.name}`" data-tag="item.name">{{{item.name}}(0)</a>
+          <a v-for="item of items" :href="`/tags/${item.name}`" data-tag="item.name">{{{item.name}}{{item.count}}</a>
         </section>
       </div>
     </article>
@@ -21,13 +21,24 @@
     data() {
       return {
         title: '标签',
-        items: []
+        items: {}
       }
     },
     created() {
       store.fetchTags(this).then(items => {
-        this.items = items;
-      })
+        store.fetchPostTags(this).then(postTags => {
+          postTags.forEach(value => {
+            let tagID = value.tagID;
+            if (typeof items[tagID - 1].count === 'undefined') {
+              items[tagID - 1].count = 1;
+            } else {
+              items[tagID - 1].count++;
+            }
+          });
+          items.sort((a, b) => b.count - a.count);
+          this.items = items;
+        });
+      });
     }
   }
 </script>

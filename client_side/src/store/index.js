@@ -23,7 +23,8 @@ store.fetchAbout = (vue) => {
 store.fetchBlogByPage = (vue, page = 0, perPage = 10) => {
   return vue.$http.get(blogAPI, {
     params: {
-      type: '0',
+      keys: ['type'],
+      values: ['0'],
       limit: perPage,
       skip: page * perPage,
       sort: '1'
@@ -39,7 +40,8 @@ store.fetchBlogByPage = (vue, page = 0, perPage = 10) => {
 store.fetchBlogCount = (vue, page = 0, perPage = 10) => {
   return vue.$http.get(blogAPI, {
     params: {
-      type: '0',
+      keys: ['type'],
+      values: ['0'],
       count: 1
     }
   }).then((response) => {
@@ -52,7 +54,8 @@ store.fetchBlogCount = (vue, page = 0, perPage = 10) => {
 store.fetchAllBlog = (vue) => {
   return vue.$http.get(blogAPI, {
     params: {
-      type: '0',
+      keys: ['type'],
+      values: ['0'],
       sort: '1'
     }
   }).then((response) => {
@@ -75,5 +78,18 @@ store.fetchPostTags = (vue) => {
     return response.body;
   }, (err) => {
     console.log(err);
+  });
+};
+
+store.fetchPostByPathName = (vue, pathName) => {
+  return vue.$http.get(blogAPI, {
+    params: {
+      keys: ['pathName'],
+      values: [pathName]
+    }
+  }).then((response) => {
+    return response.body[0];
+  }, (err) => {
+    console.log(err)
   });
 };

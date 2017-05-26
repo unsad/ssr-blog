@@ -28,7 +28,7 @@
         items: {}
       }
     },
-    ready() {
+    created() {
       store.fetchAllBlog(this).then(items => {
         let result = {};
         item.forEach(item => {

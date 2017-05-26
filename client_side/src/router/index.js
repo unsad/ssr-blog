@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import BlogPager from '@/components/home/BlogPager'
 import About from '@/components/home/About'
 import Archive from '@/components/home/Archive'
+import Tag from '@/components/home/Tag'
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ let router =  new Router({
       path: '/archive',
       name: 'archive',
       component: Archive
+    },
+    {
+      path: '/tag',
+      name: 'tag',
+      component: Tag
     },
     {
       path: '*',

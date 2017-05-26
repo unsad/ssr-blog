@@ -4,6 +4,7 @@
 import { EventEmitter } from 'events';
 const aboutAPI = `/proxyPrefix/api/post/57dbe47c2993f70dc6d6b12c`;
 const blogAPI = `/proxyPrefix/api/post`;
+const tagAPI = `/proxyPrefix/api/tag`;
 
 const store = new EventEmitter();
 
@@ -47,13 +48,21 @@ store.fetchBlogCount = (vue, page = 0, perPage = 10) => {
   })
 };
 
-store.fetchAllBlog = (vue, page = 0, perPage = 10) => {
+store.fetchAllBlog = (vue) => {
   return vue.$http.get(blogAPI, {
     params: {
       type: '0',
       sort: '1'
     }
   }).then((response) => {
+    return response.body;
+  }, (err) => {
+    console.log(err);
+  })
+};
+
+store.fetchTags = (vue) => {
+  return vue.$http.get(tagAPI).then((response) => {
     return response.body;
   }, (err) => {
     console.log(err);

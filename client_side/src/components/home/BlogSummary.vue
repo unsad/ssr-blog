@@ -4,7 +4,7 @@
       <div class="date">{{article.createdAt}}</div>
       <div class="comment"><a :href=`/post/${article.pathName}.html#comments`>{{article.commentNum}}comments</a></div>
     </div>
-    <h1 class="title"><a :href=`/post/${article.pathName}.html`>{{article.title}}</a></h1>
+    <h1 class="title"><router-link :to="{name:'post', params:pathName: article.pathName}">{{article.title}}</router-link></h1>
     <div class="entry-content" v-html="article.summary">
 
     </div>

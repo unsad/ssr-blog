@@ -90,6 +90,6 @@ store.fetchPostByPathName = (vue, pathName) => {
   }).then((response) => {
     return response.body[0];
   }, (err) => {
-    console.log(err)
+    console.log(err);
   });
 };

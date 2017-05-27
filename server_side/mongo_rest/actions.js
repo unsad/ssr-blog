@@ -12,7 +12,6 @@ module.exports = function generateActions(model) {
         if (query.conditions) {
           conditions = JSON.parse(query.conditions);
         }
-        console.log(query);
         if (query.keys && query.values) {
           if (Array.isArray(query.keys) === true) {
             query.keys.forEach((value, index) => {
@@ -53,6 +52,14 @@ module.exports = function generateActions(model) {
       let error, result;
       try {
         result = await model.findById(this.params.id).exec();
+        let query = this.request.query;
+        let arr = ['prev', 'next'];
+        for (let i = 0; i < arr.length; i++) {
+          let key = arr[i];
+          if (query[key]) {
+            result = await result[key]();
+          }
+        }
         return this.body = result;
       } catch (_error) {
         error = _error;

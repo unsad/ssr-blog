@@ -54,6 +54,18 @@
         prev: {},
         next: {}
       }
+    },
+    created() {
+      this.fetchData();
+    },
+    methods: {
+      fetchData() {
+        let pathName = this.$route.params.pathName;
+        store.fetchPostByPathName(this, pathName).then(article => {
+          this.article = article;
+          window.scrollTo(0, 0);
+        });
+      }
     }
   }
 </script>

@@ -4,6 +4,7 @@
       <tip :should-tip-show="showTipShow" type="0" :text="placeholder"></tip>
       <login></login>
     </template>
+    <router-view></router-view>
   </div>
 </template>
 

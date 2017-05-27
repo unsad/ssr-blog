@@ -64,6 +64,14 @@
         store.fetchPostByPathName(this, pathName).then(article => {
           this.article = article;
           window.scrollTo(0, 0);
+          resolve();
+        }).then(() => {
+          store.fetchPrevPostByPathName(this.article._id).then(post => {
+            this.prev = post;
+          });
+          store.fetchNextPostByPathName(this.article._id).then(post => {
+            this.next = post;
+          });
         });
       }
     }

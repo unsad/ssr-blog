@@ -93,3 +93,21 @@ store.fetchPostByPathName = (vue, pathName) => {
     console.log(err);
   });
 };
+
+store.fetchPrevPostByPathName = (vue, id) => {
+  let api = `${blogAPI}/${id}?prev=1`;
+  return vue.$http.get(api).then((response) => {
+    return response.body;
+  }, (err) => {
+    console.log(err);
+  });
+};
+
+store.fetchNextPostByPathName = (vue, id) => {
+  let api = `${blogAPI}/${id}?next=1`;
+  return vue.$http.get(api).then((response) => {
+    return response.body;
+  }, (err) => {
+    console.log(err);
+  });
+};

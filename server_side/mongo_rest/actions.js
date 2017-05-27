@@ -87,6 +87,7 @@ module.exports = function generateActions(model) {
         result = await model.create(newDocument);
         return this.body = result;
       } catch (_error) {
+        error = _error;
         return this.body = error;
       }
     },

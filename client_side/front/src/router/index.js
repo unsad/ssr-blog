@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import BlogPager from '@/components/home/BlogPager'
-import About from '@/components/home/About'
-import Archive from '@/components/home/Archive'
-import Tag from '@/components/home/Tag'
-import Post from '@/components/home/Post'
+import BlogPager from '@/components/BlogPager'
+import About from '@/components/About'
+import Archive from '@/components/Archive'
+import Tag from '@/components/Tag'
+import Post from '@/components/Post'
 
 Vue.use(Router);
 

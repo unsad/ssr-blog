@@ -35,7 +35,7 @@
       </article>
       <nav class="pagination">
         <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'" class="prev">&laquo;{{prev.title}}</router-link>
-        <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof prev.pathName !== 'undefined'" class="next">&laquo;{{next.title}}</router-link>
+        <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof prev.pathName !== 'undefined'" class="next">&raquo;{{next.title}}</router-link>
       </nav>
     </div>
   </div>

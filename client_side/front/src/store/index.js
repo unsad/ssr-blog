@@ -5,7 +5,7 @@ import { EventEmitter } from 'events';
 const aboutAPI = `/proxyPrefix/api/post/57dbe47c2993f70dc6d6b12c`;
 const blogAPI = `/proxyPrefix/api/post`;
 const tagAPI = `/proxyPrefix/api/tag`;
-const postTagAPI =`/proxyPrefix/api/postTag`;
+const postTagAPI = `/proxyPrefix/api/postTag`;
 
 const store = new EventEmitter();
 

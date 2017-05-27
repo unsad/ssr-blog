@@ -48,7 +48,9 @@
         this.items = items;
         window.scrollTo(0, 0)
       });
-      store.fetchBlogCount(this).then(totalPage => this.totalPage = totalPage);
+      store.fetchBlogCount(this).then(totalPage => {
+        this.totalPage = totalPage;
+      });
     }
   }
 </script>

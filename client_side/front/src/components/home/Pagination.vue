@@ -3,7 +3,7 @@
     <a class="prev" href="javascript: void(0)" v-if="page > 1" @click="prev()">&laquo;上一页</a>
     <a class="next" href="javascript: void(0)"  v-if="page < totalPage" @click="next()">&raquo;下一页</a>
     <div class="center">
-      <a href="/archives.html">博客归档</a>
+      <router-link :to="{name: 'archive'}">博客归档</router-link>
     </div>
   </nav>
 </template>

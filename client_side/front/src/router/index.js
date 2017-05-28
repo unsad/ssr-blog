@@ -5,6 +5,7 @@ import About from '@/components/About'
 import Archive from '@/components/Archive'
 import Tag from '@/components/Tag'
 import Post from '@/components/Post'
+import TagPager from '@/components/TagPager'
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ let router = new Router({
       path: '/tag',
       name: 'tag',
       component: Tag
+    },
+    {
+      path: '/tag/:tagName',
+      name: 'tagPager',
+      component: TagPager
     },
     {
       path: '*',

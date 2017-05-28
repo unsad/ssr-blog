@@ -20,11 +20,13 @@ store.fetchAbout = (vue) => {
   });
 };
 
-store.fetchBlogByPage = (vue, page = 0, perPage = 10) => {
+store.fetchBlogByPage = (vue, queryJSON, perPage = 10) => {
+  let keys = Object.keys(queryJSON);
+  let values = Object.values(queryJSON);
   return vue.$http.get(blogAPI, {
     params: {
-      keys: ['type'],
-      values: ['0'],
+      keys,
+      values,
       limit: perPage,
       skip: page * perPage,
       sort: '1'
@@ -37,11 +39,13 @@ store.fetchBlogByPage = (vue, page = 0, perPage = 10) => {
   });
 };
 
-store.fetchBlogCount = (vue, page = 0, perPage = 10) => {
+store.fetchBlogCount = (vue, queryJSON, page = 0) => {
+  let keys = Object.keys(queryJSON);
+  let values = Object.values(queryJSON);
   return vue.$http.get(blogAPI, {
     params: {
-      keys: ['type'],
-      values: ['0'],
+      keys,
+      values,
       count: 1
     }
   }).then((response) => {

@@ -32,7 +32,7 @@
     },
     methods: {
       getItems() {
-        store.fetchBlogByPage(this, this.page - 1).then(items => {
+        store.fetchBlogByPage(this, {type: 0}, this.page - 1).then(items => {
           this.items = items;
           window.scrollTo(0, 0)
         })
@@ -44,11 +44,11 @@
       pagination
     },
     created() {
-      store.fetchBlogByPage(this, 0).then(items => {
+      store.fetchBlogByPage(this, {type: 0}, 0).then(items => {
         this.items = items;
         window.scrollTo(0, 0)
       });
-      store.fetchBlogCount(this).then(totalPage => {
+      store.fetchBlogCount(this, {type: 0}).then(totalPage => {
         this.totalPage = totalPage;
       });
     }

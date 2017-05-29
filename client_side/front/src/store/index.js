@@ -98,6 +98,19 @@ store.fetchPostTags = (vue) => {
   });
 };
 
+store.fetchTagsByPostID = (vue, queryJSON) => {
+  let keys = Object.keys(queryJSON);
+  let values = Object.values(queryJSON);
+  return vue.$http.get(postTagAPI, {
+    keys,
+    values
+  }).then((response) => {
+    return response.body;
+  }, (err) => {
+    console.log(err);
+  });
+};
+
 store.fetchPostByPathName = (vue, pathName) => {
   return vue.$http.get(blogAPI, {
     params: {

@@ -25,9 +25,12 @@
             <time>{{article.createAt}}</time>
             ，添加在分类
             <a href="/cate/Node.js" data-cate="Node.js">Node.js</a>
-            下，并被添加[
-            <a href="/tags/JavaScript" data-tag="JavaScript"><code class="notebook">JavaScript</code></a>
+            下
+            <template v-if="tags.length !== 0">
+            ,并被添加[
+            <router-link v-for="tag in tags" :to="{name: 'tagPager', params: {tagName: tag.name}}" :data-tag="tag.name"><code class="notebook">{{tagName}}</code></router-link>
             ]标签下，
+            </template>
             最后修改于
             <time>{{article.updatedAt}}</time>
           </p>
@@ -71,6 +74,18 @@
           });
           store.fetchNextPostByPathName(this.article._id).then(post => {
             this.next = post;
+          });
+          store.fetchTagsByPostID(this, {postID: article._id}).then(postTags => {
+            console.log(postTags);
+            store.fetchTags(this).then(tags => {
+              let obj = {};
+              tags.forEach(value => {
+                obj[value._id] = value;
+              });
+              postTags.forEach(value => {
+                this.tags.push(obj[value.tagID]);
+              });
+            });
           });
         });
       }

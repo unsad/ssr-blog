@@ -6,6 +6,7 @@ const aboutAPI = `/proxyPrefix/api/post/57dbe47c2993f70dc6d6b12c`;
 const blogAPI = `/proxyPrefix/api/post`;
 const tagAPI = `/proxyPrefix/api/tag`;
 const postTagAPI = `/proxyPrefix/api/postTag`;
+const perPage = 10;
 
 const store = new EventEmitter();
 
@@ -20,7 +21,19 @@ store.fetchAbout = (vue) => {
   });
 };
 
-store.fetchBlogByPage = (vue, queryJSON, perPage = 10) => {
+store.fetchBlogByID = (vue, id, page = 0) => {
+  return vue.$http.get(blogAPI, {
+    params: {
+      id
+    }
+  }).then((response) => {
+    return response.body;
+  }, (err) => {
+    console.log(err);
+  });
+};
+
+store.fetchBlogByPage = (vue, queryJSON, page = 0) => {
   let keys = Object.keys(queryJSON);
   let values = Object.values(queryJSON);
   return vue.$http.get(blogAPI, {

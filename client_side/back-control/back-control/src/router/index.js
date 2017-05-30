@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
+import Login from '@/components/Login'
 
 Vue.use(Router);
 
@@ -23,15 +24,15 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: list
+          components: Login
         },
         {
           path: 'create',
-          components: create
+          components: Login
         },
         {
           path: 'edit/:id',
-          components: edit
+          components: Login
         }
       ]
     },
@@ -42,15 +43,15 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: list
+          components: Login
         },
         {
           path: 'create',
-          components: create
+          components: Login
         },
         {
           path: 'edit/:id',
-          components: edit
+          components: Login
         }
       ]
     },
@@ -61,19 +62,19 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: list
+          components: Login
         },
         {
           path: 'create',
-          components: create
+          components: Login
         },
         {
           path: 'edit/:id',
-          components: edit
+          components: Login
         },
         {
           path: '/edit_pwd',
-          components: edit_pwd
+          components: Login
         }
       ]
     },
@@ -84,15 +85,15 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: list
+          components: Login
         },
         {
           path: 'create',
-          components: create
+          components: Login
         },
         {
           path: 'edit/:id',
-          components: edit
+          components: Login
         }
       ]
     },
@@ -102,15 +103,15 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: list
+          components: Login
         },
         {
           path: 'create',
-          components: create
+          components: Login
         },
         {
           path: 'edit/:id',
-          components: edit
+          components: Login
         }
       ]
     },
@@ -121,23 +122,23 @@ let router = new Router({
       children: [
         {
           path: 'general',
-          components: general
+          components: Login
         },
         {
           path: 'two_factor_auth',
-          components: two_factor_auth
+          components: Login
         },
         {
           path: 'comment',
-          components: comment
+          components: Login
         },
         {
           path: 'analytic',
-          components: analytic
+          components: Login
         },
         {
           path: 'import',
-          components: impo
+          components: Login
         }
       ]
     },

@@ -1,8 +1,13 @@
 <template>
   <div class="hello">
     <template v-if="isLogin === false">
-      <tip :should-tip-show="showTipShow" type="0" :text="placeholder"></tip>
+      <tip :should-tip-show="showTipShow" type="success" text="placeholder"></tip>
       <login></login>
+    </template>
+    <template v-else>
+      <sidebar current-route="/dashboard"></sidebar>
+      <tip :should-tip-show="showTipShow" type="success" text="placeholder"></tip>
+      <router-view></router-view>
     </template>
     <router-view></router-view>
   </div>
@@ -11,6 +16,7 @@
 <script>
 import Login from './Login';
 import Tip from './Tip';
+import Sidebar from './Sidebar';
 
 export default {
   name: 'hello',
@@ -23,7 +29,8 @@ export default {
   },
   components: {
     Login,
-    Tip
+    Tip,
+    Sidebar
   }
 }
 </script>

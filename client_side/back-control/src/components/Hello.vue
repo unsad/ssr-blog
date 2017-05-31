@@ -5,8 +5,9 @@
       <login></login>
     </template>
     <template v-else>
-      <sidebar current-route="/dashboard"></sidebar>
-      <tip :should-tip-show="showTipShow" type="success" text="placeholder"></tip>
+      <sidebar :current-route="currentRoute"></sidebar>
+      <dashboard v-if="currentRoute.indexOf('/dashboard') > -1"></dashboard>
+      <tip :should-tip-show="showTipShow" :type="'success'" :text="'placeholder'"></tip>
       <router-view></router-view>
     </template>
     <router-view></router-view>
@@ -17,20 +18,23 @@
 import Login from './Login';
 import Tip from './Tip';
 import Sidebar from './Sidebar';
+import Dashboard from './Dashboard';
 
 export default {
   name: 'hello',
   data () {
     return {
-      isLogin: false,
+      isLogin: true,
       shouldTipShow: false,
-      SystemInfo: {}
+      SystemInfo: {},
+      currentRoute: '/dashboard'
     }
   },
   components: {
     Login,
     Tip,
-    Sidebar
+    Sidebar,
+    Dashboard
   }
 }
 </script>

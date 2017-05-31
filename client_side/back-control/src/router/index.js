@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Login from '@/components/Login'
+import Dashboard from '@/components/Dashboard'
 
 Vue.use(Router);
 
@@ -14,8 +15,8 @@ let router = new Router({
     },
     {
       path: '/dashboard',
-      name: 'dashboard',
-      component: dashboard
+      name: 'Dashboard',
+      component: Dashboard
     },
     {
       path: '/post',

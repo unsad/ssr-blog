@@ -1,13 +1,14 @@
 <template>
   <div class="hello">
     <template v-if="isLogin === false">
-      <tip :should-tip-show="showTipShow" type="success" text="placeholder"></tip>
+      <tip :should-tip-show="shouldTipShow" type="success" text="placeholder"></tip>
       <login></login>
     </template>
     <template v-else>
       <sidebar :current-route="currentRoute"></sidebar>
       <dashboard :current-route="currentRoute" v-if="currentRoute.indexOf('/dashboard') > -1"></dashboard>
-      <tip :should-tip-show="showTipShow" :type="'success'" :text="'placeholder'"></tip>
+      <post-list :current-route="shouldTipShow" v-if="currentRoute === '/post/list'"></post-list>
+      <tip :should-tip-show="shouldTipShow" :type="'success'" :text="'placeholder'"></tip>
       <router-view></router-view>
     </template>
     <router-view></router-view>
@@ -19,6 +20,7 @@ import Login from './Login';
 import Tip from './Tip';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
+import PostList from './PostList';
 
 export default {
   name: 'hello',
@@ -34,7 +36,8 @@ export default {
     Login,
     Tip,
     Sidebar,
-    Dashboard
+    Dashboard,
+    PostList
   }
 }
 </script>

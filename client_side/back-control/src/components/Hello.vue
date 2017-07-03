@@ -8,6 +8,7 @@
       <sidebar :current-route="currentRoute"></sidebar>
       <dashboard :current-route="currentRoute" v-if="currentRoute.indexOf('/dashboard') > -1"></dashboard>
       <post-list :current-route="shouldTipShow" v-if="currentRoute === '/post/list'"></post-list>
+      <page-list :current-route="currentRoute" v-if="currentRoute === '/page/list'"></page-list>
       <tip :should-tip-show="shouldTipShow" :type="'success'" :text="'placeholder'"></tip>
       <router-view></router-view>
     </template>
@@ -21,6 +22,7 @@ import Tip from './Tip';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import PostList from './PostList';
+import PageList from './PageList';
 
 export default {
   name: 'hello',
@@ -37,7 +39,8 @@ export default {
     Tip,
     Sidebar,
     Dashboard,
-    PostList
+    PostList,
+    PageList
   }
 }
 </script>

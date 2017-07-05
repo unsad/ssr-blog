@@ -66,14 +66,6 @@ let router = new Router({
           components: Login
         },
         {
-          path: 'create',
-          components: Login
-        },
-        {
-          path: 'edit/:id',
-          components: Login
-        },
-        {
           path: '/edit_pwd',
           components: Login
         }
@@ -126,19 +118,11 @@ let router = new Router({
           components: Login
         },
         {
-          path: 'two_factor_auth',
-          components: Login
-        },
-        {
           path: 'comment',
           components: Login
         },
         {
           path: 'analytic',
-          components: Login
-        },
-        {
-          path: 'import',
           components: Login
         }
       ]

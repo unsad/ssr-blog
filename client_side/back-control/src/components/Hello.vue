@@ -9,8 +9,12 @@
       <dashboard :current-route="currentRoute" v-if="currentRoute.indexOf('/dashboard') > -1"></dashboard>
       <post-list :current-route="shouldTipShow" v-if="currentRoute === '/post/list'"></post-list>
       <page-list :current-route="currentRoute" v-if="currentRoute === '/page/list'"></page-list>
+      <tag-list :current-route="currentRoute" v-if="currentRoute === '/tag/list'"></tag-list>
+      <tag-create :current-route="currentRoute" v-if="currentRoute === '/tag/create'"></tag-create>
+      <cate-list :current-route="currentRoute" v-if="currentRoute === '/cate/list'"></cate-list>
+      <cate-create :current-route="currentRoute" v-if="currentRoute === '/cate/create'"></cate-create>
+      <user-edit :current-route="currentRoute" v-if="currentRoute === '/user/edit_pwd'"></user-edit>
       <tip :should-tip-show="shouldTipShow" :type="'success'" :text="'placeholder'"></tip>
-      <router-view></router-view>
     </template>
     <router-view></router-view>
   </div>
@@ -23,6 +27,9 @@ import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import PostList from './PostList';
 import PageList from './PageList';
+import TagCreate from './TagCreate';
+import CateCreate from './CateCreate';
+import UserEdit from './UserEdit';
 
 export default {
   name: 'hello',
@@ -40,7 +47,10 @@ export default {
     Sidebar,
     Dashboard,
     PostList,
-    PageList
+    PageList,
+    TagCreate,
+    CateCreate,
+    UserEdit
   }
 }
 </script>

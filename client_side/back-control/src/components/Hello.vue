@@ -14,6 +14,10 @@
       <cate-list :current-route="currentRoute" v-if="currentRoute === '/cate/list'"></cate-list>
       <cate-create :current-route="currentRoute" v-if="currentRoute === '/cate/create'"></cate-create>
       <user-edit :current-route="currentRoute" v-if="currentRoute === '/user/edit_pwd'"></user-edit>
+      <user-list :current-route="currentRoute" v-if="currentRoute === '/user/list'"></user-list>
+      <option-general :current-route="currentRoute" v-if="currentRoute === '/option/general'"></option-general>
+      <option-comment :current-route="currentRoute" v-if="currentRoute === '/option/comment'"></option-comment>
+      <option-analytic :current-route="currentRoute" v-if="currentRoute === '/option/analytic'"></option-analytic>
       <tip :should-tip-show="shouldTipShow" :type="'success'" :text="'placeholder'"></tip>
     </template>
     <router-view></router-view>
@@ -30,6 +34,10 @@ import PageList from './PageList';
 import TagCreate from './TagCreate';
 import CateCreate from './CateCreate';
 import UserEdit from './UserEdit';
+import UserList from './UserList';
+import OptionGeneral from './OptionGeneral';
+import OptionComment from './OptionComment';
+import OptionAnalytic from './OptionAnalytic';
 
 export default {
   name: 'hello',

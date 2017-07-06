@@ -109,8 +109,8 @@ let router = new Router({
       ]
     },
     {
-      path: '/options',
-      name: 'post',
+      path: '/option',
+      name: 'option',
       components: post,
       children: [
         {

@@ -8,7 +8,9 @@
       <sidebar :current-route="currentRoute"></sidebar>
       <dashboard :current-route="currentRoute" v-if="currentRoute.indexOf('/dashboard') > -1"></dashboard>
       <post-list :current-route="shouldTipShow" v-if="currentRoute === '/post/list'"></post-list>
+      <post-create :current-route="currentRoute" v-if="currentRoute === '/post/create'"></post-create>
       <page-list :current-route="currentRoute" v-if="currentRoute === '/page/list'"></page-list>
+      <page-create :current-route="currentRoute" v-if="currentRoute === '/post/create"></page-create>
       <tag-list :current-route="currentRoute" v-if="currentRoute === '/tag/list'"></tag-list>
       <tag-create :current-route="currentRoute" v-if="currentRoute === '/tag/create'"></tag-create>
       <cate-list :current-route="currentRoute" v-if="currentRoute === '/cate/list'"></cate-list>
@@ -30,7 +32,9 @@ import Tip from './Tip';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import PostList from './PostList';
+import PostCreate from './PostCreate';
 import PageList from './PageList';
+import PageCreate from './PageCreate';
 import TagCreate from './TagCreate';
 import CateCreate from './CateCreate';
 import UserEdit from './UserEdit';
@@ -58,7 +62,9 @@ export default {
     PageList,
     TagCreate,
     CateCreate,
-    UserEdit
+    UserEdit,
+    PostCreate,
+    PageCreate
   }
 }
 </script>

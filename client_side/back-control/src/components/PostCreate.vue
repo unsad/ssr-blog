@@ -106,7 +106,7 @@
           type: 'day',
           week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
           month: ['January', 'February', 'March', 'April', 'May',
-            'June', 'Jujy', 'August', 'September', 'October', 'November'
+            'June', 'Jujy', 'August', 'September', 'October', 'November',
             'December'],
           format: 'YYYY-MM-DD',
           placeholder: 'when?',
@@ -126,7 +126,7 @@
           type: 'min',
           week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
           month: ['January', 'February', 'March', 'April', 'May',
-            'June', 'Jujy', 'August', 'September', 'October', 'November'
+            'June', 'Jujy', 'August', 'September', 'October', 'November',
             'December'],
           format: 'YYYY-MM-DD HH:mm'
         },

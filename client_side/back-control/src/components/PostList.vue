@@ -35,7 +35,7 @@
               <a href="" v-if="item.status === 3" target="_blank"></a>
             </td>
             <td>{{item.user.display_name || item.user.name}}</td>
-            <td>{{this.renderStatus(item.status}}</td>
+            <td>{{this.renderStatus(item.status)}}</td>
             <td>create_time</td>
             <td>update_time</td>
             <td>
@@ -82,7 +82,8 @@
       currentRoute: String
     },
     data() {
-      return {}
+      return {
+      }
     }
   }
 </script>

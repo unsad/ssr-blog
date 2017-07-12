@@ -7,7 +7,7 @@
         </h1>
         <form>
           <input type="text" name="username" ref="username" class="form-control" required pattern="\w{1, 15}"
-                 placeholder="用户名"
+                 placeholder="用户名">
           <input type="password" name="password" ref="password" class="form-control" required pattern="\w{1, 15}"
                  placeholder="密码">
           <button type="submit">登录</button>

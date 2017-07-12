@@ -10,7 +10,7 @@
       <post-list :current-route="shouldTipShow" v-if="currentRoute === '/post/list'"></post-list>
       <post-create :current-route="currentRoute" v-if="currentRoute === '/post/create'"></post-create>
       <page-list :current-route="currentRoute" v-if="currentRoute === '/page/list'"></page-list>
-      <page-create :current-route="currentRoute" v-if="currentRoute === '/post/create"></page-create>
+      <page-create :current-route="currentRoute" v-if="currentRoute === '/post/create'"></page-create>
       <tag-list :current-route="currentRoute" v-if="currentRoute === '/tag/list'"></tag-list>
       <tag-create :current-route="currentRoute" v-if="currentRoute === '/tag/create'"></tag-create>
       <cate-list :current-route="currentRoute" v-if="currentRoute === '/cate/list'"></cate-list>

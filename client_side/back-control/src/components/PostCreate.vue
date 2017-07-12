@@ -14,10 +14,11 @@
             <div class="pathname">
               <span>https://sweetalkto.me/post/</span>
               <div class="form-group">
-                <input type="text" name="pathname"></div><span>.html</span>
+                <input type="text" name="pathname"></div>
+              <span>.html</span>
             </div>
             <div class="form-group">
-                <markdown-editor></markdown-editor>
+              <markdown-editor></markdown-editor>
               <p><span>文章使用markdown格式</span></p>
             </div>
           </div>
@@ -37,7 +38,8 @@
                   <input type="text">
                   <date-picker></date-picker>
                 </div>
-              </div></div>
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="">分类</label>
@@ -96,7 +98,48 @@
     },
     data() {
       return {
-
+        starttime: '',
+        endtime: '2016-01-19',
+        test: '',
+        multiTime: '',
+        option: {
+          type: 'day',
+          week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+          month: ['January', 'February', 'March', 'April', 'May',
+            'June', 'Jujy', 'August', 'September', 'October', 'November'
+            'December'],
+          format: 'YYYY-MM-DD',
+          placeholder: 'when?',
+          inputStyle: {},
+          color: {
+            header: '#ccc',
+            headerText: '#f00'
+          },
+          buttons: {
+            ok: 'Ok',
+            cancel: 'Cancel'
+          },
+          overlayOpacity: 0.5,
+          dismissible: true
+        },
+        timeoption: {
+          type: 'min',
+          week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+          month: ['January', 'February', 'March', 'April', 'May',
+            'June', 'Jujy', 'August', 'September', 'October', 'November'
+            'December'],
+          format: 'YYYY-MM-DD HH:mm'
+        },
+        limit: [
+          {
+            type: 'weekday',
+            available: [1, 2, 3, 4, 5]
+          },
+          {
+            type: 'fromto',
+            from: '2016-02-01',
+            to: '2016-02-20'
+          }]
       }
     }
   }

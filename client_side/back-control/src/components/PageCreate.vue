@@ -54,10 +54,10 @@
             <label for="">公开度</label>
             <div>
               <div>
-                <div class="radio"><label for=""></label><input type="text" type="radio"><span>公开</span></div>
+                <div class="radio"><label for=""></label><input type="radio"><span>公开</span></div>
               </div>
               <div>
-                <div class="radio"><label for=""></label><input type="text" type="radio"><span>不公开</span></div>
+                <div class="radio"><label for=""></label><input type="radio"><span>不公开</span></div>
               </div>
             </div>
           </div>
@@ -78,7 +78,7 @@
 <script>
   import Top from './Top';
   import MarkdownEditor from './editor/index';
-  import DatePicker from 'vue-datepicker';
+  import DatePicker from 'vue-datepicker/vue-datepicker-es6.vue';
   import moment from 'moment';
 
   export default {

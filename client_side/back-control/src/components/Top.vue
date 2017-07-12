@@ -13,7 +13,7 @@
       <ul class="nav userinfo" ref="userinfo">
         <li :class="this.getUserClass()">
           <a href="" class="dropdown-toggle" data-toggle="dropdown">
-            {{SysConfig.userInfo.name}}<b class="caret"></b>
+            SysConfig.userInfo.name<b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <li><a href="/user/edit_pwd">修改密码</a></li>

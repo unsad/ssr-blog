@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
 import Login from '@/components/Login'
-import Dashboard from '@/components/Dashboard'
+import App from '@/App'
 
 Vue.use(Router);
 
@@ -10,18 +9,18 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'main',
+      component: App
     },
     {
       path: '/dashboard',
       name: 'Dashboard',
-      component: Dashboard
+      component: App
     },
     {
       path: '/post',
       name: 'post',
-      component: post,
+      component: App,
       children: [
         {
           path: 'list',
@@ -40,7 +39,7 @@ let router = new Router({
     {
       path: '/page',
       name: 'page',
-      components: page,
+      components: App,
       children: [
         {
           path: 'list',
@@ -59,7 +58,7 @@ let router = new Router({
     {
       path: '/user',
       name: 'user',
-      components: user,
+      components: App,
       children: [
         {
           path: 'list',
@@ -73,8 +72,8 @@ let router = new Router({
     },
     {
       path: '/cate',
-      name: cate,
-      components: cate,
+      name: 'cate',
+      components: App,
       children: [
         {
           path: 'list',
@@ -92,7 +91,7 @@ let router = new Router({
     },
     {
       path: '/tag',
-      components: tag,
+      components: App,
       children: [
         {
           path: 'list',
@@ -111,7 +110,7 @@ let router = new Router({
     {
       path: '/option',
       name: 'option',
-      components: post,
+      components: App,
       children: [
         {
           path: 'general',

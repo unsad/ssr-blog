@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="showTipShow === true">
+    <div v-if="shouldTipShow === true">
       {{text}}
     </div>
     <div v-else></div>
@@ -12,7 +12,6 @@
     name: 'tip',
     data() {
       return {
-
       }
     },
     props: {

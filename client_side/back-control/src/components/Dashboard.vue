@@ -15,7 +15,7 @@
         <ul>
           <li v-for="post of posts" :key="post.id">
             <label>{{moment(new Date(post.create_time)).format('MM.DD')
-            }:</label>
+            }}:</label>
             <a :href="`/post/${post.pathname}`" target="_blank">{{post.title}}</a>
           </li>
         </ul>
@@ -36,7 +36,10 @@
       currentRoute: String
     },
     data() {
-      return {}
+      return {
+        count: '',
+        posts: ''
+      }
     },
     components: {
       Top

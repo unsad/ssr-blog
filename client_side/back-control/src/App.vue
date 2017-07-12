@@ -1,23 +1,91 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <template v-if="isLogin === false">
+      <tip :should-tip-show="shouldTipShow" :type="success" :text="placeholder"></tip>
+      <login></login>
+    </template>
+    <template v-else>
+      <sidebar :current-route="currentRoute"></sidebar>
+      <dashboard :current-route="currentRoute" v-if="currentRoute.indexOf('/dashboard') > -1"></dashboard>
+      <post-list :current-route="shouldTipShow" v-if="currentRoute === '/post/list'"></post-list>
+      <post-create :current-route="currentRoute" v-if="currentRoute === '/post/create'"></post-create>
+      <page-list :current-route="currentRoute" v-if="currentRoute === '/page/list'"></page-list>
+      <page-create :current-route="currentRoute" v-if="currentRoute === '/post/create'"></page-create>
+      <tag-list :current-route="currentRoute" v-if="currentRoute === '/tag/list'"></tag-list>
+      <tag-create :current-route="currentRoute" v-if="currentRoute === '/tag/create'"></tag-create>
+      <cate-list :current-route="currentRoute" v-if="currentRoute === '/cate/list'"></cate-list>
+      <cate-create :current-route="currentRoute" v-if="currentRoute === '/cate/create'"></cate-create>
+      <user-edit :current-route="currentRoute" v-if="currentRoute === '/user/edit_pwd'"></user-edit>
+      <user-list :current-route="currentRoute" v-if="currentRoute === '/user/list'"></user-list>
+      <option-general :current-route="currentRoute" v-if="currentRoute === '/option/general'"></option-general>
+      <option-comment :current-route="currentRoute" v-if="currentRoute === '/option/comment'"></option-comment>
+      <option-analytic :current-route="currentRoute" v-if="currentRoute === '/option/analytic'"></option-analytic>
+      <tip :should-tip-show="shouldTipShow" :type="'success'" :text="'placeholder'"></tip>
+    </template>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Login from '@/components/Login';
+import Tip from '@/components/Tip';
+import Sidebar from '@/components/Sidebar';
+import Dashboard from '@/components/Dashboard';
+import PostList from '@/components/PostList';
+import PostCreate from '@/components/PostCreate';
+import PageList from '@/components/PageList';
+import PageCreate from '@/components/PageCreate';
+import TagCreate from '@/components/TagCreate';
+import CateCreate from '@/components/CateCreate';
+import UserEdit from '@/components/UserEdit';
+import UserList from '@/components/UserList';
+import OptionGeneral from '@/components/OptionGeneral';
+import OptionComment from '@/components/OptionComment';
+import OptionAnalytic from '@/components/OptionAnalytic';
+
 export default {
-  name: 'app'
+  name: 'app',
+  data () {
+    return {
+      isLogin: true,
+      shouldTipShow: false,
+      SystemInfo: {},
+      currentRoute: '/dashboard'
+    }
+  },
+  components: {
+    Login,
+    Tip,
+    Sidebar,
+    Dashboard,
+    PostList,
+    PageList,
+    TagCreate,
+    CateCreate,
+    UserEdit,
+    PostCreate
+
+  }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h1, h2 {
+  font-weight: normal;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+a {
+  color: #42b983;
 }
 </style>

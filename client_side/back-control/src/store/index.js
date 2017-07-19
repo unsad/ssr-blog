@@ -12,6 +12,13 @@ const store = new EventEmitter();
 
 export default store;
 
+store.newCate = (vue, name) => {
+  if (typeof name === 'undefined' || name === '') return;
+  return vue.$http.post(`${root}/cate`, {
+    name
+  }).then((response) => response.body, err => console.log(err));
+};
+
 store.fetchAbout = (vue) => {
   return vue.$http.get(aboutAPI).then((response) => {
     console.log('response ok');

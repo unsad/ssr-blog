@@ -12,6 +12,13 @@ const store = new EventEmitter();
 
 export default store;
 
+store.newTag = (vue, name) => {
+  if (typeof name === 'undefined' || name === '') return;
+  return vue.$http.post(`${root}/tag`, {
+    name
+  }).then((response) => response.body, err => console.log(err));
+};
+
 store.newCate = (vue, name) => {
   if (typeof name === 'undefined' || name === '') return;
   return vue.$http.post(`${root}/cate`, {

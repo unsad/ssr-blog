@@ -31,6 +31,9 @@
       text: String,
       currentRoute: String
     },
+    mounted() {
+      this.getOption();
+    },
     data() {
       return {
         option: {},
@@ -56,9 +59,6 @@
         });
       }
     },
-    mounted() {
-      this.getOption();
-    }
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">

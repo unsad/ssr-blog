@@ -116,7 +116,7 @@ store.fetchOption = (vue) => {
   return vue.$http.get(`${root}/option`).then(response => response.body, err => console.log(err));
 };
 
-store.putOption = (vue, id, json) => {
+store.patchOption = (vue, id, json) => {
   return vue.$http.patch(`${root}/option/${id}`, json).then(response => response.body, err => console.log(err));
 };
 

@@ -120,7 +120,7 @@
           store.patchOption(this, value._id, {
             value: this[value.key]
           }).then(result => {
-            console.log(value.key, 'updated');
+            value.value = this[value.key];
           });
         });
       }

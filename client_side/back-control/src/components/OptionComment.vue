@@ -2,28 +2,28 @@
   <div class="wrap">
     <top :current-route="currentRoute"></top>
     <div class="manage-container">
-      <form action="#" class="options-comment">
+      <form onsubmit="return false" class="options-comment">
         <div class="form-group">
           <label>评论类型</label>
           <div class="form-group">
             <div>
               <div class="">
                 <div class="radio">
-                  <label for=""><input type="radio"><span>评论</span></label>
+                  <label><input name="type" type="radio" value="disqus" v-model="picked"><span>评论</span></label>
                 </div>
               </div>
               <div class="">
                 <div class="radio">
-                  <label for=""><input type="radio"><span>自定义</span></label>
+                  <label for=""><input name="type" value="custom" v-model="picked" type="radio"><span>自定义</span></label>
                 </div>
               </div>
             </div>
           </div>
           <div class="form-group">
             <label for=""><span>网站名称</span></label>
-            <div class="form-group"><input type="text" value="unsad"></div>
+            <div class="form-group"><input type="text" value="unsad" name="name" v-model="name"></div>
           </div>
-          <button type="submit">
+          <button type="submit" @click="submit">
             提交
           </button>
         </div>
@@ -49,7 +49,9 @@
     },
     data() {
       return {
-
+        picked: 'disqus',
+        name: '',
+        option: {}
       }
     },
     mounted() {
@@ -63,14 +65,15 @@
             obj[value.key] = value;
           });
           this.option = obj;
-          this.analyze_code = obj['analyze_code'].value;
+          let {type, name} = JSON.parse(obj['comment'].value);
+          this.picked = type;
+          this.name = name;
         });
       },
       submit() {
-        store.patchOption(this, this.option['analyze_code']._id, {
-          value: this.analyze_code
-        }).then(result => {
-
+        let value = JSON.stringify({type: this.picked, name: this.name});
+        store.patchOption(this, this.option['comment']._id, {value}).then(result => {
+          console.log(value, result);
         });
       }
     }

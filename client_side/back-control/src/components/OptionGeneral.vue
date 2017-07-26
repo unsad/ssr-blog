@@ -11,6 +11,7 @@
         </div>
         <div class="form-group">
           <label for="">LOGO地址</label>
+          <img :src="`${site_url}/static/upload/201605/logo.png?m=1474296766757`" alt="logo">
           <div class="form-group">
             <input type="text" v-model="logo_url" name="logo_url">
           </div>
@@ -34,6 +35,7 @@
         </div>
         <div class="form-group">
           <label for="">favicon地址</label>
+          <img :src="`${site_url}/favicon.ico?m=1474296766757`" alt="logo">
           <div class="form-group">
             <input type="text" name="favicon_url" v-model="favicon_url">
           </div>

@@ -14,13 +14,13 @@
               </div>
               <div class="">
                 <div class="radio">
-                  <label for=""><input name="type" value="custom" v-model="picked" type="radio"><span>自定义</span></label>
+                  <label><input name="type" value="custom" v-model="picked" type="radio"><span>自定义</span></label>
                 </div>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <label for=""><span>网站名称</span></label>
+            <label><span>网站名称</span></label>
             <div class="form-group"><input type="text" value="unsad" name="name" v-model="name"></div>
           </div>
           <button type="submit" @click="submit">

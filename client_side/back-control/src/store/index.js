@@ -35,6 +35,14 @@ store.fetchAbout = (vue) => {
   });
 };
 
+store.fetchUser = vue => {
+  return vue.$http.get(`${root}/user`).then(response => response.body, err => console.log(err));
+};
+
+store.patchUser = (vue, id, json) => {
+  return vue.$http.patch(`${root}/user/${id}`, json).then(response => response.body, err => console.log(err));
+};
+
 store.fetchBlogByID = (vue, id, page = 0) => {
   return vue.$http.get(blogAPI, {
     params: {

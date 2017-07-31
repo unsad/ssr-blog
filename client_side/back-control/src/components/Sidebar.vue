@@ -90,8 +90,7 @@
             title: '用户管理',
             type: 1,
             children: [
-              {url: '/user/list', title: '用户设置'},
-              {url: '/user/edit_pwd', title: '修改密码'}
+              {url: '/user/list', title: '用户设置'}
             ]
           },
           {

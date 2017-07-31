@@ -1,7 +1,7 @@
 <template>
   <div>
     <top :current-route="currentRoute"></top>
-    <div class="manage-container"></div>
+    <div class="manage-container">
     <div>
       <input type="text" placeholder="请输入关键字">
       <i class="search-button"></i>
@@ -16,69 +16,54 @@
       <thead>
       <tr>
         <th>标题</th>
-        <th>作者</th>
-        <th>状态</th>
-        <th>创建日期</th>
-        <th>修改日期</th>
+        <th>缩略名</th>
+        <th>文章数</th>
+        <th>操作</th>
       </tr>
       </thead>
       <tbody>
       <tr v-if="isLoading">
         <td colSpan="8" class="center">加载中</td>
       </tr>
-      <tr v-if="!items.length">
+      <tr v-if="!tags.length">
         <td colSpan="8" class="center">暂无文章</td>
       </tr>
-      <tr v-else>
+      <tr v-else v-for="tag of tags">
         <td>
-          <Link to={`/post/edit/${item.id}` title="{item.title}">
-          {item.title}
-          </Link>
-          <a href="{/post/${item.pathname}.html" target="_blank">
+          <router-link :to="{path: '/tag/edit'}" :title="tag.name">
+          {{tag.name}}
+          </router-link>
+          <a v-if="tag.status === 3" :href="`/post${tag.pathname}.html`" target="_blank">
             <span></span>
           </a>
         </td>
-        <td>{item.user.display_name || item.user.name}</td>
-        <td></td>
-        <td>{!item.create_time || item.create.time === '0000-00-0000:00:00}</td>
+        <td>{{tag.pathName}}</td>
+        <td>0</td>
         <td>
-          <button v-if="showPassAndDeny"
-                  type="button"
-                  disabled="{[0, 3].includes(post.status)}"
-          >
-            <span class="ok"></span>
-            通过
-          </button>
-          <span v-if="showPassAndDeny"></span>
-          <button v-if="showPassAndDeny"
-                  type="button"
-                  disabled="{[0, 2].includes([post.status}">
-            <span v-if="showPassAndDeny"></span>
-            拒绝
-          </button>
-          <span v-if="showPassAndDeny"></span>
           <Link v-if="showEditandDel" to="{`/post/edit/${post.id}`}" title="{post.title}">
           <button v-if="showEditAndDel" type="button">
             <span v-if="showEditAndDel"></span>
-            编辑
+            <span>编辑</span>
           </button>
           </Link>
           <span v-if="showEditAndDel"></span>
           <button
             v-if="showEditAndDel"
-            type="button">
+            type="button" @click="deleteTag(tag.name)">
             <span v-if="showEditAndDel"></span>
-            删除
+            <span>删除</span>
           </button>
         </td>
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </template>
 
 <script>
-  import Top from './Top'
+  import Top from './Top';
+  import store from '../store/index';
 
   export default {
     name: 'tagList',
@@ -93,8 +78,32 @@
     },
     data() {
       return {
-
+        tags: [],
+        showPassAndDeny: true,
+        showEditAndDel: true
       }
+    },
+    methods: {
+      getTag() {
+        store.fetchTag(this).then(result => {
+          this.tags = result;
+          console.log(this.tags);
+        });
+      },
+      submit() {
+        if (this.user.password !== this.repassword) return;
+        store.patchUser(this, this.user._id, this.user).then(result => {
+
+        });
+      },
+      deleteTag(name) {
+        store.deleteTag(this, name).then(result => {
+          this.tags = this.tags.filter(value => value.name !== name);
+        });
+      }
+    },
+    mounted() {
+      this.getTag();
     }
   }
 </script>

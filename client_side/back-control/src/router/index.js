@@ -63,10 +63,6 @@ let router = new Router({
         {
           path: 'list',
           components: Login
-        },
-        {
-          path: '/edit_pwd',
-          components: Login
         }
       ]
     },

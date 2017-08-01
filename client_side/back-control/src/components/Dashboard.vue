@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-    <top :current-route="currentRoute"></top>
     <div class="manage-container">
       <h1>网站概要</h1>
       <!--<p>目前有{{count.posts}}篇文章，并有{{count.comments}}条关于你的评论在{{count.cates}}个分类中</p>-->

@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-    <top :current-route="currentRoute"></top>
     <div class="manage-container">
       <form onsubmit="return false">
         <div class="form-group">

@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-    <top :current-route="currentRoute"></top>
     <div class="manage-container">
       <div class="search">
         <input type="text" class="search-input" placeholder="请输入关键字">

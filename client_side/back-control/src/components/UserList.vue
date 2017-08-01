@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-    <top :current-route="currentRoute">
       <div class="manage-container">
         <form action="" onsubmit="return false">
           <div class="left">

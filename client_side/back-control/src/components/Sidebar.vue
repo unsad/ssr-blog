@@ -10,14 +10,17 @@
       <li v-for="route of routes">
         <router-link v-if="route.children" :to="{path: route.children[0].url}"
                      :class="getClassName(route.icon, route.url)"
+                     @click="go(route.children[0].url)"
         ><span>{{route.title}}</span></router-link>
         <router-link v-else :to="{path: route.url}"
                      :class="getClassName(route.icon, route.url)"
+                     @click="go(route.url)"
         ><span>{{route.title}}</span></router-link>
         <ul v-if="route.children" :style="{'height': getHeight(route)}">
           <li v-for="child of route.children">
             <router-link :to="{path: child.url}"
                          :class="getSubLinkClassName(child.url)"
+                         @click="go(route.url)"
             ><span>{{child.title}}</span></router-link>
           </li>
         </ul>
@@ -34,7 +37,8 @@
     props: {
       shouldTipShow: Boolean,
       type: String,
-      text: String
+      text: String,
+      currentRoute: String
     },
     data() {
       return {
@@ -134,6 +138,9 @@
         return classNames({
           active: this.isActive(routeUrl)
         })
+      },
+      go(routeUrl) {
+        this.currentRoute = routeUrl;
       }
     }
   }

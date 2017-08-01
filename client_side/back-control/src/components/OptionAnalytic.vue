@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-    <top :current-route="currentRoute"></top>
     <div class="manage-container">
       <h3>网站统计代码</h3>
       <form action="#" onsubmit="return false" class="options-general">

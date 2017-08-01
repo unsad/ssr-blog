@@ -6,12 +6,6 @@
       <input type="text" placeholder="请输入关键字">
       <i class="search-button"></i>
     </div>
-    <Tabs>
-      <Tab title="全部"></Tab>
-      <Tab title="已发布"></Tab>
-      <Tab title="审核中"></Tab>
-      <Tab title="已拒绝"></Tab>
-    </Tabs>
     <table class="table">
       <thead>
       <tr>
@@ -30,7 +24,7 @@
       </tr>
       <tr v-else v-for="tag of tags">
         <td>
-          <router-link :to="{path: '/tag/edit'}" :title="tag.name">
+          <router-link :to="{name: 'editTag', params: {id: tag._id}}" :title="tag.name">
           {{tag.name}}
           </router-link>
           <a v-if="tag.status === 3" :href="`/post${tag.pathname}.html`" target="_blank">
@@ -40,16 +34,16 @@
         <td>{{tag.pathName}}</td>
         <td>0</td>
         <td>
-          <Link v-if="showEditandDel" to="{`/post/edit/${post.id}`}" title="{post.title}">
+          <router-link v-if="showEditandDel" :to="{name: 'editTag', params: {id: tag._id}}" :title="post.title">
           <button v-if="showEditAndDel" type="button">
             <span v-if="showEditAndDel"></span>
             <span>编辑</span>
           </button>
-          </Link>
+          </router-link>
           <span v-if="showEditAndDel"></span>
           <button
             v-if="showEditAndDel"
-            type="button" @click="deleteTag(tag.name)">
+            type="button" @click="deleteTag(tag._id)">
             <span v-if="showEditAndDel"></span>
             <span>删除</span>
           </button>
@@ -87,7 +81,6 @@
       getTag() {
         store.fetchTag(this).then(result => {
           this.tags = result;
-          console.log(this.tags);
         });
       },
       submit() {
@@ -96,9 +89,10 @@
 
         });
       },
-      deleteTag(name) {
-        store.deleteTag(this, name).then(result => {
-          this.tags = this.tags.filter(value => value.name !== name);
+      deleteTag(id) {
+        store.deleteTag(this, id).then(result => {
+          console.log(result);
+          this.tags = this.tags.filter(value => value.name !== id);
         });
       }
     },

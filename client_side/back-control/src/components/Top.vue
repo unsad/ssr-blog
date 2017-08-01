@@ -38,11 +38,11 @@
     },
     computed: {
       routes() {
-        let arr = this.currentRoute.split('/');
+        /*let arr = this.currentRoute.split('/');
         arr = arr.filter(value => {
           return value !== ''
         });
-        return arr;
+        return arr;*/
       }
     },
     data() {

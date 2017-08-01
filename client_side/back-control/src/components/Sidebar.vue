@@ -9,17 +9,14 @@
       <input type="hidden" id="hide_values" val="0"/>
       <li v-for="route of routes">
         <router-link v-if="route.children" :to="{path: route.children[0].url}"
-                     @click="open(route.children && route.children[0].url || route.url)"
                      :class="getClassName(route.icon, route.url)"
         ><span>{{route.title}}</span></router-link>
         <router-link v-else :to="{path: route.url}"
-                     @click="open(route.children && route.children[0].url || route.url)"
                      :class="getClassName(route.icon, route.url)"
         ><span>{{route.title}}</span></router-link>
         <ul v-if="route.children" :style="{'height': getHeight(route)}">
           <li v-for="child of route.children">
             <router-link :to="{path: child.url}"
-                         @click="open(child.url)"
                          :class="getSubLinkClassName(child.url)"
             ><span>{{child.title}}</span></router-link>
           </li>
@@ -37,8 +34,7 @@
     props: {
       shouldTipShow: Boolean,
       type: String,
-      text: String,
-      currentRoute: String
+      text: String
     },
     data() {
       return {
@@ -107,6 +103,17 @@
         ]
       }
     },
+    computed: {
+
+    },
+    route: {
+      data({to}) {
+        console.log(to);
+        return {
+
+        };
+      }
+    },
     methods: {
       isActive(routeUrl) {
         return this.currentRoute.indexOf(routeUrl) > -1;
@@ -127,9 +134,6 @@
         return classNames({
           active: this.isActive(routeUrl)
         })
-      },
-      open(routeUrl) {
-        this.currentRoute = routeUrl;
       }
     }
   }

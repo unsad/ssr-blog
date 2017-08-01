@@ -2,6 +2,21 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import App from '@/App'
+import Dashboard from '@/components/Dashboard'
+import Tip from '@/components/Tip'
+import Sidebar from '@/components/Sidebar'
+import PostList from '@/components/PostList'
+import PageList from '@/components/PageList'
+import TagList from '@/components/TagList'
+import CateList from '@/components/CateList'
+import TagCreate from '@/components/TagCreate'
+import PostCreate from '@/components/PostCreate'
+import PageCreate from '@/components/PageCreate'
+import CateCreate from '@/components/CateCreate'
+import UserList from '@/components/UserList'
+import OptionGeneral from '@/components/OptionGeneral'
+import OptionComment from '@/components/OptionComment'
+import OptionAnalytic from '@/components/OptionAnalytic'
 
 Vue.use(Router);
 
@@ -24,15 +39,15 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: Login
+          components: PostList
         },
         {
           path: 'create',
-          components: Login
+          components: PostCreate
         },
         {
           path: 'edit/:id',
-          components: Login
+          components: PostCreate
         }
       ]
     },
@@ -43,15 +58,15 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: Login
+          components: PageList
         },
         {
           path: 'create',
-          components: Login
+          components: PageCreate
         },
         {
           path: 'edit/:id',
-          components: Login
+          components: PageCreate
         }
       ]
     },
@@ -62,7 +77,7 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: Login
+          components: UserList
         }
       ]
     },
@@ -73,15 +88,15 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: Login
+          components: CateList
         },
         {
           path: 'create',
-          components: Login
+          components: CateCreate
         },
         {
           path: 'edit/:id',
-          components: Login
+          components: CateCreate
         }
       ]
     },
@@ -91,15 +106,15 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: Login
+          components: TagList
         },
         {
           path: 'create',
-          components: Login
+          components: TagCreate
         },
         {
           path: 'edit/:id',
-          components: Login
+          components: TagCreate
         }
       ]
     },
@@ -110,15 +125,15 @@ let router = new Router({
       children: [
         {
           path: 'general',
-          components: Login
+          components: OptionGeneral
         },
         {
           path: 'comment',
-          components: Login
+          components: OptionComment
         },
         {
           path: 'analytic',
-          components: Login
+          components: OptionAnalytic
         }
       ]
     },

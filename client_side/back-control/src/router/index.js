@@ -24,13 +24,12 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'main',
-      component: App
+      redirect: '/dashboard'
     },
     {
       path: '/dashboard',
       name: 'Dashboard',
-      component: App
+      component: Dashboard
     },
     {
       path: '/post',

@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="manage-container">
-      <form action="#">
+      <form action="#" onsubmit="return false">
         <div class="row">
           <div class="col-xs-9">
             <div class="form-group">
@@ -26,7 +26,7 @@
                 保存草稿
               </button>
               <span></span>
-              <button type="submit">
+              <button type="submit" @click="submit">
                 发布文章
               </button>
             </div>
@@ -53,10 +53,10 @@
             <label for="">公开度</label>
             <div>
               <div>
-                <div class="radio"><label for=""></label><input type="radio"><span>公开</span></div>
+                <div class="radio"><label for=""></label><input type="radio" value="1" v-model="page.isPublic"><span>公开</span></div>
               </div>
               <div>
-                <div class="radio"><label for=""></label><input type="radio"><span>不公开</span></div>
+                <div class="radio"><label for=""></label><input type="radio" value="0"><span>不公开</span></div>
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@
             <label for="">权限控制</label>
             <div>
               <label for="">
-                <input type="text"><span>允许评论</span>
+                <input type="checkbox" v-model="page.allowComment"><span>允许评论</span>
               </label>
             </div>
           </div>
@@ -79,6 +79,7 @@
   import MarkdownEditor from './editor/index';
   import DatePicker from 'vue-datepicker/vue-datepicker-es6.vue';
   import moment from 'moment';
+  import store from '../store/index'
 
   export default {
     name: 'pageCreate',
@@ -136,7 +137,43 @@
             type: 'fromto',
             from: '2016-02-01',
             to: '2016-02-20'
-          }]
+          }],
+        id: '',
+        page: {
+          updateAt: '',
+          createAt: '',
+          allowComment: 1,
+          pathName: '',
+          type: '',
+          title: '',
+          isPublic: '1',
+          markdownContent: ''
+        }
+      }
+    },
+    route: {
+      data({ to }) {
+        if (typeof to.params.id === 'undefined') return;
+        this.id = to.params.id;
+        store.fetchBlogByID(this, this.id).then(result => {
+          this.page = result;
+        });
+      }
+    },
+    methods: {
+      submit() {
+        this.isSubmitting = true;
+        if (this.id === '') {
+          store.newpage(this, this.name).then(body => {
+            console.log('pageCreate', body);
+            this.isSubmitting = false;
+          });
+        } else {
+          store.patchpage(this, this.id, this.page).then(body => {
+            console.log('pagePatched', body);
+            this.isSubmitting = false;
+          });
+        }
       }
     }
   }

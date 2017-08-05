@@ -1,83 +1,64 @@
 <template>
   <div>
-    <div class="manage-container"></div>
+    <div class="manage-container">
     <div>
       <input type="text" placeholder="请输入关键字">
       <i class="search-button"></i>
     </div>
-    <Tabs>
-      <Tab title="全部"></Tab>
-      <Tab title="已发布"></Tab>
-      <Tab title="审核中"></Tab>
-      <Tab title="已拒绝"></Tab>
-    </Tabs>
     <table class="table">
       <thead>
       <tr>
         <th>标题</th>
-        <th>作者</th>
         <th>状态</th>
         <th>创建日期</th>
         <th>修改日期</th>
+        <th>操作</th>
       </tr>
       </thead>
       <tbody>
         <tr v-if="isLoading">
           <td colSpan="8" class="center">加载中</td>
         </tr>
-        <tr v-if="!items.length">
+        <tr v-if="!pages.length">
           <td colSpan="8" class="center">暂无文章</td>
         </tr>
-      <tr v-else>
+      <tr v-else v-for="page of pages">
         <td>
-          <Link to={`/post/edit/${item.id}` title="{item.title}">
-            {item.title}
-          </Link>
-          <a href="{/post/${item.pathname}.html" target="_blank">
+          <router-link :to="{name: 'editPage', params: {id: page._id}}" :title="page.title">
+            {{page.title}}
+          </router-link>
+          <a v-if="page.status === 3" :href="`/page/${page.pathname}.html`" target="_blank">
             <span></span>
           </a>
         </td>
-        <td>{item.user.display_name || item.user.name}</td>
-        <td></td>
-        <td>{!item.create_time || item.create.time === '0000-00-0000:00:00}</td>
+        <td>{{page.status}}</td>
+        <td>{{page.createdAt}}</td>
+        <td>{{page.updateAt}}</td>
         <td>
-          <button v-if="showPassAndDeny"
-                  type="button"
-                  disabled="{[0, 3].includes(post.status)}"
-                 >
-            <span class="ok"></span>
-            通过
-          </button>
-            <span v-if="showPassAndDeny"></span>
-            <button v-if="showPassAndDeny"
-                    type="button"
-                    disabled="{[0, 2].includes([post.status}">
-              <span v-if="showPassAndDeny"></span>
-              拒绝
-            </button>
-            <span v-if="showPassAndDeny"></span>
-          <Link v-if="showEditandDel" to="{`/post/edit/${post.id}`}" title="{post.title}">
+          <router-link :to="{name: 'editPage', params: {id: page._id}}">
           <button v-if="showEditAndDel" type="button">
             <span v-if="showEditAndDel"></span>
-            编辑
+            <span>编辑</span>
           </button>
-          </Link>
+          </router-link>
           <span v-if="showEditAndDel"></span>
           <button
             v-if="showEditAndDel"
-            type="button">
+            type="button" @click="deletePageByID(page._id)">
             <span v-if="showEditAndDel"></span>
-            删除
+            <span>删除</span>
           </button>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
+  </div>
 </template>
 
 <script>
-  import Top from './Top'
+  import Top from './Top';
+  import store from '../store/index'
 
   export default {
     name: 'pageList',
@@ -92,8 +73,24 @@
     },
     data() {
       return {
-
+        showEditAndDel: true,
+        pages: []
       }
+    },
+    methods: {
+      getPage() {
+        store.fetchBlogByPage(this, {type: '1'}).then(result => {
+          this.pages = result;
+        });
+      },
+      deletePageByID(id) {
+        store.deleteBlogByID(this, id).then(result => {
+          this.pages = this.pages.filter(val => val._id !== id);
+        });
+      }
+    },
+    mounted() {
+      this.getPage();
     }
   }
 </script>

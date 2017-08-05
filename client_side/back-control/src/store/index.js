@@ -6,6 +6,10 @@ const aboutAPI = `/proxyPrefix/api/post/57dbe47c2993f70dc6d6b12c`;
 const blogAPI = `/proxyPrefix/api/post`;
 const tagAPI = `/proxyPrefix/api/tag`;
 const postTagAPI = `/proxyPrefix/api/postTag`;
+const postCateAPI = `/proxyPrefix/api/postCategory`;
+
+const root = 'proxyPrefix/api';
+
 const perPage = 10;
 
 const store = new EventEmitter();
@@ -156,6 +160,10 @@ store.fetchPostTags = (vue) => {
   }, (err) => {
     console.log(err);
   });
+};
+
+store.fetchPostCate = vue => {
+  return vue.$http.get(postCateAPI).then(response => response.body, err => console.log(err));
 };
 
 store.fetchOption = (vue) => {

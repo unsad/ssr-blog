@@ -56,7 +56,7 @@
       </ul>
     </div>
     <div class="md-editor">
-      <textarea name="content" id="" cols="30" rows="10"></textarea>
+      <textarea name="content" v-model="content"></textarea>
     </div>
     <div class="md-preview"></div>
     <div class="md-spliter"></div>
@@ -69,7 +69,7 @@
     props: {
       shouldTipShow: Boolean,
       type: String,
-      text: String
+      content: String
     },
     data() {
       return {

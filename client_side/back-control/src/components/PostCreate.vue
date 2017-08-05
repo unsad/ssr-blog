@@ -8,16 +8,16 @@
               <label for="" class="control-label">
                 <span>撰写文章</span>
               </label>
-              <input type="text" name="title" placeholder="标题">
+              <input v-model="post.title" type="text" name="title" placeholder="标题">
             </div>
             <div class="pathname">
               <span>https://sweetalkto.me/post/</span>
               <div class="form-group">
-                <input type="text" name="pathname"></div>
+                <input :disabled="shouldPathDisabled" v-model="post.pathName" type="text" name="pathname"></div>
               <span>.html</span>
             </div>
             <div class="form-group">
-              <markdown-editor></markdown-editor>
+              <markdown-editor :content="post.markdownContent"></markdown-editor>
               <p><span>文章使用markdown格式</span></p>
             </div>
           </div>
@@ -31,11 +31,10 @@
                 发布文章
               </button>
             </div>
-            <div><label for="">发布日期</label>
+            <div><label for="">{{this.id === '' ? '发布日期' : '修改日期'}}</label>
               <div>
                 <div class="rdt">
-                  <input type="text">
-                  <date-picker></date-picker>
+                  <date-picker :time="starttime" :option="timeoption"></date-picker>
                 </div>
               </div>
             </div>
@@ -43,13 +42,24 @@
           <div class="form-group">
             <label for="">分类</label>
             <ul>
-              <li><input type="checkbox"><span>前端</span></li>
-              <li><input type="checkbox"><span>后期</span></li>
+              <li v-for="cate of cates">
+                <label for="">
+                  <input type="checkbox" name="cate" :value="cate._id" v-model="postCate">
+                  <span>{{cate.name}}</span>
+                </label>
+              </li>
             </ul>
           </div>
           <div class="form-group">
             <label for="">标签</label>
-            <div><span><span><ul><li><span><input type="text"></span></li></ul></span></span></div>
+            <ul>
+              <li v-for="tag of tags">
+                <label for="">
+                  <input type="checkbox" :value="tag._id" v-model="postTags">
+                  <span>{{tag.name}}</span>
+                </label>
+              </li>
+            </ul>
           </div>
           <div class="form-group">
             <label for="">公开度</label>
@@ -102,33 +112,18 @@
         endtime: '2016-01-19',
         test: '',
         multiTime: '',
-        option: {
-          type: 'day',
-          week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-          month: ['January', 'February', 'March', 'April', 'May',
-            'June', 'Jujy', 'August', 'September', 'October', 'November',
-            'December'],
-          format: 'YYYY-MM-DD',
-          placeholder: 'when?',
-          inputStyle: {},
-          color: {
-            header: '#ccc',
-            headerText: '#f00'
-          },
-          buttons: {
-            ok: 'Ok',
-            cancel: 'Cancel'
-          },
-          overlayOpacity: 0.5,
-          dismissible: true
-        },
         timeoption: {
           type: 'min',
-          week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-          month: ['January', 'February', 'March', 'April', 'May',
-            'June', 'Jujy', 'August', 'September', 'October', 'November',
-            'December'],
-          format: 'YYYY-MM-DD HH:mm'
+          week: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+          month: ['一月', '二月', '三月', '四月', '五月',
+            '六月', '七月', '八月', '九月', '十月', '十一月',
+            '十二月'],
+          format: 'YYYY-MM-DD HH:mm:ss',
+          placeholder: '请选择时间',
+          buttons: {
+            ok: '确认',
+            cancel: '取消'
+          }
         },
         limit: [
           {
@@ -139,8 +134,74 @@
             type: 'fromto',
             from: '2016-02-01',
             to: '2016-02-20'
-          }]
+          }],
+        id: '',
+        shouldPathDisabled: false,
+        cates: [],
+        postCate: [],
+        tags: [],
+        postTags: [],
+        testTags: ['a', 'n', 'c'],
+        post: {
+          updateAt: '',
+          createAt: '',
+          allowComment: 1,
+          pathName: '',
+          type: '',
+          title: '',
+          isPublic: '1',
+          markdownContent: ''
+        }
       }
+    },
+    route: {
+      data({to}) {
+        if (typeof to.params.id === 'undefined') return;
+        this.id = to.params.id;
+        this.shouldPathDisabled = true;
+        let tempResult;
+        store.fetchBlogByID(this, this.id).then(result => {
+          this.post = result;
+          this.starttime = this.post.updatedAt ||  this.post.createdAt;
+          this.timeoption.placeholder = this.starttime;
+
+          store.fetchPostTags(this).then(result => {
+            let obj = {};
+            result = result.filter(val => val.postID === this.id);
+            this.postTags = result.map(val => val.tagID);
+          });
+
+          store.fetchPostCate(this.then(result => {
+            let obj = {};
+            result = result.filter(val => val.postID === this.id);
+            this.postCate = result.map(val => val.categoryID);
+          }));
+        });
+      }
+    },
+    methods: {
+      submit() {
+        this.isSubmitting = true;
+        if (this.id === '') {
+          store.newBlog(this, this.name).then(body => {
+            console.log('postCreate', body);
+            this.isSubmitting = false;
+          })
+        } else {
+          store.patchBlog(this, this.id, this.post).then(body => {
+            console.log('postPatched', body);
+            this.isSubmitting = false;
+          });
+        }
+      }
+    },
+    created() {
+      store.fetchCate(this).then(result => {
+        this.cates = result;
+      });
+      store.fetchTag(this).then(result => {
+        this.tags = result;
+      });
     }
   }
 </script>

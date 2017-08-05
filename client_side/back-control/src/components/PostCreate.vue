@@ -81,6 +81,7 @@
   import MarkdownEditor from './editor/index';
   import DatePicker from 'vue-datepicker/vue-datepicker-es6.vue';
   import moment from 'moment';
+  import store from '../store/index';
 
   export default {
     name: 'pageCreate',

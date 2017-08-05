@@ -17,8 +17,8 @@
     name: 'about',
     data() {
       return {
-        html: store.fetchAbout(this).then(html => {
-          this.html = html;
+        html: store.fetchPage(this, {title: '关于'}).then(html => {
+          this.html = html[0];
         })
       }
     },

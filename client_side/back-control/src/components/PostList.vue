@@ -4,17 +4,10 @@
       <div class="search">
         <input type="text" class="search-input" placeholder="请输入关键字">
         <i class="icon-search"></i>
-        <tabs>
-          <tab title="全部"></tab>
-          <tab title="已发布"></tab>
-          <tab title="审核中"></tab>
-          <tab title="已拒绝"></tab>
-        </tabs>
         <table class="table">
           <thead>
           <tr>
             <th>标题</th>
-            <th>作者</th>
             <th>状态</th>
             <th>创建日期</th>
             <th>修改日期</th>
@@ -25,33 +18,24 @@
           <tr v-if="isLoading">
             <td colspan="8" class="center">加载中..</td>
           </tr>
-          <tr v-if="!items.length">
+          <tr v-if="!posts.length">
             <td colspan="8" class="center">暂无文章</td>
           </tr>
-          <tr v-else>
+          <tr v-else v-for="post of posts">
             <td>
-              <a href="" title="item.title">{{item.title}}</a>
-              <a href="" v-if="item.status === 3" target="_blank"></a>
+              <router-link :to="{name: 'editPost', params: {id: post._id}}" :title="{{post.title}}">{{post.title}}</router-link>
+              <a :href="`/post/${post.pathname}.html`" v-if="item.status === 3" target="_blank"></a>
             </td>
-            <td>{{item.user.display_name || item.user.name}}</td>
-            <td>{{this.renderStatus(item.status)}}</td>
-            <td>create_time</td>
-            <td>update_time</td>
+            <td>{{post.status}}</td>
+            <td>{{post.createAt}}</td>
+            <td>{{post.updateAt}}</td>
             <td>
-              <button v-if="showPassAndDeny" type="button" class="btn">
-                <span class="glyphicon-ok"></span>通过
-              </button>
-              <span v-if="showPassAndDeny"></span>
-              <button v-if="showPassAndDeny" type="button" class="btn">
-                <span class="glyphicon-remove"></span>拒绝
-              </button>
-              <span v-if="showPassAndDeny"></span>
-              <a href="" v-if="showEditAndDel" title="post.title">
+              <router-link :to="{name: 'editPost', params: {id: post._id}}">
               <button v-if="showEditAndDel" type="button" class="btn">
                 <span v-if="showEditAndDel" class="glyphicon-edit"></span>
-                编辑
+                <span>编辑</span>
               </button>
-              </a>
+              </router-link>
               <span v-if="showEditAndDel"></span>
               <button v-if="showEditAndDel" type="button" class="btn">
                 <span v-if="showEditAndDel" class="glyphicon-trash"></span>
@@ -68,6 +52,7 @@
 
 <script>
   import Top from './Top';
+  import store from '../store/index';
 
   export default {
     name: 'postList',
@@ -82,7 +67,24 @@
     },
     data() {
       return {
+        showEditAndDel: true,
+        post: []
       }
+    },
+    methods: {
+      getBlogByPage() {
+        store.fetchAllBlog(this).then(result => {
+          this.posts = result;
+        });
+      },
+      deleteBlogByID(id) {
+        store.deleteBlogByID(this, id).then(result => {
+          this.posts = this.posts.filter(val => val._id !== id);
+        });
+      }
+    },
+    mounted() {
+      this.getBlogByPage();
     }
   }
 </script>

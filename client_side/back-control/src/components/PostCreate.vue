@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="manage-container">
-      <form action="#">
+      <form onsubmit="return false">
         <div class="row">
           <div class="col-xs-9">
             <div class="form-group">
@@ -27,7 +27,7 @@
                 保存草稿
               </button>
               <span></span>
-              <button type="submit">
+              <button type="submit" @click="sumbit">
                 发布文章
               </button>
             </div>
@@ -39,7 +39,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" v-if="isPost">
             <label for="">分类</label>
             <ul>
               <li v-for="cate of cates">
@@ -50,7 +50,7 @@
               </li>
             </ul>
           </div>
-          <div class="form-group">
+          <div class="form-group" v-if="isPost">
             <label for="">标签</label>
             <ul>
               <li v-for="tag of tags">
@@ -61,14 +61,14 @@
               </li>
             </ul>
           </div>
-          <div class="form-group">
+          <div class="form-group" v-if="isPost">
             <label for="">公开度</label>
             <div>
               <div>
-                <div class="radio"><label for=""></label><input type="radio"><span>公开</span></div>
+                <div class="radio"><label for=""></label><input type="radio" value="1" v-model="isPublic"><span>公开</span></div>
               </div>
               <div>
-                <div class="radio"><label for=""></label><input type="radio"><span>不公开</span></div>
+                <div class="radio"><label for=""></label><input type="radio" value="0" v-model="isPublic"><span>不公开</span></div>
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@
             <label for="">权限控制</label>
             <div>
               <label for="">
-                <input type="text"><span>允许评论</span>
+                <input type="checkbox" v-model="allowComment"><span>允许评论</span>
               </label>
             </div>
           </div>
@@ -136,12 +136,14 @@
             to: '2016-02-20'
           }],
         id: '',
+        isPost: true,
         shouldPathDisabled: false,
         cates: [],
         postCate: [],
         tags: [],
         postTags: [],
-        testTags: ['a', 'n', 'c'],
+        allowComment: true,
+        isPublic: '1',
         post: {
           updateAt: '',
           createAt: '',
@@ -156,6 +158,7 @@
     },
     route: {
       data({to}) {
+        this.isPost = to.path.indexOf('/post/') > -1;
         if (typeof to.params.id === 'undefined') return;
         this.id = to.params.id;
         this.shouldPathDisabled = true;
@@ -164,6 +167,9 @@
           this.post = result;
           this.starttime = this.post.updatedAt ||  this.post.createdAt;
           this.timeoption.placeholder = this.starttime;
+          this.allowComment = this.post.allowComment === '1';
+
+          if(this.isPost === false) return;
 
           store.fetchPostTags(this).then(result => {
             let obj = {};
@@ -182,12 +188,36 @@
     methods: {
       submit() {
         this.isSubmitting = true;
+        let time = moment().format('YYYY-MM-DD HH:mm:ss').toString();
         if (this.id === '') {
+          let newPost = {
+            title: this.post.title,
+            type: this.isPost ? '0' : '1',
+            updatedAt: time,
+            createdAt: time,
+            status: 3,
+            pathName: this.post.status,
+            summary: 'gg',
+            markdownContent: this.post.markdownContent,
+            content: 'gg',
+            allowComment: this.allowComment === true ? '1' : '0',
+            isPublic: this.isPublic === '1' ? 1 : 0,
+            commentNum: 0,
+            options: ''
+          };
           store.newBlog(this, this.name).then(body => {
             console.log('postCreate', body);
             this.isSubmitting = false;
           })
         } else {
+          this.post = Object.assign({}, this.post, {
+            updatedAt: time,
+            summary: 'gg',
+            markdownContent: this.post.markdownContent,
+            content: 'gg',
+            allowComment: this.allowComment === true ? '1' : '0',
+            isPublic: this.isPublic === '1' ? 1 : 0
+          });
           store.patchBlog(this, this.id, this.post).then(body => {
             console.log('postPatched', body);
             this.isSubmitting = false;
@@ -196,6 +226,7 @@
       }
     },
     created() {
+      if (this.isPost === false) return;
       store.fetchCate(this).then(result => {
         this.cates = result;
       });

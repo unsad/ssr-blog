@@ -174,6 +174,31 @@ store.fetchPostCate = vue => {
   return vue.$http.get(postCateAPI).then(response => response.body, err => console.log(err));
 };
 
+store.fetchPostCateByID = (vue, queryJSON) => {
+  let keys = Object.keys(queryJSON);
+  let values = Object.values(queryJSON);
+  return vue.$resource(postCateAPI + '{?keys, values}').get({
+    keys,
+    values
+  }).then(response => response.body, err => console.log(err));
+};
+
+store.deletePostTags = (vue, id) => {
+  return vue.$http.delete(`${postTagAPI}/${id}`).then(response => response.body, err => console.log(err));
+};
+
+store.addPostTags = (vue, json) => {
+  return vue.$http.post(`${postTagAPI}`, json).then(response => response.body, err => console.log(err));
+};
+
+store.deletePostCates = (vue, id) => {
+  return vue.$http.delete(`${postCateAPI}/${id}`).then(response => response.body, err => console.log(err));
+};
+
+store.addPostCates  = (vue, json) => {
+  return vue.$http.post(`${postCateAPI}`, json).then(response => response.body, err => console.log(err));
+};
+
 store.fetchOption = (vue) => {
   return vue.$http.get(`${root}/option`).then(response => response.body, err => console.log(err));
 };

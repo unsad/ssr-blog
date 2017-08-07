@@ -140,8 +140,10 @@
         shouldPathDisabled: false,
         cates: [],
         postCate: [],
+        postCateBackup: [],
         tags: [],
         postTags: [],
+        postTagsBackup: [],
         allowComment: true,
         isPublic: '1',
         post: {
@@ -175,12 +177,14 @@
             let obj = {};
             result = result.filter(val => val.postID === this.id);
             this.postTags = result.map(val => val.tagID);
+            this.postTagsBackup = this.postTags.slice(0);
           });
 
           store.fetchPostCate(this.then(result => {
             let obj = {};
             result = result.filter(val => val.postID === this.id);
             this.postCate = result.map(val => val.categoryID);
+            this.postCateBackup = this.postTags.slice(0);
           }));
         });
       }
@@ -223,9 +227,27 @@
             this.isSubmitting = false;
           });
         }
+        this.postTagsBackup.forEach(value => {
+          store.deletePostTags(this, value);
+        });
+        this.postCateBackup.forEach(value => {
+          store.deletePostCates(this, value);
+        });
+        this.postTags.forEach(value => {
+          store.addPostTags(this, {
+            postID: this.id,
+            tagID: value
+          });
+        });
+        this.postCate.forEach(value => {
+          store.addPostCates(this, {
+            postID: this.id,
+            categoryID: value
+          });
+        });
       }
     },
-    created() {
+    mounted() {
       if (this.isPost === false) return;
       store.fetchCate(this).then(result => {
         this.cates = result;

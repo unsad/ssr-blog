@@ -116,6 +116,14 @@ store.deleteBlogByID = (vue, id, page = 0) => {
   }).then(response => response.body, err => console.log(err));
 };
 
+store.deleteTagsByPostID = (vue, id) => {
+  return vue.$http.delete(`${postTagAPI}/${id}`).then(response => response.body, err => console.log(err));
+};
+
+store.deleteCateByPostID = (vue, id) => {
+  return vue.$http.delete(`${postCateAPI}/${id}`).then(response => response.body, err => console.log(err));
+};
+
 store.fetchBlogCount = (vue, queryJSON, page = 0) => {
   let keys = Object.keys(queryJSON);
   let values = Object.values(queryJSON);
@@ -185,6 +193,15 @@ store.fetchTagsByPostID = (vue, queryJSON) => {
   }, (err) => {
     console.log(err);
   });
+};
+
+store.fetchPostTagsByID = (vue, queryJSON) => {
+  let keys = Object.keys(queryJSON);
+  let values = Object.values(queryJSON);
+  return vue.$resource(postTagAPI + '{?keys, values}').get({
+    keys,
+    values
+  }).then(response => response.body, err => console.log(err));
 };
 
 store.fetchPostByPathName = (vue, pathName) => {

@@ -175,16 +175,16 @@
 
           store.fetchPostTags(this).then(result => {
             let obj = {};
+            this.postTagsBackup = result.filter(value => value.postID === this.id).map(value => value._id);
             result = result.filter(val => val.postID === this.id);
             this.postTags = result.map(val => val.tagID);
-            this.postTagsBackup = this.postTags.slice(0);
           });
 
           store.fetchPostCate(this.then(result => {
             let obj = {};
+            this.postCateBackup = result.filter(value => value.postID === this.id).map(value => value._id);
             result = result.filter(val => val.postID === this.id);
             this.postCate = result.map(val => val.categoryID);
-            this.postCateBackup = this.postTags.slice(0);
           }));
         });
       }
@@ -209,9 +209,10 @@
             commentNum: 0,
             options: ''
           };
-          store.newBlog(this, this.name).then(body => {
+          store.newBlog(this, newPost).then(body => {
             console.log('postCreate', body);
             this.isSubmitting = false;
+            this.deletePostAndTag(body._id);
           })
         } else {
           this.post = Object.assign({}, this.post, {
@@ -225,26 +226,31 @@
           store.patchBlog(this, this.id, this.post).then(body => {
             console.log('postPatched', body);
             this.isSubmitting = false;
+            this.deletePostAndTag(body._id);
           });
         }
-        this.postTagsBackup.forEach(value => {
-          store.deletePostTags(this, value);
-        });
-        this.postCateBackup.forEach(value => {
-          store.deletePostCates(this, value);
-        });
-        this.postTags.forEach(value => {
-          store.addPostTags(this, {
-            postID: this.id,
-            tagID: value
+      },
+      deletePostAndTag(id) {
+          this.postTagsBackup.forEach(value => {
+            store.deletePostTags(this, value);
           });
-        });
-        this.postCate.forEach(value => {
-          store.addPostCates(this, {
-            postID: this.id,
-            categoryID: value
+          console.log(this.postCateBackup);
+          this.postCateBackup.forEach(value => {
+            store.deletePostCates(this, value);
           });
-        });
+          this.postTags.forEach(value => {
+            store.addPostTags(this, {
+              postID: id,
+              tagID: value
+            });
+          });
+          this.postCate.forEach(value => {
+            store.addPostCates(this, {
+              postID: id,
+              categoryID: value
+            });
+          });
+        }
       }
     },
     mounted() {

@@ -90,6 +90,7 @@
   import Top from './Top';
   import MarkdownEditor from './editor/index';
   import DatePicker from 'vue-datepicker/vue-datepicker-es6.vue';
+  import marked from 'marked';
   import moment from 'moment';
   import store from '../store/index';
 
@@ -200,10 +201,10 @@
             updatedAt: time,
             createdAt: time,
             status: 3,
-            pathName: this.post.status,
-            summary: 'gg',
+            pathName: this.post.pathName,
+            summary: marked(this.post.markdownContent.split('<!-- more -->')[0].replace(/<[>]*>/g, '')),
             markdownContent: this.post.markdownContent,
-            content: 'gg',
+            content: marked(this.post.markdownContent),
             allowComment: this.allowComment === true ? '1' : '0',
             isPublic: this.isPublic === '1' ? 1 : 0,
             commentNum: 0,
@@ -217,9 +218,9 @@
         } else {
           this.post = Object.assign({}, this.post, {
             updatedAt: time,
-            summary: 'gg',
+            summary: marked(this.post.markdownContent.split('<!-- more -->')[0].replace(/<[>]*>/g, '')),
             markdownContent: this.post.markdownContent,
-            content: 'gg',
+            content: marked(this.post.markdownContent),
             allowComment: this.allowComment === true ? '1' : '0',
             isPublic: this.isPublic === '1' ? 1 : 0
           });

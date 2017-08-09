@@ -56,7 +56,7 @@
       </ul>
     </div>
     <div class="md-editor">
-      <textarea name="content" v-model="content"></textarea>
+      <div name="content" @change="getNodeFromMarkdown" v-model="content"></div>
     </div>
     <div class="md-preview"></div>
     <div class="md-spliter"></div>
@@ -64,6 +64,8 @@
 </template>
 
 <script>
+  import marked from 'marked';
+
   export default {
     name: 'editor',
     props: {
@@ -73,7 +75,12 @@
     },
     data() {
       return {
-
+        result: ''
+      }
+    },
+    methods: {
+      getNodeFromMarkdown() {
+        this.result = marked(this.content);
       }
     }
   }

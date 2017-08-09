@@ -107,9 +107,6 @@
         ]
       }
     },
-    computed: {
-
-    },
     route: {
       data({to}) {
         console.log(to);
@@ -119,7 +116,9 @@
       }
     },
     mounted() {
-      this.currentRoute = this.$route.path;
+      if (this.currentRoute !== this.$route.path) {
+        this.currentRoute = this.$route.path;
+      }
     },
     methods: {
       isActive(routeUrl) {

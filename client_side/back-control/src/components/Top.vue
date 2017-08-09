@@ -2,9 +2,9 @@
   <div class="header">
     <div class="pull-left">
       <ol class="breadcrumb">
-        <li :class="true ? 'active' : ''" v-if="routes[0] !== ['dashboard']">
+        <!--<li :class="true ? 'active' : ''" v-if="routes[0] !== ['dashboard']">
           <router-link :to="{path: '/'}">首页</router-link>
-        </li>
+        </li>-->
         <template v-for="(route, index) of routes">
           <li :class="true ? 'active' : ''">
           <router-link :to="{path: index === 0 ? '/' + route : routes.join('/')}">{{route === '/dashboard' ? '首页' : route}}</router-link>
@@ -17,7 +17,7 @@
             'unsad'<b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><router-link :to="{path: '/user/list'}">修改密码</router-link></li>
+            <li><router-link @click="goToUrl('/user/list', true)"  :to="{path: '/user/list'}">修改密码</router-link></li>
             <li><a href="/admin/user/logout" @click="toggleUser">退出</a></li>
           </ul>
         </li>
@@ -61,8 +61,10 @@
       toggleUser() {
         this.isOpen = !this.isOpen;
       },
-      goToUrl(url) {
-        this.toggleUser();
+      goToUrl(url, toggle) {
+        if (toggle) {
+          this.toggleUser();
+        }
         this.currentRoute = url;
       }
     }

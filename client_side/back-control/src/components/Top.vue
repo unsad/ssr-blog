@@ -2,12 +2,12 @@
   <div class="header">
     <div class="pull-left">
       <ol class="breadcrumb">
-        <!--<li :class="true ? 'active' : ''" v-if="routes[0] !== ['dashboard']">
-          <router-link :to="{path: '/'}">首页</router-link>
-        </li>-->
+        <li :class="true ? 'active' : ''" v-if="routes[0] !== ['dashboard']">
+          <router-link :to="{name: 'dashboard'}" @click="goToUrl('/dashboard', false)">首页</router-link>
+        </li>
         <template v-for="(route, index) of routes">
           <li :class="true ? 'active' : ''">
-          <router-link :to="{path: index === 0 ? '/' + route : routes.join('/')}">{{route === '/dashboard' ? '首页' : route}}</router-link>
+          <router-link @click=goURL(routes, index) :to="{path: index === 0 ? '/' + route : routes.join('/')}">{{route === '/dashboard' ? '首页' : route}}</router-link>
           </li>
         </template>
       </ol>
@@ -65,7 +65,10 @@
         if (toggle) {
           this.toggleUser();
         }
-        this.currentRoute = url;
+//        this.currentRoute = url;
+      },
+      goURL(routes, index) {
+
       }
     }
   }

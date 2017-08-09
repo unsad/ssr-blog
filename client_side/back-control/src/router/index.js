@@ -21,6 +21,7 @@ import OptionAnalytic from '@/components/OptionAnalytic'
 Vue.use(Router);
 
 let router = new Router({
+  mode: history,
   routes: [
     {
       path: '/',
@@ -167,8 +168,20 @@ let router = new Router({
   ]
 });
 
-router.beforeEach(function() {
+router.beforeEach(function () {
   window.scrollTo(0, 0);
+});
+
+router.afterEach(transition => {
+  if (transition.to.router._children[0] && typeof transition.to.router._children[0].currentRoute !== 'undefined') {
+    let arr = transition.to.path.split('/').filter(value => value != '').filter((value, index) => index < 2).map(value => {
+      if (value === 'edit') {
+        value = 'create';
+      }
+      return value;
+    });
+    transition.to.router._children[0].currentRoute = '/' + arr.join('/');
+  }
 });
 
 export default router;

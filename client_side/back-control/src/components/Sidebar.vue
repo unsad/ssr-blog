@@ -118,6 +118,9 @@
         };
       }
     },
+    mounted() {
+      this.currentRoute = this.$route.path;
+    },
     methods: {
       isActive(routeUrl) {
         return this.currentRoute.indexOf(routeUrl) > -1;

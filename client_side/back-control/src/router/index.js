@@ -139,6 +139,30 @@ let router = new Router({
     {
       path: '*',
       redirect: '/'
+    },
+    {
+      path: '/post',
+      redirect: '/post/list'
+    },
+    {
+      path: '/page',
+      redirect: '/page/list'
+    },
+    {
+      path: '/tag',
+      redirect: '/tag/list'
+    },
+    {
+      path: '/cate',
+      redirect: '/cate/list'
+    },
+    {
+      path: '/user',
+      redirect: '/user/list'
+    },
+    {
+      path: '/option',
+      redirect: '/option/general'
     }
   ]
 });

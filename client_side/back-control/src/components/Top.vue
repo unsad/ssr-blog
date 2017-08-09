@@ -2,20 +2,23 @@
   <div class="header">
     <div class="pull-left">
       <ol class="breadcrumb">
-        <template v-for="item of routes">
-          <li :class="item.url === this.props.location.pathName ? 'active' : ''">
-          <router-link :to="{path: item.children ? item.children[0].url : item.url}">{{item === '/dashboard' ? '首页' : item}}</router-link>
+        <li :class="true ? 'active' : ''" v-if="routes[0] !== ['dashboard']">
+          <router-link :to="{path: '/'}">首页</router-link>
+        </li>
+        <template v-for="(route, index) of routes">
+          <li :class="true ? 'active' : ''">
+          <router-link :to="{path: index === 0 ? '/' + route : routes.join('/')}">{{route === '/dashboard' ? '首页' : route}}</router-link>
           </li>
         </template>
       </ol>
       <ul class="nav userinfo">
         <li :class="this.getUserClass()">
-          <a href="" class="dropdown-toggle" data-toggle="dropdown">
-            SysConfig.userInfo.name<b class="caret"></b>
+          <a href="" @click="toggleUser" class="dropdown-toggle" data-toggle="dropdown">
+            'unsad'<b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="/user/edit_pwd">修改密码</a></li>
-            <li><a href="/admin/user/logout">退出</a></li>
+            <li><router-link :to="{path: '/user/list'}">修改密码</router-link></li>
+            <li><a href="/admin/user/logout" @click="toggleUser">退出</a></li>
           </ul>
         </li>
       </ul>
@@ -45,15 +48,22 @@
     },
     data() {
       return {
-
+        isOpen: false
       }
     },
     methods: {
       getUserClass() {
         return classNames({
           dropdown: true,
-          open: true
+          open: this.isOpen
         })
+      },
+      toggleUser() {
+        this.isOpen = !this.isOpen;
+      },
+      goToUrl(url) {
+        this.toggleUser();
+        this.currentRoute = url;
       }
     }
   }

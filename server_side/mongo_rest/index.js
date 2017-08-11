@@ -4,8 +4,7 @@
 const generateRoutes = require('./routes');
 const generateActions = require('./actions');
 
-module.exports = function generateRest(app, router, model, prefix) {
+module.exports = function generateRest(app, router, model, prefix = '', permission) {
   let actions = generateActions(model);
-  if (prefix === null) prefix = '';
-  generateRoutes(app, router, model.modelName, actions, prefix);
+  generateRoutes(app, router, model.modelName, actions, prefix, permission);
 };

@@ -109,7 +109,6 @@ tag = mongoose.model('tag', tag);
 user = mongoose.model('user', user);
 
 module.exports = {
-  db,
   post,
   category,
   option,

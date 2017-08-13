@@ -1,8 +1,8 @@
 const redis = require('../model/redis');
 const tokenService = require('../service/token');
+const {user: model} = require('../model/mongo');
 
 exports.login = async (next) => {
-  let model = models.user;
   let error, result;
   let users, user;
 
@@ -48,6 +48,32 @@ exports.logout = async (next) => {
   if (result === false) {
     return this.body = 'Token verify failed';
   } else {
-    // redis
+    await redis.del('token');
+    return this.body = 'Token delete!';
+  }
+};
+
+exports.permission = async (next) => {
+  const headers = this.request.headers;
+  let token;
+  try {
+    token = headers['authorization'];
+  } catch (err) {
+    return this.body = err;
+  }
+  if (!token) {
+    return this.body = 'Token not found';
+  }
+  const result = tokenService.verifyToken(token);
+  if (result === false) {
+    return this.body = 'Token verify failed';
+  }
+  let reply = await redis.getAsync('token');
+  if (reply === token) {
+    await next;
+    return;
+  } else {
+    console.log(reply, token);
+    return this.body = 'token invalid';
   }
 };

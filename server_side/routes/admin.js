@@ -19,14 +19,22 @@ exports.login = async (next) => {
       redis.set('token', token, 'EX', tokenService.expiresIn, () => {
 
       });
-      console.log(token);
-      return this.body = {token: token};
+      return this.body = {
+        token: token,
+        status: 'success'
+      };
     } else {
-      return this.body = 'Get token fails. Check name and password';
+      return this.body = {
+        status: 'fail',
+        description: 'Get token failed.Check name and password'
+      }
     }
   } catch (_error) {
     error = _error;
-    return this.body = _error;
+    return this.body = {
+      status: 'fail',
+      description: error
+    }
   }
 };
 
@@ -36,20 +44,32 @@ exports.logout = async (next) => {
   try {
     token = headers['authorization'];
   } catch (err) {
-    return this.body = err;
+    return this.body = {
+      status: 'fail',
+      description: err
+    };
   }
 
   if (!token) {
-    return this.body = 'Token not found';
+    return this.body = {
+      status: 'fail',
+      description: 'Token not found'
+    };
   }
 
   const result = tokenService.verifyToken(token);
 
   if (result === false) {
-    return this.body = 'Token verify failed';
+    return this.body = {
+      status: 'fail',
+      description: 'Token verify failed'
+    };
   } else {
     await redis.del('token');
-    return this.body = 'Token delete!';
+    return this.body = {
+      status: 'success',
+      description: 'Token delete!'
+    };
   }
 };
 
@@ -59,21 +79,32 @@ exports.permission = async (next) => {
   try {
     token = headers['authorization'];
   } catch (err) {
-    return this.body = err;
+    return this.body = {
+      status: 'fail',
+      description: err
+    };
   }
   if (!token) {
-    return this.body = 'Token not found';
+    return this.body = {
+      status: 'fail',
+      description: 'Token not found'
+    };
   }
   const result = tokenService.verifyToken(token);
   if (result === false) {
-    return this.body = 'Token verify failed';
+    return this.body = {
+      status: 'fail',
+      description: 'Token verify failed'
+    };
   }
   let reply = await redis.getAsync('token');
   if (reply === token) {
     await next;
     return;
   } else {
-    console.log(reply, token);
-    return this.body = 'token invalid';
+    return this.body = {
+      status: 'fail',
+      description: 'token invalid'
+    };
   }
 };

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
+import Logout from '@/components/Logout'
 import App from '@/App'
 import Dashboard from '@/components/Dashboard'
 import Tip from '@/components/Tip'
@@ -24,30 +25,45 @@ let router = new Router({
   mode: history,
   routes: [
     {
+      path: '/admin/login',
+      component: Login,
+      auth: false
+    },
+    {
+      path: '/admin/logout',
+      component: Logout,
+      auth: false
+    },
+    {
       path: '/',
       redirect: '/dashboard'
     },
     {
       path: '/dashboard',
-      name: 'Dashboard',
-      component: Dashboard
+      name: 'dashboard',
+      component: Dashboard,
+      auth: true
     },
     {
       path: '/post',
       name: 'post',
       component: App,
+      auth: true,
       children: [
         {
           path: 'list',
-          components: PostList
+          components: PostList,
+          auth: true
         },
         {
           path: 'create',
-          components: PostCreate
+          components: PostCreate,
+          auth: true
         },
         {
           path: 'edit/:id',
-          components: PostCreate
+          components: PostCreate,
+          auth: true
         }
       ]
     },
@@ -55,18 +71,22 @@ let router = new Router({
       path: '/page',
       name: 'page',
       components: App,
+      auth: true,
       children: [
         {
           path: 'list',
-          components: PageList
+          components: PageList,
+          auth: true
         },
         {
           path: 'create',
-          components: PageCreate
+          components: PageCreate,
+          auth: true
         },
         {
           path: 'edit/:id',
-          components: PageCreate
+          components: PageCreate,
+          auth: true
         }
       ]
     },
@@ -74,10 +94,12 @@ let router = new Router({
       path: '/user',
       name: 'user',
       components: App,
+      auth: true,
       children: [
         {
           path: 'list',
-          components: UserList
+          components: UserList,
+          auth: true
         }
       ]
     },
@@ -85,36 +107,44 @@ let router = new Router({
       path: '/cate',
       name: 'cate',
       components: App,
+      auth: true,
       children: [
         {
           path: 'list',
-          components: CateList
+          components: CateList,
+          auth: true
         },
         {
           path: 'create',
-          components: CateCreate
+          components: CateCreate,
+          auth: true
         },
         {
           path: 'edit/:id',
-          components: CateCreate
+          components: CateCreate,
+          auth: true
         }
       ]
     },
     {
       path: '/tag',
       components: App,
+      auth: true,
       children: [
         {
           path: 'list',
-          components: TagList
+          components: TagList,
+          auth: true
         },
         {
           path: 'create',
-          components: TagCreate
+          components: TagCreate,
+          auth: true
         },
         {
           path: 'edit/:id',
-          components: TagCreate
+          components: TagCreate,
+          auth: true
         }
       ]
     },
@@ -122,18 +152,22 @@ let router = new Router({
       path: '/option',
       name: 'option',
       components: App,
+      auth: true,
       children: [
         {
           path: 'general',
-          components: OptionGeneral
+          components: OptionGeneral,
+          auth: true
         },
         {
           path: 'comment',
-          components: OptionComment
+          components: OptionComment,
+          auth: true
         },
         {
           path: 'analytic',
-          components: OptionAnalytic
+          components: OptionAnalytic,
+          auth: true
         }
       ]
     },
@@ -168,8 +202,17 @@ let router = new Router({
   ]
 });
 
-router.beforeEach(function () {
-  window.scrollTo(0, 0);
+router.beforeEach(function (transition) {
+  let authenticated = true;
+  let token = localStorage.getItem('token');
+  if (!token) {
+    authenticated = false;
+  }
+  if (transition.to.path !== '/admin/login' && transition.to.auth && !authenticated) {
+    transition.redirect('/admin/login');
+  } else {
+    transition.next();
+  }
 });
 
 router.afterEach(transition => {

@@ -1,13 +1,7 @@
 <template>
   <div id="app">
-    <template v-if="isLogin === false">
-      <tip :should-tip-show="shouldTipShow" :type="success" :text="placeholder"></tip>
-      <login></login>
-    </template>
-    <template v-else>
       <sidebar :current-route="currentRoute"></sidebar>
       <top :current-route="currentRoute"></top>
-    </template>
     <router-view :current-route="currentRoute"></router-view>
   </div>
 </template>

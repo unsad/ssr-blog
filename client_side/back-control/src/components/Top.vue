@@ -18,7 +18,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><router-link @click="goToUrl('/user/list', true)"  :to="{path: '/user/list'}">修改密码</router-link></li>
-            <li><a href="/admin/user/logout" @click="toggleUser">退出</a></li>
+            <li><router-link :to="{path: '/admin/logout'}" @click="toggleUser">退出</router-link></li>
           </ul>
         </li>
       </ul>

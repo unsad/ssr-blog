@@ -16,6 +16,14 @@ const store = new EventEmitter();
 
 export default store;
 
+store.login = (vue, json) => {
+  return vue.$http.post(`/proxyPrefix/admin/login`, json);
+};
+
+store.logout = (vue, json) => {
+  return vue.$http.post(`/proxyPrefix/admin/logout`, json);
+};
+
 store.newTag = (vue, name) => {
   if (typeof name === 'undefined' || name === '') return;
   return vue.$http.post(`${root}/tag`, {

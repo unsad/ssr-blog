@@ -61,8 +61,9 @@
     methods: {
       getUser() {
         store.fetchUser(this).then(result => {
+          console.log(result);
           this.user = result[0];
-        })
+        });
       },
       submit() {
         if (this.user.password !== this.repassword) return;

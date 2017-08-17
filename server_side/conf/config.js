@@ -9,5 +9,7 @@ module.exports = {
   redisHost: '',
   redisPort: 6390,
   tokenSecret: 'test',
-  tokenExpiresIn: 3600
+  tokenExpiresIn: 3600,
+  defaultAdminName: 'admin',
+  defaultAdminPassword: 'admin'
 };

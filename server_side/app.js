@@ -9,6 +9,7 @@ const koa2RestMongoose = require('./mongo_rest/index');
 const models = require('./model/mongo');
 const tokenService = require('./service/token');
 const redis = require('./model/redis');
+const config = require('./conf/config');
 const {login, logout, permission} = require('./routes/admin');
 
 const app = new Koa();
@@ -28,7 +29,29 @@ Object.keys(models).forEach(value => {
   koa2RestMongoose(app, router, models[value], '/api', permission);
 });
 
-app.listen(3000);
+(async () => {
+  let count = await models.user.find().count().exec();
+  if (count === 0) {
+    if (config.defaultAdminPassword === 'admin') {
+      log.error('you must change the default password at ./conf/confjg.js');
+      log.error('koa2 refused to start bacause of weak password');
+      return;
+    }
 
-console.log('koa2 is running at 3000');
+    let result = await models.user.create({
+      name: config.defaultAdminName,
+      password: config.defaultAdminPassword,
+      displayName: config.defaultAdminName,
+      email: ''
+    });
+
+    log.info(`account '${result.name}' with password '${result.password}' is created`);
+  }
+
+  app.listen(3000);
+
+  log.debug('koa2 is running at 3000');
+
+})();
+
 

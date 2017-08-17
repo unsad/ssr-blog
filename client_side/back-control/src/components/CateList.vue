@@ -85,6 +85,13 @@
           console.log(result);
           this.cates = this.cates.filter(val => val._id !== id);
         });
+        store.fetchPostCateByID(this, {
+          categoryID: id
+        }).then(tags => {
+          tags.forEach(value => {
+            store.deleteCateByPostID(this, value._id);
+          })
+        });
       }
     },
     mounted() {

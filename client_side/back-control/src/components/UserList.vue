@@ -68,7 +68,7 @@
       submit() {
         if (this.user.password !== this.repassword) return;
         store.patchUser(this, this.user._id, this.user).then(result => {
-
+          console.log(result);
         });
       }
     },

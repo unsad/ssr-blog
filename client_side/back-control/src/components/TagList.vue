@@ -87,6 +87,13 @@
           console.log(result);
           this.tags = this.tags.filter(value => value.name !== id);
         });
+        store.fetchPostTagsByID(this, {
+          categoryID: id
+        }).then(tags => {
+          tags.forEach(value => {
+            store.deleteTagsByPostID(this, value._id);
+          })
+        });
       }
     },
     mounted() {

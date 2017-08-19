@@ -2,7 +2,8 @@
   <div id="app">
       <sidebar :current-route="currentRoute"></sidebar>
       <top :current-route="currentRoute"></top>
-    <router-view :current-route="currentRoute"></router-view>
+    <tip :should-tip-show="shouldTipShow" :tip-info="tipInfo" :tip-type="tipType"></tip>
+    <router-view :current-route="currentRoute" :should-tip-show="shouldTipShow" :tip-info="tipInfo" :tip-type="tipType></router-view>
   </div>
 </template>
 
@@ -17,7 +18,9 @@ export default {
   data () {
     return {
       isLogin: true,
-      shouldTipShow: false,
+      shouldTipShow: true,
+      tipInfo: '',
+      tipType: 'alert',
       SystemInfo: {},
       currentRoute: '/dashboard'
     }

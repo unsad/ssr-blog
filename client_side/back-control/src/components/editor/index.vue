@@ -70,7 +70,7 @@
     name: 'editor',
     props: {
       shouldTipShow: Boolean,
-      type: String,
+      tipType: String,
       content: String
     },
     data() {

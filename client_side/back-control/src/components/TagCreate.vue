@@ -38,6 +38,13 @@
     methods: {
       submitTag() {
         this.isSubmitting = true;
+        this.tipInfo = '已成功提交';
+        this.tipType = 'success';
+        this.shouldTipShow = true;
+        setTimeout(() => {
+          this.shouldTipShow = true;
+          this.$router.go({path: '/tag/list'});
+        }, 2000);
         if (this.id === '') {
         store.newTag(this, this.name).then(body => {
           console.log('tagCreate', body);
@@ -62,8 +69,8 @@
     },
     props: {
       shouldTipShow: Boolean,
-      type: String,
-      text: String,
+      tipType: String,
+      tipInfo: String,
       currentRoute: String
     }
   }

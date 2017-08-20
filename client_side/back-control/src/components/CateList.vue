@@ -63,8 +63,8 @@
     },
     props: {
       shouldTipShow: Boolean,
-      type: String,
-      text: String,
+      tipType: String,
+      tipInfo: String,
       currentRoute: String
     },
     data() {
@@ -81,6 +81,12 @@
         });
       },
       deleteCate(id) {
+        this.tipInfo = '删除成功';
+        this.tipType = 'success';
+        this,shouldTipShow = true;
+        setTimeout(() => {
+          this.shouldTipShow = false;
+        }, 2000);
         store.deleteCate(this, id).then(result => {
           console.log(result);
           this.cates = this.cates.filter(val => val._id !== id);

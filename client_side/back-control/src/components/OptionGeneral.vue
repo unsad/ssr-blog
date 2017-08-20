@@ -80,8 +80,8 @@
     },
     props: {
       shouldTipShow: Boolean,
-      type: String,
-      text: String,
+      tipType: String,
+      tipInfo: String,
       currentRoute: String
     },
     data() {
@@ -114,6 +114,12 @@
         });
       },
       submit() {
+        this.tipInfo = '设置已更新';
+        this.tipType = 'success';
+        this.shouldTipShow = true;
+        setTimeout(() => {
+          this.shouldTipShow = false;
+        }, 2000);
         Object.keys(this.option).forEach(name => {
           let value = this.option[name];
           if (typeof this[value.key] === 'undefined') return;

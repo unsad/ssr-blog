@@ -223,6 +223,9 @@ router.afterEach(transition => {
       }
       return value;
     });
+    if (transition.to.router._children[0].shouldTipShow === true) {
+      transition.to.router._children[0].shouldTipShow = false;
+    }
     transition.to.router._children[0].currentRoute = '/' + arr.join('/');
   }
 });

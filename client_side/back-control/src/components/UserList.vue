@@ -48,8 +48,8 @@
     },
     props: {
       shouldTipShow: Boolean,
-      type: String,
-      text: String,
+      tipType: String,
+      tipInfo: String,
       currentRoute: String
     },
     data() {
@@ -66,7 +66,21 @@
         });
       },
       submit() {
-        if (this.user.password !== this.repassword) return;
+        if (this.user.password !== this.repassword) {
+          this.tipInfo = '请确认密码';
+          this.tipType = 'warning';
+          this.shouldTipShow = true;
+          setTimeout(() => {
+            this.shouldTipShow = false;
+          }, 2000);
+          return;
+        }
+        this.tipInfo = '用户信息已更新';
+        tip.tipType = 'success';
+        this.shouldTipShow = true;
+        setTimeout(() => {
+          this.shouldTipShow = false;
+        }, 2000);
         store.patchUser(this, this.user._id, this.user).then(result => {
           console.log(result);
         });

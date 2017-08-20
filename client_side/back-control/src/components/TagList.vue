@@ -65,8 +65,8 @@
     },
     props: {
       shouldTipShow: Boolean,
-      type: String,
-      text: String,
+      tipType: String,
+      tipInfo: String,
       currentRoute: String
     },
     data() {
@@ -83,6 +83,12 @@
         });
       },
       deleteTag(id) {
+        this.tipInfo = '删除成功';
+        this.tipType = 'success';
+        this.shouldTipShow = true;
+        setTimeout(() => {
+          this.shouldTipShow = false;
+        }, 2000);
         store.deleteTag(this, id).then(result => {
           console.log(result);
           this.tags = this.tags.filter(value => value.name !== id);

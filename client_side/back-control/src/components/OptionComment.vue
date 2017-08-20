@@ -42,8 +42,8 @@
     },
     props: {
       shouldTipShow: Boolean,
-      type: String,
-      text: String,
+      tipType: String,
+      tipInfo: String,
       currentRoute: String
     },
     data() {
@@ -70,6 +70,12 @@
         });
       },
       submit() {
+        this.tipInfo = '评论设置已更新';
+        this.tipType = 'success';
+        this.shouldTipShow = true;
+        setTimeout(() => {
+          this.shouldTipShow = false;
+        }, 2000);
         let value = JSON.stringify({type: this.picked, name: this.name});
         store.patchOption(this, this.option['comment']._id, {value}).then(result => {
           console.log(value, result);

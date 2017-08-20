@@ -10,8 +10,8 @@
     name: 'search',
     props: {
       shouldTipShow: Boolean,
-      type: String,
-      text: String
+      tipType: String,
+      tipInfo: String
     },
     data() {
 

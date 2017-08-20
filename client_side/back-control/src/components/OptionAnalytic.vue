@@ -26,8 +26,8 @@
     },
     props: {
       shouldTipShow: Boolean,
-      type: String,
-      text: String,
+      tipType: String,
+      tipInfo: String,
       currentRoute: String
     },
     mounted() {
@@ -51,6 +51,12 @@
         });
       },
       submit() {
+        this.tipInfo = '统计代码已更新';
+        this.tipType = 'success';
+        this.shouldTipShow = true;
+        setTimeout(() => {
+          this.shouldTipShow = false;
+        }, 2000);
         store.patchOption(this, this.option['analyze_code']._id, {
           value : this.analyze_code
         }).then(result => {

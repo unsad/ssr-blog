@@ -12,12 +12,8 @@
       logout() {
         store.logout(this).then(response => {
           localStorage.removeItem('token');
-          if (response.body.status === 'fail') {
-            console.log('logout fails');
-            this.$router.go({path: '/admin/login'});
-          } else if (response.body.status === 'success') {
-            this.$router.go({path: '/admin/login'});
-          }
+          localStorage.removeItem('username');
+          this.$router.go({path: '/admin/login'});
         });
       }
     },

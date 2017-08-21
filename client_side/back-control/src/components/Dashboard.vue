@@ -5,8 +5,8 @@
       <!--<p>目前有{{count.posts}}篇文章，并有{{count.comments}}条关于你的评论在{{count.cates}}个分类中</p>-->
       <p>点击下面链接快速开始：</p>
       <div>
-        <a href="/post/create">撰写新文章</a>
-        <a href="/options/general">系统设置</a>
+        <router-link :to="{path: '/post/create'}">撰写新文章</router-link>
+        <a :to="{path: '/option/general'}">系统设置</a>
       </div>
       <hr/>
       <div class="info">

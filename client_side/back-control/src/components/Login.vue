@@ -39,6 +39,7 @@
 
           } else if (response.body.status === 'success') {
             localStorage.setItem('token', response.body.token);
+            localStorage.setItem('username', response.body.username);
             this.$router.go({path: '/dashboard'});
           }
         });

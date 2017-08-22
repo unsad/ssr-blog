@@ -14,7 +14,7 @@
       <ul class="nav userinfo">
         <li :class="this.getUserClass()">
           <a href="" @click="toggleUser" class="dropdown-toggle" data-toggle="dropdown">
-            {{name}}<b class="caret"></b>
+            {{username}}<b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <li><router-link @click="goToUrl('/user/list', true)"  :to="{path: '/user/list'}">修改密码</router-link></li>

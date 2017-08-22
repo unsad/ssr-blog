@@ -23,12 +23,16 @@
         <div class="post-info">
           <p>发表于
             <time>{{article.createAt}}</time>
+            <template v-if="cates.length !== 0">
             ，添加在分类
-            <a href="/cate/Node.js" data-cate="Node.js">Node.js</a>
-            下
+            <a v-for="cate of cates" :data-cate="cate.name">
+              <code class="notebook">{{cate.name}}</code>
+            </a>
+            </template>
+            下,
             <template v-if="tags.length !== 0">
             ,并被添加[
-            <router-link v-for="tag in tags" :to="{name: 'tagPager', params: {tagName: tag.name}}" :data-tag="tag.name"><code class="notebook">{{tagName}}</code></router-link>
+            <router-link v-for="tag of tags" :to="{name: 'tagPager', params: {tagName: tag.name}}" :data-tag="tag.name"><code class="notebook">{{tag.name}}</code></router-link>
             ]标签下，
             </template>
             最后修改于
@@ -84,6 +88,17 @@
               });
               postTags.forEach(value => {
                 this.tags.push(obj[value.tagID]);
+              });
+            });
+          });
+          store.fetchCatesByPostID(this, {postID: article._id}).then(postCates => {
+            store.fetchCates(this).then(cates => {
+              let obj = {};
+              cates.forEach(value => {
+                obj[value._id] = value;
+              });
+              postCates.forEach(value => {
+                this.cates.push(obj[value.categoryID]);
               });
             });
           });

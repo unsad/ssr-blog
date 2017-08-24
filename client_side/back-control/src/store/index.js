@@ -207,6 +207,15 @@ store.addPostCates  = (vue, json) => {
   return vue.$http.post(`${postCateAPI}`, json).then(response => response.body, err => console.log(err));
 };
 
+store.fetchOptionByJSON = (vue, queryJSON) => {
+  let keys = Object.keys(queryJSON);
+  let values = Object.values(queryJSON);
+  return vue.$resource(`${root}/option` + '/{?keys, values}').get({
+    keys,
+    values
+  }).then(response => response.body, err => console.log(err));
+};
+
 store.fetchOption = (vue) => {
   return vue.$http.get(`${root}/option`).then(response => response.body, err => console.log(err));
 };

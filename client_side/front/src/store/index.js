@@ -149,6 +149,10 @@ store.fetchNextPostByPathName = (vue, id) => {
   });
 };
 
+store.fetchOption = vue => {
+  return vue.$http.get(`/proxyPrefix/api/option`).then(response => response.body, err => console.log(err));
+};
+
 store.fetchCatesByPostID = (vue, queryJSON) => {
   let keys = Object.keys(queryJSON);
   let values = Object.keys(queryJSON).map(value => queryJSON[value]);

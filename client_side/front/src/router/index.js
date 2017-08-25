@@ -10,6 +10,7 @@ import TagPager from '@/components/TagPager'
 Vue.use(Router);
 
 let router = new Router({
+  mode: history,
   routes: [
     {
       path: '/',

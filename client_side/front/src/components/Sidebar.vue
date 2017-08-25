@@ -49,6 +49,9 @@
           obj[value.key] = value;
         });
         this.siteInfo = obj;
+        if (this.siteInfo['title']) {
+          document.title = this.siteInfo['title'].value;
+        }
       });
     }
   }

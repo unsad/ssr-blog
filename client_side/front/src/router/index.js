@@ -50,7 +50,7 @@ let router = new Router({
 });
 
 router.beforeEach(function() {
-  window.scrollTo(0, 0);
+
 });
 
 export default router;

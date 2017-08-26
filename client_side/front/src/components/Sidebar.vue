@@ -52,6 +52,11 @@
         if (this.siteInfo['title']) {
           document.title = this.siteInfo['title'].value;
         }
+        if (this.siteInfo['comment']) {
+          let value = JSON.parse(this.siteInfo['comment'].value);
+          let type = value.type;
+          let name = value.name;
+        }
       });
     }
   }

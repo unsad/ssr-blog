@@ -24,16 +24,17 @@
           <p>发表于
             <time>{{article.createAt}}</time>
             <template v-if="cates.length !== 0">
-            ，添加在分类
-            <a v-for="cate of cates" :data-cate="cate.name">
-              <code class="notebook">{{cate.name}}</code>
-            </a>
+              ，添加在分类
+              <a v-for="cate of cates" :data-cate="cate.name">
+                <code class="notebook">{{cate.name}}</code>
+              </a>
             </template>
             下,
             <template v-if="tags.length !== 0">
-            ,并被添加[
-            <router-link v-for="tag of tags" :to="{name: 'tagPager', params: {tagName: tag.name}}" :data-tag="tag.name"><code class="notebook">{{tag.name}}</code></router-link>
-            ]标签下，
+              ,并被添加[
+              <router-link v-for="tag of tags" :to="{name: 'tagPager', params: {tagName: tag.name}}"
+                           :data-tag="tag.name"><code class="notebook">{{tag.name}}</code></router-link>
+              ]标签下，
             </template>
             最后修改于
             <time>{{article.updatedAt}}</time>
@@ -41,9 +42,21 @@
         </div>
       </article>
       <nav class="pagination">
-        <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'" class="prev">&laquo;{{prev.title}}</router-link>
-        <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof prev.pathName !== 'undefined'" class="next">&raquo;{{next.title}}</router-link>
+        <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
+                     class="prev">&laquo;{{prev.title}}
+        </router-link>
+        <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
+                     class="next">&raquo;{{next.title}}
+        </router-link>
       </nav>
+      <div id="comments" :data-type="commentType" :data-thread-key=
+        "article.pathName.toString(16)" :data-url=`${siteURL}/post/${article.pathName}`>
+        <h1 class="title">Comments</h1>
+        <div id="disqus_thread" :data-url="${siteURL}/post/${article.pathName}"
+             :data-identifier="article.pathName.toString(16)" :data-name="commentName">
+          评论加载中...
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -59,15 +72,16 @@
         cates: [],
         tags: [],
         prev: {},
-        next: {}
+        next: {},
+        commentType: '',
+        commentName: '',
+        siteURL: ''
       }
     },
-    created() {
-      this.fetchData();
-    },
-    methods: {
-      fetchData() {
-        let pathName = this.$route.params.pathName;
+    watch: {},
+    route: {
+      data(obj) {
+        let pathName = obj.to.params.pathName;
         store.fetchPostByPathName(this, pathName).then(article => {
           this.article = article;
           window.scrollTo(0, 0);
@@ -103,6 +117,21 @@
             });
           });
         });
+        return {
+          article: {},
+          cates: [],
+          tags: [],
+          prev: {},
+          next: {}
+        }
+      }
+    },
+    created() {
+
+    },
+    methods: {
+      getItems() {
+
       }
     }
   }

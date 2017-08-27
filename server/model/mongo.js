@@ -5,12 +5,12 @@ const config = require('../conf/config');
 const mongoose = require('mongoose');
 const log = require('../utils/log');
 
-let mongoUrl = '127.0.0.1:27017/koa_rest_mongoose';
+let mongoUrl = '127.0.0.1:27017/blog';
 mongoose.connect(mongoUrl);
 
 let db = mongoose.connection; // 监控数据库变化
-db.on('error', log.error.bind(log, 'connect error:'));
-db.once('open', () => console.log('MongoDB opened!'));
+db.on('error', (err) => log.error('connect error:', err));
+db.once('open', () => log.debug('MongoDB is ready!'));
 
 let Schema = mongoose.Schema;
 let ObjectId = Schema.ObjectId;

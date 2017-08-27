@@ -25,6 +25,7 @@
 
 <script>
   import Top from './Top';
+  import store from '../store/index';
 
   export default {
     name: 'dashboard',
@@ -39,6 +40,15 @@
         count: '',
         posts: ''
       }
+    },
+    created() {
+      store.fetchUser(this).then(result => {
+        if (!Array.isArray(result)) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('username');
+          this.$router.go({path: 'admin/login'});
+        }
+      });
     },
     components: {
       Top

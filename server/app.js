@@ -10,6 +10,7 @@ const models = require('./model/mongo');
 const tokenService = require('./service/token');
 const redis = require('./model/redis');
 const config = require('./conf/config');
+const option = require('./conf/option');
 const {login, logout, permission} = require('./routes/admin');
 
 const app = new Koa();
@@ -30,6 +31,7 @@ Object.keys(models).forEach(value => {
 });
 
 (async () => {
+  await initOption();
   let count = await models.user.find().count().exec();
   if (count === 0) {
     if (config.defaultAdminPassword === 'admin') {
@@ -54,4 +56,14 @@ Object.keys(models).forEach(value => {
 
 })();
 
-
+async function initOption() {
+  for (let i = 0, len = option.length; i < len; i++) {
+    let key = option[i].key;
+    let value = option[i].value;
+    let count = await models.option.find({key}).count().exec();
+    if (count === 0) {
+      await models.option.create(option[i]);
+      log.info(`Option ${key} created`);
+    }
+  }
+}

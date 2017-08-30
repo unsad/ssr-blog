@@ -28,6 +28,7 @@
 
 <script>
   import classNames from 'classnames';
+  import store from '../store/index';
 
   export default {
     name: 'top',
@@ -72,7 +73,9 @@
 
       },
       mounted() {
-        this.username = localStorage.getItem('username') || '';
+        store.fetchUser(this).then(result => {
+          this.username = result[0].displayName;
+        });
       }
     }
   }

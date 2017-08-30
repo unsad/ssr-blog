@@ -14,7 +14,7 @@
     </ul>
     <ul class="buttons">
       <li>
-        <a :href="siteInfo.github_blog.value" target="_blank" class="inline">
+        <a :href="siteInfo.github_url.value" target="_blank" class="inline">
           <i title="GitHub"></i>
         </a>
       </li>
@@ -51,11 +51,6 @@
         this.siteInfo = obj;
         if (this.siteInfo['title']) {
           document.title = this.siteInfo['title'].value;
-        }
-        if (this.siteInfo['comment']) {
-          let value = JSON.parse(this.siteInfo['comment'].value);
-          let type = value.type;
-          let name = value.name;
         }
       });
     }

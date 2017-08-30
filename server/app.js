@@ -31,7 +31,6 @@ Object.keys(models).forEach(value => {
 });
 
 (async () => {
-  await initOption();
   let count = await models.user.find().count().exec();
   if (count === 0) {
     if (config.defaultAdminPassword === 'admin') {
@@ -48,6 +47,8 @@ Object.keys(models).forEach(value => {
     });
 
     log.info(`account '${result.name}' with password '${result.password}' is created`);
+
+    await initOption();
   }
 
   app.listen(3000);

@@ -11,7 +11,7 @@
               <input v-model="post.title" type="text" name="title" placeholder="标题">
             </div>
             <div class="pathname">
-              <span>https://sweetalkto.me/post/</span>
+              <span>{{site_url}}{{isPost ? '/post/' : '/page'}}</span>
               <div class="form-group">
                 <input :disabled="shouldPathDisabled" v-model="post.pathName" type="text" name="pathname"></div>
               <span>.html</span>
@@ -147,6 +147,7 @@
         postTagsBackup: [],
         allowComment: true,
         isPublic: '1',
+        site_url: '',
         post: {
           updateAt: '',
           createAt: '',
@@ -259,9 +260,13 @@
             });
           });
         }
-      }
-    },
+      },
     mounted() {
+      store.fetchOptionByJSON(this, {key: 'site_url'}.then(result => {
+        if (Array.isArray(result) && result[0]) {
+          this.site_url = result[0].value;
+        }
+      }));
       if (this.isPost === false) return;
       store.fetchCate(this).then(result => {
         this.cates = result;

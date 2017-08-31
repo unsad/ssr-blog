@@ -1,7 +1,7 @@
 <template>
   <nav class="pagination">
-    <a class="prev" href="javascript: void(0)" v-if="page > 1" @click="prev()">&laquo;上一页</a>
-    <a class="next" href="javascript: void(0)"  v-if="page < totalPage" @click="next()">&raquo;下一页</a>
+    <router-link :to="{ path: '/?page=' + page - 1}" class="prev" v-if="page > 1">&laquo;上一页</router-link>
+    <router-link :to="{ path: '/?page=' + page - 1}" class="next" v-if="page < totalPage">&raquo;下一页</router-link>
     <div class="center">
       <router-link :to="{name: 'archive'}">博客归档</router-link>
     </div>
@@ -16,12 +16,7 @@
       page: Number
     },
     methods: {
-      prev() {
-        this.page--;
-      },
-      next() {
-        this.page++;
-      }
+
     }
   }
 </script>

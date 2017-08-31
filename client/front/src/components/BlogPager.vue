@@ -25,6 +25,18 @@
         totalPage: 1
       }
     },
+    route: {
+      data({to}) {
+        let query = to.query;
+        let page = typeof query.page !== 'undefined' ? parseInt(query.page) : 1;
+        if (page < 0) {
+          page = 1;
+        }
+        return {
+          page
+        }
+      }
+    },
     watch: {
       page() {
         this.getItems();

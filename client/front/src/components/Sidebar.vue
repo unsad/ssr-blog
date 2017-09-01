@@ -39,7 +39,17 @@
     name: 'sideBar',
     data() {
       return {
-        siteInfo: {}
+        siteInfo: {
+          github_url: {
+            value: ''
+          },
+          title: {
+            value: ''
+          },
+          logo_url: {
+            value: ''
+          }
+        }
       }
     },
     mounted() {

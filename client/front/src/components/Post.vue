@@ -50,10 +50,10 @@
         </router-link>
       </nav>
       <div id="comments" :data-type="commentType" :data-thread-key=
-        "article.pathName.toString(16)" :data-url=`${siteURL}/post/${article.pathName}`>
+        "article.pathName || ''" :data-url=`${siteURL}/post/${article.pathName}`>
         <h1 class="title">Comments</h1>
         <div id="disqus_thread" :data-url="${siteURL}/post/${article.pathName}"
-             :data-identifier="article.pathName.toString(16)" :data-name="commentName">
+             :data-identifier="article.pathName || ''" :data-name="commentName">
           评论加载中...
         </div>
       </div>

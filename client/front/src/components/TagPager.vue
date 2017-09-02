@@ -29,11 +29,6 @@
         totalPage: 1
       }
     },
-    watch: {
-      page() {
-        this.getItems();
-      }
-    },
     methods: {
       getItems() {
         let idArr = [];

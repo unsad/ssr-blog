@@ -1,16 +1,21 @@
 <template>
   <div id="app">
     <sidebar></sidebar>
+    <header></header>
+    <keep-alive>
     <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-  import sidebar from './components/home/Sidebar.vue'
+  import sidebar from './components/Sidebar.vue';
+  import header from './components/Header.vue';
   export default {
     name: 'app',
     components: {
-      sidebar
+      sidebar,
+      header
     }
   }
 </script>

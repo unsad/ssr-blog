@@ -86,6 +86,22 @@
             ]
           },
           {
+            url: '/update',
+            icon: 'report',
+            title: '更新管理',
+            type: 1,
+            children: [
+              {
+                url: '/update/list',
+                title: '版本列表'
+              },
+              {
+                url: '/update/create',
+                title: '添加更新'
+              }
+            ]
+          },
+          {
             url: '/user',
             icon: 'user',
             title: '用户管理',

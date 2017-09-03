@@ -24,6 +24,14 @@ store.logout = (vue, json) => {
   return vue.$http.post(`/proxyPrefix/admin/logout`, json);
 };
 
+store.fetchUpdates = (vue) => {
+  return vue.$http.get(`/proxyPrefix/api/update`);
+};
+
+store.deleteUpdate = (vue, id) => {
+  return vue.$http.delete(`/proxyPrefix/api/update/${id}`);
+};
+
 store.newTag = (vue, name) => {
   if (typeof name === 'undefined' || name === '') return;
   return vue.$http.post(`${root}/tag`, {

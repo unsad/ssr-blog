@@ -18,6 +18,8 @@ import UserList from '@/components/UserList'
 import OptionGeneral from '@/components/OptionGeneral'
 import OptionComment from '@/components/OptionComment'
 import OptionAnalytic from '@/components/OptionAnalytic'
+import UpdateCreate from '@/components/UpdateCreate'
+import UpdateList from '@/components/UpdateList'
 
 Vue.use(Router);
 
@@ -147,6 +149,31 @@ let router = new Router({
           auth: true
         }
       ]
+    },
+    {
+      path: '/update',
+      name: 'update',
+      components: App,
+      auth: true,
+      children: [
+        {
+          path: 'list',
+          component: UpdateList,
+          auth: true
+        },
+        {
+          path: 'create',
+          component: UpdateCreate,
+          auth: true
+        },
+        {
+          path: 'edit/:id',
+          name: 'editUpdate',
+          component: UpdateCreate,
+          auth: true
+        }
+      ]
+
     },
     {
       path: '/option',

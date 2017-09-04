@@ -78,9 +78,14 @@
         siteURL: ''
       }
     },
-    watch: {},
-    route: {
-      data(obj) {
+    watch: {
+      '$route': 'getPost'
+    },
+    created() {
+
+    },
+    methods: {
+      getPost(val, oldVal) {
         let pathName = obj.to.params.pathName;
         store.fetchPostByPathName(this, pathName).then(article => {
           this.article = article;
@@ -117,21 +122,6 @@
             });
           });
         });
-        return {
-          article: {},
-          cates: [],
-          tags: [],
-          prev: {},
-          next: {}
-        }
-      }
-    },
-    created() {
-
-    },
-    methods: {
-      getItems() {
-
       }
     }
   }

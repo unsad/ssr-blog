@@ -25,22 +25,24 @@
         totalPage: 1
       }
     },
-    route: {
-      data({transition}) {
-        let query = transition.to.query;
+    watch: {
+      '$route': 'fetchData'
+    },
+    methods: {
+      fetchData(val, oldVal) {
+        console.log('fetchData');
+        let query = this.$route.query;
         let page = typeof query.page !== 'undefined' ? parseInt(query.page) : 1;
         if (page < 0) {
           page = 1;
         }
         store.fetchBlogByPage(this, {type: 0}, page - 1).then(items => {
           this.items = items;
+          if (oldVal.query.name && oldVal.query.name !== 'post') {
+
+          }
         });
-        if (transition.from.name !== 'post') {
-          window.scrollTo(0, 0);
-        }
-        return {
-          page
-        }
+        this.page = page;
       }
     },
     components: {

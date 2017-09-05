@@ -78,6 +78,11 @@
         siteURL: ''
       }
     },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        vm.getPost(to);
+      });
+    },
     watch: {
       '$route': 'getPost'
     },

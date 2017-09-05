@@ -25,6 +25,11 @@
         totalPage: 1
       }
     },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        vm.fetchData();
+      })
+    },
     watch: {
       '$route': 'fetchData'
     },
@@ -38,9 +43,6 @@
         }
         store.fetchBlogByPage(this, {type: 0}, page - 1).then(items => {
           this.items = items;
-          if (oldVal.query.name && oldVal.query.name !== 'post') {
-
-          }
         });
         this.page = page;
       }

@@ -1,7 +1,8 @@
 /**
  * Created by unsad on 2017/5/23.
  */
-import { EventEmitter } from 'events';
+import axios from 'axios';
+
 const aboutAPI = `/proxyPrefix/api/post/57dbe47c2993f70dc6d6b12c`;
 const blogAPI = `/proxyPrefix/api/post`;
 const tagAPI = `/proxyPrefix/api/tag`;
@@ -12,25 +13,67 @@ const root = 'proxyPrefix/api';
 
 const perPage = 10;
 
-const store = new EventEmitter();
+const store = {};
+
+axios.interceptors.request.use(config => {
+  const token = localStorage.getItem('token');
+  if (request.method === 'get' && request.url.indexOf('/proxyPrefix/user') === -1) return config;
+  if (token !== null && token !== 'undefined') {
+    config.headers['authorization'] = token;
+  }
+  return config;
+}, error => Promise.reject(error));
+
+axios.interceptors.response.use(response => {
+  if (response.data && response.data.status && response.data.status === 'fail') {
+    console.error(response.data.description);
+  }
+  return response;
+}, error => Promise.reject(error));
 
 export default store;
 
-store.login = (vue, json) => {
-  return vue.$http.post(`/proxyPrefix/admin/login`, json);
+store.login = (conditions, args) => {
+  return axios.post(`/proxyPrefix/admin/login`, conditions);
 };
 
-store.logout = (vue, json) => {
-  return vue.$http.post(`/proxyPrefix/admin/logout`, json);
+store.logout = (conditions, args) => {
+  return axios.post(`/proxyPrefix/admin/logout`, conditions);
 };
 
-store.fetchUpdates = (vue) => {
-  return vue.$http.get(`/proxyPrefix/api/update`);
+store.fetchUpdates = (conditions = {}, args) => {
+  return axios.get(`/proxyPrefix/api/update`, conditions);
 };
 
-store.deleteUpdate = (vue, id) => {
-  return vue.$http.delete(`/proxyPrefix/api/update/${id}`);
+store.deleteUpdate = id => {
+  return axios.delete(`/proxyPrefix/api/update/${id}`);
 };
+
+// post CRUD
+
+store.fetchBlog = (conditions, args) => {
+  return axios.get(blogAPI + `?conditions=${JSON.stringify(conditions)}&sort=1`).then(response => response.data, err => console.log(err));
+};
+
+store.fetchBlogByID = id => {
+  return axios.get(blogAPI + `/${id}`).then(response => response.data, err => console.log(err));
+};
+
+store.newBlog = json => {
+  return axios.post(blogAPI, json).then(response => response.data, err => console.log(err));
+};
+
+
+store.patchBlog = (id, json) => {
+  return axios.patch(`${blogAPI}/${id}`, json).then(response => response.data, err => console.log(err));
+};
+
+store.deleteBlogByID = (id, page = 0) => {
+  return axios.delete(`blogAPI/${id}`).then(response => response.data, err => console.log(err));
+};
+
+//cate CRUD
+
 
 store.newTag = (vue, name) => {
   if (typeof name === 'undefined' || name === '') return;
@@ -95,17 +138,7 @@ store.deleteCate = (vue, id) => {
   return vue.$http.delete(`${root}/category/${id}`).then(response => response.body, err => console.log(err));
 };
 
-store.fetchBlogByID = (vue, id, page = 0) => {
-  return vue.$http.get(blogAPI, {
-    params: {
-      id
-    }
-  }).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
-};
+
 
 store.fetchBlogByPage = (vue, queryJSON, page = 0) => {
   let keys = Object.keys(queryJSON);
@@ -126,11 +159,6 @@ store.fetchBlogByPage = (vue, queryJSON, page = 0) => {
   });
 };
 
-store.deleteBlogByID = (vue, id, page = 0) => {
-  return vue.$resource(`blogAPI/${id}`).delete({
-    id
-  }).then(response => response.body, err => console.log(err));
-};
 
 store.deleteTagsByPostID = (vue, id) => {
   return vue.$http.delete(`${postTagAPI}/${id}`).then(response => response.body, err => console.log(err));
@@ -285,10 +313,4 @@ store.fetchNextPostByPathName = (vue, id) => {
   });
 };
 
-store.newBlog = (vue, json) => {
-  return vue.$http.post(blogAPI, json).then(response => response.body, err => console.log(err));
-};
 
-store.patchBlog = (vue, id, json) => {
-  return vue.$http.patch(`${blogAPI}/${id}`, json).then(response => response.body, err => console.log(err));
-};

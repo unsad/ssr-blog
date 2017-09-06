@@ -107,6 +107,7 @@
             console.log(postTags);
             store.fetchTags(this).then(tags => {
               let obj = {};
+              this.tags = [];
               tags.forEach(value => {
                 obj[value._id] = value;
               });
@@ -118,6 +119,7 @@
           store.fetchCatesByPostID(this, {postID: article._id}).then(postCates => {
             store.fetchCates(this).then(cates => {
               let obj = {};
+              this.cates = [];
               cates.forEach(value => {
                 obj[value._id] = value;
               });

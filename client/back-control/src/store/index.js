@@ -74,6 +74,30 @@ store.deleteBlogByID = (id, page = 0) => {
 
 //cate CRUD
 
+store.fetchCate = (conditions = {}, arg) => {
+  return axios.get(`${root}/category?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
+};
+
+store.newCate = name => {
+  if (typeof name === 'undefined' || name === '') return;
+  return axios.post(`${root}/category`, {
+    name
+  }).then(response => response.data, err => console.log(err));
+};
+
+store.fetchCateById = id => {
+  return axios.get(`${root}/category/${id}`).then(response => response.data, err => console.log(err));
+};
+
+store.patchCate = (id, json) => {
+  return axios.patch(`${root}/category/${id}`, json).then(response => response.data, err => console.log(err));
+};
+
+store.deleteCate = id => {
+  return axios.delete(`${root}/category/${id}`).then(response => response.data, err => console.log(err));
+};
+
+// tag CRUD
 
 store.newTag = (vue, name) => {
   if (typeof name === 'undefined' || name === '') return;
@@ -82,12 +106,6 @@ store.newTag = (vue, name) => {
   }).then((response) => response.body, err => console.log(err));
 };
 
-store.newCate = (vue, name) => {
-  if (typeof name === 'undefined' || name === '') return;
-  return vue.$http.post(`${root}/category`, {
-    name
-  }).then((response) => response.body, err => console.log(err));
-};
 
 store.fetchAbout = (vue) => {
   return vue.$http.get(aboutAPI).then((response) => {
@@ -121,24 +139,6 @@ store.patchTag = (vue, id, json) => {
 store.deleteTag = (vue, id) => {
   return vue.$http.delete(`${root}/tag/${id}`).then(response => response.body, err => console.log(err));
 };
-
-store.fetchCate = vue => {
-  return vue.$http.get(`${root}/category`).then(response => response.body, err => console.log(err));
-};
-
-store.fetchCateById = (vue, id) => {
-  return vue.$http.get(`${root}/category/${id}`).then(response => response.body, err => console.log(err));
-};
-
-store.patchCate = (vue, id, json) => {
-  return vue.$http.patch(`${root}/category/${id}`, json).then(response => response.body, err => console.log(err));
-};
-
-store.deleteCate = (vue, id) => {
-  return vue.$http.delete(`${root}/category/${id}`).then(response => response.body, err => console.log(err));
-};
-
-
 
 store.fetchBlogByPage = (vue, queryJSON, page = 0) => {
   let keys = Object.keys(queryJSON);

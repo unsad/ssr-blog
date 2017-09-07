@@ -99,13 +99,52 @@ store.deleteCate = id => {
 
 // tag CRUD
 
-store.newTag = (vue, name) => {
-  if (typeof name === 'undefined' || name === '') return;
-  return vue.$http.post(`${root}/tag`, {
-    name
-  }).then((response) => response.body, err => console.log(err));
+store.fetchTag = (conditions = {}, args) => {
+  return axios.get(`${root}/tag?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
 };
 
+store.fetchTagById = id => {
+  return axios.get(`${root}/tag/${id}`).then(response => response.data, err => console.log(err));
+};
+
+store.newTag = name => {
+  if (typeof name === 'undefined' || name === '') return;
+  return axios.post(`${root}/tag`, {
+    name
+  }).then(response => response.data, err => console.log(err));
+};
+
+store.patchTag = (id, json) => {
+  return axios.patch(`${root}/tag/${id}`, json).then(response => response.data, err => console.log(err));
+};
+
+store.deleteTag = id => {
+  return axios.delete(`${root}/tag/${id}`).then(response => response.data, err => console.log(err));
+};
+
+// version CRUD
+
+store.fetchVersion = (conditions = {}, args) => {
+  return axios.get(`${root}/update?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
+};
+
+store.fetchVersionById = id => {
+  return axios.get(`${root}/update/${id}`).then(response => response.data, err => console.log(err));
+};
+
+store.newVersion = json => {
+  return axios.post(`${root}/update`, json).then(response => response.data, err => console.log(err));
+};
+
+store.patchVersion = (id, json) => {
+  return axios.patch(`${root}/update/${id}`, json).then(response => response.data, err => console.log(err));
+};
+
+store.deleteVersion = id => {
+  return axios.delete(`${root}/update/${id}`).then(response => response.data, err => console.log(err));
+};
+
+// option CURD
 
 store.fetchAbout = (vue) => {
   return vue.$http.get(aboutAPI).then((response) => {
@@ -122,22 +161,6 @@ store.fetchUser = vue => {
 
 store.patchUser = (vue, id, json) => {
   return vue.$http.patch(`${root}/user/${id}`, json).then(response => response.body, err => console.log(err));
-};
-
-store.fetchTag = vue => {
-  return vue.$http.get(`${root}/tag`).then(response => response.body, err => console.log(err));
-};
-
-store.fetchTagById = (vue, id) => {
-  return vue.$http.get(`${root}/tag/${id}`).then(response => response.body, err => console.log(err));
-};
-
-store.patchTag = (vue, id, json) => {
-  return vue.$http.patch(`${root}/tag/${id}`, json).then(response => response.body, err => console.log(err));
-};
-
-store.deleteTag = (vue, id) => {
-  return vue.$http.delete(`${root}/tag/${id}`).then(response => response.body, err => console.log(err));
 };
 
 store.fetchBlogByPage = (vue, queryJSON, page = 0) => {

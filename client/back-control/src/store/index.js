@@ -41,7 +41,7 @@ store.logout = (conditions, args) => {
   return axios.post(`/proxyPrefix/admin/logout`, conditions);
 };
 
-store.fetchUpdates = (conditions = {}, args) => {
+store.fetchUpdate = (conditions = {}, args) => {
   return axios.get(`/proxyPrefix/api/update`, conditions);
 };
 
@@ -144,196 +144,68 @@ store.deleteVersion = id => {
   return axios.delete(`${root}/update/${id}`).then(response => response.data, err => console.log(err));
 };
 
-// option CURD
+// option CRUD
 
-store.fetchAbout = (vue) => {
-  return vue.$http.get(aboutAPI).then((response) => {
-    console.log('response ok');
-    return response.body;
-  }, (err) => {
-    console.log('response error', err);
-  });
+store.fetchOption = (conditions = {}, args) => {
+  return axios.get(`${root}/option?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchUser = vue => {
-  return vue.$http.get(`${root}/user`).then(response => response.body, err => console.log(err));
+store.patchOption = (id, json) => {
+  return axios.patch(`${root}/option/${id}`, json).then(response => response.data, err => console.log(err));
 };
 
-store.patchUser = (vue, id, json) => {
-  return vue.$http.patch(`${root}/user/${id}`, json).then(response => response.body, err => console.log(err));
+// user CRUD
+
+store.fetchUser = () => {
+  return axios.get(`${root}/user`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchBlogByPage = (vue, queryJSON, page = 0) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$http.get(blogAPI, {
-    params: {
-      keys,
-      values,
-      limit: perPage,
-      skip: page * perPage,
-      sort: '1'
-    }
-  }).then((response) => {
-    console.log(response.body[0].title);
-    return response.body;
-  }, (err) => {
-    console.log('response error', err);
-  });
+store.patchUser = (id, json) => {
+  return axios.patch(`${root}/user/${id}`, json).then(response => response.data, err => console.log(err));
 };
 
+// many to many
 
-store.deleteTagsByPostID = (vue, id) => {
-  return vue.$http.delete(`${postTagAPI}/${id}`).then(response => response.body, err => console.log(err));
+store.deleteTagsByPostID = id => {
+  return axios.delete(`${postTagAPI}/${id}`).then(response => response.data, err => console.log(err));
 };
 
-store.deleteCateByPostID = (vue, id) => {
-  return vue.$http.delete(`${postCateAPI}/${id}`).then(response => response.body, err => console.log(err));
+store.deleteCateByPostID = id => {
+  return axios.delete(`${postCateAPI}/${id}`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchBlogCount = (vue, queryJSON, page = 0) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$http.get(blogAPI, {
-    params: {
-      keys,
-      values,
-      count: 1
-    }
-  }).then((response) => {
-    return Math.ceil(parseInt(response.body) / perPage);
-  }, (err) => {
-    console.log('response error', err);
-  });
+// postTag
+
+store.fetchPostTags = () => {
+  return axios.get(postTagAPI).then(response => response.data, err => console.log(err));
 };
 
-store.fetchAllBlog = (vue) => {
-  return vue.$http.get(blogAPI, {
-    params: {
-      keys: ['type'],
-      values: ['0'],
-      sort: '1'
-    }
-  }).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
+store.fetchPostTagsByID = (conditions) => {
+  return axios.get(postTagAPI + `?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchTags = (vue) => {
-  return vue.$http.get(tagAPI).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
+// postCate
+
+store.fetchPostCate = () => {
+  return axios.get(postCateAPI).then(response => response.data, err => console.log(err));
 };
 
-store.fetchPostTags = (vue) => {
-  return vue.$http.get(postTagAPI).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
+store.fetchPostCateByID = (conditions) => {
+  return axios.get(postCateAPI + `?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchPostCate = vue => {
-  return vue.$http.get(postCateAPI).then(response => response.body, err => console.log(err));
+store.deletePostTags = id => {
+  return axios.delete(`${postTagAPI}/${id}`).then(response => response, err => console.log(err));
 };
 
-store.fetchPostCateByID = (vue, queryJSON) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$resource(postCateAPI + '{?keys, values}').get({
-    keys,
-    values
-  }).then(response => response.body, err => console.log(err));
+store.addPostTags = json => {
+  return axios.post(`${postTagAPI}`, json).then(response => response.data, err => console.log(err));
 };
 
-store.deletePostTags = (vue, id) => {
-  return vue.$http.delete(`${postTagAPI}/${id}`).then(response => response, err => console.log(err));
-};
-
-store.addPostTags = (vue, json) => {
-  return vue.$http.post(`${postTagAPI}`, json).then(response => response.body, err => console.log(err));
-};
-
-store.deletePostCates = (vue, id) => {
-  return vue.$http.delete(`${postCateAPI}/${id}`).then(response => response, err => console.log(err));
+store.deletePostCates = id => {
+  return axios.delete(`${postCateAPI}/${id}`).then(response => response, err => console.log(err));
 };
 
 store.addPostCates  = (vue, json) => {
-  return vue.$http.post(`${postCateAPI}`, json).then(response => response.body, err => console.log(err));
+  return axios.post(`${postCateAPI}`, json).then(response => response.data, err => console.log(err));
 };
-
-store.fetchOptionByJSON = (vue, queryJSON) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$resource(`${root}/option` + '/{?keys, values}').get({
-    keys,
-    values
-  }).then(response => response.body, err => console.log(err));
-};
-
-store.fetchOption = (vue) => {
-  return vue.$http.get(`${root}/option`).then(response => response.body, err => console.log(err));
-};
-
-store.patchOption = (vue, id, json) => {
-  return vue.$http.patch(`${root}/option/${id}`, json).then(response => response.body, err => console.log(err));
-};
-
-store.fetchTagsByPostID = (vue, queryJSON) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$http.get(postTagAPI, {
-    keys,
-    values
-  }).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
-};
-
-store.fetchPostTagsByID = (vue, queryJSON) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$resource(postTagAPI + '{?keys, values}').get({
-    keys,
-    values
-  }).then(response => response.body, err => console.log(err));
-};
-
-store.fetchPostByPathName = (vue, pathName) => {
-  return vue.$http.get(blogAPI, {
-    params: {
-      keys: ['pathName'],
-      values: [pathName]
-    }
-  }).then((response) => {
-    return response.body[0];
-  }, (err) => {
-    console.log(err);
-  });
-};
-
-store.fetchPrevPostByPathName = (vue, id) => {
-  let api = `${blogAPI}/${id}?prev=1`;
-  return vue.$http.get(api).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
-};
-
-store.fetchNextPostByPathName = (vue, id) => {
-  let api = `${blogAPI}/${id}?next=1`;
-  return vue.$http.get(api).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
-};
-
-

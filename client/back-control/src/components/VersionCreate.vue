@@ -60,10 +60,10 @@
           return;
         }
         this.id = to.params.id;
-        this.$http.get(`/proxyPrefix/api/update/${this.id}`).then(result => {
-          this.name = result.body.name;
-          this.path = result.body.path;
-          this.version = result.body.version;
+        store.fetchVersionById(this.id).then(result => {
+          this.name = result.name;
+          this.path = result.path;
+          this.version = result.version;
         });
       }
     },
@@ -80,7 +80,7 @@
           });
         }, 2000);
         if (this.id === '') {
-          this.$http.post(`/proxyPrefix/api/update`, {
+          store.newVersion({
             name: this.name,
             path: this.path,
             version: this.version
@@ -88,7 +88,7 @@
             this.isSubmitting = false;
           });
         } else {
-          this.$http.patch(`/proxyPrefix/api/update/${this.id}`, {
+          store.patchVersion(this.id, {
             name: this.name,
             path: this.path,
             version: this.version

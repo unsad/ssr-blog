@@ -10,7 +10,7 @@
   export default {
     methods: {
       logout() {
-        store.logout(this).then(response => {
+        store.logout().then(response => {
           localStorage.removeItem('token');
           localStorage.removeItem('username');
           this.$router.go({path: '/admin/login'});

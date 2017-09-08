@@ -135,7 +135,7 @@
     mounted() {
       if (this.currentRoute !== this.$route.path) {
         this.currentRoute = this.$route.path;
-        store.fetchOptionByJSON(this, {key: 'title'}).then(result => {
+        store.fetchOption({key: 'title'}).then(result => {
           this.title = result[0].value || '';
         });
       }

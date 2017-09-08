@@ -76,18 +76,18 @@
     },
     methods: {
       getCate() {
-        store.fetchCate(this).then(result => {
+        store.fetchCate().then(result => {
           this.cates = result;
         });
       },
       deleteCate(id) {
         this.tipInfo = '删除成功';
         this.tipType = 'success';
-        this,shouldTipShow = true;
+        this.shouldTipShow = true;
         setTimeout(() => {
           this.shouldTipShow = false;
         }, 2000);
-        store.deleteCate(this, id).then(result => {
+        store.deleteCate(id).then(result => {
           console.log(result);
           this.cates = this.cates.filter(val => val._id !== id);
         });
@@ -95,7 +95,7 @@
           categoryID: id
         }).then(tags => {
           tags.forEach(value => {
-            store.deleteCateByPostID(this, value._id);
+            store.deleteCateByPostID(value._id);
           })
         });
       }

@@ -73,7 +73,7 @@
     },
     methods: {
       getUpdates() {
-        store.fetchUpdates(this).then(result => {
+        store.fetchUpdate().then(result => {
           this.items = result.body;
         });
       }
@@ -85,7 +85,7 @@
       setTimeout(() => {
         this.shouldTipShow = false;
       }, 2000);
-      store.deleteUpdate(this, id).then(result => {
+      store.deleteUpdate(id).then(result => {
         this.items = this.items.filter(value => value._id !== id);
       });
     },

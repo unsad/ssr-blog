@@ -60,7 +60,7 @@
     },
     methods: {
       getUser() {
-        store.fetchUser(this).then(result => {
+        store.fetchUser().then(result => {
           console.log(result);
           this.user = result[0];
         });
@@ -81,7 +81,7 @@
         setTimeout(() => {
           this.shouldTipShow = false;
         }, 2000);
-        store.patchUser(this, this.user._id, this.user).then(result => {
+        store.patchUser(this.user._id, this.user).then(result => {
           console.log(result);
         });
       }

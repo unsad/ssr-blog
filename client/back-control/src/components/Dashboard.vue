@@ -42,7 +42,7 @@
       }
     },
     created() {
-      store.fetchUser(this).then(result => {
+      store.fetchUser().then(result => {
         if (!Array.isArray(result)) {
           localStorage.removeItem('token');
           localStorage.removeItem('username');

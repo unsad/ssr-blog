@@ -46,12 +46,12 @@
           this.$router.go({path: '/cate/list'});
         }, 2000);
         if (this.id === '') {
-          store.newCate(this, this.name).then(body => {
+          store.newCate(this.name).then(body => {
             console.log('cateCreate', body);
             this.isSubmitting = false;
           });
         } else {
-          store.patchCate(this, this.id, {
+          store.patchCate(this.id, {
             name: this.name
           }).then(body => {
             console.log('catePatched', body);
@@ -64,7 +64,7 @@
       data({ to }) {
         if (typeof to.params.id === 'undefined') return;
         this.id = to.params.id;
-        store.fetchCateById(this, this.id).then(result => {
+        store.fetchCateById(this.id).then(result => {
           this.name = result.name;
         });
       }

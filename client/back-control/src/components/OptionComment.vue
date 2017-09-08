@@ -58,7 +58,7 @@
     },
     methods: {
       getOption() {
-        store.fetchOption(this).then(result => {
+        store.fetchOption().then(result => {
           let obj = {};
           result.forEach(value => {
             obj[value.key] = value;
@@ -77,7 +77,7 @@
           this.shouldTipShow = false;
         }, 2000);
         let value = JSON.stringify({type: this.picked, name: this.name});
-        store.patchOption(this, this.option['comment']._id, {value}).then(result => {
+        store.patchOption(this.option['comment']._id, {value}).then(result => {
           console.log(value, result);
         });
       }

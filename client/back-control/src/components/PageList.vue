@@ -79,7 +79,7 @@
     },
     methods: {
       getPage() {
-        store.fetchBlogByPage(this, {type: '1'}).then(result => {
+        store.fetchBlogByPage({type: '1'}).then(result => {
           this.pages = result;
         });
       },
@@ -90,7 +90,7 @@
         setTimeout(() => {
           this.shouldTipShow = false;
         }, 2000);
-        store.deleteBlogByID(this, id).then(result => {
+        store.deleteBlogByID(id).then(result => {
           this.pages = this.pages.filter(val => val._id !== id);
         });
       }

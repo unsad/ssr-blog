@@ -73,7 +73,9 @@
     },
     methods: {
       getBlogByPage() {
-        store.fetchAllBlog(this).then(result => {
+        store.fetchBlog({
+          type: 0
+        }).then(result => {
           this.posts = result;
         });
       },
@@ -84,22 +86,22 @@
         setTimeout(() => {
           this.shouldTipShow = false;
         }, 2000);
-        store.deleteBlogByID(this, id).then(result => {
+        store.deleteBlogByID(id).then(result => {
           this.posts = this.posts.filter(val => val._id !== id);
         });
         console.log(id);
-        store.fetchPostTagsByID(this, {
+        store.fetchPostTagsByID({
           postID: id
         }).then(tags => {
           tags.forEach(value => {
-            store.deleteTagsByPostID(this, value._id);
+            store.deleteTagsByPostID(value._id);
           });
         });
-        store.fetchPostCateByID(this, {
+        store.fetchPostCateByID({
           postID: id
         }).then(tags => {
           tags.forEach(value => {
-            store.deleteCateByPostID(this, value._id);
+            store.deleteCateByPostID(value._id);
           });
         })
       }

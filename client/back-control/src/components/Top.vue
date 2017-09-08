@@ -73,7 +73,7 @@
 
       },
       mounted() {
-        store.fetchUser(this).then(result => {
+        store.fetchUser().then(result => {
           this.username = result[0].displayName;
         });
       }

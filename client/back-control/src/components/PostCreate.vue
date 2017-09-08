@@ -167,7 +167,7 @@
         this.id = to.params.id;
         this.shouldPathDisabled = true;
         let tempResult;
-        store.fetchBlogByID(this, this.id).then(result => {
+        store.fetchBlogByID(this.id).then(result => {
           this.post = result;
           this.starttime = this.post.updatedAt ||  this.post.createdAt;
           this.timeoption.placeholder = this.starttime;
@@ -175,19 +175,19 @@
 
           if(this.isPost === false) return;
 
-          store.fetchPostTags(this).then(result => {
+          store.fetchPostTags().then(result => {
             let obj = {};
             this.postTagsBackup = result.filter(value => value.postID === this.id).map(value => value._id);
             result = result.filter(val => val.postID === this.id);
             this.postTags = result.map(val => val.tagID);
           });
 
-          store.fetchPostCate(this.then(result => {
+          store.fetchPostCate().then(result => {
             let obj = {};
             this.postCateBackup = result.filter(value => value.postID === this.id).map(value => value._id);
             result = result.filter(val => val.postID === this.id);
             this.postCate = result.map(val => val.categoryID);
-          }));
+          });
         });
       }
     },
@@ -218,7 +218,7 @@
             commentNum: 0,
             options: ''
           };
-          store.newBlog(this, newPost).then(body => {
+          store.newBlog(newPost).then(body => {
             console.log('postCreate', body);
             this.isSubmitting = false;
             this.deletePostAndTag(body._id);
@@ -232,7 +232,7 @@
             allowComment: this.allowComment === true ? '1' : '0',
             isPublic: this.isPublic === '1' ? 1 : 0
           });
-          store.patchBlog(this, this.id, this.post).then(body => {
+          store.patchBlog(this.id, this.post).then(body => {
             console.log('postPatched', body);
             this.isSubmitting = false;
             this.deletePostAndTag(body._id);
@@ -241,20 +241,20 @@
       },
       deletePostAndTag(id) {
           this.postTagsBackup.forEach(value => {
-            store.deletePostTags(this, value);
+            store.deletePostTags(value);
           });
           console.log(this.postCateBackup);
           this.postCateBackup.forEach(value => {
-            store.deletePostCates(this, value);
+            store.deletePostCates(value);
           });
           this.postTags.forEach(value => {
-            store.addPostTags(this, {
+            store.addPostTags({
               postID: id,
               tagID: value
             });
           });
           this.postCate.forEach(value => {
-            store.addPostCates(this, {
+            store.addPostCates({
               postID: id,
               categoryID: value
             });
@@ -262,16 +262,16 @@
         }
       },
     mounted() {
-      store.fetchOptionByJSON(this, {key: 'site_url'}.then(result => {
+      store.fetchOption({key: 'site_url'}.then(result => {
         if (Array.isArray(result) && result[0]) {
           this.site_url = result[0].value;
         }
       }));
       if (this.isPost === false) return;
-      store.fetchCate(this).then(result => {
+      store.fetchCate().then(result => {
         this.cates = result;
       });
-      store.fetchTag(this).then(result => {
+      store.fetchTag().then(result => {
         this.tags = result;
       });
     }

@@ -18,8 +18,8 @@ import UserList from '@/components/UserList'
 import OptionGeneral from '@/components/OptionGeneral'
 import OptionComment from '@/components/OptionComment'
 import OptionAnalytic from '@/components/OptionAnalytic'
-import UpdateCreate from '@/components/UpdateCreate'
-import UpdateList from '@/components/UpdateList'
+import VersionCreate from '@/components/VersionCreate'
+import VersionList from '@/components/VersionList'
 
 Vue.use(Router);
 
@@ -158,18 +158,18 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          component: UpdateList,
+          component: VersionList,
           auth: true
         },
         {
           path: 'create',
-          component: UpdateCreate,
+          component: VersionCreate,
           auth: true
         },
         {
           path: 'edit/:id',
           name: 'editUpdate',
-          component: UpdateCreate,
+          component: VersionCreate,
           auth: true
         }
       ]

@@ -41,7 +41,7 @@
     },
     methods: {
       getOption() {
-        store.fetchOption(this).then(result => {
+        store.fetchOption().then(result => {
           let obj = {};
           result.forEach(value => {
             obj[value.key] = value;
@@ -57,7 +57,7 @@
         setTimeout(() => {
           this.shouldTipShow = false;
         }, 2000);
-        store.patchOption(this, this.option['analyze_code']._id, {
+        store.patchOption(this.option['analyze_code']._id, {
           value : this.analyze_code
         }).then(result => {
           console.log(result);

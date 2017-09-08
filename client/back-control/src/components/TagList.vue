@@ -78,7 +78,7 @@
     },
     methods: {
       getTag() {
-        store.fetchTag(this).then(result => {
+        store.fetchTag().then(result => {
           this.tags = result;
         });
       },
@@ -89,15 +89,15 @@
         setTimeout(() => {
           this.shouldTipShow = false;
         }, 2000);
-        store.deleteTag(this, id).then(result => {
+        store.deleteTag(id).then(result => {
           console.log(result);
           this.tags = this.tags.filter(value => value.name !== id);
         });
-        store.fetchPostTagsByID(this, {
-          categoryID: id
+        store.fetchPostTagsByID({
+          tagID: id
         }).then(tags => {
           tags.forEach(value => {
-            store.deleteTagsByPostID(this, value._id);
+            store.deleteTagsByPostID(value._id);
           })
         });
       }

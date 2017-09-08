@@ -106,15 +106,14 @@
     },
     methods: {
       getOption() {
-        store.fetchOption(this).then(result => {
-          let obj = {};
-          result.forEach(value => {
-            obj[value.key] = value;
-            if (typeof this[value.key] !== 'undefined') {
-              this[value.key] = value.value;
+        store.fetchOption().then(result => {
+          this.option = result.reduce((prev, curr) => {
+            prev[curr.key] = curr;
+            if (typeof this[curr.key] !== 'undefined') {
+              this[curr.key] = curr.value;
             }
-          });
-          this.option = obj;
+            return prev;
+          }, {});
         });
       },
       submit() {
@@ -129,7 +128,7 @@
           let value = this.option[name];
           if (typeof this[value.key] === 'undefined') return;
           if (this[value.key] === value.value) return;
-          store.patchOption(this, value._id, {
+          store.patchOption(value._id, {
             value: this[value.key]
           }).then(result => {
             value.value = this[value.key];

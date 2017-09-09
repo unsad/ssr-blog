@@ -65,10 +65,12 @@
             <label for="">公开度</label>
             <div>
               <div>
-                <div class="radio"><label for=""></label><input type="radio" value="1" v-model="isPublic"><span>公开</span></div>
+                <div class="radio"><label for=""></label><input type="radio" value="1"
+                                                                v-model="isPublic"><span>公开</span></div>
               </div>
               <div>
-                <div class="radio"><label for=""></label><input type="radio" value="0" v-model="isPublic"><span>不公开</span></div>
+                <div class="radio"><label for=""></label><input type="radio" value="0"
+                                                                v-model="isPublic"><span>不公开</span></div>
               </div>
             </div>
           </div>
@@ -169,11 +171,11 @@
         let tempResult;
         store.fetchBlogByID(this.id).then(result => {
           this.post = result;
-          this.starttime = this.post.updatedAt ||  this.post.createdAt;
+          this.starttime = this.post.updatedAt || this.post.createdAt;
           this.timeoption.placeholder = this.starttime;
           this.allowComment = this.post.allowComment === '1';
 
-          if(this.isPost === false) return;
+          if (this.isPost === false) return;
 
           store.fetchPostTags().then(result => {
             let obj = {};
@@ -240,27 +242,27 @@
         }
       },
       deletePostAndTag(id) {
-          this.postTagsBackup.forEach(value => {
-            store.deletePostTags(value);
+        this.postTagsBackup.forEach(value => {
+          store.deletePostTags(value);
+        });
+        console.log(this.postCateBackup);
+        this.postCateBackup.forEach(value => {
+          store.deletePostCates(value);
+        });
+        this.postTags.forEach(value => {
+          store.addPostTags({
+            postID: id,
+            tagID: value
           });
-          console.log(this.postCateBackup);
-          this.postCateBackup.forEach(value => {
-            store.deletePostCates(value);
+        });
+        this.postCate.forEach(value => {
+          store.addPostCates({
+            postID: id,
+            categoryID: value
           });
-          this.postTags.forEach(value => {
-            store.addPostTags({
-              postID: id,
-              tagID: value
-            });
-          });
-          this.postCate.forEach(value => {
-            store.addPostCates({
-              postID: id,
-              categoryID: value
-            });
-          });
-        }
-      },
+        });
+      }
+    },
     mounted() {
       store.fetchOption({key: 'site_url'}.then(result => {
         if (Array.isArray(result) && result[0]) {

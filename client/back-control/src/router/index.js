@@ -24,7 +24,7 @@ import VersionList from '@/components/VersionList'
 Vue.use(Router);
 
 let router = new Router({
-  mode: history,
+  mode: 'history',
   routes: [
     {
       path: '/admin/login',
@@ -244,7 +244,7 @@ router.beforeEach(function (transition) {
 
 router.afterEach(transition => {
   if (transition.to.router._children[0] && typeof transition.to.router._children[0].currentRoute !== 'undefined') {
-    let arr = transition.to.path.split('/').filter(value => value != '').filter((value, index) => index < 2).map(value => {
+    let arr = transition.to.path.split('/').filter(value => value !== '').filter((value, index) => index < 2).map(value => {
       if (value === 'edit') {
         value = 'create';
       }

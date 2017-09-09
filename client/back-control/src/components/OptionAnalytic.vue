@@ -58,12 +58,12 @@
           this.shouldTipShow = false;
         }, 2000);
         store.patchOption(this.option['analyze_code']._id, {
-          value : this.analyze_code
+          value: this.analyze_code
         }).then(result => {
           console.log(result);
         });
       }
-    },
+    }
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">

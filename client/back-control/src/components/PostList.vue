@@ -23,7 +23,7 @@
           </tr>
           <tr v-else v-for="post of posts">
             <td>
-              <router-link :to="{name: 'editPost', params: {id: post._id}}" :title="{{post.title}}">{{post.title}}</router-link>
+              <router-link :to="{name: 'editPost', params: {id: post._id}}" :title="post.title">{{post.title}}</router-link>
               <a :href="`/post/${post.pathname}.html`" v-if="item.status === 3" target="_blank"></a>
             </td>
             <td>{{post.status}}</td>

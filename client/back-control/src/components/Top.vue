@@ -7,7 +7,7 @@
         </li>
         <template v-for="(route, index) of routes">
           <li :class="true ? 'active' : ''">
-          <router-link @click=goURL(routes, index) :to="{path: index === 0 ? '/' + route : routes.join('/')}">{{route === '/dashboard' ? '首页' : route}}</router-link>
+          <router-link @click=goURL(routes,index) :to="{path: index === 0 ? '/' + route : routes.join('/')}">{{route === '/dashboard' ? '首页' : route}}</router-link>
           </li>
         </template>
       </ol>

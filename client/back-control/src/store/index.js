@@ -63,7 +63,6 @@ store.newBlog = json => {
   return axios.post(blogAPI, json).then(response => response.data, err => console.log(err));
 };
 
-
 store.patchBlog = (id, json) => {
   return axios.patch(`${blogAPI}/${id}`, json).then(response => response.data, err => console.log(err));
 };
@@ -72,7 +71,7 @@ store.deleteBlogByID = (id, page = 0) => {
   return axios.delete(`blogAPI/${id}`).then(response => response.data, err => console.log(err));
 };
 
-//cate CRUD
+// cate CRUD
 
 store.fetchCate = (conditions = {}, arg) => {
   return axios.get(`${root}/category?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
@@ -206,6 +205,6 @@ store.deletePostCates = id => {
   return axios.delete(`${postCateAPI}/${id}`).then(response => response, err => console.log(err));
 };
 
-store.addPostCates  = (vue, json) => {
+store.addPostCates = (vue, json) => {
   return axios.post(`${postCateAPI}`, json).then(response => response.data, err => console.log(err));
 };

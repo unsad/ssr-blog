@@ -34,19 +34,20 @@
           password: this.password
         }).then(response => {
           console.log(response);
-          if (response.body.status === 'fall') {
+          if (response.body.status === 'fail') {
 
           } else if (response.data.status === 'success') {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('username', this.username);
-            this.$router.go({path: '/dashboard'});
+            this.$router.push({path: '/dashboard'});
           }
         });
       }
     },
     mounted() {
-      store.fetchOption(this, {key: 'title'}).then(result => {
-        this.title = result[0].value || '';
+      store.fetchOption({key: 'title'}).then(result => {
+        result = (result || [])[0];
+        this.title = (result || {}).value || '';
       });
     }
   }

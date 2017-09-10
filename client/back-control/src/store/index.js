@@ -17,7 +17,7 @@ const store = {};
 
 axios.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
-  if (request.method === 'get' && request.url.indexOf('/proxyPrefix/user') === -1) return config;
+  if (config.method === 'get' && config.url.indexOf('/proxyPrefix/user') === -1) return config;
   if (token !== null && token !== 'undefined') {
     config.headers['authorization'] = token;
   }

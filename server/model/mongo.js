@@ -4,8 +4,9 @@
 const config = require('../conf/config');
 const mongoose = require('mongoose');
 const log = require('../utils/log');
-
+mongoose.Promise = global.Promise;
 let mongoUrl = '127.0.0.1:27017/blog';
+
 mongoose.connect(mongoUrl);
 
 let db = mongoose.connection; // 监控数据库变化

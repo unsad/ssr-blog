@@ -133,12 +133,10 @@
       }
     },
     mounted() {
-      if (this.currentRoute !== this.$route.path) {
-        this.currentRoute = this.$route.path;
-        store.fetchOption({key: 'title'}).then(result => {
-          this.title = result[0].value || '';
-        });
-      }
+      store.fetchOption({key: 'title'}).then(result => {
+        result = (result || [])[0];
+        this.title = (result || {}).value || '';
+      });
     },
     methods: {
       isActive(routeUrl) {

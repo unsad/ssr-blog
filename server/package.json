@@ -1,10 +1,14 @@
 {
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "jsonwebtoken": "^7.4.2",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.1.1",
     "log4js": "^1.1.1",
-    "mongoose": "^4.9.8"
+    "mongoose": "^4.9.8",
+    "redis": "^2.8.0"
   }
 }

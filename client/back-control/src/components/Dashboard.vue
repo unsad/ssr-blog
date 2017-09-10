@@ -41,12 +41,12 @@
         posts: ''
       }
     },
-    created() {
+    mounted() {
       store.fetchUser().then(result => {
         if (!Array.isArray(result)) {
           localStorage.removeItem('token');
           localStorage.removeItem('username');
-          this.$router.go({path: 'admin/login'});
+          this.$router.push({path: '/admin/login'});
         }
       });
     },

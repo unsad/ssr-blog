@@ -229,31 +229,18 @@ let router = new Router({
   ]
 });
 
-router.beforeEach(function (transition) {
+router.beforeEach((to, from, next) => {
   let authenticated = true;
   let token = localStorage.getItem('token');
   if (!token) {
     authenticated = false;
   }
-  if (transition.to.path !== '/admin/login' && transition.to.auth && !authenticated) {
-    transition.redirect('/admin/login');
-  } else {
-    transition.next();
-  }
-});
-
-router.afterEach(transition => {
-  if (transition.to.router._children[0] && typeof transition.to.router._children[0].currentRoute !== 'undefined') {
-    let arr = transition.to.path.split('/').filter(value => value !== '').filter((value, index) => index < 2).map(value => {
-      if (value === 'edit') {
-        value = 'create';
-      }
-      return value;
+  if (to.path !== '/admin/login' && to.matched.auth && !authenticated) {
+    next({
+      path: '/admin/login'
     });
-    if (transition.to.router._children[0].shouldTipShow === true) {
-      transition.to.router._children[0].shouldTipShow = false;
-    }
-    transition.to.router._children[0].currentRoute = '/' + arr.join('/');
+  } else {
+    next();
   }
 });
 

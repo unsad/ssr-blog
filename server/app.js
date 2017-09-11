@@ -24,7 +24,7 @@ app.use(async (ctx, next) => {
 });
 
 router.post('/admin/login', login);
-router.post('./admin/logout', logout);
+router.post('/admin/logout', logout);
 
 Object.keys(models).forEach(value => {
   koa2RestMongoose(app, router, models[value], '/api', permission);

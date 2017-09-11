@@ -8,7 +8,6 @@ exports.login = async (ctx, next) => {
 
   try {
     users = await model.find({name: ctx.request.body.name}).exec();
-    console.log(users);
     user = {
       name: users[0].name,
       password: users[0].password

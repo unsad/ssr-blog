@@ -34,8 +34,8 @@
           password: this.password
         }).then(response => {
           console.log(response);
-          if (response.body.status === 'fail') {
-
+          if (response.data.status === 'fail') {
+            console.log('fail');
           } else if (response.data.status === 'success') {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('username', this.username);

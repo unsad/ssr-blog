@@ -98,8 +98,7 @@ exports.permission = async (ctx, next) => {
   }
   let reply = await redis.getAsync('token');
   if (reply === token) {
-    await next;
-    return;
+    await next();
   } else {
     return ctx.body = {
       status: 'fail',

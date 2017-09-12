@@ -3,6 +3,7 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
     "jsonwebtoken": "^7.4.2",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",

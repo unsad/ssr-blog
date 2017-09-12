@@ -33,7 +33,6 @@
           name: this.username,
           password: this.password
         }).then(response => {
-          console.log(response);
           if (response.data.status === 'fail') {
             console.log('fail');
           } else if (response.data.status === 'success') {

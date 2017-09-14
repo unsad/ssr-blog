@@ -12,7 +12,6 @@ import TagList from '@/components/TagList'
 import CateList from '@/components/CateList'
 import TagCreate from '@/components/TagCreate'
 import PostCreate from '@/components/PostCreate'
-import PageCreate from '@/components/PageCreate'
 import CateCreate from '@/components/CateCreate'
 import UserList from '@/components/UserList'
 import OptionGeneral from '@/components/OptionGeneral'
@@ -54,17 +53,17 @@ let router = new Router({
       children: [
         {
           path: 'list',
-          components: PostList,
+          component: PostList,
           auth: true
         },
         {
           path: 'create',
-          components: PostCreate,
+          component: PostCreate,
           auth: true
         },
         {
           path: 'edit/:id',
-          components: PostCreate,
+          component: PostCreate,
           auth: true
         }
       ]
@@ -72,22 +71,22 @@ let router = new Router({
     {
       path: '/page',
       name: 'page',
-      components: App,
+      component: App,
       auth: true,
       children: [
         {
           path: 'list',
-          components: PageList,
+          component: PageList,
           auth: true
         },
         {
           path: 'create',
-          components: PageCreate,
+          component: PostCreate,
           auth: true
         },
         {
           path: 'edit/:id',
-          components: PageCreate,
+          component: PostCreate,
           auth: true
         }
       ]
@@ -95,12 +94,12 @@ let router = new Router({
     {
       path: '/user',
       name: 'user',
-      components: App,
+      component: App,
       auth: true,
       children: [
         {
           path: 'list',
-          components: UserList,
+          component: UserList,
           auth: true
         }
       ]
@@ -108,44 +107,44 @@ let router = new Router({
     {
       path: '/cate',
       name: 'cate',
-      components: App,
+      component: App,
       auth: true,
       children: [
         {
           path: 'list',
-          components: CateList,
+          component: CateList,
           auth: true
         },
         {
           path: 'create',
-          components: CateCreate,
+          component: CateCreate,
           auth: true
         },
         {
           path: 'edit/:id',
-          components: CateCreate,
+          component: CateCreate,
           auth: true
         }
       ]
     },
     {
       path: '/tag',
-      components: App,
+      component: App,
       auth: true,
       children: [
         {
           path: 'list',
-          components: TagList,
+          component: TagList,
           auth: true
         },
         {
           path: 'create',
-          components: TagCreate,
+          component: TagCreate,
           auth: true
         },
         {
           path: 'edit/:id',
-          components: TagCreate,
+          component: TagCreate,
           auth: true
         }
       ]
@@ -153,7 +152,7 @@ let router = new Router({
     {
       path: '/update',
       name: 'update',
-      components: App,
+      component: App,
       auth: true,
       children: [
         {
@@ -178,22 +177,22 @@ let router = new Router({
     {
       path: '/option',
       name: 'option',
-      components: App,
+      component: App,
       auth: true,
       children: [
         {
           path: 'general',
-          components: OptionGeneral,
+          component: OptionGeneral,
           auth: true
         },
         {
           path: 'comment',
-          components: OptionComment,
+          component: OptionComment,
           auth: true
         },
         {
           path: 'analytic',
-          components: OptionAnalytic,
+          component: OptionAnalytic,
           auth: true
         }
       ]

@@ -11,10 +11,9 @@
               <input v-model="post.title" type="text" name="title" placeholder="标题">
             </div>
             <div class="pathname">
-              <span>{{site_url}}{{isPost ? '/post/' : '/page'}}</span>
+              <span>{{site_url}}{{isPost ? '/post/' : '/page/'}}</span>
               <div class="form-group">
                 <input :disabled="shouldPathDisabled" v-model="post.pathName" type="text" name="pathname"></div>
-              <span>.html</span>
             </div>
             <div class="form-group">
               <markdown-editor :content="post.markdownContent"></markdown-editor>
@@ -27,14 +26,14 @@
                 保存草稿
               </button>
               <span></span>
-              <button type="submit" @click="sumbit">
+              <button type="submit" @click="submit">
                 发布文章
               </button>
             </div>
-            <div><label for="">{{this.id === '' ? '发布日期' : '修改日期'}}</label>
+            <div><label for="">{{id === '' ? '发布日期' : '修改日期'}}</label>
               <div>
                 <div class="rdt">
-                  <date-picker :time="starttime" :option="timeoption"></date-picker>
+                  <date-picker :date="startTime" :limit="limit" :option="option"></date-picker>
                 </div>
               </div>
             </div>
@@ -97,7 +96,7 @@
   import store from '../store/index';
 
   export default {
-    name: 'pageCreate',
+    name: 'postCreate',
     components: {
       Top,
       MarkdownEditor,
@@ -111,18 +110,36 @@
     },
     data() {
       return {
-        starttime: '',
-        endtime: '2016-01-19',
+        startTime: {
+          time: ''
+        },
+        endTime: {
+          time: ''
+        },
         test: '',
         multiTime: '',
-        timeoption: {
-          type: 'min',
+        option: {
+          type: 'day',
           week: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
           month: ['一月', '二月', '三月', '四月', '五月',
             '六月', '七月', '八月', '九月', '十月', '十一月',
             '十二月'],
           format: 'YYYY-MM-DD HH:mm:ss',
           placeholder: '请选择时间',
+          inputStyle: {
+            'display': 'inline-block',
+            'padding': '6px',
+            'line-height': '22px',
+            'font-size': '16px',
+            'border': '2px solid #fff',
+            'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
+            'border-radius': '2px',
+            'color': '#5F5F5F'
+          },
+          color: {
+            header: '#ccc',
+            headerText: '#f00'
+          },
           buttons: {
             ok: '确认',
             cancel: '取消'
@@ -202,7 +219,7 @@
         this.shouldTipShow = true;
         setTimeout(() => {
           this.shouldTipShow = false;
-          this.$router.go({path: this.isPost ? '/post/list' : '/page/list'}, 2000);
+          this.$router.push({path: this.isPost ? '/post/list' : '/page/list'}, 2000);
         });
         if (this.id === '') {
           let newPost = {
@@ -264,11 +281,11 @@
       }
     },
     mounted() {
-      store.fetchOption({key: 'site_url'}.then(result => {
+      store.fetchOption({key: 'site_url'}).then(result => {
         if (Array.isArray(result) && result[0]) {
           this.site_url = result[0].value;
         }
-      }));
+      });
       if (this.isPost === false) return;
       store.fetchCate().then(result => {
         this.cates = result;

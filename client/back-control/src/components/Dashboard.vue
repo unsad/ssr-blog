@@ -6,7 +6,7 @@
       <p>点击下面链接快速开始：</p>
       <div>
         <router-link :to="{path: '/post/create'}">撰写新文章</router-link>
-        <a :to="{path: '/option/general'}">系统设置</a>
+        <router-link :to="{path: '/option/general'}">系统设置</router-link>
       </div>
       <hr/>
       <div class="info">

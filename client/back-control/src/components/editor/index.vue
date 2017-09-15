@@ -77,6 +77,11 @@
         result: ''
       }
     },
+    watch: {
+      result(val) {
+        this.$emit('filter', val);
+      }
+    },
     methods: {
       getHTMLFromMarkdown() {
         this.result = marked(this.content);
@@ -93,7 +98,7 @@
           preEnd = preStart + exist.length;
         }
         let content = origin.slice(0, start) + text + origin.slice(end);
-        this.content = content;
+        this.result = content;
         this.getHTMLFromMarkdown();
       },
       _insertMore() {

@@ -24,7 +24,7 @@
           <tr v-else v-for="post of posts">
             <td>
               <router-link :to="{name: 'editPost', params: {id: post._id}}" :title="post.title">{{post.title}}</router-link>
-              <a :href="`/post/${post.pathname}.html`" v-if="item.status === 3" target="_blank"></a>
+              <a :href="`/post/${post.pathname}.html`" target="_blank"></a>
             </td>
             <td>{{post.status}}</td>
             <td>{{post.createAt}}</td>
@@ -37,7 +37,7 @@
               </button>
               </router-link>
               <span v-if="showEditAndDel"></span>
-              <button v-if="showEditAndDel" type="button" class="btn">
+              <button @click="deleteBlogByID(post._id)" v-if="showEditAndDel" type="button" class="btn">
                 <span v-if="showEditAndDel" class="glyphicon-trash"></span>
                 删除
               </button>
@@ -67,8 +67,9 @@
     },
     data() {
       return {
+        isLoading: false,
         showEditAndDel: true,
-        post: []
+        posts: []
       }
     },
     methods: {
@@ -80,12 +81,6 @@
         });
       },
       deleteBlogByID(id) {
-        this.tipInfo = '删除成功';
-        this.tipType = 'success';
-        this.shouldTipShow = true;
-        setTimeout(() => {
-          this.shouldTipShow = false;
-        }, 2000);
         store.deleteBlogByID(id).then(result => {
           this.posts = this.posts.filter(val => val._id !== id);
         });

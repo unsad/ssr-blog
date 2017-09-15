@@ -16,7 +16,7 @@
                 <input :disabled="shouldPathDisabled" v-model="post.pathName" type="text" name="pathname"></div>
             </div>
             <div class="form-group">
-              <markdown-editor :content="post.markdownContent"></markdown-editor>
+              <markdown-editor @filter="getFinalContent" :content="post.markdownContent"></markdown-editor>
               <p><span>文章使用markdown格式</span></p>
             </div>
           </div>
@@ -175,48 +175,47 @@
           type: '',
           title: '',
           isPublic: '1',
-          markdownContent: ''
+          markdownContent: '',
+          finalContent: ''
         }
       }
     },
-    route: {
-      data({to}) {
-        this.isPost = to.path.indexOf('/post/') > -1;
-        if (typeof to.params.id === 'undefined') return;
-        this.id = to.params.id;
-        this.shouldPathDisabled = true;
-        let tempResult;
-        store.fetchBlogByID(this.id).then(result => {
-          this.post = result;
-          this.starttime = this.post.updatedAt || this.post.createdAt;
-          this.timeoption.placeholder = this.starttime;
-          this.allowComment = this.post.allowComment === '1';
+    beforeRouteUpdate(to) {
+      this.isPost = to.path.indexOf('/post/') > -1;
+      if (typeof to.params.id === 'undefined') return;
+      this.id = to.params.id;
+      this.shouldPathDisabled = true;
+      let tempResult;
+      store.fetchBlogByID(this.id).then(result => {
+        this.post = result;
+        this.starttime = this.post.updatedAt || this.post.createdAt;
+        this.option.placeholder = this.starttime;
+        this.allowComment = this.post.allowComment === '1';
 
-          if (this.isPost === false) return;
+        if (this.isPost === false) return;
 
-          store.fetchPostTags().then(result => {
-            let obj = {};
-            this.postTagsBackup = result.filter(value => value.postID === this.id).map(value => value._id);
-            result = result.filter(val => val.postID === this.id);
-            this.postTags = result.map(val => val.tagID);
-          });
-
-          store.fetchPostCate().then(result => {
-            let obj = {};
-            this.postCateBackup = result.filter(value => value.postID === this.id).map(value => value._id);
-            result = result.filter(val => val.postID === this.id);
-            this.postCate = result.map(val => val.categoryID);
-          });
+        store.fetchPostTags().then(result => {
+          let obj = {};
+          this.postTagsBackup = result.filter(value => value.postID === this.id).map(value => value._id);
+          result = result.filter(val => val.postID === this.id);
+          this.postTags = result.map(val => val.tagID);
         });
-      }
+
+        store.fetchPostCate().then(result => {
+          let obj = {};
+          this.postCateBackup = result.filter(value => value.postID === this.id).map(value => value._id);
+          result = result.filter(val => val.postID === this.id);
+          this.postCate = result.map(val => val.categoryID);
+        });
+      });
     },
     methods: {
+      getFinalContent(val) {
+        this.finalContent = val;
+      },
       submit() {
         this.isSubmitting = true;
         let time = moment().format('YYYY-MM-DD HH:mm:ss').toString();
-        this.tipInfo = '已成功提交';
-        this.tipType = 'success';
-        this.shouldTipShow = true;
         setTimeout(() => {
           this.shouldTipShow = false;
           this.$router.push({path: this.isPost ? '/post/list' : '/page/list'}, 2000);
@@ -229,9 +228,9 @@
             createdAt: time,
             status: 3,
             pathName: this.post.pathName,
-            summary: marked(this.post.markdownContent.split('<!-- more -->')[0].replace(/<[>]*>/g, '')),
-            markdownContent: this.post.markdownContent,
-            content: marked(this.post.markdownContent),
+            summary: marked(this.post.finalContent.split('<!-- more -->')[0].replace(/<[>]*>/g, '')),
+            markdownContent: this.post.finalContent,
+            content: marked(this.post.finalContent),
             allowComment: this.allowComment === true ? '1' : '0',
             isPublic: this.isPublic === '1' ? 1 : 0,
             commentNum: 0,
@@ -245,9 +244,9 @@
         } else {
           this.post = Object.assign({}, this.post, {
             updatedAt: time,
-            summary: marked(this.post.markdownContent.split('<!-- more -->')[0].replace(/<[>]*>/g, '')),
-            markdownContent: this.post.markdownContent,
-            content: marked(this.post.markdownContent),
+            summary: marked(this.post.finalContent.split('<!-- more -->')[0].replace(/<[>]*>/g, '')),
+            markdownContent: this.post.finalContent,
+            content: marked(this.post.finalContent),
             allowComment: this.allowComment === true ? '1' : '0',
             isPublic: this.isPublic === '1' ? 1 : 0
           });

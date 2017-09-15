@@ -68,7 +68,7 @@ store.patchBlog = (id, json) => {
 };
 
 store.deleteBlogByID = (id, page = 0) => {
-  return axios.delete(`blogAPI/${id}`).then(response => response.data, err => console.log(err));
+  return axios.delete(`${blogAPI}/${id}`).then(response => response.data, err => console.log(err));
 };
 
 // cate CRUD

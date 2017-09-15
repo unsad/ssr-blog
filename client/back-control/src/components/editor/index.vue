@@ -56,7 +56,7 @@
       </ul>
     </div>
     <div class="md-editor">
-      <textarea name="content" id="myTextArea" @change="getHTMLFromMarkdown" v-model="content"></textarea>
+      <textarea name="result" id="myTextArea" @change="getHTMLFromMarkdown" v-model="result"></textarea>
     </div>
     <div class="md-preview"></div>
     <div class="md-spliter"></div>
@@ -77,14 +77,12 @@
         result: ''
       }
     },
-    watch: {
-      result(val) {
-        this.$emit('filter', val);
-      }
+    created() {
+      this.result = this.content;
     },
     methods: {
       getHTMLFromMarkdown() {
-        this.result = marked(this.content);
+        this.$emit('filter', this.result);
       },
       _preInputText(text, preStart, preEnd) {
         let textControl = document.getElementById('myTextArea');

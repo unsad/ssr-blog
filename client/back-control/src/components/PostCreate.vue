@@ -211,15 +211,14 @@
     },
     methods: {
       getFinalContent(val) {
-        this.finalContent = val;
+        this.post.finalContent = val;
       },
       submit() {
         this.isSubmitting = true;
         let time = moment().format('YYYY-MM-DD HH:mm:ss').toString();
         setTimeout(() => {
-          this.shouldTipShow = false;
-          this.$router.push({path: this.isPost ? '/post/list' : '/page/list'}, 2000);
-        });
+          this.$router.push({path: this.isPost ? '/post/list' : '/page/list'});
+        }, 2000);
         if (this.id === '') {
           let newPost = {
             title: this.post.title,
@@ -236,6 +235,7 @@
             commentNum: 0,
             options: ''
           };
+          debugger;
           store.newBlog(newPost).then(body => {
             console.log('postCreate', body);
             this.isSubmitting = false;

@@ -8,19 +8,16 @@
     <ul class="mod-bar">
       <input type="hidden" id="hide_values" val="0"/>
       <li v-for="route of routes">
-        <router-link v-if="route.children" :to="{path: route.children[0].url}"
+        <span v-if="route.children" @click="showChildren = route.children"
                      :class="getClassName(route.icon, route.url)"
-                     @click="go(route.children[0].url)"
-        ><span>{{route.title}}</span></router-link>
+        ><span>{{route.title}}</span></span>
         <router-link v-else :to="{path: route.url}"
                      :class="getClassName(route.icon, route.url)"
-                     @click="go(route.url)"
         ><span>{{route.title}}</span></router-link>
-        <ul v-if="route.children" :style="{'height': getHeight(route)}">
+        <ul v-show="showChildren === route.children" v-if="route.children" :style="{'height': getHeight(route), 'margin-left': '100px'}">
           <li v-for="child of route.children">
             <router-link :to="{path: child.url}"
                          :class="getSubLinkClassName(child.url)"
-                         @click="go(route.url)"
             ><span>{{child.title}}</span></router-link>
           </li>
         </ul>
@@ -39,7 +36,8 @@
       shouldTipShow: Boolean,
       tipType: String,
       tipInfo: String,
-      currentRoute: String
+      currentRoute: String,
+      showChildren: ''
     },
     data() {
       return {
@@ -158,9 +156,6 @@
         return classNames({
           active: this.isActive(routeUrl)
         })
-      },
-      go(routeUrl) {
-//        this.currentRoute = routeUrl;
       }
     }
   }

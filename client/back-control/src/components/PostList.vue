@@ -27,7 +27,7 @@
               <a :href="`/post/${post.pathname}.html`" target="_blank"></a>
             </td>
             <td>{{post.status}}</td>
-            <td>{{post.createAt}}</td>
+            <td>{{post.createdAt}}</td>
             <td>{{post.updateAt}}</td>
             <td>
               <router-link :to="{name: 'editPost', params: {id: post._id}}">

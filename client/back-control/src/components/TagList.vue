@@ -33,7 +33,7 @@
         <td>{{tag.pathName}}</td>
         <td>0</td>
         <td>
-          <router-link v-if="showEditandDel" :to="{name: 'editTag', params: {id: tag._id}}" :title="post.title">
+          <router-link v-if="showEditAndDel" :to="{name: 'editTag', params: {id: tag._id}}" :title="tag.title">
           <button v-if="showEditAndDel" type="button">
             <span v-if="showEditAndDel"></span>
             <span>编辑</span>
@@ -84,15 +84,9 @@
         });
       },
       deleteTag(id) {
-        this.tipInfo = '删除成功';
-        this.tipType = 'success';
-        this.shouldTipShow = true;
-        setTimeout(() => {
-          this.shouldTipShow = false;
-        }, 2000);
         store.deleteTag(id).then(result => {
           console.log(result);
-          this.tags = this.tags.filter(value => value.name !== id);
+          this.tags = this.tags.filter(value => value._id !== id);
         });
         store.fetchPostTagsByID({
           tagID: id

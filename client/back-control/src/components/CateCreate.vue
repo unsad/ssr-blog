@@ -38,12 +38,8 @@
     methods: {
       submitCate() {
         this.isSubmitting = true;
-        this.tipInfo = '已成功提交';
-        this.tipType = 'success';
-        this.shouldTipShow = true;
         setTimeout(() => {
-          this.shouldTipShow = false;
-          this.$router.go({path: '/cate/list'});
+          this.$router.push({path: '/cate/list'});
         }, 2000);
         if (this.id === '') {
           store.newCate(this.name).then(body => {

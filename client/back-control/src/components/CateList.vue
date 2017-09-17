@@ -71,7 +71,8 @@
       return {
         cates: [],
         showPassAndDeng: true,
-        showEditAndDel: true
+        showEditAndDel: true,
+        isLoading: false
       }
     },
     methods: {
@@ -81,17 +82,11 @@
         });
       },
       deleteCate(id) {
-        this.tipInfo = '删除成功';
-        this.tipType = 'success';
-        this.shouldTipShow = true;
-        setTimeout(() => {
-          this.shouldTipShow = false;
-        }, 2000);
         store.deleteCate(id).then(result => {
           console.log(result);
           this.cates = this.cates.filter(val => val._id !== id);
         });
-        store.fetchPostCateByID(this, {
+        store.fetchPostCateByID({
           categoryID: id
         }).then(tags => {
           tags.forEach(value => {

@@ -72,6 +72,7 @@
     data() {
       return {
         tags: [],
+        isLoading: false,
         showPassAndDeny: true,
         showEditAndDel: true
       }

@@ -36,12 +36,12 @@
       shouldTipShow: Boolean,
       tipType: String,
       tipInfo: String,
-      currentRoute: String,
-      showChildren: ''
+      currentRoute: String
     },
     data() {
       return {
         title: '造梦之地',
+        showChildren: '',
         routes: [
           {url: '/dashboard', icon: 'home', title: '概述'},
           {

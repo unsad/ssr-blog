@@ -17,7 +17,7 @@
       <tr v-if="isLoading">
         <td colSpan="8" class="center">加载中...</td>
       </tr>
-      <tr v-if="!item.length">
+      <tr v-if="!(items || []).length">
         <td colSpan="8" class="center">暂无</td>
       </tr>
       <tr v-else v-for="item of items">
@@ -54,7 +54,7 @@
   import store from '../store/index';
 
   export default {
-    name: 'updateList',
+    name: 'VersionList',
     components: {
       Top
     },
@@ -68,26 +68,21 @@
       return {
         items: [],
         showPassAndDeny: true,
-        showEditAndDel: true
+        showEditAndDel: true,
+        isLoading: false
       }
     },
     methods: {
       getUpdates() {
         store.fetchUpdate().then(result => {
-          this.items = result.body;
+          this.items = result.data;
+        });
+      },
+      deleteUpdate(id) {
+        store.deleteUpdate(id).then(result => {
+          this.items = this.items.filter(value => value._id !== id);
         });
       }
-    },
-    deleteUpdate(id) {
-      this.tipInfo = '删除成功';
-      this.tipType = 'success';
-      this.shouldTipShow = true;
-      setTimeout(() => {
-        this.shouldTipShow = false;
-      }, 2000);
-      store.deleteUpdate(id).then(result => {
-        this.items = this.items.filter(value => value._id !== id);
-      });
     },
     created() {
       this.getUpdates();

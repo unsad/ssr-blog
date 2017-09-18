@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="manage-container">
-      <form :model="tagInfo" onsubmit="return false">
+      <form onsubmit="return false">
         <div class="form-group">
           <label>名称</label>
           <div>
@@ -70,12 +70,8 @@
     methods: {
       submitTag() {
         this.isSubmitting = true;
-        this.tipInfo = '已成功提交';
-        this.tipType = 'success';
-        this.shouldTipShow = true;
         setTimeout(() => {
-          this.shouldTipShow = false;
-          this.$router.go({
+          this.$router.push({
             path: '/update/list'
           });
         }, 2000);

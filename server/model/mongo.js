@@ -123,7 +123,8 @@ module.exports = {
   postCategory,
   postTag,
   tag,
-  user
+  user,
+  update
 };
 
 

@@ -79,9 +79,6 @@
       Top
     },
     props: {
-      shouldTipShow: Boolean,
-      tipType: String,
-      tipInfo: String,
       currentRoute: String
     },
     data() {
@@ -101,7 +98,15 @@
         },
         title: '',
         logo_url: '',
-        description: ''
+        description: '',
+        site_url: '',
+        favicon_url: '',
+        keywords: '',
+        twitter_url: '',
+        github_url: '',
+        github_blog: '',
+        miitbeian: '',
+        image_upload: ''
       }
     },
     methods: {
@@ -117,11 +122,7 @@
         });
       },
       submit() {
-        this.tipInfo = '设置已更新';
-        this.tipType = 'success';
-        this.shouldTipShow = true;
         setTimeout(() => {
-          this.shouldTipShow = false;
           this.getOption();
         }, 2000);
         Object.keys(this.option).forEach(name => {

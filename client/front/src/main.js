@@ -9,9 +9,10 @@ Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
+const app = new Vue({
   router,
   template: '<App/>',
   components: { App }
-})
+});
+
+export {app, router};

@@ -7,8 +7,11 @@
   "scripts": {},
   "dependencies": {
     "axios": "^0.16.1",
+    "compression": "^1.7.0",
     "glob": "^7.1.2",
     "memory-fs": "^0.4.1",
+    "route-cache": "^0.4.3",
+    "serve-favicon": "^2.4.4",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue": "^2.2.6",

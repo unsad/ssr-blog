@@ -4,6 +4,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const MFS = require('memory-fs');
+const proxyTable = require('../config/index').dev.proxyTable;
 const clientConfig = require('./webpack.client.config');
 const serverConfig = require('./webpack.server.config');
 
@@ -56,6 +57,15 @@ module.exports = function setupDevServer(app, cb) {
         clientManifest
       })
     }
+  });
+  // proxy middleware
+  const proxyMiddleware = require('http-proxy-middleware');
+  Object.keys(proxyTable).forEach(function (context) {
+    let options = proxyTable[context];
+    if (typeof options === 'string') {
+      options = {target: options}
+    }
+    app.use(proxyMiddleware(context, options))
   });
 
   // hot middleware

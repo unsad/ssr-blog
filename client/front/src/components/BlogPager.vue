@@ -30,6 +30,9 @@
         vm.fetchData();
       })
     },
+    preFetch(state) {
+      return store.fetchBlogCount({type: 0}).then(totalPage => this.totalPage = totalPage);
+    },
     watch: {
       '$route': 'fetchData'
     },

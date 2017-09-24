@@ -8,6 +8,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "glob": "^7.1.2",
+    "memory-fs": "^0.4.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue": "^2.2.6",

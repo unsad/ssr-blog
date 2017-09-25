@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const LRU = require('lru-cache');
 const express = require('express');
+const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const compression = require('compression');
 const microcache = require('route-cache');
@@ -56,6 +57,7 @@ app.use('/public', serve('./public', true));
 app.use('/manifest.json', serve('./manifest.json', true));
 app.use('/service-worker.js', serve('./dist/service-worker.js'));
 app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl));
+app.use(bodyParser.json());
 
 function render (req, res) {
   const s = Date.now();
@@ -77,7 +79,10 @@ function render (req, res) {
 
   const context = {
     title: 'Vue HN 2.0',
-    url: req.url
+    url: req.url,
+    path: req.path,
+    query: req.query,
+    params: req.params
   };
   renderer.renderToString(context, (err, html) => {
     if (err) {

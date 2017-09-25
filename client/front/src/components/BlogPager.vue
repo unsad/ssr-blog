@@ -14,15 +14,19 @@
   import store from '../store/index';
   import myFooter from './Footer.vue';
   import blogSummary from './BlogSummary.vue';
-  import pagination from './Pagination.vue'
+  import pagination from './Pagination.vue';
+
+  let items = [],
+      page = 1,
+      totalPage = 1;
 
   export default {
     name: 'blogPager',
     data() {
       return {
-        items: [],
-        page: 1,
-        totalPage: 1
+        items,
+        page,
+        totalPage
       }
     },
     beforeRouteEnter(to, from, next) {
@@ -31,7 +35,29 @@
       })
     },
     preFetch(state) {
-      return store.fetchBlogCount({type: 0}).then(totalPage => this.totalPage = totalPage);
+      let fetchDataPromise = new Promise(resolve => {
+        let query;
+
+        try {
+          query = this.$route.query;
+        } catch (err) {
+          query = {page: 1};
+        }
+        let page = typeof query.page !== 'undefined' ? parseInt(query.page) : 1;
+        if (page < 0) {
+          page = 1;
+        }
+        this.data.page = page;
+
+        store.fetchBlogByPage({type: 0}, page - 1).then(fetchedItems => {
+          items = fetchedItems;
+          resolve(items);
+        });
+      });
+      let arr = [store.fetchBlogCount({type: 0}).then(fetchedTotalPage => {
+        totalPage = fetchedTotalPage
+      }), fetchDataPromise];
+      return Promise.all(arr);
     },
     watch: {
       '$route': 'fetchData'
@@ -44,10 +70,10 @@
         if (page < 0) {
           page = 1;
         }
+        this.page = page;
         store.fetchBlogByPage(this, {type: 0}, page - 1).then(items => {
           this.items = items;
         });
-        this.page = page;
       }
     },
     components: {

@@ -1,176 +1,197 @@
 /**
  * Created by unsad on 2017/5/23.
  */
-import { EventEmitter } from 'events';
-const aboutAPI = `/proxyPrefix/api/post/?title=关于`;
-const blogAPI = `/proxyPrefix/api/post`;
-const tagAPI = `/proxyPrefix/api/tag`;
-const postTagAPI = `/proxyPrefix/api/postTag`;
-const categoryAPI = `/proxyPrefix/api/category`;
-const postCateAPI = `/proxyPrefix/api/postCategory`;
+import axios from 'axios';
+
+const host = typeof location === 'undefined' ? 'http://localhost:8080' : '';
+
+const aboutAPI = `/proxyPrefix/api/post/57dbe47c2993f70dc6d6b12c`;
+const blogAPI = `${host}/proxyPrefix/api/post`;
+const tagAPI = `${host}/proxyPrefix/api/tag`;
+const postTagAPI = `${host}/proxyPrefix/api/postTag`;
+const postCateAPI = `${host}/proxyPrefix/api/postCategory`;
+const categoryAPI = `${host}/proxyPrefix/api/category`;
+
+const root = '/proxyPrefix/api';
+
 const perPage = 10;
 
-const store = new EventEmitter();
+const store = {};
 
 export default store;
 
-store.fetchPage = (vue, queryJSON) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$resource(blogAPI + '{?keys,values}').get({
-    keys,
-    values
-  }).then((response) => {
-    console.log('response ok');
-    return response.body;
-  }, (err) => {
-    console.log('response error', err);
-  });
+store.login = (conditions, args) => {
+  return axios.post(`/proxyPrefix/admin/login`, conditions);
 };
 
-store.fetchOptionByJSON = (vue, queryJSON) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$resource(`/proxyPrefix/api/option/{?keys,values,count}`).get({
-    keys,
-    values
-  }).then(response => response.body, err => console.log(err));
+store.logout = (conditions, args) => {
+  return axios.post(`/proxyPrefix/admin/logout`, conditions);
 };
 
-store.fetchBlogByID = (vue, id, page = 0) => {
-  return vue.$http.get(blogAPI, {
-    params: {
-      id
-    }
-  }).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
+store.fetchUpdate = (conditions = {}, args) => {
+  return axios.get(`/proxyPrefix/api/update`, conditions);
 };
 
-store.fetchBlogByPage = (vue, queryJSON, page = 0) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$http.get(blogAPI, {
-    params: {
-      keys,
-      values,
-      limit: perPage,
-      skip: page * perPage,
-      sort: '1'
-    }
-  }).then((response) => {
-    console.log(response.body[0].title);
-    return response.body;
-  }, (err) => {
-    console.log('response error', err);
-  });
+store.deleteUpdate = id => {
+  return axios.delete(`/proxyPrefix/api/update/${id}`);
 };
 
-store.fetchBlogCount = (vue, queryJSON, page = 0) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$http.get(blogAPI, {
-    params: {
-      keys,
-      values,
-      count: 1
-    }
-  }).then((response) => {
-    return Math.ceil(parseInt(response.body) / perPage);
-  }, (err) => {
-    console.log('response error', err);
-  });
+// post CRUD
+
+store.fetchBlog = (conditions, args) => {
+  return axios.get(blogAPI + `?conditions=${JSON.stringify(conditions)}&sort=1`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchAllBlog = (vue) => {
-  return vue.$http.get(blogAPI, {
-    params: {
-      keys: ['type'],
-      values: ['0'],
-      sort: '1'
-    }
-  }).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
+store.fetchBlogByID = id => {
+  return axios.get(blogAPI + `/${id}`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchTags = (vue) => {
-  return vue.$http.get(tagAPI).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
+store.newBlog = json => {
+  return axios.post(blogAPI, json).then(response => response.data, err => console.log(err));
 };
 
-store.fetchPostTags = (vue) => {
-  return vue.$http.get(postTagAPI).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
+store.patchBlog = (id, json) => {
+  return axios.patch(`${blogAPI}/${id}`, json).then(response => response.data, err => console.log(err));
 };
 
-store.fetchTagsByPostID = (vue, queryJSON) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.values(queryJSON);
-  return vue.$http.get(postTagAPI, {
-    keys,
-    values
-  }).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
+store.deleteBlogByID = (id, page = 0) => {
+  return axios.delete(`${blogAPI}/${id}`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchPostByPathName = (vue, pathName) => {
-  return vue.$http.get(blogAPI, {
-    params: {
-      keys: ['pathName'],
-      values: [pathName]
-    }
-  }).then((response) => {
-    return response.body[0];
-  }, (err) => {
-    console.log(err);
-  });
+// cate CRUD
+
+store.fetchCate = (conditions = {}, arg) => {
+  return axios.get(`${root}/category?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchPrevPostByPathName = (vue, id) => {
-  let api = `${blogAPI}/${id}?prev=1`;
-  return vue.$http.get(api).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
+store.newCate = name => {
+  if (typeof name === 'undefined' || name === '') return;
+  return axios.post(`${root}/category`, {
+    name
+  }).then(response => response.data, err => console.log(err));
 };
 
-store.fetchNextPostByPathName = (vue, id) => {
-  let api = `${blogAPI}/${id}?next=1`;
-  return vue.$http.get(api).then((response) => {
-    return response.body;
-  }, (err) => {
-    console.log(err);
-  });
+store.fetchCateById = id => {
+  return axios.get(`${root}/category/${id}`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchOption = vue => {
-  return vue.$http.get(`/proxyPrefix/api/option`).then(response => response.body, err => console.log(err));
+store.patchCate = (id, json) => {
+  return axios.patch(`${root}/category/${id}`, json).then(response => response.data, err => console.log(err));
 };
 
-store.fetchCatesByPostID = (vue, queryJSON) => {
-  let keys = Object.keys(queryJSON);
-  let values = Object.keys(queryJSON).map(value => queryJSON[value]);
-  return vue.$resource(postCateAPI + '{?keys, values}').get({
-    keys,
-    values
-  }).then(response => response.body, err => console.log(err));
+store.deleteCate = id => {
+  return axios.delete(`${root}/category/${id}`).then(response => response.data, err => console.log(err));
 };
 
-store.fetchCates = vue => {
-  return vue.$http.get(categoryAPI).then(response => response.body, err => console.log(err));
+// tag CRUD
+
+store.fetchTag = (conditions = {}, args) => {
+  return axios.get(`${root}/tag?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
+};
+
+store.fetchTagById = id => {
+  return axios.get(`${root}/tag/${id}`).then(response => response.data, err => console.log(err));
+};
+
+store.newTag = name => {
+  if (typeof name === 'undefined' || name === '') return;
+  return axios.post(`${root}/tag`, {
+    name
+  }).then(response => response.data, err => console.log(err));
+};
+
+store.patchTag = (id, json) => {
+  return axios.patch(`${root}/tag/${id}`, json).then(response => response.data, err => console.log(err));
+};
+
+store.deleteTag = id => {
+  return axios.delete(`${root}/tag/${id}`).then(response => response.data, err => console.log(err));
+};
+
+// version CRUD
+
+store.fetchVersion = (conditions = {}, args) => {
+  return axios.get(`${root}/update?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
+};
+
+store.fetchVersionById = id => {
+  return axios.get(`${root}/update/${id}`).then(response => response.data, err => console.log(err));
+};
+
+store.newVersion = json => {
+  return axios.post(`${root}/update`, json).then(response => response.data, err => console.log(err));
+};
+
+store.patchVersion = (id, json) => {
+  return axios.patch(`${root}/update/${id}`, json).then(response => response.data, err => console.log(err));
+};
+
+store.deleteVersion = id => {
+  return axios.delete(`${root}/update/${id}`).then(response => response.data, err => console.log(err));
+};
+
+// option CRUD
+
+store.fetchOption = (conditions = {}, args) => {
+  return axios.get(`${root}/option?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
+};
+
+store.patchOption = (id, json) => {
+  return axios.patch(`${root}/option/${id}`, json).then(response => response.data, err => console.log(err));
+};
+
+// user CRUD
+
+store.fetchUser = () => {
+  return axios.get(`${root}/user`).then(response => response.data, err => console.log(err));
+};
+
+store.patchUser = (id, json) => {
+  return axios.patch(`${root}/user/${id}`, json).then(response => response.data, err => console.log(err));
+};
+
+// many to many
+
+store.deleteTagsByPostID = id => {
+  return axios.delete(`${postTagAPI}/${id}`).then(response => response.data, err => console.log(err));
+};
+
+store.deleteCateByPostID = id => {
+  return axios.delete(`${postCateAPI}/${id}`).then(response => response.data, err => console.log(err));
+};
+
+// postTag
+
+store.fetchPostTags = () => {
+  return axios.get(postTagAPI).then(response => response.data, err => console.log(err));
+};
+
+store.fetchPostTagsByID = (conditions) => {
+  return axios.get(postTagAPI + `?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
+};
+
+// postCate
+
+store.fetchPostCate = () => {
+  return axios.get(postCateAPI).then(response => response.data, err => console.log(err));
+};
+
+store.fetchPostCateByID = (conditions) => {
+  return axios.get(postCateAPI + `?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
+};
+
+store.deletePostTags = id => {
+  return axios.delete(`${postTagAPI}/${id}`).then(response => response, err => console.log(err));
+};
+
+store.addPostTags = json => {
+  return axios.post(`${postTagAPI}`, json).then(response => response.data, err => console.log(err));
+};
+
+store.deletePostCates = id => {
+  return axios.delete(`${postCateAPI}/${id}`).then(response => response, err => console.log(err));
+};
+
+store.addPostCates = (vue, json) => {
+  return axios.post(`${postCateAPI}`, json).then(response => response.data, err => console.log(err));
 };

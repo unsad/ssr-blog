@@ -16,47 +16,34 @@
   import blogSummary from './BlogSummary.vue';
   import pagination from './Pagination.vue';
 
-  let items = [],
-      page = 1,
-      totalPage = 1;
-
   export default {
     name: 'blogPager',
     data() {
+      const isInitialRender = !this.$root._isMounted;
+
       return {
-        items,
-        page,
-        totalPage
+        items: isInitialRender ? this.$store.getters.items : []
+        page: 1,
+        totalPage: 1
       }
     },
-    beforeRouteEnter(to, from, next) {
-      next(vm => {
-        vm.fetchData();
-      })
-    },
-    preFetch(state) {
+    preFetch(serverStore, {path, query, params}) {
       let fetchDataPromise = new Promise(resolve => {
-        let query;
-
-        try {
-          query = this.$route.query;
-        } catch (err) {
-          query = {page: 1};
+        if (path !== '/') {
+          return resolve();
         }
-        let page = typeof query.page !== 'undefined' ? parseInt(query.page) : 1;
+        console.log(path, query, params);
         if (page < 0) {
           page = 1;
         }
         this.data.page = page;
 
-        store.fetchBlogByPage({type: 0}, page - 1).then(fetchedItems => {
-          items = fetchedItems;
-          resolve(items);
-        });
+        serverStore.dispatch('FETCH_ITEMS', {
+          queryJSON: {type: 0},
+          page: page - 1
+        }).then(() => resolve(page));
       });
-      let arr = [store.fetchBlogCount({type: 0}).then(fetchedTotalPage => {
-        totalPage = fetchedTotalPage
-      }), fetchDataPromise];
+      let arr = [fetchDataPromise];
       return Promise.all(arr);
     },
     watch: {
@@ -71,9 +58,13 @@
           page = 1;
         }
         this.page = page;
-        store.fetchBlogByPage(this, {type: 0}, page - 1).then(items => {
-          this.items = items;
+        this.$store.dispatch('FETCH_ITEMS', {
+          queryJSON: { type: 0 },
+          page: page - 1
+        }).then(() => {
+
         });
+        console.log('fetchData', page);
       }
     },
     components: {

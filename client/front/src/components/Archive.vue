@@ -17,30 +17,34 @@
 </template>
 
 <script>
-  import Footer from './Footer.vue';
+  import myFooter from './Footer.vue';
   import store from '../store/index';
+
+  function fetchAchieves(store) {
+    return store.dispatch('FETCH_ACHIEVE');
+  }
 
   export default {
     name: 'archive',
     data() {
       return {
-        title: '归档',
-        items: {}
+        title: '归档'
       }
     },
-    created() {
-      store.fetchAllBlog(this).then(items => {
-        let result = {};
-        item.forEach(item => {
-          let time = item.createdAt.slice(0, 7).replace('-', '年') + '月';
-          if (typeof result[time] === 'undefined') {
-            result[time] = [item];
-          } else {
-            result[time].push(item);
-          }
-        });
-        this.items = result;
-      });
+    computed: {
+      items() {
+        return this.$store.getters.achieves;
+      }
+    },
+    preFetch: fetchAchieves,
+    beforeMount() {
+      if (this.$root._isMounted) {
+        console.log('fetchAchirenve');
+        fetchAchieves(this.$store);
+      }
+    },
+    components: {
+      myFooter
     }
   }
 </script>

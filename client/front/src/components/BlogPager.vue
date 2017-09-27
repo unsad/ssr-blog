@@ -16,41 +16,44 @@
   import blogSummary from './BlogSummary.vue';
   import pagination from './Pagination.vue';
 
+  function fetchItems(serverStore, {path, query, params}) {
+    let fetchDataPromise = new Promise(resolve => {
+      if (path !== '/') {
+        return resolve();
+      }
+      console.log(path, query, params);
+      if (page < 0) {
+        page = 1;
+      }
+      this.data.page = page;
+
+      serverStore.dispatch('FETCH_ITEMS', {
+        queryJSON: {type: 0},
+        page: page - 1
+      }).then(() => resolve(page));
+    });
+    let arr = [fetchDataPromise];
+    return Promise.all(arr);
+  }
+
   export default {
     name: 'blogPager',
     data() {
       const isInitialRender = !this.$root._isMounted;
 
       return {
-        items: isInitialRender ? this.$store.getters.items : []
+        items: this.$store.getters.items,
         page: 1,
         totalPage: 1
       }
     },
-    preFetch(serverStore, {path, query, params}) {
-      let fetchDataPromise = new Promise(resolve => {
-        if (path !== '/') {
-          return resolve();
-        }
-        console.log(path, query, params);
-        if (page < 0) {
-          page = 1;
-        }
-        this.data.page = page;
-
-        serverStore.dispatch('FETCH_ITEMS', {
-          queryJSON: {type: 0},
-          page: page - 1
-        }).then(() => resolve(page));
-      });
-      let arr = [fetchDataPromise];
-      return Promise.all(arr);
-    },
+    preFetch: fetchItems,
     watch: {
       '$route': 'fetchData'
     },
     methods: {
       fetchData(val, oldVal) {
+        if (val.name !== 'main') return;
         console.log('fetchData');
         let query = this.$route.query;
         let page = typeof query.page !== 'undefined' ? parseInt(query.page) : 1;
@@ -72,10 +75,11 @@
       blogSummary,
       pagination
     },
-    created() {
-      store.fetchBlogCount(this, {type: 0}).then(totalPage => {
-        this.totalPage = totalPage;
-      });
+    beforeMount() {
+      if (this.$root._isMounted) {
+        fetchItems(this,$store, this.$store.state.route);
+        store.fetchBlogCount({type: 0}).then(totalPage => this.totalPage = totalPage);
+      }
     }
   }
 </script>

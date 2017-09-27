@@ -92,18 +92,18 @@
     methods: {
       getPost(val, oldVal) {
         let pathName = obj.to.params.pathName;
-        store.fetchPostByPathName(this, pathName).then(article => {
+        store.fetchPostByPathName(pathName).then(article => {
           this.article = article;
           window.scrollTo(0, 0);
           resolve();
         }).then(() => {
-          store.fetchPrevPostByPathName(this.article._id).then(post => {
+          store.fetchPrevPostByPathName(article._id).then(post => {
             this.prev = post;
           });
-          store.fetchNextPostByPathName(this.article._id).then(post => {
+          store.fetchNextPostByPathName(article._id).then(post => {
             this.next = post;
           });
-          store.fetchTagsByPostID(this, {postID: article._id}).then(postTags => {
+          store.fetchTagsByPostID({postID: article._id}).then(postTags => {
             console.log(postTags);
             store.fetchTags(this).then(tags => {
               let obj = {};
@@ -116,8 +116,8 @@
               });
             });
           });
-          store.fetchCatesByPostID(this, {postID: article._id}).then(postCates => {
-            store.fetchCates(this).then(cates => {
+          store.fetchCatesByPostID({postID: article._id}).then(postCates => {
+            store.fetchCates().then(cates => {
               let obj = {};
               this.cates = [];
               cates.forEach(value => {

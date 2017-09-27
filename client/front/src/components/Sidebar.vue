@@ -38,31 +38,26 @@
   export default {
     name: 'sideBar',
     data() {
+      const isInitialRender = !this.$root._isMounted;
       return {
-        siteInfo: {
-          github_url: {
-            value: ''
-          },
-          title: {
-            value: ''
-          },
-          logo_url: {
-            value: ''
-          }
-        }
+        siteInfo: isInitialRender ? this.$store.getters.siteInfo : {}
       }
     },
-    mounted() {
-      store.fetchOption(this).then(result => {
-        let obj = {};
-        result.forEach(value => {
-          obj[value.key] = value;
-        });
-        this.siteInfo = obj;
-        if (this.siteInfo['title']) {
-          document.title = this.siteInfo['title'].value;
-        }
+    preFetch(store, {path, params, query}) {
+      return store.dispatch('FETCH_OPTIONS').then(() => {
+
       });
+    },
+    mounted() {
+      if (typeof this.siteInfo.title === 'undefined') {
+        this.$store.dispatch('FETCH_OPTIONS').then(() => {
+          if (this.siteInfo['title'] && typeof document !== 'undefined') {
+            document.title = this.siteInfo['title'].value;
+          }
+        });
+      } else {
+        document.title = this.siteInfo['title'].value || 'Blog';
+      }
     }
   }
 </script>

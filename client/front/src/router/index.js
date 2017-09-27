@@ -6,6 +6,8 @@ import Archive from '@/components/Archive'
 import Tag from '@/components/Tag'
 import Post from '@/components/Post'
 import TagPager from '@/components/TagPager'
+import Sidebar from '@/components/Sidebar'
+import Header from '@/components/Header'
 
 Vue.use(Router);
 
@@ -15,32 +17,56 @@ let router = new Router({
     {
       path: '/',
       name: 'main',
-      component: BlogPager
+      component: {
+        default: BlogPager,
+        sidebar: Sidebar,
+        header: Header
+      }
     },
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: {
+        default: About,
+        sidebar: Sidebar,
+        header: Header
+      }
     },
     {
       path: '/post/:pathName',
       name: 'post',
-      component: Post
+      component: {
+        default: Post,
+        sidebar: Sidebar,
+        header: Header
+      }
     },
     {
       path: '/archive',
       name: 'archive',
-      component: Archive
+      component: {
+        default: Archive,
+        sidebar: Sidebar,
+        header: Header
+      }
     },
     {
       path: '/tag',
       name: 'tag',
-      component: Tag
+      component: {
+        default: Tag,
+        sidebar: Sidebar,
+        header: Header
+      }
     },
     {
       path: '/tag/:tagName',
       name: 'tagPager',
-      component: TagPager
+      component: {
+        default: TagPager,
+        sidebar: Sidebar,
+        header: Header
+      }
     },
     {
       path: '*',

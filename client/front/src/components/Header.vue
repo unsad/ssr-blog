@@ -13,25 +13,14 @@
   export default {
     name: 'header',
     data() {
+      const isInitialRender = !this.$root._isMounted;
+
       return {
-        siteInfo: {
-          logo_url: {
-            value: ''
-          },
-          title: {
-            value: ''
-          }
-        }
+        siteInfo: this.$store.getters.siteInfo
       }
     },
     mounted() {
-      store.fetchOption(this).then(result => {
-        let obj = {};
-        result.forEach(value => {
-          obj[value.key] = value;
-        });
-        this.siteInfo = obj;
-      });
+
     }
   }
 </script>

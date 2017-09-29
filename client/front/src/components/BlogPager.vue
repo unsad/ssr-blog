@@ -17,23 +17,15 @@
   import pagination from './Pagination.vue';
 
   function fetchItems(serverStore, {path, query, params}) {
-    let fetchDataPromise = new Promise(resolve => {
-      if (path !== '/') {
-        return resolve();
-      }
-      console.log(path, query, params);
-      if (page < 0) {
-        page = 1;
-      }
-      this.data.page = page;
-
-      serverStore.dispatch('FETCH_ITEMS', {
-        queryJSON: {type: 0},
-        page: page - 1
-      }).then(() => resolve(page));
-    });
-    let arr = [fetchDataPromise];
-    return Promise.all(arr);
+    if (path !== '/') return resolve();
+    let page = (typeof query.page !== 'undefined') ? parseInt(query.page) : 1;
+    if (page < 0) {
+      page = 1;
+    }
+    return serverStore.dispatch('FETCH_ITEMS', {
+      queryJSON: {type: 0},
+      page: page - 1
+    })
   }
 
   export default {
@@ -45,6 +37,11 @@
         items: this.$store.getters.items,
         page: 1,
         totalPage: 1
+      }
+    },
+    computed: {
+      totalPage() {
+        return this.$store.state.totalPage;
       }
     },
     preFetch: fetchItems,
@@ -77,8 +74,7 @@
     },
     beforeMount() {
       if (this.$root._isMounted) {
-        fetchItems(this,$store, this.$store.state.route);
-        store.fetchBlogCount({type: 0}).then(totalPage => this.totalPage = totalPage);
+        fetchItems(this.$store, this.$store.state.route);
       }
     }
   }

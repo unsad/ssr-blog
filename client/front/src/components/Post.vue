@@ -23,7 +23,7 @@
         <div class="post-info">
           <p>发表于
             <time>{{article.createAt}}</time>
-            <template v-if="cates.length !== 0">
+            <template v-if="cates.length && tags.length">
               ，添加在分类
               <a v-for="cate of cates" :data-cate="cate.name">
                 <code class="notebook">{{cate.name}}</code>

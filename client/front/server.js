@@ -95,6 +95,10 @@ function render (req, res) {
   });
 }
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  return next();
+});
 app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res));
 });

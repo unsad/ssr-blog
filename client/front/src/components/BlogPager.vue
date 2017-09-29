@@ -61,8 +61,6 @@
         this.$store.dispatch('FETCH_ITEMS', {
           queryJSON: { type: 0 },
           page: page - 1
-        }).then(() => {
-
         });
         console.log('fetchData', page);
       }

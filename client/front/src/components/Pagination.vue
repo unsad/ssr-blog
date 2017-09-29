@@ -14,9 +14,6 @@
     props: {
       totalPage: Number,
       page: Number
-    },
-    methods: {
-
     }
   }
 </script>

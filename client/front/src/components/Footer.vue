@@ -15,9 +15,6 @@
       return {
         siteInfo: this.$store.getters.siteInfo
       }
-    },
-    mounted() {
-
     }
   }
 </script>

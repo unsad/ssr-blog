@@ -44,11 +44,9 @@
       }
     },
     preFetch(store, {path, params, query}) {
-      return store.dispatch('FETCH_OPTIONS').then(() => {
-
-      });
+      return store.dispatch('FETCH_OPTIONS');
     },
-    mounted() {
+    beforeMount() {
       if (typeof this.siteInfo.title === 'undefined') {
         this.$store.dispatch('FETCH_OPTIONS').then(() => {
           if (this.siteInfo['title'] && typeof document !== 'undefined') {

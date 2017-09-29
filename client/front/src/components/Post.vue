@@ -49,7 +49,7 @@
                      class="next">&raquo;{{next.title}}
         </router-link>
       </nav>
-      <div id="comments" :data-type="commentType" :data-thread-key=
+      <div v-if="commentName !== ''" id="comments" :data-type="commentType" :data-thread-key=
         "article.pathName || ''" :data-url=`${siteURL}/post/${article.pathName}`>
         <h1 class="title">Comments</h1>
         <div id="disqus_thread" :data-url="${siteURL}/post/${article.pathName}"
@@ -58,30 +58,51 @@
         </div>
       </div>
     </div>
+    <my-footer></my-footer>
   </div>
 </template>
 
 <script>
   import store from '../store/index'
 
+  function fetchBlog(store, {path, params, query}) {
+    path = path.replace(/^\/post\//g, '');
+    return store.dispatch('FETCH_BLOG', {path});
+  }
+
   export default {
     name: 'Post',
     data() {
       return {
-        article: {},
         cates: [],
-        tags: [],
-        prev: {},
-        next: {},
-        commentType: '',
-        commentName: '',
-        siteURL: ''
+        tags: []
       }
     },
-    beforeRouteEnter(to, from, next) {
-      next(vm => {
-        vm.getPost(to);
-      });
+    computed: {
+      article() {
+        return this.$store.state.blog;
+      },
+      prev() {
+        return this.$store.state.prev;
+      },
+      next() {
+        return this.$store.state.next;
+      },
+      commentType() {
+        return this.$store.state.siteInfo.comment.value.type || 'disqus';
+      },
+      commentName() {
+        return this.$store.state.siteInfo.comment.value.name || '';
+      },
+      siteURL() {
+        return this.$store.state.siteInfo.site_url.value || 'localhost';
+      }
+    },
+    preFetch: fetchBlog,
+    beforeMount() {
+      if (this.$root._isMounted) {
+        fetchBlog(this.$store, this.$store.state.route);
+      }
     },
     watch: {
       '$route': 'getPost'
@@ -91,44 +112,9 @@
     },
     methods: {
       getPost(val, oldVal) {
-        let pathName = obj.to.params.pathName;
-        store.fetchPostByPathName(pathName).then(article => {
-          this.article = article;
-          window.scrollTo(0, 0);
-          resolve();
-        }).then(() => {
-          store.fetchPrevPostByPathName(article._id).then(post => {
-            this.prev = post;
-          });
-          store.fetchNextPostByPathName(article._id).then(post => {
-            this.next = post;
-          });
-          store.fetchTagsByPostID({postID: article._id}).then(postTags => {
-            console.log(postTags);
-            store.fetchTags(this).then(tags => {
-              let obj = {};
-              this.tags = [];
-              tags.forEach(value => {
-                obj[value._id] = value;
-              });
-              postTags.forEach(value => {
-                this.tags.push(obj[value.tagID]);
-              });
-            });
-          });
-          store.fetchCatesByPostID({postID: article._id}).then(postCates => {
-            store.fetchCates().then(cates => {
-              let obj = {};
-              this.cates = [];
-              cates.forEach(value => {
-                obj[value._id] = value;
-              });
-              postCates.forEach(value => {
-                this.cates.push(obj[value.categoryID]);
-              });
-            });
-          });
-        });
+        if (val.name !== 'post') return;
+        let path = val.params.pathName;
+        this.$store.dispatch('FETCH_BLOG', { path });
       }
     }
   }

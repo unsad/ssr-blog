@@ -11,13 +11,13 @@
 </template>
 <script>
   import myFooter from './Footer.vue';
-  import store from '../../store/index';
+  import store from '../store/index';
 
   export default {
     name: 'about',
     data() {
       return {
-        html: store.fetchPage(this, {title: '关于'}).then(html => {
+        html: store.fetchPost(this, {title: '关于', type: 1}).then(html => {
           this.html = html[0];
         })
       }

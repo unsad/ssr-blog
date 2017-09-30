@@ -21,7 +21,7 @@
   import store from '../store/index';
 
   function fetchAchieves(store) {
-    return store.dispatch('FETCH_ACHIEVE');
+    return store.dispatch('FETCH_ACHIEVE', {type: 0}, {sort: 1});
   }
 
   export default {

@@ -22,10 +22,12 @@
     if (page < 0) {
       page = 1;
     }
-    return serverStore.dispatch('FETCH_ITEMS', {
-      queryJSON: {type: 0},
-      page: page - 1
-    })
+    return serverStore.dispatch('FETCH_ITEMS',
+      {type: 0},
+      {limit: 10},
+      {skip: (page - 1) * 10},
+      {sort: 1}
+    );
   }
 
   export default {
@@ -51,18 +53,7 @@
     methods: {
       fetchData(val, oldVal) {
         if (val.name !== 'main') return;
-        console.log('fetchData');
-        let query = this.$route.query;
-        let page = typeof query.page !== 'undefined' ? parseInt(query.page) : 1;
-        if (page < 0) {
-          page = 1;
-        }
-        this.page = page;
-        this.$store.dispatch('FETCH_ITEMS', {
-          queryJSON: { type: 0 },
-          page: page - 1
-        });
-        console.log('fetchData', page);
+        fetchItems(this.$store, this.$store.state.route);
       }
     },
     components: {

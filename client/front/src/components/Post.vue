@@ -65,9 +65,11 @@
 <script>
   import store from '../store/index'
 
-  function fetchBlog(store, {path, params, query}) {
-    path = path.replace(/^\/post\//g, '');
-    return store.dispatch('FETCH_BLOG', {path});
+  function fetchBlog(store, {path: pathName, params, query}) {
+    pathName = pathName.replace(/^\/post\//g, '');
+    return store.dispatch('FETCH_BLOG', {
+      conditions: pathName
+    });
   }
 
   export default {
@@ -113,8 +115,7 @@
     methods: {
       getPost(val, oldVal) {
         if (val.name !== 'post') return;
-        let path = val.params.pathName;
-        this.$store.dispatch('FETCH_BLOG', { path });
+        fetchBlog(this.$store, this.$store.state.route);
       }
     }
   }

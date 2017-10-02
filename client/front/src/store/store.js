@@ -16,6 +16,7 @@ const store = new Vuex.Store({
     blog: {},
     prev: {},
     next: {},
+    about: {},
     siteInfo: {
       github_url: {
         value: ''
@@ -29,20 +30,31 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    FETCH_BLOG: ({commit, state}, {path}) => {
-      return api.fetchPostByPathName(path).then(blog => {
+    FETCH_BLOG: ({commit, state}, {conditions, ...args}) => {
+      return api.fetchPost(conditions, args).then(result => {
+        let blog = result[0];
         commit('SET_BLOG', {blog});
-        let first = api.fetchPrevPostByPathName(blog._id).then(post => {
+        let first = api.fetchPostByID(blog._id, {type: 0}, {prev: 1}).then(post => {
           if (post.type === '0') {
             commit('SET_PREV', {post});
+          } else {
+            commit('SET_PREV', {post: {}});
           }
         });
-        let second = api.fetchNextPostByPathName(blog._id).then(post => {
+        let second = api.fetchPostByID(blog._id, {type: 0}, {next: 1}).then(post => {
           if (post.type === '0') {
             commit('SET_NEXT', {post});
+          } else {
+            commit('SET_NEXT', {post: {}});
           }
         });
         return Promise.all([first, second]);
+      });
+    },
+    FETCH_ABOUT: ({commit, state}, {conditions, ...args}) => {
+      return api.fetchPost(conditions, args).then(result => {
+        let blog = result[0];
+        commit('SET_ABOUT', { blog });
       });
     },
     FETCH_ITEMS: ({commit, state}, conditions, ...args) => {
@@ -101,6 +113,9 @@ const store = new Vuex.Store({
     },
     SET_PAGES: (state, {totalPage}) => {
       Vue.set(state, 'totalPage', totalPage);
+    },
+    SET_ABOUT: (state, {blog}) => {
+      Vue.set(state, 'about', blog);
     },
     SET_ACHIEVE: (state, {sortedItem}) => {
       Vue.set(state, 'achieves', sortedItem);

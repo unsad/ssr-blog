@@ -10,6 +10,15 @@
   </div>
 </template>
 <script>
+  function fetchAbout(store) {
+    return store.dispatch('FETCH_ABOUT', {
+      conditions: {
+        pathName: 'about',
+        type: 1
+      }
+    });
+  }
+
   import myFooter from './Footer.vue';
   import store from '../store/index';
 
@@ -17,9 +26,19 @@
     name: 'about',
     data() {
       return {
-        html: store.fetchPost(this, {title: '关于', type: 1}).then(html => {
-          this.html = html[0];
-        })
+      }
+    },
+    computed: {
+      html() {
+        return this.$store.state.about;
+      }
+    },
+    preFetch(store) {
+      return fetchAbout(store);
+    },
+    beforeMount() {
+      if (this.$root._isMounted) {
+        fetchAbout(this.$store);
       }
     },
     components: {

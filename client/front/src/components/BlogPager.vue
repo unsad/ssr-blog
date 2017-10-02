@@ -1,10 +1,10 @@
 <template>
   <div id="main">
     <section id="page-index">
-        <blog-summary v-for="item of items" :article="item">
+      <blog-summary v-for="item of items" :article="item">
 
-        </blog-summary>
-        <pagination :page='page' :total-page="totalPage"></pagination>
+      </blog-summary>
+      <pagination :page='page' :total-page="totalPage"></pagination>
     </section>
     <my-footer></my-footer>
   </div>
@@ -22,12 +22,14 @@
     if (page < 0) {
       page = 1;
     }
-    return serverStore.dispatch('FETCH_ITEMS',
-      {type: 0},
-      {limit: 10},
-      {skip: (page - 1) * 10},
-      {sort: 1}
-    );
+    return serverStore.dispatch('FETCH_ITEMS', {
+      conditions: {
+        type: 0
+      },
+      limit: 10,
+      skip: (page - 1) * 10,
+      sort: 1
+    });
   }
 
   export default {

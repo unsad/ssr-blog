@@ -70,7 +70,7 @@ const store = new Vuex.Store({
         } else return '';
       });
     },
-    FETCH_ACHIEVE: ({commit, state}, conditions, ...args) => {
+    FETCH_ACHIEVE: ({commit, state}, {conditions, ...args}) => {
       return api.fetchPost(conditions, ...args).then(items => {
         let sortedItem = items.reduce((prev, curr) => {
           let time = curr.createdAt.slice(0, 7).replace('-', '年') + '月';

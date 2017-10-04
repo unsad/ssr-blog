@@ -68,7 +68,14 @@
   function fetchBlog(store, {path: pathName, params, query}) {
     pathName = pathName.replace(/^\/post\//g, '');
     return store.dispatch('FETCH_BLOG', {
-      conditions: pathName
+      conditions: {pathName},
+      select: {
+        title: 1,
+        createdAt: 1,
+        content: 1,
+        updatedAt: 1,
+        commentNum: 1
+      }
     });
   }
 

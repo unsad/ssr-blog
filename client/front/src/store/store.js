@@ -34,14 +34,35 @@ const store = new Vuex.Store({
       return api.fetchPost(conditions, args).then(result => {
         let blog = result[0];
         commit('SET_BLOG', {blog});
-        let first = api.fetchPostByID(blog._id, {type: 0}, {prev: 1}).then(post => {
+        let first = api.fetchPost({
+          _id: {$lt: blog._id}
+        }, {
+          sort: 1,
+          limit: 1,
+          select: {
+            title: 1,
+            pathName: 1,
+            type: 1
+          }
+        }).then(posts => {
+          let post = posts[0];
           if (post.type === '0') {
             commit('SET_PREV', {post});
           } else {
             commit('SET_PREV', {post: {}});
           }
         });
-        let second = api.fetchPostByID(blog._id, {type: 0}, {next: 1}).then(post => {
+        let second = api.fetchPost({
+          _id: {$gt: blog._id}
+        }, {
+          limit: 1,
+          select: {
+            title: 1,
+            pathName: 1,
+            type: 1
+          }
+        }).then(posts => {
+          let post = posts[0];
           if (post.type === '0') {
             commit('SET_NEXT', {post});
           } else {
@@ -54,7 +75,7 @@ const store = new Vuex.Store({
     FETCH_ABOUT: ({commit, state}, {conditions, ...args}) => {
       return api.fetchPost(conditions, args).then(result => {
         let blog = result[0];
-        commit('SET_ABOUT', { blog });
+        commit('SET_ABOUT', {blog});
       });
     },
     FETCH_ITEMS: ({commit, state}, conditions, ...args) => {
@@ -81,7 +102,7 @@ const store = new Vuex.Store({
           }
           return prev;
         }, {});
-        commit('SET_ACHIEVE', { sortedItem });
+        commit('SET_ACHIEVE', {sortedItem});
       });
     },
     FETCH_OPTIONS: ({commit, state}) => {
@@ -90,21 +111,21 @@ const store = new Vuex.Store({
           prev[curr.key] = curr;
           return prev;
         }, {});
-        commit('SET_OPTIONS', { obj });
+        commit('SET_OPTIONS', {obj});
       });
     }
   },
   mutations: {
-    SET_BLOG: (state, { blog }) => {
+    SET_BLOG: (state, {blog}) => {
       Vue.set(state, 'blog', blog);
     },
-    SET_PREV: (state, { post }) => {
+    SET_PREV: (state, {post}) => {
       Vue.set(state, 'prev', post);
     },
-    SET_NEXT: (state, { post }) => {
+    SET_NEXT: (state, {post}) => {
       Vue.set(state, 'next', post);
     },
-    SET_ITEMS: (state, { items }) => {
+    SET_ITEMS: (state, {items}) => {
       items.forEach((item, index) => {
         if (item) {
           Vue.set(state.items, index, item);
@@ -120,13 +141,13 @@ const store = new Vuex.Store({
     SET_ACHIEVE: (state, {sortedItem}) => {
       Vue.set(state, 'achieves', sortedItem);
     },
-    SET_OPTIONS: (state, { obj }) => {
+    SET_OPTIONS: (state, {obj}) => {
       Vue.set(state, 'siteInfo', obj);
     }
   },
   getters: {
     items (state, getters) {
-      const { items, itemsPerPage} = state;
+      const {items, itemsPerPage} = state;
       return items;
     },
     siteInfo(state, getters) {

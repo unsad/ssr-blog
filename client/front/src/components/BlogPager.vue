@@ -46,13 +46,15 @@
 
       return {
         items: this.$store.getters.items,
-        page: 1,
         totalPage: 1
       }
     },
     computed: {
       totalPage() {
         return this.$store.state.totalPage;
+      },
+      page() {
+        return this.$store.state.route.query.page || 1;
       }
     },
     preFetch: fetchItems,

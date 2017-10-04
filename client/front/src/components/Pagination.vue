@@ -1,7 +1,7 @@
 <template>
   <nav class="pagination">
-    <router-link :to="{ path: '/?page=' + page - 1}" class="prev" v-if="page > 1">&laquo;上一页</router-link>
-    <router-link :to="{ path: '/?page=' + page - 1}" class="next" v-if="page < totalPage">&raquo;下一页</router-link>
+    <router-link :to="{ query: page - 1}" class="prev" v-if="page > 1">&laquo;上一页</router-link>
+    <router-link :to="{ query: page + 1}" class="next" v-if="page < totalPage">&raquo;下一页</router-link>
     <div class="center">
       <router-link :to="{name: 'archive'}">博客归档</router-link>
     </div>

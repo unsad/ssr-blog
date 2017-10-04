@@ -6,7 +6,7 @@ import { app, router, store } from './main';
 const isDev = process.env.NODE_ENV !== 'production';
 
 export default context => {
-  router.push(context.path);
+  router.push(context.url);
 
   const s = isDev && Date.now();
 

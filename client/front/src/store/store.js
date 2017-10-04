@@ -126,11 +126,7 @@ const store = new Vuex.Store({
       Vue.set(state, 'next', post);
     },
     SET_ITEMS: (state, {items}) => {
-      items.forEach((item, index) => {
-        if (item) {
-          Vue.set(state.items, index, item);
-        }
-      });
+      Vue.set(state, 'items', items);
     },
     SET_PAGES: (state, {totalPage}) => {
       Vue.set(state, 'totalPage', totalPage);

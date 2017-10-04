@@ -45,16 +45,19 @@
       const isInitialRender = !this.$root._isMounted;
 
       return {
-        items: this.$store.getters.items,
         totalPage: 1
       }
     },
     computed: {
+      items() {
+        return this.$store.getters.items;
+      },
       totalPage() {
         return this.$store.state.totalPage;
       },
       page() {
-        return this.$store.state.route.query.page || 1;
+        let page = this.$store.state.route.query.page || 1;
+        return parseInt(page);
       }
     },
     preFetch: fetchItems,

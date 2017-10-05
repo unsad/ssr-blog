@@ -32,9 +32,9 @@ function createRenderer(bundle, options) {
     runInNewContext: false
   }));
 }
-
 let renderer;
 let readyPromise;
+
 if (isProd) {
   const bundle = require('./dist/vue-ssr-server-bundle.json');
   const clientManifest = require('./dist/vue-ssr-client-manifest.json');
@@ -43,6 +43,7 @@ if (isProd) {
   });
 } else {
   readyPromise = require('./build/setup-dev-server')(app, (bundle, options) => {
+    debugger;
     renderer = createRenderer(bundle, options);
   });
 }
@@ -84,6 +85,7 @@ function render (req, res) {
     query: req.query,
     params: req.params
   };
+  debugger;
   renderer.renderToString(context, (err, html) => {
     if (err) {
       return handleError(err);

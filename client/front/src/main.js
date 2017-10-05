@@ -2,22 +2,29 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import App from './App';
-import router from './router';
-import Axios from 'axios';
+import { createStore } from './store/store';
+import { createRouter } from './router';
 import { sync } from 'vuex-router-sync';
 import store from './store/store';
 
-Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
-
-sync(store, router);
 
 /* eslint-disable no-new */
 const app = new Vue({
   router,
   store,
-  template: '<App/>',
-  components: { App }
+  ...App
 });
 
-export {app, router, store};
+export function createApp() {
+  const store = createStore();
+  const router = createRouter();
+  sync(store, router);
+  const app = new Vue({
+    router,
+    store,
+    render: h => h(App)
+  });
+  return { app, router, store };
+}
+

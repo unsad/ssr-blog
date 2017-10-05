@@ -11,72 +11,70 @@ import Header from '@/components/Header'
 
 Vue.use(Router);
 
-let router = new Router({
-  mode: history,
-  routes: [
-    {
-      path: '/',
-      name: 'main',
-      component: {
-        default: BlogPager,
-        sidebar: Sidebar,
-        header: Header
+export function createRouter() {
+  new Router({
+    mode: 'history',
+    fallback: false,
+    scrollBehavior: () => ({y: 0}),
+    routes: [
+      {
+        path: '/',
+        name: 'main',
+        component: {
+          default: BlogPager,
+          sidebar: Sidebar,
+          header: Header
+        }
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: {
+          default: About,
+          sidebar: Sidebar,
+          header: Header
+        }
+      },
+      {
+        path: '/post/:pathName',
+        name: 'post',
+        component: {
+          default: Post,
+          sidebar: Sidebar,
+          header: Header
+        }
+      },
+      {
+        path: '/archive',
+        name: 'archive',
+        component: {
+          default: Archive,
+          sidebar: Sidebar,
+          header: Header
+        }
+      },
+      {
+        path: '/tag',
+        name: 'tag',
+        component: {
+          default: Tag,
+          sidebar: Sidebar,
+          header: Header
+        }
+      },
+      {
+        path: '/tag/:tagName',
+        name: 'tagPager',
+        component: {
+          default: TagPager,
+          sidebar: Sidebar,
+          header: Header
+        }
+      },
+      {
+        path: '*',
+        redirect: '/'
       }
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: {
-        default: About,
-        sidebar: Sidebar,
-        header: Header
-      }
-    },
-    {
-      path: '/post/:pathName',
-      name: 'post',
-      component: {
-        default: Post,
-        sidebar: Sidebar,
-        header: Header
-      }
-    },
-    {
-      path: '/archive',
-      name: 'archive',
-      component: {
-        default: Archive,
-        sidebar: Sidebar,
-        header: Header
-      }
-    },
-    {
-      path: '/tag',
-      name: 'tag',
-      component: {
-        default: Tag,
-        sidebar: Sidebar,
-        header: Header
-      }
-    },
-    {
-      path: '/tag/:tagName',
-      name: 'tagPager',
-      component: {
-        default: TagPager,
-        sidebar: Sidebar,
-        header: Header
-      }
-    },
-    {
-      path: '*',
-      redirect: '/'
-    }
-  ]
-});
-
-router.beforeEach(function() {
-  window.scrollTo(0, 0);
-});
-
-export default router;
+    ]
+  });
+}

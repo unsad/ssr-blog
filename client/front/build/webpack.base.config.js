@@ -9,6 +9,10 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 module.exports = {
   devtool: isProd ? false : '#cheap-module-source-map',
   output: {
@@ -17,8 +21,10 @@ module.exports = {
     filename: '[name].[chunkhash].js'
   },
   resolve: {
+    extensions: ['.js', '.vue', '.json'],
     alias: {
-      'public': path.resolve(__dirname, '../public')
+      'public': path.resolve(__dirname, '../public'),
+      '@': resolve('src')
     }
   },
   module: {

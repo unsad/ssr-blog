@@ -26,7 +26,7 @@ const config = merge(base, {
       name: 'vendor',
       minChunks: function(module) {
         return (
-          /node_modules/.text(module.context) && !/\.css$/.test(module.request)
+          /node_modules/.test(module.context) && !/\.css$/.test(module.request)
         )
       }
     }),

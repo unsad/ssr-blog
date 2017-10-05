@@ -45,7 +45,7 @@ module.exports = function setupDevServer(app, cb) {
   clientCompiler.plugin('done', stats => {
     stats = stats.toJson();
     stats.errors.forEach(err => console.error(err));
-    stats.warning.forEach(err => console.warn(err));
+    stats.warnings.forEach(err => console.warn(err));
     if (stats.errors.length) return;
 
     clientManifest = JSON.parse(readFile(

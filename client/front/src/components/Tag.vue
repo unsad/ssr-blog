@@ -4,7 +4,7 @@
       <h1 class="title">{{title}}</h1>
       <div class="entry-content">
         <section>
-          <router-link v-for="item of items" :to="{name: 'tagPager', params: {tagName: item.name}}" data-tag="item.name">{{item.name}}({{item.count}})</router-link>
+          <router-link v-for="item of items" :key="item" :to="{name: 'tagPager', params: {tagName: item.name}}" data-tag="item.name">{{item.name}}({{item.count}})</router-link>
         </section>
       </div>
     </article>

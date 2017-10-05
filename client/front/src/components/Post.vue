@@ -24,17 +24,21 @@
           <p>发表于
             <time>{{article.createAt}}</time>
             <template v-if="cates.length && tags.length">
+              <div>
               ，添加在分类
               <a v-for="cate of cates" :data-cate="cate.name">
                 <code class="notebook">{{cate.name}}</code>
               </a>
+              </div>
             </template>
             下,
             <template v-if="tags.length !== 0">
+              <div>
               ,并被添加[
-              <router-link v-for="tag of tags" :to="{name: 'tagPager', params: {tagName: tag.name}}"
+              <router-link v-for="tag of tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag.name}}"
                            :data-tag="tag.name"><code class="notebook">{{tag.name}}</code></router-link>
               ]标签下，
+              </div>
             </template>
             最后修改于
             <time>{{article.updatedAt}}</time>
@@ -49,21 +53,14 @@
                      class="next">&raquo;{{next.title}}
         </router-link>
       </nav>
-      <div v-if="commentName !== ''" id="comments" :data-type="commentType" :data-thread-key=
-        "article.pathName || ''" :data-url=`${siteURL}/post/${article.pathName}`>
-        <h1 class="title">Comments</h1>
-        <div id="disqus_thread" :data-url="${siteURL}/post/${article.pathName}"
-             :data-identifier="article.pathName || ''" :data-name="commentName">
-          评论加载中...
-        </div>
-      </div>
     </div>
     <my-footer></my-footer>
   </div>
 </template>
 
 <script>
-  import store from '../store/index'
+  import store from '../store/index';
+  import myFooter from './Footer.vue';
 
   function fetchBlog(store, {path: pathName, params, query}) {
     pathName = pathName.replace(/^\/post\//g, '');
@@ -124,6 +121,9 @@
         if (val.name !== 'post') return;
         fetchBlog(this.$store, this.$store.state.route);
       }
+    },
+    components: {
+      myFooter
     }
   }
 </script>

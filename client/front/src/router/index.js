@@ -1,18 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import BlogPager from '@/components/BlogPager'
-import About from '@/components/About'
-import Archive from '@/components/Archive'
-import Tag from '@/components/Tag'
-import Post from '@/components/Post'
-import TagPager from '@/components/TagPager'
-import Sidebar from '@/components/Sidebar'
-import Header from '@/components/Header'
+
+const BlogPager = () => import('@/components/BlogPager');
+const About = () => import('@/components/About');
+const Archive = () => import('@/components/Archive');
+const Tag = () => import('@/components/Tag');
+const Post = () => import('@/components/Post');
+const TagPager = () => import('@/components/TagPager');
+const Sidebar = () => import('@/components/Sidebar');
+const Header = () => import('@/components/Header');
 
 Vue.use(Router);
 
 export function createRouter() {
-  new Router({
+  return new Router({
     mode: 'history',
     fallback: false,
     scrollBehavior: () => ({y: 0}),
@@ -20,61 +21,33 @@ export function createRouter() {
       {
         path: '/',
         name: 'main',
-        component: {
-          default: BlogPager,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: BlogPager
       },
       {
         path: '/about',
         name: 'about',
-        component: {
-          default: About,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: About
       },
       {
         path: '/post/:pathName',
         name: 'post',
-        component: {
-          default: Post,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: Post
       },
       {
         path: '/archive',
         name: 'archive',
-        component: {
-          default: Archive,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: Archive
       },
       {
         path: '/tag',
         name: 'tag',
-        component: {
-          default: Tag,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: Tag
       },
       {
         path: '/tag/:tagName',
         name: 'tagPager',
-        component: {
-          default: TagPager,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: TagPager
       },
-      {
-        path: '*',
-        redirect: '/'
-      }
     ]
   });
 }

@@ -235,7 +235,6 @@
             commentNum: 0,
             options: ''
           };
-          debugger;
           store.newBlog(newPost).then(body => {
             console.log('postCreate', body);
             this.isSubmitting = false;

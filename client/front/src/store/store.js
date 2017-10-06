@@ -79,10 +79,11 @@ export function createStore() {
           commit('SET_ABOUT', {blog});
         });
       },
-      FETCH_ITEMS: ({commit, state}, conditions, ...args) => {
+      FETCH_ITEMS: ({commit, state}, {conditions, ...args}) => {
+        debugger;
         console.log(...args);
         console.log(conditions);
-        return api.fetchPost(conditions, ...args).then(items => {
+        return api.fetchPost(conditions, args).then(items => {
           commit('SET_ITEMS', {items});
           if (state.totalPage === -1) {
             return api.fetchPost(
@@ -93,7 +94,7 @@ export function createStore() {
         });
       },
       FETCH_ACHIEVE: ({commit, state}, {conditions, ...args}) => {
-        return api.fetchPost(conditions, ...args).then(items => {
+        return api.fetchPost(conditions, args).then(items => {
           let sortedItem = items.reduce((prev, curr) => {
             let time = curr.createdAt.slice(0, 7).replace('-', '年') + '月';
             if (typeof prev[time] === 'undefined') {

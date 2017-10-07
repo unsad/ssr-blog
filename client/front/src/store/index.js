@@ -37,16 +37,12 @@ function convertObjectToArray(args) {
 // post CRUD
 
 store.fetchPost = (conditions, args) => {
-  let target = `${blogAPI}/?conditions=${JSON.stringify(conditions)}`;
+  let target = `${blogAPI}?conditions=${JSON.stringify(conditions)}`;
   if (args.select) {
     target += `&select=${JSON.stringify(args.select)}`;
     delete args.select;
   }
-  args = convertObjectToArray(args);
-  return args.reduce((prev, curr) => {
-    prev = prev.query(curr);
-    return prev;
-  }, axios.get(target)).then(response => response.body, err => console.log(err));
+  return axios.get(target).then(response => response.body, err => console.log(err));
 };
 
 store.fetchPostByID = (id, conditions, args) => {

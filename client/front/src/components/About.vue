@@ -10,6 +10,9 @@
   </div>
 </template>
 <script>
+  import myFooter from './Footer.vue';
+  import store from '../store/index';
+
   function fetchAbout(store) {
     return store.dispatch('FETCH_ABOUT', {
       conditions: {
@@ -23,14 +26,14 @@
     });
   }
 
-  import myFooter from './Footer.vue';
-  import store from '../store/index';
-
   export default {
     name: 'about',
     data() {
       return {
       }
+    },
+    asyncData(store) {
+      return fetchAbout(store);
     },
     computed: {
       html() {
@@ -39,11 +42,6 @@
     },
     preFetch(store) {
       return fetchAbout(store);
-    },
-    beforeMount() {
-      if (this.$root._isMounted) {
-        fetchAbout(this.$store);
-      }
     },
     components: {
       myFooter

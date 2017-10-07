@@ -20,7 +20,7 @@
   import myFooter from './Footer.vue';
   import store from '../store/index';
 
-  function fetchAchieves(store) {
+  function fetchArchive(store) {
     return store.dispatch('FETCH_ACHIEVE', {
       conditions: {type: 0},
       select: {
@@ -39,16 +39,12 @@
         title: '归档'
       }
     },
+    asyncData(store) {
+      return fetchArchive(store);
+    },
     computed: {
       items() {
         return this.$store.getters.achieves;
-      }
-    },
-    preFetch: fetchAchieves,
-    beforeMount() {
-      if (this.$root._isMounted) {
-        console.log('fetchAchirenve');
-        fetchAchieves(this.$store);
       }
     },
     components: {

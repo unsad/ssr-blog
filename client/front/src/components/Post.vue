@@ -62,20 +62,6 @@
   import store from '../store/index';
   import myFooter from './Footer.vue';
 
-  function fetchBlog(store, {path: pathName, params, query}) {
-    pathName = pathName.replace(/^\/post\//g, '');
-    return store.dispatch('FETCH_BLOG', {
-      conditions: {pathName},
-      select: {
-        title: 1,
-        createdAt: 1,
-        content: 1,
-        updatedAt: 1,
-        commentNum: 1
-      }
-    });
-  }
-
   export default {
     name: 'Post',
     data() {
@@ -83,6 +69,19 @@
         cates: [],
         tags: []
       }
+    },
+    asyncData(store, route: {path: pathName, params, query}) {
+      pathName = pathName.replace(/^\/post\//g, '');
+      return store.dispatch('FETCH_BLOG', {
+        conditions: {pathName},
+        select: {
+          title: 1,
+          createdAt: 1,
+          content: 1,
+          updatedAt: 1,
+          commentNum: 1
+        }
+      });
     },
     computed: {
       article() {
@@ -102,24 +101,6 @@
       },
       siteURL() {
         return this.$store.state.siteInfo.site_url.value || 'localhost';
-      }
-    },
-    preFetch: fetchBlog,
-    beforeMount() {
-      if (this.$root._isMounted) {
-        fetchBlog(this.$store, this.$store.state.route);
-      }
-    },
-    watch: {
-      '$route': 'getPost'
-    },
-    created() {
-
-    },
-    methods: {
-      getPost(val, oldVal) {
-        if (val.name !== 'post') return;
-        fetchBlog(this.$store, this.$store.state.route);
       }
     },
     components: {

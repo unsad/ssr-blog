@@ -80,7 +80,6 @@ export function createStore() {
         });
       },
       FETCH_ITEMS: ({commit, state}, {conditions, ...args}) => {
-        debugger;
         console.log(...args);
         console.log(conditions);
         return api.fetchPost(conditions, args).then(items => {

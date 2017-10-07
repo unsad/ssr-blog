@@ -24,6 +24,9 @@
         items: {}
       }
     },
+    components: {
+      myFooter
+    },
     created() {
       store.fetchTags(this).then(items => {
         store.fetchPostTags(this).then(postTags => {

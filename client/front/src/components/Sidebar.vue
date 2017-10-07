@@ -8,7 +8,7 @@
     </div>
     <ul class="buttons">
       <li><router-link :to="{name: 'main'}" title="首页"><span>首页</span></router-link></li>
-      <li><router-link :to="{name: 'archives'}" title="归档"><span>归档</span></router-link></li>
+      <li><router-link :to="{name: 'archive'}" title="归档"><span>归档</span></router-link></li>
       <li><router-link :to="{name: 'tag'}" title="标签"><span>标签</span></router-link></li>
       <li><router-link :to="{name: 'about'}" title="关于"><span>关于</span></router-link></li>
     </ul>
@@ -38,21 +38,18 @@
   export default {
     name: 'sideBar',
     data() {
-      const isInitialRender = !this.$root._isMounted;
       return {
         siteInfo: this.$store.getters.siteInfo
       }
     },
-    preFetch(store, {path, params, query}) {
+    asyncData(store, route: {path, params, query}) {
       return store.dispatch('FETCH_OPTIONS');
     },
     beforeMount() {
       if (typeof this.siteInfo.title === 'undefined') {
-        this.$store.dispatch('FETCH_OPTIONS').then(() => {
-          if (this.siteInfo['title'] && typeof document !== 'undefined') {
-            document.title = this.siteInfo['title'].value;
-          }
-        });
+        if (this.siteInfo['title'] && typeof document !== 'undefined') {
+          document.title = this.siteInfo['title'].value;
+        }
       } else {
         document.title = this.siteInfo['title'].value || 'Blog';
       }

@@ -20,7 +20,7 @@
     name: 'blogPager',
     data() {
       return {
-        totalPage: 1
+
       }
     },
     asyncData({store, route: {path, query, params}}) {

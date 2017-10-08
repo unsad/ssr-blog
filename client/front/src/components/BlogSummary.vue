@@ -22,8 +22,10 @@
     },
     data() {
       return {
-        siteName: '造梦之地'
       }
+    },
+    serverCacheKey: props => {
+      return `${props.article._id}::${props.article.updatedAt}`
     }
   }
 </script>

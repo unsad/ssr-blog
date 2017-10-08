@@ -1,0 +1,46 @@
+<template>
+  <pager :page="page"></pager>
+</template>
+<script>
+  import pager from './Pager';
+
+  function fetchPage({store, route: {path: pathName, params, query}}) {
+    pathName = pathName.replace(/^\//g, '');
+    return store.dispatch('FETCH_PAGE', {
+      conditions: {
+        pathName,
+        type: 1
+      },
+      select: {
+        title: 1,
+        createdAt: 1,
+        content: 1,
+        updatedAt: 1,
+        commentNum: 1,
+        pathName: 1
+      }
+    });
+  }
+
+  export default {
+    name: 'about',
+    data() {
+      return {
+      }
+    },
+    asyncData(context) {
+      return fetchPage(context);
+    },
+    computed: {
+      page() {
+        return this.$store.state.page;
+      }
+    },
+    components: {
+      pager
+    }
+  }
+</script>
+<style scoped lang="stylus" rel="stylesheet/stylus">
+
+</style>

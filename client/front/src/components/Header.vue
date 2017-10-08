@@ -10,8 +10,6 @@
 </template>
 
 <script>
-  import store from '../store/index';
-
   export default {
     name: 'header',
     data() {
@@ -20,6 +18,9 @@
       return {
         siteInfo: this.$store.getters.siteInfo
       }
+    },
+    serverCacheKey: props => {
+      return 'static-header'
     }
   }
 </script>

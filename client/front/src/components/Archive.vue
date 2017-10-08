@@ -18,7 +18,6 @@
 
 <script>
   import myFooter from './Footer.vue';
-  import store from '../store/index';
 
   function fetchArchive(store) {
     return store.dispatch('FETCH_ACHIEVE', {

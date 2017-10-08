@@ -17,7 +17,7 @@ export function createStore() {
       blog: {},
       prev: {},
       next: {},
-      about: {},
+      page: {},
       siteInfo: {
         github_url: {
           value: ''
@@ -73,10 +73,10 @@ export function createStore() {
           return Promise.all([first, second]);
         });
       },
-      FETCH_ABOUT: ({commit, state}, {conditions, ...args}) => {
+      FETCH_PAGE: ({commit, state}, {conditions, ...args}) => {
         return api.fetchPost(conditions, args).then(result => {
           let blog = result[0];
-          commit('SET_ABOUT', {blog});
+          commit('SET_PAGE', {blog});
         });
       },
       FETCH_ITEMS: ({commit, state}, {conditions, ...args}) => {
@@ -133,8 +133,8 @@ export function createStore() {
       SET_PAGES: (state, {totalPage}) => {
         Vue.set(state, 'totalPage', totalPage);
       },
-      SET_ABOUT: (state, {blog}) => {
-        Vue.set(state, 'about', blog);
+      SET_PAGE: (state, {blog}) => {
+        Vue.set(state, 'page', blog);
       },
       SET_ACHIEVE: (state, {sortedItem}) => {
         Vue.set(state, 'achieves', sortedItem);

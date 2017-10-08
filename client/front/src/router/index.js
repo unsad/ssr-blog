@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const BlogPager = () => import('@/components/BlogPager');
-const About = () => import('@/components/About');
+const PageContainer = () => import('@/components/PageContainer');
 const Archive = () => import('@/components/Archive');
 const Tag = () => import('@/components/Tag');
 const Post = () => import('@/components/Post');
@@ -24,9 +24,13 @@ export function createRouter() {
         component: BlogPager
       },
       {
-        path: '/about',
-        name: 'about',
-        component: About
+        path: '/:page',
+        name: 'page',
+        components: {
+          default: PageContainer,
+          sidebar: Sidebar,
+          header: Header
+        }
       },
       {
         path: '/post/:pathName',

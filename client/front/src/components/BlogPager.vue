@@ -11,7 +11,6 @@
 </template>
 
 <script>
-  import store from '../store/index';
   import myFooter from './Footer.vue';
   import blogSummary from './BlogSummary.vue';
   import pagination from './Pagination.vue';
@@ -38,6 +37,7 @@
           summary: 1,
           commentNum: 1,
           createdAt: 1,
+          updatedAt: 1,
           pathName: 1
         },
         limit: 10,

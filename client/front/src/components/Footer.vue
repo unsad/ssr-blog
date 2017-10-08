@@ -5,8 +5,6 @@
 </template>
 
 <script>
-  import store from '../store/index';
-
   export default {
     name: 'footer',
     data() {
@@ -15,6 +13,9 @@
       return {
         siteInfo: this.$store.getters.siteInfo
       }
+    },
+    serverCacheKey: props => {
+      return 'static-footer'
     }
   }
 </script>

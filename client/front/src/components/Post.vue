@@ -62,7 +62,6 @@
 </template>
 
 <script>
-  import store from '../store/index';
   import myFooter from './Footer.vue';
   import disqus from './Disqus.vue';
 

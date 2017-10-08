@@ -36,6 +36,25 @@ router.onReady(() => {
     Promise.all(asyncDataHooks.map(hook => hook({store, route: to}))).then(next).catch(next);
   });
 
+  if (window.__INITIAL_STATE__.siteInfo) {
+    let analyze_code = window.__INITIAL_STATE__.siteInfo.analyze_code;
+    if (analyze_code && analyze_code.value !== '') {
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      +ga('create', 'UA-86299315-1', 'auto');
+      +ga('send', 'pageview');
+    }
+  }
+
+  router.afterEach(route => {
+    console.log(route);
+    ga('send', {
+      hitType: 'pageview',
+      page: route.path,
+      location: window.location.origin + route.path,
+      title: route.name
+    })
+  });
+
   app.$mount('#app');
 });
 

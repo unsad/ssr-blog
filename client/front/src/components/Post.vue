@@ -53,6 +53,9 @@
                      class="next">&raquo;{{next.title}}
         </router-link>
       </nav>
+      <div class="comments" v-if="commentName!== ''">
+        <disqus :shortname="commentName"></disqus>
+      </div>
     </div>
     <my-footer></my-footer>
   </div>
@@ -61,6 +64,9 @@
 <script>
   import store from '../store/index';
   import myFooter from './Footer.vue';
+  import Disqus from 'vue-disqus';
+
+  Disqus.mounted = Disqus.ready;
 
   export default {
     name: 'Post',
@@ -83,6 +89,18 @@
         }
       });
     },
+    methods: {
+      reset(dsq) {
+        const self = this;
+        dsq.reset({
+          reload: true,
+          config: function() {
+            this.page.identifier = (self.$route.path || window.location.pathname);
+            this.page.url = window.location.href;
+          }
+        });
+      }
+    },
     computed: {
       article() {
         return this.$store.state.blog;
@@ -104,7 +122,8 @@
       }
     },
     components: {
-      myFooter
+      myFooter,
+      Disqus
     }
   }
 </script>

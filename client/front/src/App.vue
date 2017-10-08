@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <sidebar></sidebar>
-    <header></header>
+    <my-header></my-header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
   import sidebar from './components/Sidebar.vue';
-  import header from './components/Header.vue';
+  import myHeader from './components/Header.vue';
   export default {
     name: 'app',
     components: {
       sidebar,
-      header
+      myHeader
     }
   }
 </script>

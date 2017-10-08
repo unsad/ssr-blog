@@ -42,7 +42,7 @@ store.fetchPost = (conditions, args) => {
     target += `&select=${JSON.stringify(args.select)}`;
     delete args.select;
   }
-  return axios.get(target).then(response => response.body, err => console.log(err));
+  return axios.get(target).then(response => response.data, err => console.log(err));
 };
 
 store.fetchPostByID = (id, conditions, args) => {
@@ -55,7 +55,7 @@ store.fetchPostByID = (id, conditions, args) => {
   return args.reduce((prev, curr) => {
     prev = prev.query(curr);
     return prev;
-  }, axios.get(target)).then(response => response.body, err => console.log(err));
+  }, axios.get(target)).then(response => response.data, err => console.log(err));
 };
 
 // cate CRUD
@@ -63,16 +63,16 @@ store.fetchPostByID = (id, conditions, args) => {
 // tag CRUD
 
 store.fetchTags = () => {
-  return axios.get(tagAPI).then(response => response.body, err => console.log(err));
+  return axios.get(tagAPI).then(response => response.data, err => console.log(err));
 };
 
 store.fetchPostTags = () => {
-  return axios.get(postTagAPI).then(response => response.body, err => console.log(err));
+  return axios.get(postTagAPI).then(response => response.data, err => console.log(err));
 };
 
 // option CRUD
 
 store.fetchOption = () => {
-  return axios.get(`${prefix}/option?select={"key": 1, "value": 1}`).then(response => response.body, err => console.log(err));
+  return axios.get(`${prefix}/option?select={"key": 1, "value": 1}`).then(response => response.data, err => console.log(err));
 };
 

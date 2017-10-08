@@ -70,7 +70,7 @@
         tags: []
       }
     },
-    asyncData(store, route: {path: pathName, params, query}) {
+    asyncData({store, route: {path: pathName, params, query}}) {
       pathName = pathName.replace(/^\/post\//g, '');
       return store.dispatch('FETCH_BLOG', {
         conditions: {pathName},
@@ -94,10 +94,10 @@
         return this.$store.state.next;
       },
       commentType() {
-        return this.$store.state.siteInfo.comment.value.type || 'disqus';
+        return JSON.parse(this.$store.state.siteInfo.comment.value).type || 'disqus';
       },
       commentName() {
-        return this.$store.state.siteInfo.comment.value.name || '';
+        return JSON.parse(this.$store.state.siteInfo.comment.value).name || '';
       },
       siteURL() {
         return this.$store.state.siteInfo.site_url.value || 'localhost';

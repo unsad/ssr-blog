@@ -42,7 +42,7 @@
         siteInfo: this.$store.getters.siteInfo
       }
     },
-    asyncData(store, route: {path, params, query}) {
+    asyncData({store, route: {path, params, query}}) {
       return store.dispatch('FETCH_OPTIONS');
     },
     beforeMount() {

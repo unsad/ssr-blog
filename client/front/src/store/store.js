@@ -84,6 +84,7 @@ export function createStore() {
         console.log(conditions);
         return api.fetchPost(conditions, args).then(items => {
           commit('SET_ITEMS', {items});
+          debugger;
           if (state.totalPage === -1) {
             return api.fetchPost(
               {type: 0}, {count: 1}).then(totalPage => {

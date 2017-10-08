@@ -8,6 +8,22 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const microcache = require('route-cache');
+const robots = require('./server/robots.js');
+const { axios, api, getSitemapFromBody } = require('./server/sitemap.js');
+const { title } = require('./config');
+const schedule = require('node-schedule');
+
+let sitemap = '';
+axios.get(api).then(result => {
+  sitemap = getSitemapFromBody(result);
+});
+
+let job = schedule.scheduleJob(`30 3 * * *`, () => {
+  axios.get(api).then(result => {
+    sitemap = getSitemapFromBody(result);
+  });
+});
+
 const resolve = file => path.resolve(__dirname, file);
 const {createBundleRenderer} = require('vue-server-renderer');
 
@@ -90,10 +106,20 @@ function render (req, res) {
   });
 }
 
+app.get('/robots.txt', (req, res) => {
+  res.end(robots);
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  res.header('Content-Type', 'application/xml');
+  res.end(sitemap);
+});
+
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   return next();
 });
+
 app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res));
 });

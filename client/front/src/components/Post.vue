@@ -64,9 +64,7 @@
 <script>
   import store from '../store/index';
   import myFooter from './Footer.vue';
-  import Disqus from 'vue-disqus';
-
-  Disqus.mounted = Disqus.ready;
+  import disqus from './Disqus.vue';
 
   export default {
     name: 'Post',
@@ -123,7 +121,7 @@
     },
     components: {
       myFooter,
-      Disqus
+      disqus
     }
   }
 </script>

@@ -19,12 +19,12 @@
         </a>
       </li>
       <li>
-        <a href="/rss.html" target="_blank" class="inline">
+        <a href="/rss.xml" target="_blank" class="inline">
           <i title="RSS"></i>
         </a>
       </li>
       <li>
-        <a href="/search.html" target="_blank" class="inline">
+        <a href="/search" target="_blank" class="inline">
           <i title="Search"></i>
         </a>
       </li>

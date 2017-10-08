@@ -9,18 +9,31 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const microcache = require('route-cache');
 const robots = require('./server/robots.js');
-const { axios, api, getSitemapFromBody } = require('./server/sitemap.js');
-const { title } = require('./config');
+const axios = require('axios');
+const { api: sitemapApi, getSitemapFromBody } = require('./server/sitemap.js');
+const { api: rssApi, getRssBodyFromBody } = require('./server/rss.js');
+const { title } = require('./server/config');
 const schedule = require('node-schedule');
 
 let sitemap = '';
-axios.get(api).then(result => {
+axios.get(sitemapApi).then(result => {
   sitemap = getSitemapFromBody(result);
 });
 
-let job = schedule.scheduleJob(`30 3 * * *`, () => {
-  axios.get(api).then(result => {
+let sitemapJob = schedule.scheduleJob(`30 3 * * *`, () => {
+  axios.get(sitemapApi).then(result => {
     sitemap = getSitemapFromBody(result);
+  });
+});
+
+let rss = '';
+axios.get(rssApi).then(result => {
+  rss = getRssBodyFromBody(result);
+});
+
+let rssJob = schedule.scheduleJob(`30 3 * * *`, () => {
+  axios.get(rssApi).then(result => {
+    rss = getRssBodyFromBody(result);
   });
 });
 
@@ -108,6 +121,11 @@ function render (req, res) {
 
 app.get('/robots.txt', (req, res) => {
   res.end(robots);
+});
+
+app.get('./rss.xml', (req, res) => {
+  res.header('Content-Type', 'application/xml');
+  res.end(rss);
 });
 
 app.get('/sitemap.xml', (req, res) => {

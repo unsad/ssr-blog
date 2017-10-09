@@ -36,7 +36,8 @@ export function createStore() {
           let blog = result[0];
           commit('SET_BLOG', {blog});
           let first = api.fetchPost({
-            _id: {$lt: blog._id}
+            _id: {$lt: blog._id},
+            type: 0
           }, {
             sort: 1,
             limit: 1,
@@ -54,7 +55,8 @@ export function createStore() {
             }
           });
           let second = api.fetchPost({
-            _id: {$gt: blog._id}
+            _id: {$gt: blog._id},
+            type: 0
           }, {
             limit: 1,
             select: {
@@ -71,6 +73,21 @@ export function createStore() {
             }
           });
           return Promise.all([first, second]);
+        });
+      },
+      FETCH_TAGS: ({commit, state}, {conditions, ...args}) => {
+        return api.fetchPost(conditions, args).then(result => {
+          let tags = result.reduce((prev, curr) => {
+            curr.tags.forEach(tag => {
+              if (typeof prev[tag] === 'undefined') {
+                prev[tag] = 1;
+              } else {
+                prev[tag] = prev[tag] + 1
+              }
+            });
+            return prev;
+          }, {});
+          commit('SET_TAGS', {tags});
         });
       },
       FETCH_PAGE: ({commit, state}, {conditions, ...args}) => {
@@ -126,6 +143,9 @@ export function createStore() {
       },
       SET_NEXT: (state, {post}) => {
         Vue.set(state, 'next', post);
+      },
+      SET_TAGS: (state, {tags}) => {
+        Vue.set(state, 'tags', tags);
       },
       SET_ITEMS: (state, {items}) => {
         Vue.set(state, 'items', items);

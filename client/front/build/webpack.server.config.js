@@ -28,6 +28,18 @@ module.exports = merge(baseConfig, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warning: false
+      },
+      output: {
+        comments: false
+      },
+      sourceMap: false
     })
   ]
 });

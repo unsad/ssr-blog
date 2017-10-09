@@ -36,28 +36,28 @@
     },
     methods: {
       getItems() {
-        let idArr = [];
-        store.fetchTags(this).then(tags => {
-          let tagID = '';
-          tags.forEach(value => {
-            if (value.name === this.$route.params.tagName) {
-              tagID = value._id;
+        store.fetchPost({}, {
+          select: {
+            tags: 1,
+            title: 1,
+            summary: 1,
+            commentNum: 1,
+            createdAt: 1,
+            updatedAt: 1,
+            pathName: 1
+          },
+          sort: 1
+        }).then(result => {
+          this.items = [];
+          result.forEach(value => {
+            for (let i = 0; i < value.tags.length; i++) {
+              let tag = value.tags[i];
+              if (tag === this.$route.params.tagName) {
+                this.items.push(value);
+                break;
+              }
             }
           });
-
-          store.fetchPostTags(this).then(postTags => {
-            postTags = postTags.filter((value, index) => {
-              return value.tagID === tagID;
-            });
-
-            postTags.forEach((value) => {
-              store.fetchBlogByID(this, value.postID).then(item => {
-                if (item._id) {
-                  this.items.push(item);
-                }
-              });
-            });
-          })
         });
       }
     },

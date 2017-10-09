@@ -17,7 +17,8 @@
         content: 1,
         updatedAt: 1,
         commentNum: 1,
-        pathName: 1
+        pathName: 1,
+        allowComment: 1
       }
     });
   }

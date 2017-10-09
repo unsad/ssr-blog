@@ -43,7 +43,7 @@
             <ul>
               <li v-for="cate of cates">
                 <label for="">
-                  <input type="checkbox" name="cate" :value="cate._id" v-model="postCate">
+                  <input type="radio" name="cate" :value="cate.name" v-model="postCate">
                   <span>{{cate.name}}</span>
                 </label>
               </li>
@@ -54,7 +54,7 @@
             <ul>
               <li v-for="tag of tags">
                 <label for="">
-                  <input type="checkbox" :value="tag._id" v-model="postTags">
+                  <input type="checkbox" :value="tag.name" v-model="postTags">
                   <span>{{tag.name}}</span>
                 </label>
               </li>
@@ -194,19 +194,8 @@
 
         if (this.isPost === false) return;
 
-        store.fetchPostTags().then(result => {
-          let obj = {};
-          this.postTagsBackup = result.filter(value => value.postID === this.id).map(value => value._id);
-          result = result.filter(val => val.postID === this.id);
-          this.postTags = result.map(val => val.tagID);
-        });
-
-        store.fetchPostCate().then(result => {
-          let obj = {};
-          this.postCateBackup = result.filter(value => value.postID === this.id).map(value => value._id);
-          result = result.filter(val => val.postID === this.id);
-          this.postCate = result.map(val => val.categoryID);
-        });
+        this.postTags = result.tags;
+        this.postCate = result.category;
       });
     },
     methods: {
@@ -233,7 +222,9 @@
             allowComment: this.allowComment === true ? '1' : '0',
             isPublic: this.isPublic === '1' ? 1 : 0,
             commentNum: 0,
-            options: ''
+            options: {},
+            category: this.postCate,
+            tags: this.postTags
           };
           store.newBlog(newPost).then(body => {
             console.log('postCreate', body);
@@ -247,35 +238,15 @@
             markdownContent: this.post.finalContent,
             content: marked(this.post.finalContent),
             allowComment: this.allowComment === true ? '1' : '0',
-            isPublic: this.isPublic === '1' ? 1 : 0
+            isPublic: this.isPublic === '1' ? 1 : 0,
+            category: this.postCate,
+            tags: this.postTags
           });
           store.patchBlog(this.id, this.post).then(body => {
             console.log('postPatched', body);
             this.isSubmitting = false;
-            this.deletePostAndTag(body._id);
           });
         }
-      },
-      deletePostAndTag(id) {
-        this.postTagsBackup.forEach(value => {
-          store.deletePostTags(value);
-        });
-        console.log(this.postCateBackup);
-        this.postCateBackup.forEach(value => {
-          store.deletePostCates(value);
-        });
-        this.postTags.forEach(value => {
-          store.addPostTags({
-            postID: id,
-            tagID: value
-          });
-        });
-        this.postCate.forEach(value => {
-          store.addPostCates({
-            postID: id,
-            categoryID: value
-          });
-        });
       }
     },
     mounted() {

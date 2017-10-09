@@ -23,20 +23,22 @@
         <div class="post-info">
           <p>发表于
             <time>{{article.createAt}}</time>
-            <template v-if="cates.length && tags.length">
+            <template v-if="article.category">
               <div>
               ，添加在分类
-              <a v-for="cate of cates" :data-cate="cate.name">
-                <code class="notebook">{{cate.name}}</code>
+              <a :data-cate="article.category">
+                <code class="notebook">{{article.category}}</code>
               </a>
               </div>
             </template>
-            下,
-            <template v-if="tags.length !== 0">
+            <template v-if="article.category">
+              下,
+            </template>
+            <template v-if="article.tags && article.tags.length !== 0">
               <div>
               ,并被添加[
-              <router-link v-for="tag of tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag.name}}"
-                           :data-tag="tag.name"><code class="notebook">{{tag.name}}</code></router-link>
+              <router-link v-for="tag of article.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
+                           :data-tag="tag"><code class="notebook">{{tag}}</code></router-link>
               ]标签下，
               </div>
             </template>
@@ -53,7 +55,7 @@
                      class="next">&raquo;{{next.title}}
         </router-link>
       </nav>
-      <div class="comments" v-if="commentName!== ''">
+      <div class="comments" v-if="article.allowComment === 1 && commentName!== ''">
         <disqus :shortname="commentName"></disqus>
       </div>
     </div>
@@ -69,8 +71,7 @@
     name: 'Post',
     data() {
       return {
-        cates: [],
-        tags: []
+
       }
     },
     asyncData({store, route: {path: pathName, params, query}}) {
@@ -82,7 +83,11 @@
           createdAt: 1,
           content: 1,
           updatedAt: 1,
-          commentNum: 1
+          commentNum: 1,
+          pathName: 1,
+          category: 1,
+          allowComment: 1,
+          tags: 1
         }
       });
     },
@@ -109,10 +114,10 @@
         return this.$store.state.next;
       },
       commentType() {
-        return JSON.parse(this.$store.state.siteInfo.comment.value).type || 'disqus';
+        return this.$store.state.siteInfo.comment.value.type || 'disqus';
       },
       commentName() {
-        return JSON.parse(this.$store.state.siteInfo.comment.value).name || '';
+        return this.$store.state.siteInfo.comment.value.name || '';
       },
       siteURL() {
         return this.$store.state.siteInfo.site_url.value || 'localhost';

@@ -4,7 +4,7 @@
       <h1 class="title">{{title}}</h1>
       <div class="entry-content">
         <section>
-          <router-link v-for="item of items" :key="item" :to="{name: 'tagPager', params: {tagName: item.name}}" data-tag="item.name">{{item.name}}({{item.count}})</router-link>
+          <router-link v-for="(item, key, index) of items" :key="item" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">{{key}}({{item}})</router-link>
         </section>
       </div>
     </article>
@@ -16,39 +16,32 @@
   import store from '../store/index';
   import myFooter from './Footer.vue';
 
+  function fetchTags({store, route: {path: pathName, params, query}}) {
+    return store.dispatch('FETCH_TAGS', {
+      conditions: {},
+      select: {
+        tags: 1
+      }
+    });
+  }
+
   export default {
     name: 'tag',
     data() {
       return {
-        title: '标签',
-        items: {}
+        title: '标签'
       }
     },
     components: {
       myFooter
     },
-    created() {
-      store.fetchTags(this).then(items => {
-        store.fetchPostTags(this).then(postTags => {
-          postTags.forEach(value => {
-            let tagID = value.tagID;
-            let targetIndex = 0;
-            items.forEach((value, index) => {
-              if (value._id === tagID) {
-                targetIndex = index;
-              }
-            });
-
-            if (typeof items[targetIndex].count === 'undefined') {
-              items[targetIndex].count = 1;
-            } else {
-              items[targetIndex].count++;
-            }
-          });
-          items.sort((a, b) => b.count - a.count);
-          this.items = items;
-        });
-      });
+    computed: {
+      items() {
+        return this.$store.state.tags
+      }
+    },
+    asyncData(context) {
+      return fetchTags(context);
     }
   }
 </script>

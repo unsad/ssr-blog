@@ -6,7 +6,6 @@ import axios from 'axios';
 const aboutAPI = `/proxyPrefix/api/post/57dbe47c2993f70dc6d6b12c`;
 const blogAPI = `/proxyPrefix/api/post`;
 const tagAPI = `/proxyPrefix/api/tag`;
-const postTagAPI = `/proxyPrefix/api/postTag`;
 const postCateAPI = `/proxyPrefix/api/postCategory`;
 
 const root = '/proxyPrefix/api';
@@ -26,7 +25,7 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(response => {
   if (response.data && response.data.status && response.data.status === 'fail') {
-    console.error(response.data.description);
+    console.log(response.data.description);
   }
   return response;
 }, error => Promise.reject(error));
@@ -161,50 +160,4 @@ store.fetchUser = () => {
 
 store.patchUser = (id, json) => {
   return axios.patch(`${root}/user/${id}`, json).then(response => response.data, err => console.log(err));
-};
-
-// many to many
-
-store.deleteTagsByPostID = id => {
-  return axios.delete(`${postTagAPI}/${id}`).then(response => response.data, err => console.log(err));
-};
-
-store.deleteCateByPostID = id => {
-  return axios.delete(`${postCateAPI}/${id}`).then(response => response.data, err => console.log(err));
-};
-
-// postTag
-
-store.fetchPostTags = () => {
-  return axios.get(postTagAPI).then(response => response.data, err => console.log(err));
-};
-
-store.fetchPostTagsByID = (conditions) => {
-  return axios.get(postTagAPI + `?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
-};
-
-// postCate
-
-store.fetchPostCate = () => {
-  return axios.get(postCateAPI).then(response => response.data, err => console.log(err));
-};
-
-store.fetchPostCateByID = (conditions) => {
-  return axios.get(postCateAPI + `?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
-};
-
-store.deletePostTags = id => {
-  return axios.delete(`${postTagAPI}/${id}`).then(response => response, err => console.log(err));
-};
-
-store.addPostTags = json => {
-  return axios.post(`${postTagAPI}`, json).then(response => response.data, err => console.log(err));
-};
-
-store.deletePostCates = id => {
-  return axios.delete(`${postCateAPI}/${id}`).then(response => response, err => console.log(err));
-};
-
-store.addPostCates = (vue, json) => {
-  return axios.post(`${postCateAPI}`, json).then(response => response.data, err => console.log(err));
 };

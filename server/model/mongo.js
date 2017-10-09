@@ -30,34 +30,33 @@ let post = new Schema({
   // 1为公开，0为不公开
   isPubilc: {type: Number, default: 1},
   commentNum: Number,
-  options: String
+  options: Object,
+  category: String,
+  tags: Array
 });
 
 let category = new Schema({
   name: String,
-  pid: Number,
-  pathName: String
-});
-
-let option = new Schema({
-  key: String,
-  value: String,
-  desc: String
-});
-
-let postCategory = new Schema({
-  postID: String,
-  categoryID: String
-});
-
-let postTag = new Schema({
-  name: String,
-  pathName: String
+  pathName: String,
+  postID: {
+    type: Array,
+    default: []
+  }
 });
 
 let tag = new Schema({
   name: String,
-  pathName: String
+  pathName: String,
+  postID: {
+    type: Array,
+    default: []
+  }
+});
+
+let option = new Schema({
+  key: String,
+  value: Schema.Types.Mixed,
+  desc: String
 });
 
 let user = new Schema({
@@ -71,7 +70,7 @@ let user = new Schema({
   lastLoginIP: String
 });
 
-let update = new Schema({
+let version = new Schema({
   name: String,
   version: String,
   path: String
@@ -80,21 +79,17 @@ let update = new Schema({
 post = mongoose.model('post', post);
 category = mongoose.model('category', category);
 option = mongoose.model('option', option);
-postCategory = mongoose.model('postCategory', postCategory);
-postTag = mongoose.model('postTag', postTag);
 tag = mongoose.model('tag', tag);
 user = mongoose.model('user', user);
-update = mongoose.model('update', update);
+version = mongoose.model('version', version);
 
 module.exports = {
   post,
   category,
   option,
-  postCategory,
-  postTag,
   tag,
   user,
-  update
+  version
 };
 
 

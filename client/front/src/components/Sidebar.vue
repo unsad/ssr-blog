@@ -8,7 +8,7 @@
     </div>
     <ul class="buttons">
       <li v-for="menu of siteInfo.menu.value">
-        <router-link :to="{path: menu.url}" title="menu.label">
+        <router-link :to="{path: menu.url}" :title="menu.label">
           <span>{{menu.label}}</span>
         </router-link>
       </li>

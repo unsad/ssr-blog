@@ -32,6 +32,18 @@ axios.interceptors.response.use(response => {
 
 export default store;
 
+function isObject(obj) {
+  return Object.prototype.toString.call(obj).slice(8, -1) === 'Object';
+}
+
+function convertObjectToArray(args) {
+  return isObject(args) ? Object.keys(args).map((value, index) => {
+    let temp = {};
+    temp[value] = args[value];
+    return temp;
+  }) : [];
+}
+
 store.login = (conditions, args) => {
   return axios.post(`/proxyPrefix/admin/login`, conditions);
 };
@@ -50,8 +62,14 @@ store.deleteUpdate = id => {
 
 // post CRUD
 
-store.fetchBlog = (conditions, args) => {
-  return axios.get(blogAPI + `?conditions=${JSON.stringify(conditions)}&sort=1`).then(response => response.data, err => console.log(err));
+store.fetchBlog = (conditions = {}, args) => {
+  let target = blogAPI + `?conditions=${JSON.stringify(conditions)}&sort=1`;
+  if (args && args.select) {
+    target += `&select=${JSON.stringify(args.select)}`;
+    delete args.select;
+  }
+  args = convertObjectToArray(args);
+  return axios.get(target).then(response => response.data, err => console.log(err));
 };
 
 store.fetchBlogByID = id => {

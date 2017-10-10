@@ -63,7 +63,7 @@
   </div>
 </template>
 <script>
-  import marked from 'marked';
+  import marked from '../../utils/marked';
 
   export default {
     name: 'editor',

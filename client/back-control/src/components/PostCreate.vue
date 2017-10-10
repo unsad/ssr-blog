@@ -91,7 +91,7 @@
   import Top from './Top';
   import MarkdownEditor from './editor/index';
   import DatePicker from 'vue-datepicker/vue-datepicker-es6.vue';
-  import marked from 'marked';
+  import marked from '../utils/marked';
   import moment from 'moment';
   import store from '../store/index';
 

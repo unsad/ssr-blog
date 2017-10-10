@@ -79,7 +79,13 @@
     },
     methods: {
       getPage() {
-        store.fetchBlogByPage({type: '1'}).then(result => {
+        store.fetchBlog({type: '1'}, {
+          'title': 1,
+          'createdAt': 1,
+          'updatedAt': 1,
+          'status': 1,
+          'pathName': 1
+        }).then(result => {
           this.pages = result;
         });
       },

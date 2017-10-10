@@ -24,7 +24,7 @@
           <tr v-else v-for="post of posts">
             <td>
               <router-link :to="{name: 'editPost', params: {id: post._id}}" :title="post.title">{{post.title}}</router-link>
-              <a :href="`/post/${post.pathname}.html`" target="_blank"></a>
+              <a v-if="post.status === 3" :href="`/post/${post.pathName}.html`" target="_blank"></a>
             </td>
             <td>{{post.status}}</td>
             <td>{{post.createdAt}}</td>
@@ -76,6 +76,14 @@
       getBlogByPage() {
         store.fetchBlog({
           type: 0
+        }, {
+          select: {
+            'title': 1,
+            'createdAt': 1,
+            'updatedAt': 1,
+            'status': 1,
+            'pathName': 1
+          }
         }).then(result => {
           this.posts = result;
         });

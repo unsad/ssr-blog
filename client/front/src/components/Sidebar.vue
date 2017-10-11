@@ -2,7 +2,7 @@
   <nav id="sidebar">
     <div class="profile">
       <a href="/">
-        <img :src="siteInfo.logo_url.value" :alt="siteInfo.title.value">
+        <img :src="siteInfo.logo_url.value" :alt="siteInfo.title.value" ref="logo">
       </a>
       <span>{{siteInfo.title.value}}</span>
     </div>
@@ -52,6 +52,10 @@
       } else {
         document.title = this.siteInfo['title'].value || 'Blog';
       }
+    },
+    mounted() {
+      let img = this.$refs.logo;
+      img.onerror = ({target}) => (img.src = target.currentSrc.replace('.webp', '.png'));
     },
     serverCacheKey: props => {
       return 'static-sidebar'

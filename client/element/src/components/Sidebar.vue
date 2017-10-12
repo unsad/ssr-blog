@@ -1,10 +1,9 @@
 <template>
-  <div class="sidebar">
-    <el-row class="tac">
+  <el-row class="sidebar">
       <el-col :span="4">
         <!--<h5>带 icon</h5>-->
 
-        <el-menu default-active="2" class="el-menu-vertical-demo" :unique-opened="true"
+        <el-menu default-active="2" class="full-height" :unique-opened="true"
                  @select="handleSelect">
           <el-menu-item index="1"><i class="el-icon-menu"></i>概述</el-menu-item>
 
@@ -60,7 +59,6 @@
         </el-menu>
       </el-col>
     </el-row>
-  </div>
 </template>
 
 <script>
@@ -74,8 +72,30 @@
       }
     },
     methods: {
+      push(name) {
+        this.$router.push({name});
+      },
       handleSelect(index, indexPath) {
         console.log(index, indexPath);
+        switch(index) {
+          case '1':   this.push('dashboard');  break;
+          case '2-1': this.push('postList');   break;
+          case '2-2': this.push('postCreate'); break;
+          case '3-1': this.push('pageList');   break;
+          case '3-2': this.push('pageCreate'); break;
+          case '3-3': this.push('pageSetting'); break;
+          case '4-1': this.push('cateList'); break;
+          case '4-2': this.push('cateCreate'); break;
+          case '5-1': this.push('tagList'); break;
+          case '5-2': this.push('tagCreate'); break;
+          case '6-1': this.push('versionList'); break;
+          case '6-2': this.push('versionCreate'); break;
+          case '7-1': this.push('userList'); break;
+          case '8-1': this.push('optionGeneral'); break;
+          case '8-2': this.push('optionComment'); break;
+          case '8-3': this.push('optionAnalytic'); break;
+          default: this.push('dashboard'); break;
+        }
       }
     }
   }

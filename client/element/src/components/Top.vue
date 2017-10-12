@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="top">
     <el-row class="tac">
       <el-col :span="24">
         <el-menu default-active="1" mode="horizontal" class="el-menu-vertical-demo" :unique-opened="true" theme="dark" @select="handleSelect">

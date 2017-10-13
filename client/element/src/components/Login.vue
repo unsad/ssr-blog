@@ -38,11 +38,16 @@
       onSubmit() {
         Api.login(this.form).then(response => {
           if (response.data.status === 'fail') {
-
+            this.$message({
+              message: '登录失败，请检查账号和密码',
+              type: 'success',
+              duration: 2000,
+              type: 'error'
+            });
           } else if (response.data.status === 'success') {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('username', this.username);
-            this.$notify({
+            this.$message({
               title: '成功',
               message: '登录成功',
               type: 'success',

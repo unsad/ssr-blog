@@ -14,7 +14,7 @@
         Api.logout().then(response => {
           localStorage.removeItem('token');
           localStorage.removeItem('username');
-          this.$notify({
+          this.$message({
             title: '成功',
             message: '登出成功',
             type: 'success',

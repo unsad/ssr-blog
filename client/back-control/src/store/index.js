@@ -53,11 +53,11 @@ store.logout = (conditions, args) => {
 };
 
 store.fetchUpdate = (conditions = {}, args) => {
-  return axios.get(`/proxyPrefix/api/update`, conditions);
+  return axios.get(`/proxyPrefix/api/version`, conditions);
 };
 
 store.deleteUpdate = id => {
-  return axios.delete(`/proxyPrefix/api/update/${id}`);
+  return axios.delete(`/proxyPrefix/api/version/${id}`);
 };
 
 // post CRUD
@@ -141,23 +141,23 @@ store.deleteTag = id => {
 // version CRUD
 
 store.fetchVersion = (conditions = {}, args) => {
-  return axios.get(`${root}/update?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
+  return axios.get(`${root}/version?conditions=${JSON.stringify(conditions)}`).then(response => response.data, err => console.log(err));
 };
 
 store.fetchVersionById = id => {
-  return axios.get(`${root}/update/${id}`).then(response => response.data, err => console.log(err));
+  return axios.get(`${root}/version/${id}`).then(response => response.data, err => console.log(err));
 };
 
 store.newVersion = json => {
-  return axios.post(`${root}/update`, json).then(response => response.data, err => console.log(err));
+  return axios.post(`${root}/version`, json).then(response => response.data, err => console.log(err));
 };
 
 store.patchVersion = (id, json) => {
-  return axios.patch(`${root}/update/${id}`, json).then(response => response.data, err => console.log(err));
+  return axios.patch(`${root}/version/${id}`, json).then(response => response.data, err => console.log(err));
 };
 
 store.deleteVersion = id => {
-  return axios.delete(`${root}/update/${id}`).then(response => response.data, err => console.log(err));
+  return axios.delete(`${root}/version/${id}`).then(response => response.data, err => console.log(err));
 };
 
 // option CRUD

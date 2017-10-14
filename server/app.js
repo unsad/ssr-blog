@@ -43,7 +43,8 @@ Object.keys(models).forEach(value => {
       name: config.defaultAdminName,
       password: config.defaultAdminPassword,
       displayName: config.defaultAdminName,
-      email: ''
+      email: '',
+      imageToken: config.qiniuToken
     });
 
     log.info(`account '${result.name}' with password '${result.password}' is created`);

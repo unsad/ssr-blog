@@ -3,13 +3,14 @@
  */
 module.exports = {
   appName: 'blog',
-  mongoHost: 'mongodb://localhost',
+  mongoHost: 'localhost',
   mongoDataBase: 'blog',
   mongoPort: 27017,
-  redisHost: '',
+  redisHost: 'localhost',
   redisPort: 6390,
   tokenSecret: 'test',
   tokenExpiresIn: 3600,
+  qiniuToken: '',
   defaultAdminName: 'unsad',
   defaultAdminPassword: 'unsad'
 };

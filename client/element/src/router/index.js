@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import createListView from '@/components/views/CreateListView'
+import createEditView from '@/components/views/CreateEditView'
+
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
 import Dashboard from '@/components/Dashboard'
@@ -186,9 +188,18 @@ export default new Router({
         {
           path: 'create/:id?',
           name: 'cateCreate',
-          components: {
-            default: CateCreate
-          }
+          component: createEditView({
+            name: 'cate',
+            model: 'category',
+            items: [
+              {
+                prop: 'name',
+                label: '名称',
+                width: 250
+              }
+            ],
+            query: {}
+          })
         },
       ]
     },
@@ -218,9 +229,18 @@ export default new Router({
         {
           path: 'create/:id?',
           name: 'tagCreate',
-          components: {
-            default: TagCreate
-          }
+          component: createEditView({
+            name: 'tag',
+            model: 'tag',
+            items: [
+              {
+                prop: 'name',
+                label: '名称',
+                width: 250
+              }
+            ],
+            query: {}
+          })
         },
       ]
     },
@@ -260,9 +280,31 @@ export default new Router({
         {
           path: 'create/:id?',
           name: 'versionCreate',
-          components: {
-            default: VersionCreate
-          }
+          component: createEditView({
+            name: 'version',
+            model: 'version',
+            items: [
+              {
+                prop: 'name',
+                label: '名称',
+                default: '',
+                width: 250
+              },
+              {
+                prop: 'version',
+                label: '版本',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'path',
+                label: '链接',
+                default: '',
+                width: 170
+              }
+            ],
+            query: {}
+          })
         },
       ]
     },
@@ -276,9 +318,44 @@ export default new Router({
         {
           path: 'list',
           name: 'userList',
-          components: {
-            default: User
-          }
+          component: createEditView({
+            name: 'user',
+            model: 'user',
+            isPlain: true,
+            items: [
+              {
+                prop: 'name',
+                label: '名称',
+                default: '',
+                width: 250
+              },
+              {
+                prop: 'password',
+                label: '密码',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'displayName',
+                label: '昵称',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'email',
+                label: '邮箱',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'imageToken',
+                label: '七牛Token',
+                default: '',
+                width: 170
+              }
+            ],
+            query: {}
+          })
         }
       ]
     },
@@ -290,25 +367,113 @@ export default new Router({
       },
       children: [
         {
-          path: 'list',
+          path: 'general',
           name: 'optionGeneral',
-          components: {
-            default: OptionGeneral
-          }
+          component: createEditView({
+            name: 'general',
+            model: 'option',
+            isPlain: true,
+            items: [
+              {
+                prop: 'title',
+                label: '网站名称',
+                default: '',
+                width: 250
+              },
+              {
+                prop: 'logoUrl',
+                label: 'logo地址',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'description',
+                label: '站点描述',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'siteUrl',
+                label: '网站地址',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'faviconUrl',
+                label: 'favicon地址',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'keywords',
+                label: '关键词',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'githubUrl',
+                label: 'github地址',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'weiboUrl',
+                label: '微博地址',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'miitbeian',
+                label: '网站备案号',
+                default: '',
+                width: 170
+              }
+            ],
+            query: {}
+          })
         },
         {
-          path: 'create',
+          path: 'comment',
           name: 'optionComment',
-          components: {
-            default: OptionComment
-          }
+          component: createEditView({
+            name: 'comment',
+            model: 'option',
+            isPlain: true,
+            items: [
+              {
+                prop: 'commentType',
+                label: '评论类型',
+                default: '',
+                width: 250
+              },
+              {
+                prop: 'commentName',
+                label: '评论名称',
+                default: '',
+                width: 250
+              }
+            ],
+            query: {}
+          })
+
         },
         {
-          path: 'create',
+          path: 'analytic',
           name: 'optionAnalytic',
-          components: {
-            default: OptionAnalytic
-          }
+          component: createEditView({
+            name: 'analytic',
+            model: 'option',
+            isPlain: true,
+            items: [
+              {
+                prop: 'analyzeCode',
+                label: '统计代码',
+                default: '',
+                width: 250
+              }
+            ],
+            query: {}
+          })
         },
       ]
     },

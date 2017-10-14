@@ -78,6 +78,9 @@
     },
     beforeMount() {
       this.fullPath = this.$route.path.split('/').slice(0, 3).join('/');
+      this.$store.dispatch('FETCH_OPTIONS').then(() => {
+
+      });
     }
   }
 </script>

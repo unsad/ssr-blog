@@ -55,6 +55,7 @@ let user = new Schema({
   name: String,
   displayName: String,
   password: String,
+  imageToken: String,
   email: String,
   createdAt: {type: String, default: ''},
   createdIP: String,

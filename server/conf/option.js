@@ -3,16 +3,18 @@
  */
 module.exports = [
   {
-    'key': 'analyze_code',
+    'key': 'analyzeCode',
     'value': '',
     'desc': '统计代码'
   },
   {
-    'key': 'comment',
-    'value': {
-      'type': 'disqus',
-      'name': ''
-    },
+    'key': 'commentType',
+    'value': 'disqus',
+    'desc': '评论类型'
+  },
+  {
+    'key': 'commentName',
+    'value': '',
     'desc': '评论类型'
   },
   {
@@ -46,22 +48,22 @@ module.exports = [
     'desc': '网站描述'
   },
   {
-    'key': 'favicon_url',
+    'key': 'faviconUrl',
     'value': '/static/favicon/ico',
     'desc': 'favicon'
   },
   {
-    'key': 'github_blog',
+    'key': 'githubBlog',
     'value': '',
     'desc': 'GitHub blog地址'
   },
   {
-    'key': 'github_url',
+    'key': 'githubUrl',
     'value': '',
     'desc': 'Github地址'
   },
   {
-    'key': 'image_upload',
+    'key': 'imageUpload',
     'value': '',
     'desc': '图片存放地址'
   },
@@ -71,7 +73,7 @@ module.exports = [
     'desc': '网站关键字'
   },
   {
-    'key': 'logo_url',
+    'key': 'logoUrl',
     'value': '/static/logo.png',
     'desc': 'logo地址'
   },
@@ -81,17 +83,17 @@ module.exports = [
     'desc': '网站备案号'
   },
   {
-    'key': 'num_per_page',
+    'key': 'numPerPage',
     'value': '',
     'desc': '文章一页显示条数'
   },
   {
-    'key': 'password_salt',
+    'key': 'passwordSalt',
     'value': '',
     'desc': '密码加盐'
   },
   {
-    'key': 'site_url',
+    'key': 'siteUrl',
     'value': '',
     'desc': '网站地址'
   },
@@ -106,12 +108,12 @@ module.exports = [
     'desc': '网站标题'
   },
   {
-    'key': 'twitter_url',
+    'key': 'weiboUrl',
     'value': '',
     'desc': '微博地址'
   },
   {
-    'key': 'two_factor_auth',
+    'key': 'twoFactorAuth',
     'value': '',
     'desc': '是否开启两步验证'
   }

@@ -2,7 +2,7 @@ import ItemList from '../comtainers/List.vue';
 
 export default function (options) {
   return {
-    name: `${options.name}-stories-view`,
+    name: `${options.name}-list-view`,
     asyncData({store}) {
       return store.dispatch('FETCH_LIST', options);
     },

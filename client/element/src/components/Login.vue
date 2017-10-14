@@ -4,7 +4,7 @@
       <el-col :span="6">
         <div class="grid-content bg-purple-light">
           <el-form label-position="right" ref="form" :model="form" label-width="40px">
-            <el-form-item>Blog</el-form-item>
+            <el-form-item>{{title}}</el-form-item>
             <el-form-item label="账号">
               <el-input v-model="form.name"></el-input>
             </el-form-item>
@@ -59,8 +59,8 @@
       }
     },
     mounted() {
-      Api.fetchOption({key: 'title'}).then(result => {
-        this.title = result[0].value || '';
+      this.$store.dispatch('FETCH_OPTIONS').then(result => {
+        this.title = this.$store.state.siteInfo['title'].value || '';
       });
     }
   }

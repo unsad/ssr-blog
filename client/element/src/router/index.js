@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import createListView from '@/components/views/CreateListView'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
 import Dashboard from '@/components/Dashboard'
+import Info from '@/components/Info'
 import PostList from '@/components/pages/PostList'
 import PostCreate from '@/components/pages/PostCreate'
 import PageList from '@/components/pages/PageList'
@@ -47,7 +49,16 @@ export default new Router({
       name: 'dashboard',
       components: {
         default: Dashboard
-      }
+      },
+      children: [
+        {
+          path: '/',
+          name: 'info',
+          components: {
+            default: Info
+          }
+        }
+      ]
     },
     {
       path: '/post',
@@ -59,12 +70,36 @@ export default new Router({
         {
           path: 'list',
           name: 'postList',
-          components: {
-            default: PostList
-          }
+          component: createListView({
+            name: 'post',
+            model: 'post',
+            items: [
+              {
+                prop: 'title',
+                label: '标题',
+                width: 250
+              },
+              {
+                prop: 'createdAt',
+                label: '创建日期',
+                width: 170
+              },
+              {
+                prop: 'updatedAt',
+                label: '修改日期',
+                width: 170
+              }
+            ],
+            query: {
+              conditions: {
+                type: 0
+              },
+              sort: 1
+            }
+          })
         },
         {
-          path: 'create',
+          path: 'create/:id?',
           name: 'postCreate',
           components: {
             default: PostCreate
@@ -82,12 +117,35 @@ export default new Router({
         {
           path: 'list',
           name: 'pageList',
-          components: {
-            default: PageList
-          }
+          component: createListView({
+            name: 'page',
+            model: 'post',
+            items: [
+              {
+                prop: 'title',
+                label: '标题',
+                width: 250
+              },
+              {
+                prop: 'createdAt',
+                label: '创建日期',
+                width: 170
+              },
+              {
+                prop: 'updatedAt',
+                label: '修改日期',
+                width: 170
+              }
+            ],
+            query: {
+              conditions: {
+                type: 1
+              }
+            }
+          })
         },
         {
-          path: 'create',
+          path: 'create/:id?',
           name: 'pageCreate',
           components: {
             default: PageCreate
@@ -112,12 +170,21 @@ export default new Router({
         {
           path: 'list',
           name: 'cateList',
-          components: {
-            default: CateList
-          }
+          component: createListView({
+            name: 'cate',
+            model: 'category',
+            items: [
+              {
+                prop: 'name',
+                label: '名称',
+                width: 250
+              }
+            ],
+            query: {}
+          })
         },
         {
-          path: 'create',
+          path: 'create/:id?',
           name: 'cateCreate',
           components: {
             default: CateCreate
@@ -135,12 +202,21 @@ export default new Router({
         {
           path: 'list',
           name: 'tagList',
-          components: {
-            default: TagList
-          }
+          component: createListView({
+            name: 'tag',
+            model: 'tag',
+            items: [
+              {
+                prop: 'name',
+                label: '名称',
+                width: 250
+              }
+            ],
+            query: {}
+          })
         },
         {
-          path: 'create',
+          path: 'create/:id?',
           name: 'tagCreate',
           components: {
             default: TagCreate
@@ -158,12 +234,31 @@ export default new Router({
         {
           path: 'list',
           name: 'versionList',
-          components: {
-            default: VersionList
-          }
+          component: createListView({
+            name: 'version',
+            model: 'version',
+            items: [
+              {
+                prop: 'name',
+                label: '名称',
+                width: 250
+              },
+              {
+                prop: 'version',
+                label: '版本',
+                width: 170
+              },
+              {
+                prop: 'path',
+                label: '链接',
+                width: 170
+              }
+            ],
+            query: {}
+          })
         },
         {
-          path: 'create',
+          path: 'create/:id?',
           name: 'versionCreate',
           components: {
             default: VersionCreate

@@ -1,12 +1,65 @@
 <template>
-  <div>
+  <el-table :data="list" v-loading="isLoading" border style="width: 100%">
+    <el-table-column v-for="item of options.items" :prop="item.prop" :label="item.label" :width="item.width">
 
-  </div>
+    </el-table-column>
+    <el-table-column v-if="isPost" prop="category" label="分类" width="150" inline-template>
+      <el-tag v-if="row.category" :type="'primary'" close-transition>
+        {{row.category}}
+      </el-tag>
+    </el-table-column>
+    <el-table-column v-if="isPost" prop="tags" label="标签" width="200" :filters="filters" :filter-method="filterTag" inline-template>
+      <el-tag v-for="tag of row.tags" :type="0 ? 'primary' : 'success'" close-transition>{{tag}}</el-tag>
+    </el-table-column>
+    <el-table-column inline-template :context="_self" label="操作" width="150">
+      <span>
+        <el-button @click="handleClick(row)" type="info" size="small">编辑</el-button>
+        <el-button type="danger" size="small">删除</el-button>
+      </span>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>
   export default {
-    name: ''
+    name: 'list',
+    props: ['options'],
+    data() {
+      let isPost = this.options.name === 'post';
+      let isPage = this.options.name === 'page';
+      return {
+        isPost,
+        isPage,
+        isLoading: true
+      }
+    },
+    computed: {
+      list() {
+        return this.$store.state.list
+      },
+      filters() {
+        if (!this.isPost && !this.isPage) return [];
+        let obj = this.list.reduce((prev, value) => {
+          value.tags.forEach(tag => prev[tag] = {text: tag, value: tag});
+        }, {});
+        return Object.keys(obj).map(value => obj[value]);
+      }
+    },
+    methods: {
+      filterTag(value, row) {
+        return row.tags.indexOf(value) !== -1;
+      },
+      handleClick(row) {
+        this.$router.push({
+          path: `/${this.options.name}/create/${row._id}`
+        });
+      },
+    },
+    created() {
+      this.$store.dispatch('FETCH_LIST', this.options).then(() => {
+        this.isLoading = false;
+      });
+    }
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">

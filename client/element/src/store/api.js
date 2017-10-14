@@ -61,6 +61,10 @@ store.deleteUpdate = id => {
 };
 
 // post CRUD
+store.fetchList = (model, query) => {
+  let target = `${root}/${model}`;
+  return axios.get(target, {params: query}).then(response => response.data, err => console.log(err));
+};
 
 store.fetchBlog = (conditions = {}, args) => {
   let target = blogAPI + `?conditions=${JSON.stringify(conditions)}&sort=1`;

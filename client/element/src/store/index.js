@@ -54,7 +54,7 @@ const store = new Vuex.Store({
       return api.post(model, form)
     } else if (model === 'user' || model === 'post') {
       let {_id: id} = form;
-      if (typeof id !m== 'undefined') {
+      if (typeof id !== 'undefined') {
         delete form._id;
         delete form.__v;
         return api.patchByID(model, id, form);

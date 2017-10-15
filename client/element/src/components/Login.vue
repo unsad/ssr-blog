@@ -55,7 +55,7 @@
             });
             this.$router.push({path: '/dashboard'});
           }
-        });
+        }).catch(err => console.error(err));
       }
     },
     mounted() {

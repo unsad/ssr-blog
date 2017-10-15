@@ -30,15 +30,13 @@
     },
     methods: {
       handleSelect(index, indexPath) {
-        if (index === '1-2') {
+        if (index === '1-1') {
           this.$router.push({
-            path: '/admin/logout'
+            name: 'userEdit'
           });
-        } else if (index === '1-1') {
-          this.$notify.info({
-            title: '提示',
-            message: '功能开发中',
-            duration: 2000
+        } else if (index === '1-2') {
+          this.$router.push({
+            name: 'logout'
           });
         }
       }

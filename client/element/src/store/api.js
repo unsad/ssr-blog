@@ -34,26 +34,26 @@ store.logout = (conditions, args) => {
 
 store.fetchList = (model, query) => {
   let target = `${root}/${model}`;
-  return axios.get(target, {params: query}).then(response => response.data, err => console.log(err));
+  return axios.get(target, {params: query}).then(response => response.data);
 };
 
 store.fetchByID = (model, id, query) => {
   let target = `${root}/${model}/${id}`;
-  return axios.get(target, {params: query}).then(response => response.data, err => console.log(err));
+  return axios.get(target, {params: query}).then(response => response.data);
 };
 
 store.patchByID = (model, id, form) => {
   let target = `${root}/${model}/${id}`;
-  return axios.patch(target, form).then(response => response.data, err => console.log(err));
+  return axios.patch(target, form).then(response => response.data);
 };
 
 store.post = (model, form) => {
   let target = `${root}/${model}`;
-  return axios.post(target, form).then(response => response.data, err => console.log(err));
+  return axios.post(target, form).then(response => response.data);
 };
 
 store.deleteByID = (model ,id) => {
   let target = `${root}/${model}/${id}`;
-  return axios.delete(target).then(response => response.data, err => console.log(err));
+  return axios.delete(target).then(response => response.data);
 };
 

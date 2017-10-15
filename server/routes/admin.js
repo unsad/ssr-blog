@@ -25,14 +25,14 @@ exports.login = async (ctx, next) => {
     } else {
       return ctx.body = {
         status: 'fail',
-        description: 'Get token failed.Check name and password'
+        description: 'Get token failed.Check the password'
       }
     }
   } catch (_error) {
     error = _error;
     return ctx.body = {
       status: 'fail',
-      description: error
+      description: 'Get token failed.Check the name'
     }
   }
 };

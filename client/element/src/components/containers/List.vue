@@ -59,13 +59,13 @@
           id: _id
         }, this.options)).then(() => {
           this.$store.state.list.splice(index, 1);
-        })
+        }).catch(err => console.log(err))
       }
     },
     created() {
       this.$store.dispatch('FETCH_LIST', this.options).then(() => {
         this.isLoading = false;
-      });
+      }).catch(err => console.error(err));
     }
   }
 </script>

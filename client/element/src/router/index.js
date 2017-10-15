@@ -440,8 +440,8 @@ export default new Router({
       },
       children: [
         {
-          path: 'list',
-          name: 'userList',
+          path: 'edit',
+          name: 'userEdit',
           component: createEditView({
             name: 'user',
             model: 'user',

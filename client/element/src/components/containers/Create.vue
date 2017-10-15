@@ -1,12 +1,14 @@
 <template>
-  <el-form ref="form" :model="form label-width=120px">
-    <el-form-item v-for="item of options.items" :label="item.label">
+  <div>
+  <el-form ref="form" :model="form" label-width=120px">
+    <el-form-item v-for="item of options.items" :key="index" :label="item.label">
       <el-input v-model="form[item.prop]"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click.native="onSubmit">提交</el-button>
     </el-form-item>
   </el-form>
+  </div>
 </template>
 
 <script>

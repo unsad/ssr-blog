@@ -48,7 +48,6 @@
         }
         return response;
       }, error => Promise.reject(error));
-
     }
   }
 </script>

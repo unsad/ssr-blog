@@ -5,7 +5,7 @@ import ItemList from '../containers/Create.vue'
 
 export default function(options) {
   return {
-    name: `${options.name-create-view}`,
+    name: `${options.name}-create-view`,
     asyncData({store}) {
       return store.dispatch('FETCH_LIST', options);
     },

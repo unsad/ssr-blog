@@ -52,7 +52,7 @@ store.post = (model, form) => {
   return axios.post(target, form).then(response => response.data);
 };
 
-store.deleteByID = (model ,id) => {
+store.deleteByID = (model, id) => {
   let target = `${root}/${model}/${id}`;
   return axios.delete(target).then(response => response.data);
 };

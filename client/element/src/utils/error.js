@@ -2,7 +2,7 @@
  * Created by unsad on 2017/10/15.
  */
 export const getChineseDesc = desc => {
-  switch(desc) {
+  switch (desc) {
     case 'Token not found':
       return '请求失败，请确认您已登录';
     case 'Get token failed.Check the password':

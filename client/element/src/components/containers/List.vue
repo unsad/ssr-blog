@@ -1,6 +1,6 @@
 <template>
   <el-table :data="list" v-loading="isLoading" border style="width: 100%">
-    <el-table-column v-for="item of options.items" :prop="item.prop" :label="item.label" :width="item.width">
+    <el-table-column v-for="(item, index) of options.items" :key="index" :prop="item.prop" :label="item.label" :width="item.width">
 
     </el-table-column>
     <el-table-column v-if="isPost" prop="category" label="分类" width="150" inline-template>
@@ -9,7 +9,7 @@
       </el-tag>
     </el-table-column>
     <el-table-column v-if="isPost" prop="tags" label="标签" width="200" :filters="filters" :filter-method="filterTag" inline-template>
-      <el-tag v-for="tag of row.tags" :type="0 ? 'primary' : 'success'" close-transition>{{tag}}</el-tag>
+      <el-tag v-for="(tag, index) of row.tags" :key="index" :type="0 ? 'primary' : 'success'" close-transition>{{tag}}</el-tag>
     </el-table-column>
     <el-table-column inline-template :context="_self" label="操作" width="150">
       <span>
@@ -40,7 +40,10 @@
       filters() {
         if (!this.isPost && !this.isPage) return [];
         let obj = this.list.reduce((prev, value) => {
-          Array.isArray(value.tags) && value.tags.forEach(tag => prev[tag] = {text: tag, value: tag});
+          Array.isArray(value.tags) && value.tags.forEach(tag => {
+            prev[tag] = {text: tag, value: tag};
+          });
+          return prev;
         }, {});
         return Object.keys(obj).map(value => obj[value]);
       }

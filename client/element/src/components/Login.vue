@@ -18,6 +18,7 @@
         </div>
       </el-col>
     </el-row>
+  </div>
 </template>
 
 <script>
@@ -40,7 +41,6 @@
           if (response.data.status === 'fail') {
             this.$message({
               message: '登录失败，请检查账号和密码',
-              type: 'success',
               duration: 2000,
               type: 'error'
             });

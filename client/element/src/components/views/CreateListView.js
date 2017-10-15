@@ -1,4 +1,4 @@
-import ItemList from '../comtainers/List.vue';
+import ItemList from '../containers/List.vue';
 
 export default function (options) {
   return {

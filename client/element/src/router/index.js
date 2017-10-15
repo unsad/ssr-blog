@@ -1,19 +1,17 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-import createListView from '@/components/views/CreateListView'
-import createEditView from '@/components/views/CreateEditView'
-import createMarkdownView from '@/components/views/CreateMarkdownView'
+import createListView from '@/components/views/CreateListView';
+import createEditView from '@/components/views/CreateEditView';
+import createMarkdownView from '@/components/views/CreateMarkdownView';
 
-import Login from '@/components/Login'
-import Logout from '@/components/Logout'
-import Dashboard from '@/components/Dashboard'
-import Info from '@/components/Info'
+import Login from '@/components/Login';
+import Logout from '@/components/Logout';
+import Dashboard from '@/components/Dashboard';
+import Info from '@/components/pages/Info';
+import PageSetting from '@/components/pages/PageSetting';
 
-import PageSetting from '@/components/pages/PageSetting'
-
-
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
@@ -169,7 +167,7 @@ export default new Router({
               }
             }
           })
-        },
+        }
       ]
     },
     {
@@ -283,7 +281,7 @@ export default new Router({
           components: {
             default: PageSetting
           }
-        },
+        }
       ]
     },
     {
@@ -324,7 +322,7 @@ export default new Router({
             ],
             query: {}
           })
-        },
+        }
       ]
     },
     {
@@ -365,7 +363,7 @@ export default new Router({
             ],
             query: {}
           })
-        },
+        }
       ]
     },
     {
@@ -429,7 +427,7 @@ export default new Router({
             ],
             query: {}
           })
-        },
+        }
       ]
     },
     {
@@ -598,7 +596,7 @@ export default new Router({
             ],
             query: {}
           })
-        },
+        }
       ]
     },
     {

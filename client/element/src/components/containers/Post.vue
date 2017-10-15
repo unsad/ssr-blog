@@ -2,7 +2,7 @@
   <el-form ref="form" v-loading="isLoading" :model="form" label-width="80px">
     <el-row :gutter="0">
       <el-col :span="18">
-        <el-form-item v-for="(item, index) in prevItems" :label="item.label">
+        <el-form-item v-for="(item, index) in prevItems" :key="index" :label="item.label">
           <el-input v-if="item.type === 'input'" v-model="form[item.prop]"></el-input>
           <markdown v-if="item.type === 'markdown'" v-model="form[item.prop]"></markdown>
           <el-radio v-if="item.type === 'radio'" v-model="form[item.prop]" :label="item.label"></el-radio>
@@ -13,7 +13,7 @@
           <el-button :class="{ 'margin-left': true }" type="info" @click.native="onSubmit">保存文章</el-button>
           <el-button type="success" @click.native="onSubmit">提交文章</el-button>
         </el-form-item>
-        <el-form-item v-for="(item, index) in nextItems" :label="item.label">
+        <el-form-item v-for="(item, index) in nextItems" :label="item.label" :key="index">
 
           <el-date-picker
             v-if="item.type === 'date-picker'"
@@ -23,7 +23,8 @@
 
           <el-select v-if="item.type === 'select'">
             <el-option
-              v-for="tag in tags"
+              v-for="(tag, index) in tags"
+              :key="index"
               @click.native="handleAddTag(tag)"
               :label="tag"
               :value="tag">
@@ -32,7 +33,7 @@
           <el-tag v-if="item.type === 'select'" v-for="(tag, index) in form.tags" @close="handleDelete(index)" type="primary" :closable="true" :key="tag">{{tag}}</el-tag>
 
           <el-radio-group v-if="item.type === 'radio'" v-model="form[item.prop]">
-            <el-radio v-for="(cate, index) in cates" :class="{ 'margin-left': index === 0 }" :label="cate">{{cate}}</el-radio>
+            <el-radio v-for="(cate, index) in cates" :key="index" :class="{ 'margin-left': index === 0 }" :label="cate">{{cate}}</el-radio>
           </el-radio-group>
 
           <el-switch v-if="item.type === 'switch'" v-model="form[item.prop]"></el-switch>
@@ -56,13 +57,11 @@
       let isPost = this.options.name === 'post';
       let isPage = this.options.name === 'page';
       let id = typeof this.$route.params.id === 'undefined' ? -1 : this.$route.params.id;
-      let form = this.options.items.reduce((prev, curr)=>{
-        prev[curr.prop] = Array.isArray(curr.default) ?
-          curr.default.map(value => value) :
-          curr.default;
+      let form = this.options.items.reduce((prev, curr) => {
+        prev[curr.prop] = Array.isArray(curr.default) ? curr.default.map(value => value) : curr.default;
         return prev;
       }, {});
-      let type = typeof form.type === 'undefined' ? isPost ? "0" : "1" : form.type;
+      let type = typeof form.type === 'undefined' ? isPost ? '0' : '1' : form.type;
       form.type = type;
       return {
         isPost,
@@ -78,8 +77,9 @@
     computed: {
       splitIndex() {
         return this.options.items.reduce((prev, curr, index) => {
-          if (curr.type === 'split')
+          if (curr.type === 'split') {
             return index;
+          }
           return prev
         }, -1)
       },
@@ -94,7 +94,7 @@
       onSubmit() {
         this.$store.dispatch('POST', {
           model: this.options.model,
-          form: this.form,
+          form: this.form
         }).then(response => {
           this.$message({
             message: '文章已成功提交',
@@ -130,7 +130,7 @@
         model: 'tag',
         query: {}
       });
-      Promise.all([fetchCate, fetchTag]).then(([cates, tags])=>{
+      Promise.all([fetchCate, fetchTag]).then(([cates, tags]) => {
         this.cates = cates.map(value => value.name);
         this.tags = tags.map(value => value.name);
       }).catch(err => console.log(err));

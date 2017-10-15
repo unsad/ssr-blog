@@ -9,22 +9,6 @@ const perPage = 10;
 
 const store = {};
 
-axios.interceptors.request.use(config => {
-  const token = localStorage.getItem('token');
-  if (config.method === 'get' && config.url.indexOf('/proxyPrefix/api/user') === -1) return config;
-  if (token !== null && token !== 'undefined') {
-    config.headers['authorization'] = token;
-  }
-  return config;
-}, error => Promise.reject(error));
-
-axios.interceptors.response.use(response => {
-  if (response.data && response.data.status && response.data.status === 'fail') {
-    console.log(response.data.description);
-  }
-  return response;
-}, error => Promise.reject(error));
-
 export default store;
 
 function isObject(obj) {
@@ -38,6 +22,7 @@ function convertObjectToArray(args) {
     return temp;
   }) : [];
 }
+store.axios = axios;
 
 store.login = (conditions, args) => {
   return axios.post(`/proxyPrefix/admin/login`, conditions);

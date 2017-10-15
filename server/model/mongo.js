@@ -24,11 +24,11 @@ let post = new Schema({
   summary: {type: String},
   markdownContent: {type: String},
   content: {type: String},
-  allowComment: {type: Number, default: 1},
+  allowComment: {type: Boolean, default: true},
   createdAt: {type: String, default: ''},
   updateAt: {type: String, default: ''},
   // 1为公开，0为不公开
-  isPubilc: {type: Number, default: 1},
+  isPubilc: {type: Boolean, default: true},
   commentNum: Number,
   options: Object,
   category: String,

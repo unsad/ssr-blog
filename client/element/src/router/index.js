@@ -93,22 +93,73 @@ export default new Router({
           path: 'create/:id?',
           name: 'postCreate',
           component: createMarkdownView({
-            name: 'page',
+            name: 'post',
             model: 'post',
             items: [
               {
                 prop: 'title',
                 label: '标题',
+                type: 'input',
+                default: '',
                 width: 250
+              },
+              {
+                prop: 'pathName',
+                label: '路径',
+                type: 'input',
+                default: '',
+                width: 250
+              },
+              {
+                prop: 'markdownContent',
+                label: '内容',
+                type: 'maekdown',
+                default: '',
+                width: 170
+              },
+              {
+                type: 'split'
               },
               {
                 prop: 'createdAt',
                 label: '创建日期',
+                type: 'date-picker',
+                default: '',
                 width: 170
               },
               {
                 prop: 'updatedAt',
                 label: '修改日期',
+                type: 'date-picker',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'tags',
+                label: '标签',
+                type: 'select',
+                default: [],
+                width: 170
+              },
+              {
+                prop: 'category',
+                label: '分类',
+                type: 'radio',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'isPublic',
+                label: '是否公开',
+                type: 'switch',
+                default: true,
+                width: 170
+              },
+              {
+                prop: 'allowComment',
+                label: '允许评论',
+                type: 'switch',
+                default: true,
                 width: 170
               }
             ],
@@ -161,30 +212,68 @@ export default new Router({
         {
           path: 'create/:id?',
           name: 'pageCreate',
-          component: createListView({
+          component: createMarkdownView({
             name: 'page',
             model: 'post',
             items: [
               {
                 prop: 'title',
                 label: '标题',
+                type: 'input',
+                default: '',
                 width: 250
+              },
+              {
+                prop: 'pathName',
+                label: '路径',
+                type: 'input',
+                default: '',
+                width: 250
+              },
+              {
+                prop: 'markdownContent',
+                label: '内容',
+                type: 'markdown',
+                default: '',
+                width: 170
+              },
+              {
+                type: 'split'
               },
               {
                 prop: 'createdAt',
                 label: '创建日期',
+                type: 'date-picker',
+                default: '',
                 width: 170
               },
               {
                 prop: 'updatedAt',
                 label: '修改日期',
+                type: 'date-picker',
+                default: '',
+                width: 170
+              },
+              {
+                prop: 'isPublic',
+                label: '是否公开',
+                type: 'switch',
+                default: true,
+                width: 170
+              },
+              {
+                prop: 'allowComment',
+                label: '允许评论',
+                type: 'switch',
+                default: true,
                 width: 170
               }
             ],
             query: {
               conditions: {
                 type: 1
-              }
+              },
+              sort: 1
             }
           })
         },

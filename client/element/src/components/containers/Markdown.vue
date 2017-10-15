@@ -5,18 +5,15 @@
       <el-menu-item index="2">斜体</el-menu-item>
       <el-menu-item index="3">链接</el-menu-item>
       <el-menu-item index="4">引用</el-menu-item>
-      <el-menu-item index="5"></el-menu-item>
-      <el-menu-item index="6"></el-menu-item>
-      <el-menu-item index="7"></el-menu-item>
-      <el-menu-item index="8"></el-menu-item>
-      <el-menu-item index="9"></el-menu-item>
-      <el-menu-item index="10"></el-menu-item>
+      <el-menu-item index="5">代码段</el-menu-item>
+      <el-menu-item index="6">图片</el-menu-item>
+      <el-menu-item index="7">插入摘要</el-menu-item>
       <el-submenu index="11">
-        <template slot="title">切换模式</template>
-        <el-menu-item index="11-1">编辑模式</el-menu-item>
-        <el-menu-item index="11-2">分屏模式</el-menu-item>
-        <el-menu-item index="11-3">预览模式</el-menu-item>
-        <el-menu-item index="11-4">全屏模式</el-menu-item>
+        <template slot="title">{{labels[mode]}}</template>
+        <el-menu-item index="11-1">labels['edit']</el-menu-item>
+        <el-menu-item index="11-2">labels['split']</el-menu-item>
+        <el-menu-item index="11-3">labels['preview']</el-menu-item>
+        <el-menu-item index="11-4">labels['full']</el-menu-item>
       </el-submenu>
     </el-menu>
     <div class="md-editor" :class="{
@@ -24,26 +21,40 @@
       'preview': mode === 'preview',
       'split': mode === 'split'
     }">
-      <textarea ref="markdown" :value="input" @input="handleInput"></textarea>
+      <textarea ref="markdown" :value="value" @input="handleInput"></textarea>
       <div class="md-preview markdown" v-html="compileMarkdown"></div>
     </div>
   </div>
 </template>
 
 <script>
-  import marked from '../../utils/marked'
+  import marked from 'marked'
+  import hljs from 'highlight.js'
   import _ from 'lodash'
+
+  marked.setOptions({
+    highlight: function(code) {
+      return hljs.hightlightAuto(code).value
+    }
+  });
+
   export default {
     name: 'markdown',
+    props: ['value'],
     data() {
       return {
-        input: '# Hello, my markdown editor',
-        mode: 'split'
+        labels: {
+          'edit': '编辑模式',
+          'split': '分屏模式',
+          'preview': '预览模式',
+          'full': '全屏模式'
+        },
+        mode: 'split' // ['edit', 'split', 'shrink']
       }
     },
     computed: {
       compiledMarkdown() {
-        return marked(this.input, {sanitize: true});
+        return marked(this.value.replace(/<!--more--/g, '=====> 文章摘要结束'), {sanitize: true});
       }
     },
     methods: {
@@ -56,10 +67,7 @@
             case '4': this._blockquoteText() ; break;
             case '5': this._codeText() ; break;
             case '6': this._insertMore() ; break;
-            case '7': this._listOlText() ; break;
-            case '8': this._listUlText() ; break;
-            case '9': this._headerText() ; break;
-            case '10': this._insertMore() ; break;
+            case '7': this._insertMore() ; break;
           }
         } else if (keyPath.length === 2) {
           switch (key) {
@@ -79,17 +87,17 @@
         let textControl = this.$refs.markdown;
         const start = textControl.selectionStart;
         const end = textControl.selectionEnd;
-        const origin = this.input;
+        const origin = this.value;
         if (start !== end) {
           const exist = origin.slice(start, end);
           text = text.slice(0, preStart) + exist + text.slice(preEnd);
           preEnd = preStart + exist.length;
         }
         let input = origin.slice(0, start) + text + origin.slice(end);
-        this.input = input;
+        this.$emit('input', input);
       },
       _insertMore() {
-        this._preInputText('\n<!--more-->', 12, 12);
+        this._preInputText('<!--more-->', 12, 12);
       },
       _boldText() {
         this._preInputText('**加粗文字**', 2, 6);
@@ -105,15 +113,6 @@
       },
       _codeText() {
         this._preInputText('\n```\ncode block\n```',5, 15);
-      },
-      _listUlText() {
-        this._preInputText('- 无序列表项0\n- 无序列表项1', 2, 8);
-      },
-      _listOlText() {
-        this._preInputText('1. 有序列表项0\n2. 有序列表项1', 3, 9);
-      },
-      _headerText() {
-        this._preInputText('## 标题', 3, 5);
       }
     }
   }

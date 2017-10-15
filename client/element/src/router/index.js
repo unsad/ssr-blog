@@ -3,13 +3,13 @@ import Router from 'vue-router'
 
 import createListView from '@/components/views/CreateListView'
 import createEditView from '@/components/views/CreateEditView'
+import createMarkdownView from '@/components/views/CreateMarkdownView'
 
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
 import Dashboard from '@/components/Dashboard'
 import Info from '@/components/Info'
-import PostCreate from '@/components/pages/PostCreate'
-import PageCreate from '@/components/pages/PageCreate'
+
 import PageSetting from '@/components/pages/PageSetting'
 
 
@@ -92,9 +92,32 @@ export default new Router({
         {
           path: 'create/:id?',
           name: 'postCreate',
-          components: {
-            default: PostCreate
-          }
+          component: createMarkdownView({
+            name: 'page',
+            model: 'post',
+            items: [
+              {
+                prop: 'title',
+                label: '标题',
+                width: 250
+              },
+              {
+                prop: 'createdAt',
+                label: '创建日期',
+                width: 170
+              },
+              {
+                prop: 'updatedAt',
+                label: '修改日期',
+                width: 170
+              }
+            ],
+            query: {
+              conditions: {
+                type: 1
+              }
+            }
+          })
         },
       ]
     },
@@ -138,9 +161,32 @@ export default new Router({
         {
           path: 'create/:id?',
           name: 'pageCreate',
-          components: {
-            default: PageCreate
-          }
+          component: createListView({
+            name: 'page',
+            model: 'post',
+            items: [
+              {
+                prop: 'title',
+                label: '标题',
+                width: 250
+              },
+              {
+                prop: 'createdAt',
+                label: '创建日期',
+                width: 170
+              },
+              {
+                prop: 'updatedAt',
+                label: '修改日期',
+                width: 170
+              }
+            ],
+            query: {
+              conditions: {
+                type: 1
+              }
+            }
+          })
         },
         {
           path: 'setting',

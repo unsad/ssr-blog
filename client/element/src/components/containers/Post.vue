@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'pageCreate'
+    name: ''
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">

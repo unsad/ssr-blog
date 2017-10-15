@@ -8,21 +8,10 @@ import Login from '@/components/Login'
 import Logout from '@/components/Logout'
 import Dashboard from '@/components/Dashboard'
 import Info from '@/components/Info'
-import PostList from '@/components/pages/PostList'
 import PostCreate from '@/components/pages/PostCreate'
-import PageList from '@/components/pages/PageList'
 import PageCreate from '@/components/pages/PageCreate'
 import PageSetting from '@/components/pages/PageSetting'
-import CateList from '@/components/pages/CateList'
-import CateCreate from '@/components/pages/CateCreate'
-import TagList from '@/components/pages/TagList'
-import TagCreate from '@/components/pages/TagCreate'
-import VersionList from '@/components/pages/VersionList'
-import VersionCreate from '@/components/pages/VersionCreate'
-import User from '@/components/pages/User'
-import OptionGeneral from '@/components/pages/OptionGeneral'
-import OptionComment from '@/components/pages/OptionComment'
-import OptionAnalytic from '@/components/pages/OptionAnalytic'
+
 
 Vue.use(Router)
 

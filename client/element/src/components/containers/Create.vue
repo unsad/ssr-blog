@@ -70,7 +70,6 @@
           id: this.$route.params.id
         }, this.options)).then(() => {
           this.form = Object.assign({}, this.$store.state.curr);
-          console.log(this.$store.state.curr);
           this.isLoading = false;
         })
       } else {

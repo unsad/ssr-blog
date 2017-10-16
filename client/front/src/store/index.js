@@ -13,9 +13,7 @@ const prefix = `${host}/api`;
 const aboutAPI = `${host}/api/post?title=关于`;
 const blogAPI = `${host}/api/post`;
 const tagAPI = `${host}/api/tag`;
-const postTagAPI = `${host}/api/postTag`;
-const postCateAPI = `${host}/api/postCategory`;
-const categoryAPI = `${host}/api/category`;
+const menuAPI = `${host}/api/menu`;
 const perPage = 10;
 
 const store = {};
@@ -66,8 +64,8 @@ store.fetchTags = () => {
   return axios.get(tagAPI).then(response => response.data, err => console.log(err));
 };
 
-store.fetchPostTags = () => {
-  return axios.get(postTagAPI).then(response => response.data, err => console.log(err));
+store.fetchMenu = () => {
+  return axios.get(menuAPI).then(response => response.data, err => console.log(err));
 };
 
 // option CRUD

@@ -18,6 +18,7 @@ export function createStore() {
       prev: {},
       next: {},
       page: {},
+      menu: [],
       siteInfo: {
         github_url: {
           value: ''
@@ -37,7 +38,8 @@ export function createStore() {
           commit('SET_BLOG', {blog});
           let first = api.fetchPost({
             _id: {$lt: blog._id},
-            type: 0
+            type: 0,
+            isPublic: true
           }, {
             sort: 1,
             limit: 1,
@@ -56,7 +58,8 @@ export function createStore() {
           });
           let second = api.fetchPost({
             _id: {$gt: blog._id},
-            type: 0
+            type: 0,
+            isPublic: true
           }, {
             limit: 1,
             select: {
@@ -124,6 +127,11 @@ export function createStore() {
           commit('SET_ACHIEVE', {sortedItem});
         });
       },
+      FETCH_MENU: ({commit, state}) => {
+        return api.fetchMenu().then(obj => {
+          commit('SET_MENU', { obj });
+        });
+      },
       FETCH_OPTIONS: ({commit, state}) => {
         return api.fetchOption().then(optionArr => {
           let obj = optionArr.reduce((prev, curr) => {
@@ -132,6 +140,9 @@ export function createStore() {
           }, {});
           commit('SET_OPTIONS', {obj});
         });
+      },
+      SET_MENU: (state, { obj }) => {
+        Vue.set(state, 'menu', obj);
       }
     },
     mutations: {
@@ -175,6 +186,10 @@ export function createStore() {
       achieves(state, getters) {
         const {achieves} = state;
         return achieves;
+      },
+      menu(state, getters) {
+        const { menu } = state;
+        return menu;
       }
     }
   });

@@ -10,7 +10,9 @@ module.exports = {
   redisPort: 6390,
   tokenSecret: 'test',
   tokenExpiresIn: 3600,
-  qiniuToken: '',
+  qiniuAccessKey: '',
+  qiniuSecretKey: '',
+  qiniuBucketName: '',
   defaultAdminName: 'unsad',
   defaultAdminPassword: 'unsad'
 };

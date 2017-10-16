@@ -51,16 +51,17 @@ let option = new Schema({
   desc: String
 });
 
+let menu = new Schema({
+  label: String,
+  url: String,
+  option: Schema.Types.Mixed
+});
+
 let user = new Schema({
   name: String,
   displayName: String,
   password: String,
-  imageToken: String,
-  email: String,
-  createdAt: {type: String, default: ''},
-  createdIP: String,
-  lastLoginTime: String,
-  lastLoginIP: String
+  email: String
 });
 
 let version = new Schema({
@@ -72,6 +73,7 @@ let version = new Schema({
 post = mongoose.model('post', post);
 category = mongoose.model('category', category);
 option = mongoose.model('option', option);
+menu = mongoose.model('menu', menu);
 tag = mongoose.model('tag', tag);
 user = mongoose.model('user', user);
 version = mongoose.model('version', version);
@@ -82,7 +84,8 @@ module.exports = {
   option,
   tag,
   user,
-  version
+  version,
+  menu
 };
 
 

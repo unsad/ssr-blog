@@ -1,7 +1,7 @@
 /**
  * Created by unsad on 2017/10/14.
  */
-import ItemList from '../containers/Create.vue'
+import Item from '../containers/Create.vue'
 
 export default function(options) {
   return {
@@ -10,7 +10,7 @@ export default function(options) {
       return store.dispatch('FETCH_LIST', options);
     },
     render(h) {
-      return h(ItemList, {props: {options}});
+      return h(Item, {props: {options}});
     }
   }
 }

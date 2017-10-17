@@ -2,12 +2,12 @@
   <nav id="sidebar">
     <div class="profile">
       <a href="/">
-        <img :src="siteInfo.logo_url.value" :alt="siteInfo.title.value" ref="logo">
+        <img :src="siteInfo.logoUrl.value" :alt="siteInfo.title.value" ref="logo">
       </a>
       <span>{{siteInfo.title.value}}</span>
     </div>
     <ul class="buttons">
-      <li v-for="menu of siteInfo.menu.value">
+      <li v-for="menu of menus">
         <router-link :to="{path: menu.url}" :title="menu.label">
           <span>{{menu.label}}</span>
         </router-link>
@@ -15,7 +15,7 @@
     </ul>
     <ul class="buttons">
       <li>
-        <a :href="siteInfo.github_url.value" target="_blank" class="inline">
+        <a :href="siteInfo.githubUrl.value" target="_blank" class="inline">
           <i title="GitHub"></i>
         </a>
       </li>
@@ -38,11 +38,12 @@
     name: 'sideBar',
     data() {
       return {
-        siteInfo: this.$store.getters.siteInfo
+        siteInfo: this.$store.getters.siteInfo,
+        menus: this.$store.getters.menu
       }
     },
     asyncData({store, route: {path, params, query}}) {
-      return store.dispatch('FETCH_OPTIONS');
+      return Promise.all([store.dispatch('FETCH_OPTIONS'), store.dispatch('FETCH_MENU')]);
     },
     beforeMount() {
       if (typeof this.siteInfo.title === 'undefined') {

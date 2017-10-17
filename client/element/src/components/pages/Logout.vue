@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import Api from '../store/api';
+  import Api from '../../store/api';
 
   export default {
     name: 'logout',

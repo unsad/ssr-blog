@@ -8,14 +8,14 @@ import createMarkdownView from '@/components/views/CreateMarkdownView';
 import Login from '@/components/Login';
 import Logout from '@/components/Logout';
 import Dashboard from '@/components/Dashboard';
-import Info from '@/components/pages/Info';
-import PageSetting from '@/components/pages/PageSetting';
+import Main from '@/components/Main';
+
 
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
-  scrollBehavior: function(to, from, savedPosition) {
+  scrollBehavior: function (to, from, savedPosition) {
     return savedPosition || {x: 0, y: 0}
   },
   routes: [
@@ -35,26 +35,20 @@ export default new Router({
     },
     {
       path: '/dashboard',
-      name: 'dashboard',
-      components: {
-        default: Dashboard
-      },
+      name: 'main',
+      component: Main,
       children: [
         {
           path: '/',
-          name: 'info',
-          components: {
-            default: Info
-          }
+          name: 'dashboard',
+          component: Dashboard
         }
       ]
     },
     {
       path: '/post',
       name: 'post',
-      components: {
-        default: Dashboard
-      },
+      component: Main,
       children: [
         {
           path: 'list',
@@ -62,21 +56,17 @@ export default new Router({
           component: createListView({
             name: 'post',
             model: 'post',
+            isButtonFixed: true,
             items: [
               {
                 prop: 'title',
                 label: '标题',
-                width: 250
+                width: 300
               },
               {
-                prop: 'createdAt',
-                label: '创建日期',
-                width: 170
-              },
-              {
-                prop: 'updatedAt',
-                label: '修改日期',
-                width: 170
+                prop: 'pathName',
+                label: '路径',
+                width: 300
               }
             ],
             query: {
@@ -106,7 +96,8 @@ export default new Router({
                 label: '路径',
                 type: 'input',
                 default: '',
-                width: 250
+                width: 250,
+                description: '唯一标志在前端路径显示'
               },
               {
                 prop: 'markdownContent',
@@ -173,9 +164,7 @@ export default new Router({
     {
       path: '/page',
       name: 'page',
-      components: {
-        default: Dashboard
-      },
+      component: Main,
       children: [
         {
           path: 'list',
@@ -185,9 +174,9 @@ export default new Router({
             model: 'post',
             items: [
               {
-                prop: 'title',
-                label: '标题',
-                width: 250
+                prop: 'pathName',
+                label: '路径',
+                width: 170
               },
               {
                 prop: 'createdAt',
@@ -226,7 +215,8 @@ export default new Router({
                 label: '路径',
                 type: 'input',
                 default: '',
-                width: 250
+                width: 250,
+                description: '前端路径标志'
               },
               {
                 prop: 'markdownContent',
@@ -285,11 +275,68 @@ export default new Router({
       ]
     },
     {
+      path: '/menu',
+      name: 'menu',
+      component: Main,
+      children: [
+        {
+          path: 'list',
+          name: 'menuList',
+          component: createListView({
+            name: 'menu',
+            model: 'menu',
+            items: [
+              {
+                prop: 'label',
+                label: '名称',
+                width: 250
+              },
+              {
+                prop: 'url',
+                label: '根路径',
+                width: 170
+              },
+              {
+                prop: 'option',
+                label: '字体名称',
+                width: 170
+              }
+            ],
+            query: {}
+          })
+        },
+        {
+          path: 'create/:id',
+          name: 'menuSetting',
+          component: createEditView({
+            name: 'menu',
+            model: 'menu',
+            items: [
+              {
+                prop: 'label',
+                label: '名称',
+                width: 250
+              },
+              {
+                prop: 'url',
+                label: '根路径',
+                width: 170
+              },
+              {
+                prop: 'option',
+                label: '字体名称',
+                width: 170
+              }
+            ],
+            query: {}
+          })
+        }
+      ]
+    },
+    {
       path: '/cate',
       name: 'cate',
-      components: {
-        default: Dashboard
-      },
+      component: Main,
       children: [
         {
           path: 'list',
@@ -300,7 +347,7 @@ export default new Router({
             items: [
               {
                 prop: 'name',
-                label: '名称',
+                label: '分类',
                 width: 250
               }
             ],
@@ -316,7 +363,7 @@ export default new Router({
             items: [
               {
                 prop: 'name',
-                label: '名称',
+                label: '分类名称',
                 width: 250
               }
             ],
@@ -328,9 +375,7 @@ export default new Router({
     {
       path: '/tag',
       name: 'tag',
-      components: {
-        default: Dashboard
-      },
+      component: Main,
       children: [
         {
           path: 'list',
@@ -341,7 +386,7 @@ export default new Router({
             items: [
               {
                 prop: 'name',
-                label: '名称',
+                label: '标签',
                 width: 250
               }
             ],
@@ -357,7 +402,7 @@ export default new Router({
             items: [
               {
                 prop: 'name',
-                label: '名称',
+                label: '标签名称',
                 width: 250
               }
             ],
@@ -369,9 +414,7 @@ export default new Router({
     {
       path: '/version',
       name: 'version',
-      components: {
-        default: Dashboard
-      },
+      component: Main,
       children: [
         {
           path: 'list',
@@ -382,12 +425,12 @@ export default new Router({
             items: [
               {
                 prop: 'name',
-                label: '名称',
+                label: '版本名称',
                 width: 250
               },
               {
                 prop: 'version',
-                label: '版本',
+                label: '版本号',
                 width: 170
               },
               {
@@ -408,13 +451,13 @@ export default new Router({
             items: [
               {
                 prop: 'name',
-                label: '名称',
+                label: '版本名称',
                 default: '',
                 width: 250
               },
               {
                 prop: 'version',
-                label: '版本',
+                label: '版本号',
                 default: '',
                 width: 170
               },
@@ -433,9 +476,7 @@ export default new Router({
     {
       path: '/user',
       name: 'user',
-      components: {
-        default: Dashboard
-      },
+      component: Main,
       children: [
         {
           path: 'edit',
@@ -447,7 +488,7 @@ export default new Router({
             items: [
               {
                 prop: 'name',
-                label: '名称',
+                label: '账号',
                 default: '',
                 width: 250
               },
@@ -461,13 +502,15 @@ export default new Router({
                 prop: 'displayName',
                 label: '昵称',
                 default: '',
-                width: 170
+                width: 170,
+                description: '后台管理顶部导航栏显示'
               },
               {
                 prop: 'email',
                 label: '邮箱',
                 default: '',
-                width: 170
+                width: 170,
+                description: '文章被回复时需要通知的邮箱，可为空'
               },
               {
                 prop: 'imageToken',
@@ -484,9 +527,7 @@ export default new Router({
     {
       path: '/option',
       name: 'option',
-      components: {
-        default: Dashboard
-      },
+      component: Main,
       children: [
         {
           path: 'general',
@@ -500,55 +541,64 @@ export default new Router({
                 prop: 'title',
                 label: '网站名称',
                 default: '',
-                width: 250
+                width: 250,
+                description: '前后台标题'
               },
               {
                 prop: 'logoUrl',
                 label: 'logo地址',
                 default: '',
-                width: 170
+                width: 170,
+                description: '前后台图标，80 X 80'
               },
               {
                 prop: 'description',
                 label: '站点描述',
                 default: '',
-                width: 170
+                width: 170,
+                description: '前后台侧边栏描述'
               },
               {
                 prop: 'siteUrl',
                 label: '网站地址',
                 default: '',
-                width: 170
+                width: 170,
+                description: '前台域名'
               },
               {
                 prop: 'faviconUrl',
                 label: 'favicon地址',
                 default: '',
-                width: 170
+                width: 170,
+                description: '前台favicon地址，相对前台的根路径'
               },
               {
                 prop: 'keywords',
                 label: '关键词',
                 default: '',
-                width: 170
+                width: 170,
+                description: 'meta的keywords便于seo'
               },
               {
                 prop: 'githubUrl',
                 label: 'github地址',
                 default: '',
-                width: 170
+                width: 170,
+                description: 'github用户名'
               },
               {
                 prop: 'weiboUrl',
                 label: '微博地址',
                 default: '',
-                width: 170
+                width: 170,
+                description: '微博地址全部链接'
               },
               {
                 prop: 'miitbeian',
                 label: '网站备案号',
                 default: '',
-                width: 170
+                width: 170,
+                description: '前台底部显示'
               }
             ],
             query: {}
@@ -566,13 +616,15 @@ export default new Router({
                 prop: 'commentType',
                 label: '评论类型',
                 default: '',
-                width: 250
+                width: 250,
+                description: '仅支持disqus'
               },
               {
                 prop: 'commentName',
                 label: '评论名称',
                 default: '',
-                width: 250
+                width: 250,
+                description: 'disqus的id'
               }
             ],
             query: {}
@@ -591,7 +643,8 @@ export default new Router({
                 prop: 'analyzeCode',
                 label: '统计代码',
                 default: '',
-                width: 250
+                width: 250,
+                description: '谷歌统计的id'
               }
             ],
             query: {}

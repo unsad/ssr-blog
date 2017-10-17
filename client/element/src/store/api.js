@@ -32,6 +32,10 @@ store.logout = (conditions, args) => {
   return axios.post(`/proxyPrefix/admin/logout`, conditions);
 };
 
+store.getImageToken = body => {
+  return axios.post(`/proxyPrefix/qiniu/token`, body).then(response => response.data);
+};
+
 store.fetchList = (model, query) => {
   let target = `${root}/${model}`;
   return axios.get(target, {params: query}).then(response => response.data);

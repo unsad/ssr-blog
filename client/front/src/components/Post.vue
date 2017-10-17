@@ -55,7 +55,7 @@
                      class="next">&raquo;{{next.title}}
         </router-link>
       </nav>
-      <div class="comments" v-if="article.allowComment === 1 && commentName!== ''">
+      <div class="comments" v-if="article.allowComment === true && commentName!== ''">
         <disqus :shortname="commentName"></disqus>
       </div>
     </div>
@@ -114,13 +114,13 @@
         return this.$store.state.next;
       },
       commentType() {
-        return this.$store.state.siteInfo.comment.value.type || 'disqus';
+        return this.$store.state.siteInfo.commentType || 'disqus';
       },
       commentName() {
-        return this.$store.state.siteInfo.comment.value.name || '';
+        return this.$store.state.siteInfo.commentName || '';
       },
       siteURL() {
-        return this.$store.state.siteInfo.site_url.value || 'localhost';
+        return this.$store.state.siteInfo.siteUrl.value || 'localhost';
       }
     },
     components: {

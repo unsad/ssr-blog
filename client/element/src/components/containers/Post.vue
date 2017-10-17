@@ -3,14 +3,14 @@
     <el-row :gutter="0">
       <el-col :span="18">
         <el-form-item v-for="(item, index) in prevItems" :key="index" :label="item.label">
-          <el-input v-if="item.type === 'input'" v-model="form[item.prop]"></el-input>
+          <el-input v-if="item.type === 'input'" v-model="form[item.prop]" :placeholder="item.description || ''"></el-input>
           <markdown v-if="item.type === 'markdown'" v-model="form[item.prop]"></markdown>
           <el-radio v-if="item.type === 'radio'" v-model="form[item.prop]" :label="item.label"></el-radio>
         </el-form-item>
       </el-col>
       <el-col :span="6">
-        <el-form-item label-width="20px">
-          <el-button :class="{ 'margin-left': true }" type="info" @click.native="onSubmit">保存文章</el-button>
+        <el-form-item label-width="20px" style="margin-top:58px;">
+          <el-button :class="{ 'margin-left': true }" type="info" @click.native="onSave">保存文章</el-button>
           <el-button type="success" @click.native="onSubmit">提交文章</el-button>
         </el-form-item>
         <el-form-item v-for="(item, index) in nextItems" :label="item.label" :key="index">
@@ -21,20 +21,22 @@
             placeholder="选择日期时间">
           </el-date-picker>
 
-          <el-select v-if="item.type === 'select'">
+          <el-select v-if="item.type === 'select'" v-model="form[item.prop]">
             <el-option
               v-for="(tag, index) in tags"
               :key="index"
-              @click.native="handleAddTag(tag)"
               :label="tag"
               :value="tag">
             </el-option>
           </el-select>
-          <el-tag v-if="item.type === 'select'" v-for="(tag, index) in form.tags" @close="handleDelete(index)" type="primary" :closable="true" :key="tag">{{tag}}</el-tag>
 
-          <el-radio-group v-if="item.type === 'radio'" v-model="form[item.prop]">
-            <el-radio v-for="(cate, index) in cates" :key="index" :class="{ 'margin-left': index === 0 }" :label="cate">{{cate}}</el-radio>
-          </el-radio-group>
+          <el-select v-if="item.type='radio'" v-model="form[item.prop]">
+            <el-option v-for="(cate, index) of cates"
+            :key="index"
+            :label="cate"
+            :value="cate">
+            </el-option>
+          </el-select>
 
           <el-switch v-if="item.type === 'switch'" v-model="form[item.prop]"></el-switch>
 
@@ -46,6 +48,8 @@
 
 <script>
   import Markdown from './Markdown'
+  import marked from '../utils/marked'
+  import moment from 'moment'
 
   export default {
     name: 'post',
@@ -91,7 +95,26 @@
       }
     },
     methods: {
+      onSave() {
+
+      },
+      validate() {
+        this.form.content = marked(this.form.markdownContent, {sanitize: true});
+        this.form.summary = marked(this.form.markdownContent.split('<!--more-->')[0], {sanitize: true});
+        if (this.form.createdAt === '') {
+          this.form.createdAt = moment().format('YYYY-MM-DD HH:mm:ss').toString();
+        } else {
+          this.form.createdAt = moment(this.form.createdAt).format('YYYY-MM-DD HH:mm:ss').toString();
+        }
+
+        if (this.form.updatedAt === '') {
+          this.form.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss').toString();
+        } else {
+          this.form.updatedAt = moment(this.form.updatedAt).format('YYYY-MM-DD HH:mm:ss').toString();
+        }
+      },
       onSubmit() {
+        this.validate();
         this.$store.dispatch('POST', {
           model: this.options.model,
           form: this.form

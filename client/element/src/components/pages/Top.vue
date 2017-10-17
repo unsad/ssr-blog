@@ -4,7 +4,7 @@
       <el-col :span="24">
         <el-menu default-active="1" mode="horizontal" class="el-menu-vertical-demo" :unique-opened="true" theme="dark" @select="handleSelect">
           <el-submenu index="1">
-            <template slot="title">你好</template>
+            <template slot="title">{{displayName}}</template>
             <el-menu-item index="1-1">
               修改密码
             </el-menu-item>
@@ -19,13 +19,16 @@
 </template>
 
 <script>
-  import Api from '../store/api';
-
   export default {
     name: 'top',
     data() {
       return {
         title: ''
+      }
+    },
+    computed: {
+      displayName() {
+        return this.$store.state.user.displayName || -1;
       }
     },
     methods: {
@@ -39,6 +42,16 @@
             name: 'logout'
           });
         }
+      }
+    },
+    created() {
+      if (this.displayName === -1) {
+        let username = localStorage.getItem('username');
+        this.$store.dispatch('FETCH_USER', {
+          model: 'user',
+          query: {},
+          username
+        }).catch(err => console.error(err));
       }
     }
   }

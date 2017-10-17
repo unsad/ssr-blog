@@ -10,6 +10,7 @@ export const getChineseDesc = desc => {
     case 'Get token failed.Check the name':
       return '登录失败，请检查您的账号';
     case 'Token verify failed':
+    case 'Token invalid':
       return 'Token验证失败，请重新登录';
     default:
       return desc;

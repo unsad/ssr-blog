@@ -1,4 +1,4 @@
-import ItemList from '../containers/List.vue';
+import Item from '../containers/List.vue';
 
 export default function (options) {
   return {
@@ -7,7 +7,7 @@ export default function (options) {
       return store.dispatch('FETCH_LIST', options);
     },
     render(h) {
-      return h(ItemList, {props: {options: options}});
+      return h(Item, {props: {options: options}});
     }
   }
 }

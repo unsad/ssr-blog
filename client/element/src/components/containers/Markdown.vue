@@ -16,6 +16,18 @@
         <el-menu-item index="11-4">labels['full']</el-menu-item>
       </el-submenu>
     </el-menu>
+    <el-dialog title="图片上传" v-model="isUploadShow">
+      <el-upload
+        action="https://up.qbox.me/"
+        type="drag"
+        :thumbnail-mode="true"
+        :data="form"
+        :before-upload="beforeUpload">
+        <i class="el-icon-upload"></i>
+        <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
+        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+      </el-upload>
+    </el-dialog>
     <div class="md-editor" :class="{
       'edit': mode === 'edit',
       'preview': mode === 'preview',
@@ -29,14 +41,8 @@
 
 <script>
   import marked from 'marked'
-  import hljs from 'highlight.js'
+  import moment from 'moment'
   import _ from 'lodash'
-
-  marked.setOptions({
-    highlight: function(code) {
-      return hljs.hightlightAuto(code).value
-    }
-  });
 
   export default {
     name: 'markdown',
@@ -49,12 +55,17 @@
           'preview': '预览模式',
           'full': '全屏模式'
         },
-        mode: 'split' // ['edit', 'split', 'shrink']
+        mode: 'split', // ['edit', 'split', 'shrink'],
+        isUploadShow: false,
+        upToken: '',
+        filePath: '',
+        form: {}
+
       }
     },
     computed: {
       compiledMarkdown() {
-        return marked(this.value.replace(/<!--more--/g, '=====> 文章摘要结束'), {sanitize: true});
+        return marked(this.value.replace(/<!--more--/g, ''), {sanitize: true});
       }
     },
     methods: {
@@ -66,7 +77,7 @@
             case '3': this._linkText(); break;
             case '4': this._blockquoteText(); break;
             case '5': this._codeText(); break;
-            case '6': this._insertMore(); break;
+            case '6': this._uploadImage(); break;
             case '7': this._insertMore(); break;
           }
         } else if (keyPath.length === 2) {
@@ -95,6 +106,23 @@
         }
         let input = origin.slice(0, start) + text + origin.slice(end);
         this.$emit('input', input);
+      },
+      _uploadImage() {
+        let filePath = '/' + moment().format('YYYYMMDD').toString() + '/' + new Date().getTime();
+        this.$store.dispatch('GET_IMAGE_TOKEN', {
+          filePath
+        }).then(response => {
+          this.upToken = response.token;
+          this.filePath = filePath;
+          this.isUploadShow = true;
+        });
+      },
+      beforeUpload(file) {
+        this.form = {
+          token: this.upToken,
+          file: this.filePath
+        };
+        return true;
       },
       _insertMore () {
         this._preInputText('<!--more-->', 12, 12)

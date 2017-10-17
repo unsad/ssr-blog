@@ -10,8 +10,8 @@
 
 <script>
   import Api from '../store/api'
-  import sidebar from './Sidebar'
-  import top from './Top'
+  import sidebar from './pages/Sidebar'
+  import top from './pages/Top'
 
   export default {
     name: 'dashboard',

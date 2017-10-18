@@ -25,11 +25,9 @@ app.use(async (ctx, next) => {
   log.info(`${ctx.method} ${decodeURIComponent(ctx.url)} - ${ms}ms`);
 });
 
-router.post('/qiniu/token', permission, (ctx, next) => {
-  const { filePath } = ctx.request.body;
-  ctx.body = {
-    token: getQiniuTokenFromFileName(filePath)
-  }
+router.post('/admin/token', permission, (ctx, next) => {
+  const { key } = ctx.request.body;
+  ctx.body = getQiniuTokenFromFileName(key);
 });
 router.post('/admin/login', login);
 router.post('/admin/logout', logout);

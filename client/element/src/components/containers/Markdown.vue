@@ -21,11 +21,15 @@
         action="https://up.qbox.me/"
         type="drag"
         :thumbnail-mode="true"
+        :on-preview="handlePreview"
+        :on-success="handleSuccess"
+        :on-error="handleError"
+        :show-upload-list="true"
         :data="form"
         :before-upload="beforeUpload">
         <i class="el-icon-upload"></i>
         <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
-        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+        <div class="el-upload__tip" slot="tip">请确保后台已将七牛(server/conf/config.js)相关配置确认</div>
       </el-upload>
     </el-dialog>
     <div class="md-editor" :class="{
@@ -58,7 +62,8 @@
         mode: 'split', // ['edit', 'split', 'shrink'],
         isUploadShow: false,
         upToken: '',
-        filePath: '',
+        bucketHost: '',
+        key: '',
         form: {}
 
       }
@@ -69,6 +74,41 @@
       }
     },
     methods: {
+      handlePreview(file) {
+        let text = `${this.bucketHost}/${file.response.key}`
+      },
+      handleSuccess(response, file, filelist) {
+        let key = response.key;
+        let name = file.name;
+        let prefix = key.split('/')[0];
+        let suffix = key.split('/')[1];
+        let text = `![${name}](${this.bucketHost}/${prefix}/${encodeURIComponent(suffix)})`;
+        this.$confirm(text, '上传成功，是否插入图片链接？', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          closeOnClickModal: false
+        }).then(() => {
+          this.isUploadShow = false;
+          this._preInputText(text, 12, 12);
+          this.$message({
+            type: 'info',
+            message: '已插入图片链接'
+          }).catch(() => {
+            this.isUploadShow = false;
+            this.$message({
+              type: 'info',
+              message: '已取消图片链接'
+            })
+          });
+        });
+      },
+      handleError(err, response, file) {
+        if (err.status === 401) {
+          this.$message.error('图片上传失败，请求中未带Token');
+        } else {
+          this.$message.error(JSON.stringify(err));
+        }
+      },
       handleSelect(key, keyPath) {
         if (keyPath.length === 1) {
           switch (key) {
@@ -108,21 +148,28 @@
         this.$emit('input', input);
       },
       _uploadImage() {
-        let filePath = '/' + moment().format('YYYYMMDD').toString() + '/' + new Date().getTime();
-        this.$store.dispatch('GET_IMAGE_TOKEN', {
-          filePath
-        }).then(response => {
-          this.upToken = response.token;
-          this.filePath = filePath;
-          this.isUploadShow = true;
-        });
+        this.isUploadShow = true;
       },
       beforeUpload(file) {
-        this.form = {
-          token: this.upToken,
-          file: this.filePath
-        };
-        return true;
+        let curr = moment().format('HHmmss').toString()
+        let prefix = moment(file.lastModified).format('HHmmss').toString()
+        let suffix =file.name;
+        let key = `${curr}/${prefix}_${suffix}`;
+        return this.$store.dispatch('GET_IMAGE_TOKEN', {
+          key
+        }).then(response => {
+          this.upToken = response.upToken;
+          this.key = response.key;
+          this.bucketHost = response.bucketHost;
+          if (this.bucketHost === '') {
+            this.$notify.error('获取七牛token失败，请确认配置文件');
+            return Promise.reject();
+          }
+          this.form = {
+            key,
+            token: this.upToken
+          }
+        });
       },
       _insertMore () {
         this._preInputText('<!--more-->', 12, 12)

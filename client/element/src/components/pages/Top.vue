@@ -4,7 +4,7 @@
       <el-col :span="24">
         <el-menu default-active="1" mode="horizontal" class="el-menu-vertical-demo" :unique-opened="true" theme="dark" @select="handleSelect">
           <el-submenu index="1">
-            <template slot="title">{{displayName}}</template>
+            <template slot="title">{{displayName === -1 ? '' : displayName}}</template>
             <el-menu-item index="1-1">
               修改密码
             </el-menu-item>

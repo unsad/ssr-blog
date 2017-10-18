@@ -5,8 +5,6 @@ import axios from 'axios';
 
 const root = '/proxyPrefix/api';
 
-const perPage = 10;
-
 const store = {};
 
 export default store;

@@ -24,7 +24,7 @@
         }).catch(() => {});
       }
     },
-    beforeMount() {
+    created() {
       this.logout();
     }
   }

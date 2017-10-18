@@ -9,7 +9,6 @@
 </template>
 
 <script>
-  import Api from '../store/api'
   import sidebar from './pages/Sidebar'
   import top from './pages/Top'
 

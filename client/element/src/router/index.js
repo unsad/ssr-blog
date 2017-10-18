@@ -73,6 +73,12 @@ export default new Router({
               conditions: {
                 type: 0
               },
+              select: {
+                title: 1,
+                pathName: 1,
+                tags: 1,
+                category: 1
+              },
               sort: 1
             }
           })
@@ -155,6 +161,17 @@ export default new Router({
             query: {
               conditions: {
                 type: 1
+              },
+              select: {
+                title: 1,
+                pathName: 1,
+                tags: 1,
+                category: 1,
+                isPublic: 1,
+                allowComment: 1,
+                updatedAt: 1,
+                createdAt: 1,
+                markdownContent: 1
               }
             }
           })
@@ -192,6 +209,12 @@ export default new Router({
             query: {
               conditions: {
                 type: 1
+              },
+              select: {
+                title: 1,
+                pathName: 1,
+                createdAt: 1,
+                updatedAt: 1
               }
             }
           })
@@ -261,7 +284,15 @@ export default new Router({
               conditions: {
                 type: 1
               },
-              sort: 1
+              select: {
+                title: 1,
+                pathName: 1,
+                isPublic: 1,
+                allowComment: 1,
+                updatedAt: 1,
+                createdAt: 1,
+                markdownContent: 1
+              }
             }
           })
         },

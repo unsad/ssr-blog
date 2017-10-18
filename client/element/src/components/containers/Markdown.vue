@@ -3,22 +3,25 @@
     <el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <el-menu-item index="1">加粗</el-menu-item>
       <el-menu-item index="2">斜体</el-menu-item>
-      <el-menu-item index="3">链接</el-menu-item>
-      <el-menu-item index="4">引用</el-menu-item>
-      <el-menu-item index="5">代码段</el-menu-item>
-      <el-menu-item index="6">图片</el-menu-item>
-      <el-menu-item index="7">插入摘要</el-menu-item>
-      <el-submenu index="11">
+      <el-menu-item index="3">引用</el-menu-item>
+      <el-menu-item index="4">代码段</el-menu-item>
+      <el-menu-item index="5">
+        <template slot="title">插入图片</template>
+        <el-menu-item index="5-1">上传图片</el-menu-item>
+        <el-menu-item index="5-2">网络图片</el-menu-item>
+      </el-menu-item>
+      <el-menu-item index="6">插入摘要</el-menu-item>
+      <el-submenu index="7">
         <template slot="title">{{labels[mode]}}</template>
-        <el-menu-item index="11-1">labels['edit']</el-menu-item>
-        <el-menu-item index="11-2">labels['split']</el-menu-item>
-        <el-menu-item index="11-3">labels['preview']</el-menu-item>
-        <el-menu-item index="11-4">labels['full']</el-menu-item>
+        <el-menu-item index="7-1">labels['edit']</el-menu-item>
+        <el-menu-item index="7-2">labels['split']</el-menu-item>
+        <el-menu-item index="7-3">labels['preview']</el-menu-item>
+        <el-menu-item index="7-4">labels['full']</el-menu-item>
       </el-submenu>
     </el-menu>
     <el-dialog title="图片上传" v-model="isUploadShow">
       <el-upload
-        action="https://up.qbox.me/"
+        action="//up.qbox.me/"
         type="drag"
         :thumbnail-mode="true"
         :on-preview="handlePreview"
@@ -59,8 +62,9 @@
           'preview': '预览模式',
           'full': '全屏模式'
         },
-        mode: 'split', // ['edit', 'split', 'shrink'],
+        mode: 'edit', // ['edit', 'split', 'shrink'],
         isUploadShow: false,
+        supportWebp: false,
         upToken: '',
         bucketHost: '',
         key: '',
@@ -75,14 +79,13 @@
     },
     methods: {
       handlePreview(file) {
-        let text = `${this.bucketHost}/${file.response.key}`
+
       },
       handleSuccess(response, file, filelist) {
         let key = response.key;
         let name = file.name;
         let prefix = key.split('/')[0];
-        let suffix = key.split('/')[1];
-        let text = `![${name}](${this.bucketHost}/${prefix}/${encodeURIComponent(suffix)})`;
+        let text = `![${name}](${this.bucketHost}/${prefix}/${encodeURI(key)})`;
         this.$confirm(text, '上传成功，是否插入图片链接？', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -91,7 +94,7 @@
           this.isUploadShow = false;
           this._preInputText(text, 12, 12);
           this.$message({
-            type: 'info',
+            type: 'success',
             message: '已插入图片链接'
           }).catch(() => {
             this.isUploadShow = false;
@@ -118,14 +121,15 @@
             case '4': this._blockquoteText(); break;
             case '5': this._codeText(); break;
             case '6': this._uploadImage(); break;
-            case '7': this._insertMore(); break;
           }
         } else if (keyPath.length === 2) {
           switch (key) {
-            case '11-1': this.mode = 'edit'; break;
-            case '11-2': this.mode = 'split'; break;
-            case '11-3': this.mode = 'preview'; break;
-            case '11-4': this.mode = 'edit'; break;
+            case '5-1': this._uploadImage(); break;
+            case '5-2': this._importImage(); break;
+            case '7-1': this.mode = 'edit'; break;
+            case '7-2': this.mode = 'split'; break;
+            case '7-3': this.mode = 'preview'; break;
+            case '7-4': this.mode = 'edit'; break;
           }
         }
       },
@@ -154,13 +158,14 @@
         let curr = moment().format('HHmmss').toString()
         let prefix = moment(file.lastModified).format('HHmmss').toString()
         let suffix =file.name;
-        let key = `${curr}/${prefix}_${suffix}`;
+        let key = encodeURI(`${curr}/${prefix}_${suffix}`);
         return this.$store.dispatch('GET_IMAGE_TOKEN', {
           key
         }).then(response => {
           this.upToken = response.upToken;
           this.key = response.key;
           this.bucketHost = response.bucketHost;
+          this.supportWebp = response.supportWebp;
           if (this.bucketHost === '') {
             this.$notify.error('获取七牛token失败，请确认配置文件');
             return Promise.reject();
@@ -171,7 +176,24 @@
           }
         });
       },
-      _insertMore () {
+      _importImage () {
+        this.$prompt('请输入图片链接', '导入图片链接', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消'
+        }).then(({value}) => {
+          this._preInputText(`![](${value})`, 12, 12);
+          this.$message({
+            type: 'success',
+            message: '已插入图片链接'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消插入图片链接'
+          });
+        });
+      },
+      _insertMore() {
         this._preInputText('<!--more-->', 12, 12)
       },
       _boldText () {
@@ -179,9 +201,6 @@
       },
       _italicText () {
         this._preInputText('_斜体文字_', 1, 5)
-      },
-      _linkText (url = 'github.com/smallpath/blog', text = '链接文本') {
-        this._preInputText(`[${text}](${url})`, 1, 1 + text.length)
       },
       _blockquoteText () {
         this._preInputText('\n> 引用', 3, 5)

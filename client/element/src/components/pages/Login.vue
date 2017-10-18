@@ -6,10 +6,10 @@
           <el-form label-position="right" ref="form" :model="form" label-width="40px">
             <p class="align-center" label-width="0">{{title}}</p>
             <el-form-item label="账号">
-              <el-input v-model="form.name"></el-input>
+              <el-input v-model="form.name" auto-complete="on"></el-input>
             </el-form-item>
             <el-form-item label="密码">
-              <el-input v-model="form.password"></el-input>
+              <el-input v-model="form.password" auto-complete="on"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="onSubmit">登陆</el-button>

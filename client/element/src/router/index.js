@@ -71,7 +71,7 @@ export default new Router({
             ],
             query: {
               conditions: {
-                type: 0
+                type: 'post'
               },
               select: {
                 title: 1,
@@ -160,7 +160,7 @@ export default new Router({
             ],
             query: {
               conditions: {
-                type: 1
+                type: 'post'
               },
               select: {
                 title: 1,
@@ -171,7 +171,8 @@ export default new Router({
                 allowComment: 1,
                 updatedAt: 1,
                 createdAt: 1,
-                markdownContent: 1
+                markdownContent: 1,
+                type: 1
               }
             }
           })
@@ -208,7 +209,7 @@ export default new Router({
             ],
             query: {
               conditions: {
-                type: 1
+                type: 'page'
               },
               select: {
                 title: 1,
@@ -282,7 +283,7 @@ export default new Router({
             ],
             query: {
               conditions: {
-                type: 1
+                type: 'page'
               },
               select: {
                 title: 1,
@@ -291,7 +292,8 @@ export default new Router({
                 allowComment: 1,
                 updatedAt: 1,
                 createdAt: 1,
-                markdownContent: 1
+                markdownContent: 1,
+                type: 1
               }
             }
           })

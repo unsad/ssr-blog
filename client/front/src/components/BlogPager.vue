@@ -24,13 +24,13 @@
     },
     asyncData({store, route: {path, query, params}}) {
       if (path !== '/') return resolve();
-      let page = (typeof query.page !== 'undefined') ? parseInt(query.page) : 1;
+      let page = query ? (typeof query.page !== 'undefined') ? parseInt(query.page) : 1 : 1;
       if (page < 0) {
         page = 1;
       }
       return store.dispatch('FETCH_ITEMS', {
         conditions: {
-          type: 0,
+          type: 'post',
           isPublic: true
         },
         select: {

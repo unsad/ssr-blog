@@ -65,8 +65,7 @@
         prev[curr.prop] = Array.isArray(curr.default) ? curr.default.map(value => value) : curr.default;
         return prev;
       }, {});
-      let type = typeof form.type === 'undefined' ? isPost ? '0' : '1' : form.type;
-      form.type = type;
+      form.type = this.options.name;
       return {
         isPost,
         isPage,
@@ -141,6 +140,7 @@
           query: {}
         }).then(post => {
           this.isLoading = false;
+          post.type = this.options.name;
           this.form = post;
         })
       }

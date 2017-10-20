@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="list" v-loading="isLoading" border style="width: 100%">
+  <el-table :data="list" v-loading.body="isLoading" border style="width: 100%">
     <el-table-column v-for="(item, index) of options.items" :key="index" :prop="item.prop" :label="item.label" :width="item.width">
 
     </el-table-column>

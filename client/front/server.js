@@ -12,7 +12,14 @@ const robots = require('./server/robots.js');
 const axios = require('axios');
 const { api: sitemapApi, getSitemapFromBody } = require('./server/sitemap.js');
 const { api: rssApi, getRssBodyFromBody } = require('./server/rss.js');
-const { title } = require('./server/config');
+let { title } = require('./server/config');
+
+axios.get('localhost:3000/api/options?conditions={"key": "title"}').then(result => {
+  if (Array.isArray(result) && result.length !== 0) {
+    title = result[0].value;
+  }
+});
+
 const schedule = require('node-schedule');
 
 let sitemap = '';

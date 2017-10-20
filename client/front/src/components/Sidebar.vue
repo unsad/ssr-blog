@@ -15,7 +15,7 @@
     </ul>
     <ul class="buttons">
       <li>
-        <a :href="siteInfo.githubUrl.value" target="_blank" class="inline">
+        <a :href="'https://github.com' + siteInfo.githubUrl.value" target="_blank" class="inline">
           <i title="GitHub"></i>
         </a>
       </li>

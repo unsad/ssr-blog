@@ -36,10 +36,10 @@
         return this.page
       },
       commentType () {
-        return this.$store.state.siteInfo.commentType || 'disqus'
+        return this.$store.state.siteInfo.commentType.value || 'disqus'
       },
       commentName () {
-        return this.$store.state.siteInfo.commentName || ''
+        return this.$store.state.siteInfo.commentName.value || ''
       },
       siteURL () {
         return this.$store.state.siteInfo.siteUrl.value || 'localhost'

@@ -8,7 +8,7 @@
 
 <script>
   export default {
-    name: 'LoadingBar',
+    name: 'Loading',
     props: {
       progress: {
         type: Number,

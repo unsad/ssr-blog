@@ -1,14 +1,106 @@
 <template>
-  <div>
+  <div v-if="show" class="loading-bar loading-bar--to_right"
+       :class="{'loading-bar--full': full, 'loading-bar--jump': isJumpToStartPosition}" :style="styling()">
 
   </div>
+  <div class="loading-bar-glow"></div>
 </template>
 
 <script>
   export default {
-    name: 'LoadingBar'
+    name: 'LoadingBar',
+    props: {
+      progress: {
+        type: Number,
+        default: 0
+      },
+      onProgressDone: {
+        type: Function,
+        required: true
+      }
+    },
+    data() {
+      return {
+        show: true,
+        full: '',
+        width: 0,
+        wait: false,
+        isJumpToStartPosition: false
+      }
+    },
+    watch: {
+      progress(val, old) {
+        if (old !== val) {
+          this.width = val;
+          this.$nextTick(() => {
+            this.isFull();
+          })
+        }
+      }
+    },
+    methods: {
+      isFull() {
+        let isFull = this.width === 100;
+        if (isFull) {
+          this.wait = true;
+          setTimeout(() => {
+            this.full = true;
+            setTimeout(() => {
+              this.show = false;
+              this.isJumpToStartPosition = true;
+              this.width = 0;
+              this.wait = false;
+              this.$nextTick(() => {
+                this.isJumpToStartPosition = false;
+                this.full = '';
+                this.show = true;
+                this.onProgressDone();
+              });
+            }, 400);
+          }, 400);
+        }
+      },
+      styling() {
+        if (!this.wait) {
+          return {width: `${this.width}`};
+        } else {
+          return {width: `100%`};
+        }
+      }
+    }
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
+  .loading-bar
+    transition: all .4s ease
+    position: fixed
+    top: 0
+    background: #77b6ff
+    height: 3px
+    opacity: 1
 
+  .loading-bar-glow
+    top: 0
+    position: absolute
+    width: 100%
+    height: 100%
+    box-shadow: -3px 0 15px 1px rgba(119, 182, 255, 0.7)
+
+  .loading-bar--to_right
+    left: 0
+    z-index: 1000
+
+  .loading-bar--to_right .loading-bar-glow
+    right: 0
+    z-index: 1000
+
+  .loading-bar--jump
+    transition: all 0 ease
+    height: 3px
+    opacity: 1
+
+  .loading-bar--full
+    transition: all .3s ease
+    height: 0
+    opacity: 0
 </style>

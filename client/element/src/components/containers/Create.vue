@@ -1,7 +1,7 @@
 <template>
   <div>
-  <el-form ref="form" :model="form" label-width=120px">
-    <el-form-item v-for="item of options.items" :key="index" :label="item.label">
+  <el-form ref="form" :model="form" label-width="120px">
+    <el-form-item v-for="(item, index) of options.items" :key="index" :label="item.label">
       <el-input v-if="typeof item.description === 'undefined'" v-model="form[item.prop]"></el-input>
       <el-popover
         v-if="typeof item.description !== 'undefined'"
@@ -22,7 +22,7 @@
 
 <script>
   export default {
-    name: 'list',
+    name: 'create',
     props: ['options'],
     data() {
       let isPost = this.options.name === 'post';

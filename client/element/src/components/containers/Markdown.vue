@@ -157,7 +157,7 @@
       beforeUpload(file) {
         let curr = moment().format('HHmmss').toString()
         let prefix = moment(file.lastModified).format('HHmmss').toString()
-        let suffix =file.name;
+        let suffix = file.name;
         let key = encodeURI(`${curr}/${prefix}_${suffix}`);
         return this.$store.dispatch('GET_IMAGE_TOKEN', {
           key

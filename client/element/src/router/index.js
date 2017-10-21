@@ -5,11 +5,10 @@ import createListView from '@/components/views/CreateListView';
 import createEditView from '@/components/views/CreateEditView';
 import createMarkdownView from '@/components/views/CreateMarkdownView';
 
-import Login from '@/components/Login';
-import Logout from '@/components/Logout';
-import Dashboard from '@/components/Dashboard';
+import Login from '@/components/pages/Login';
+import Logout from '@/components/pages/Logout';
+import Dashboard from '@/components/pages/Dashboard';
 import Main from '@/components/Main';
-
 
 Vue.use(Router);
 
@@ -35,7 +34,6 @@ export default new Router({
     },
     {
       path: '/dashboard',
-      name: 'main',
       component: Main,
       children: [
         {
@@ -297,13 +295,6 @@ export default new Router({
               }
             }
           })
-        },
-        {
-          path: 'setting',
-          name: 'pageSetting',
-          components: {
-            default: PageSetting
-          }
         }
       ]
     },

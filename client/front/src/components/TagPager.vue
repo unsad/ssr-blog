@@ -36,6 +36,7 @@
     },
     methods: {
       getItems() {
+        let loadingPromise = this.$store.dispatch('LOOP_LOADING');
         store.fetchPost({}, {
           select: {
             tags: 1,
@@ -58,6 +59,10 @@
               }
             }
           });
+        });
+        loadingPromise.then(interval => {
+          clearInterval(interval);
+          this.$store.dispatch('SET_PROGRESS', 100);
         });
       }
     },

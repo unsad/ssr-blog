@@ -30,7 +30,7 @@
             </el-option>
           </el-select>
 
-          <el-select v-if="item.type='radio'" v-model="form[item.prop]">
+          <el-select v-if="item.type === 'radio'" v-model="form[item.prop]">
             <el-option v-for="(cate, index) of cates"
             :key="index"
             :label="cate"

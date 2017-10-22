@@ -5,18 +5,18 @@
       <el-menu-item index="2">斜体</el-menu-item>
       <el-menu-item index="3">引用</el-menu-item>
       <el-menu-item index="4">代码段</el-menu-item>
-      <el-menu-item index="5">
+      <el-submenu index="5">
         <template slot="title">插入图片</template>
         <el-menu-item index="5-1"><i class="el-icon-upload2"></i>上传图片</el-menu-item>
         <el-menu-item index="5-2"><i class="el-icon-upload"></i>网络图片</el-menu-item>
-      </el-menu-item>
+      </el-submenu>
       <el-menu-item index="6"><i class="el-icon-more"></i>摘要</el-menu-item>
       <el-submenu index="7">
         <template slot="title">{{labels[mode]}}</template>
-        <el-menu-item index="7-1">labels['edit']</el-menu-item>
-        <el-menu-item index="7-2">labels['split']</el-menu-item>
-        <el-menu-item index="7-3">labels['preview']</el-menu-item>
-        <el-menu-item index="7-4">labels['full']</el-menu-item>
+        <el-menu-item index="7-1">{{labels['edit']}}</el-menu-item>
+        <el-menu-item index="7-2">{{labels['split']}}</el-menu-item>
+        <el-menu-item index="7-3">{{labels['preview']}}</el-menu-item>
+        <el-menu-item index="7-4">{{labels['full']}}</el-menu-item>
       </el-submenu>
     </el-menu>
     <el-dialog title="图片上传" v-model="isUploadShow">
@@ -41,7 +41,7 @@
       'split': mode === 'split'
     }">
       <textarea ref="markdown" :value="value" @input="handleInput"></textarea>
-      <div class="md-preview markdown" v-html="compileMarkdown"></div>
+      <div class="md-preview markdown" v-html="compiledMarkdown"></div>
     </div>
   </div>
 </template>
@@ -74,7 +74,7 @@
     },
     computed: {
       compiledMarkdown() {
-        return marked(this.value.replace(/<!--more--/g, ''), {sanitize: true});
+        return marked(this.value.replace(/<!--more-->/g, ''), {sanitize: true});
       }
     },
     methods: {
@@ -117,10 +117,9 @@
           switch (key) {
             case '1': this._boldText(); break;
             case '2': this._italicText(); break;
-            case '3': this._linkText(); break;
-            case '4': this._blockquoteText(); break;
-            case '5': this._codeText(); break;
-            case '6': this._uploadImage(); break;
+            case '3': this._blockquoteText(); break;
+            case '4': this._codeText(); break;
+            case '6': this._insertMore(); break;
           }
         } else if (keyPath.length === 2) {
           switch (key) {
@@ -212,5 +211,14 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-
+.md-editor
+  width: 100%
+  position: relative
+  textarea
+    box-sizing: border-box
+    resize: none
+    height: 100%
+    width: 100%
+    min-height: 500px
+    padding: 15px 15px 0
 </style>

@@ -106,7 +106,7 @@ export default new Router({
               {
                 prop: 'markdownContent',
                 label: '内容',
-                type: 'maekdown',
+                type: 'markdown',
                 default: '',
                 width: 170
               },

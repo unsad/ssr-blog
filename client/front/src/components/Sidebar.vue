@@ -45,18 +45,11 @@
     asyncData({store, route: {path, params, query}}) {
       return Promise.all([store.dispatch('FETCH_OPTIONS'), store.dispatch('FETCH_MENU')]);
     },
-    beforeMount() {
-      if (typeof this.siteInfo.title === 'undefined') {
-        if (this.siteInfo['title'] && typeof document !== 'undefined') {
-          document.title = this.siteInfo['title'].value;
-        }
-      } else {
-        document.title = this.siteInfo['title'].value || 'Blog';
-      }
-    },
     mounted() {
       let img = this.$refs.logo;
-      img.onerror = ({target}) => (img.src = target.currentSrc.replace('.webp', '.png'));
+      if (img) {
+        img.onerror = ({target}) => (img.src = target.currentSrc.replace('.webp', '.png'));
+      }
     },
     serverCacheKey: props => {
       return 'static-sidebar'

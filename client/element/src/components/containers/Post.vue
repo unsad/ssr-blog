@@ -21,7 +21,7 @@
             placeholder="选择日期时间">
           </el-date-picker>
 
-          <el-select v-if="item.type === 'select'" v-model="form[item.prop]">
+          <el-select v-if="item.type === 'select'" v-model="form[item.prop]" multiple>
             <el-option
               v-for="(tag, index) in tags"
               :key="index"

@@ -33,28 +33,37 @@ router.onReady(() => {
     const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _);
     if (!asyncDataHooks.length) return next();
 
-    Promise.all(asyncDataHooks.map(hook => hook({store, route: to}))).then(next).catch(next);
+    let loadingPromise = store.dispatch('START_LOADING');
+    let endLoadingCallback = () => {
+      return loadingPromise.then(interval => {
+        clearInterval(interval);
+        store.dispatch('SET_PROGRESS', 100);
+      });
+    };
+
+    Promise.all(asyncDataHooks.map(hook => hook({store, route: to}))).then(() => {
+      endLoadingCallback();
+      next();
+    }).catch(next);
   });
 
   if (window.__INITIAL_STATE__.siteInfo) {
-    let analyze_code = window.__INITIAL_STATE__.siteInfo.analyze_code;
-    if (analyze_code && analyze_code.value !== '') {
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      +ga('create', 'UA-86299315-1', 'auto');
-      +ga('send', 'pageview');
+    let analyzeCode = window.__INITIAL_STATE__.siteInfo.analyzeCode;
+    if (analyzeCode && analyzeCode.value !== '') {
+      window.ga = window.ga|| function(){(ga.q=ga.q||[]).push(arguments)};
+      window.ga.l = +new Date;
+      window.ga('create', 'UA-86299315-1', 'auto');
+      window.ga('send', 'pageview');
+      router.beforeEach(route => {
+        window.ga('send', {
+          hitType: 'pageview',
+          page: route.path,
+          location: window.location.origin + route.path,
+          title: route.name || ''
+        })
+      });
     }
   }
-
-  router.afterEach(route => {
-    console.log(route);
-    ga('send', {
-      hitType: 'pageview',
-      page: route.path,
-      location: window.location.origin + route.path,
-      title: route.name
-    })
-  });
-
   app.$mount('#app');
 });
 

@@ -4,7 +4,7 @@
 <script>
   import pager from './Pager';
 
-  function fetchPage({store, route: {path: pathName, params, query}}) {
+  function fetchPage({store, route: {path: pathName, params, query}}, callback) {
     pathName = pathName.replace(/^\//g, '');
     return store.dispatch('FETCH_PAGE', {
       conditions: {
@@ -19,7 +19,8 @@
         commentNum: 1,
         pathName: 1,
         allowComment: 1
-      }
+      },
+      callback
     });
   }
 

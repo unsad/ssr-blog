@@ -22,7 +22,7 @@
 
       }
     },
-    asyncData({store, route: {path, query, params}}) {
+    asyncData({store, route: {path, query, params}}, callback) {
       if (path !== '/') return resolve();
       let page = query ? (typeof query.page !== 'undefined') ? parseInt(query.page) : 1 : 1;
       if (page < 0) {
@@ -43,7 +43,8 @@
         },
         limit: 10,
         skip: (page - 1) * 10,
-        sort: 1
+        sort: 1,
+        callback
       });
     },
     computed: {

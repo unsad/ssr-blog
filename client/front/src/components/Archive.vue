@@ -19,7 +19,7 @@
 <script>
   import myFooter from './Footer.vue';
 
-  function fetchArchive(store) {
+  function fetchArchive(store, route, callback) {
     return store.dispatch('FETCH_ACHIEVE', {
       conditions: {type: 'post'},
       select: {
@@ -27,7 +27,8 @@
         createdAt: 1,
         pathName: 1
       },
-      sort: 1
+      sort: 1,
+      callback
     });
   }
 

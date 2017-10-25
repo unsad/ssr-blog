@@ -74,7 +74,7 @@
 
       }
     },
-    asyncData({store, route: {path: pathName, params, query}}) {
+    asyncData({store, route: {path: pathName, params, query}}, callback) {
       pathName = pathName.replace(/^\/post\//g, '');
       return store.dispatch('FETCH_BLOG', {
         conditions: {pathName},
@@ -88,8 +88,12 @@
           category: 1,
           allowComment: 1,
           tags: 1
-        }
+        },
+        callback
       });
+    },
+    watch: {
+      '$route': 'resetDisqus'
     },
     methods: {
       reset(dsq) {
@@ -101,6 +105,12 @@
             this.page.url = window.location.href;
           }
         });
+      },
+      resetDisqus(val, oldVal) {
+        if (val.name !== 'post') return;
+        if (window.DISQUS) {
+          this.reset(window.DISQUS);
+        }
       }
     },
     computed: {

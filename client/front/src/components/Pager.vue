@@ -46,7 +46,7 @@
       }
     },
     watch: {
-      '$route': 'getPost'
+      '$route': 'resetDisqus'
     },
     methods: {
       reset (dsq) {
@@ -59,7 +59,7 @@
           }
         })
       },
-      getPost (val, oldVal) {
+      resetDisqus (val, oldVal) {
         if (val.name !== 'page') return
         if (window.DISQUS) {
           this.reset(window.DISQUS)

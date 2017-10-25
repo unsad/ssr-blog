@@ -10,6 +10,25 @@
 </template>
 
 <script>
+  function getItems({store, route: {path, query, params}}, callback) {
+    return store.dispatch('FETCH_TAG_PAGER', {
+      conditions: {
+        tags: params.tagName
+      },
+      select: {
+        tags: 1,
+        title: 1,
+        summary: 1,
+        commentNum: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        pathName: 1
+      },
+      sort: 1,
+      callback
+    });
+  }
+
   import store from '../store/index';
   import myFooter from './Footer.vue';
   import blogSummary from './BlogSummary.vue';
@@ -24,50 +43,17 @@
     },
     data() {
       return {
-        items: [],
         page: 1,
         totalPage: 1
       }
     },
-    beforeRouteEnter(to, from, next) {
-      next(vm => {
-        vm.getItems();
-      })
-    },
-    methods: {
-      getItems() {
-        let loadingPromise = this.$store.dispatch('LOOP_LOADING');
-        store.fetchPost({}, {
-          select: {
-            tags: 1,
-            title: 1,
-            summary: 1,
-            commentNum: 1,
-            createdAt: 1,
-            updatedAt: 1,
-            pathName: 1
-          },
-          sort: 1
-        }).then(result => {
-          this.items = [];
-          result.forEach(value => {
-            for (let i = 0; i < value.tags.length; i++) {
-              let tag = value.tags[i];
-              if (tag === this.$route.params.tagName) {
-                this.items.push(value);
-                break;
-              }
-            }
-          });
-        });
-        loadingPromise.then(interval => {
-          clearInterval(interval);
-          this.$store.dispatch('SET_PROGRESS', 100);
-        });
+    computed: {
+      items() {
+        return this.$store.state.tagPager;
       }
     },
-    created() {
-      this.getItems();
+    asyncData(context) {
+      return getItems(context);
     }
   }
 </script>

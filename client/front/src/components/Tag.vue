@@ -16,12 +16,13 @@
   import store from '../store/index';
   import myFooter from './Footer.vue';
 
-  function fetchTags({store, route: {path: pathName, params, query}}) {
+  function fetchTags({store, route: {path: pathName, params, query}}, callback) {
     return store.dispatch('FETCH_TAGS', {
       conditions: {},
       select: {
         tags: 1
-      }
+      },
+      callback
     });
   }
 

@@ -13,7 +13,7 @@ const prefix = `${host}/api`;
 const aboutAPI = `${host}/api/post?title=关于`;
 const blogAPI = `${host}/api/post`;
 const tagAPI = `${host}/api/tag`;
-const menuAPI = `${host}/api/menu`;
+const themeAPI = `${host}/api/theme?conditions={"name": "firekylin"}`;
 const perPage = 10;
 
 const store = {};
@@ -64,8 +64,8 @@ store.fetchTags = () => {
   return axios.get(tagAPI).then(response => response.data, err => console.log(err));
 };
 
-store.fetchMenu = () => {
-  return axios.get(menuAPI).then(response => response.data, err => console.log(err));
+store.fetchTheme = () => {
+  return axios.get(themeAPI).then(response => response.data, err => console.log(err));
 };
 
 // option CRUD

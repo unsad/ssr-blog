@@ -74,7 +74,7 @@
     },
     computed: {
       compiledMarkdown() {
-        return marked(this.value.replace(/<!--more-->/g, ''), {sanitize: true});
+        return marked(this.value.replace(/<!--more-->/g, ''));
       }
     },
     methods: {

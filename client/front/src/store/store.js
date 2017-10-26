@@ -19,7 +19,7 @@ export function createStore() {
       next: {},
       page: {},
       tagPager: [],
-      menu: [],
+      theme: {},
       progress: 0,
       siteInfo: {
         githubUrl: {
@@ -156,8 +156,10 @@ export function createStore() {
         });
       },
       FETCH_MENU: ({commit, state}) => {
-        return api.fetchMenu().then(obj => {
-          commit('SET_MENU', { obj });
+        return api.fetchTheme().then(obj => {
+          if (obj[0]) {
+            commit('SET_FIREKYLIN', { obj: obj[0] });
+          }
         });
       },
       FETCH_OPTIONS: ({commit, state}) => {
@@ -168,9 +170,6 @@ export function createStore() {
           }, {});
           commit('SET_OPTIONS', {obj});
         });
-      },
-      SET_MENU: (state, { obj }) => {
-        Vue.set(state, 'menu', obj);
       }
     },
     mutations: {
@@ -203,6 +202,9 @@ export function createStore() {
       },
       SET_ACHIEVE: (state, {sortedItem}) => {
         Vue.set(state, 'achieves', sortedItem);
+      },
+      SET_FIREKYLIN: (state, { obj }) => {
+        Vue.set(state, 'theme', obj);
       },
       SET_OPTIONS: (state, {obj}) => {
         Vue.set(state, 'siteInfo', obj);

@@ -4,6 +4,8 @@
 const Koa = require('koa');
 const log = require('./utils/log');
 const router = require('koa-router')();
+const fs = require('fs');
+const path = name => require('path').join(__dirname, 'theme', name);
 const bodyParser = require('koa-bodyparser');
 const koa2RestMongoose = require('./mongo_rest/index');
 const models = require('./model/mongo');
@@ -11,7 +13,6 @@ const tokenService = require('./service/token');
 const redis = require('./model/redis');
 const config = require('./conf/config');
 const option = require('./conf/option');
-const menu = require('./conf/menu');
 const getQiniuTokenFromFileName = require('./service/qiniu');
 const {login, logout, permission} = require('./routes/admin');
 
@@ -58,19 +59,34 @@ Object.keys(models).forEach(value => {
     await initMenu();
   }
 
+  await installTheme();
+
   app.listen(3000);
 
   log.debug('koa2 is running at 3000');
 
 })();
 
-async function initMenu() {
-  for (let i = 0, len = menu.length; i < len; i++) {
-    let url = menu[i].url;
-    let count = await models.menu.find({url}).count().exec();
+// async function initMenu() {
+//   for (let i = 0, len = menu.length; i < len; i++) {
+//     let url = menu[i].url;
+//     let count = await models.menu.find({url}).count().exec();
+//     if (count === 0) {
+//       await models.menu.create(menu[i]);
+//       log.info( `Menu ${url} created`);
+//     }
+//   }
+// }
+
+async function installTheme() {
+  let fileArr = fs.readdirSync('./theme');
+  for (let i = 0, len = fileArr.length; i < len; i++) {
+    let fileName = fileArr[i];
+    let theme = require(`./theme/${fileName}`);
+    let count = await models.theme.find({name: theme.name}).count().exec();
     if (count === 0) {
-      await models.menu.create(menu[i]);
-      log.info( `Menu ${url} created`);
+      await models.theme.create(theme);
+      log.info(`theme ${theme.name} created`);
     }
   }
 }

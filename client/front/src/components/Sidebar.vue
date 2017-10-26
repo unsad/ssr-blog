@@ -1,31 +1,34 @@
 <template>
-  <nav id="sidebar">
+  <nav id="sidebar" class="behavior_1"
+       :class="{'sidebar-image': option.sidebarImageUrl !== ''}"
+       :style="{'background-image': option.sidebarImageUrl ? 'url(' + option.sidebarImageUrl + ')' : ''}">
     <div class="profile">
       <a href="/">
         <img :src="siteInfo.logoUrl.value" :alt="siteInfo.title.value" ref="logo">
       </a>
-      <span>{{siteInfo.title.value}}</span>
+      <span :style="{'color': option.sidebarFontColor || ''}">{{siteInfo.title.value}}</span>
     </div>
     <ul class="buttons">
-      <li v-for="menu of menus">
-        <router-link :to="{path: menu.url}" :title="menu.label">
+      <li v-for="menu of option.menus">
+        <router-link :style="{'color': option.sidebarFontColor || ''}" :to="{path: menu.url}" :title="menu.label">
+          <i class="iconfont" :class="'icon-' + menu.option"></i>
           <span>{{menu.label}}</span>
         </router-link>
       </li>
     </ul>
     <ul class="buttons">
       <li>
-        <a :href="'https://github.com' + siteInfo.githubUrl.value" target="_blank" class="inline">
+        <a :style="{'color': option.sidebarFontColor || ''}" :href="'https://github.com' + siteInfo.githubUrl.value" target="_blank" class="inline">
           <i title="GitHub"></i>
         </a>
       </li>
       <li>
-        <a href="/rss.xml" target="_blank" class="inline">
+        <a :style="{'color': option.sidebarFontColor || ''}" href="/rss.xml" target="_blank" class="inline">
           <i title="RSS"></i>
         </a>
       </li>
       <li>
-        <a href="/search" target="_blank" class="inline">
+        <a :style="{'color': option.sidebarFontColor || ''}" href="/search" target="_blank" class="inline">
           <i title="Search"></i>
         </a>
       </li>
@@ -38,12 +41,16 @@
     name: 'sideBar',
     data() {
       return {
-        siteInfo: this.$store.getters.siteInfo,
-        menus: this.$store.getters.menu
+        siteInfo: this.$store.getters.siteInfo
       }
     },
     asyncData({store, route: {path, params, query}}) {
-      return Promise.all([store.dispatch('FETCH_OPTIONS'), store.dispatch('FETCH_MENU')]);
+      return Promise.all([store.dispatch('FETCH_OPTIONS'), store.dispatch('FETCH_FIREKYLIN')]);
+    },
+    computed: {
+      option() {
+        return this.$store.state.theme.option;
+      }
     },
     mounted() {
       let img = this.$refs.logo;

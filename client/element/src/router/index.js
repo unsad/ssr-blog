@@ -678,7 +678,7 @@ export default new Router({
     },
     {
       path: '/',
-      redirect: '/dashboard'
+      redirect: '/admin/login'
     }
   ]
 })

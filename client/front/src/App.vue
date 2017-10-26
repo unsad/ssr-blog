@@ -1,19 +1,33 @@
 <template>
   <div id="app">
-    <sidebar></sidebar>
-    <my-header></my-header>
-    <router-view></router-view>
+    <loading-bar :on-progress-done="onProgressDone" :progress="progress"></loading-bar>
+    <keep-alive>
+      <router-view name="sidebar"></router-view>
+    </keep-alive>
+    <keep-alive>
+      <router-view name="header"></router-view>
+    </keep-alive>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-  import sidebar from './components/Sidebar.vue';
-  import myHeader from './components/Header.vue';
+  import sidebar from './components/Sidebar';
+  import myHeader from './components/Header';
+  import LoadingBar from './components/Loading';
   export default {
     name: 'app',
     components: {
       sidebar,
-      myHeader
+      myHeader,
+      LoadingBar
+    },
+    methods: {
+      onProgressDone() {
+
+      }
     }
   }
 </script>

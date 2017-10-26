@@ -98,8 +98,8 @@
 
       },
       validate() {
-        this.form.summary = marked(this.form.markdownContent.split('<!--more-->')[0], {sanitize: true});
-        this.form.content = marked(this.form.markdownContent.replace(/<!--more-->/g, ''), {sanitize: true});
+        this.form.summary = marked(this.form.markdownContent.split('<!--more-->')[0]);
+        this.form.content = marked(this.form.markdownContent.replace(/<!--more-->/g, ''));
         if (this.form.createdAt === '') {
           this.form.createdAt = moment().format('YYYY-MM-DD HH:mm:ss').toString();
         } else {

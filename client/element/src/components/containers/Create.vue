@@ -2,7 +2,7 @@
   <div>
   <el-form ref="form" :model="form" label-width="120px">
     <el-form-item v-for="(item, index) of options.items" :key="index" :label="item.label">
-      <el-input v-if="typeof item.description === 'undefined'" v-model="form[item.prop]"></el-input>
+      <el-input :autosize="{minRows: 2, maxRows: 16}" :type="item.type || 'text'" v-if="typeof item.description === 'undefined'" v-model="form[item.prop]"></el-input>
       <el-popover
         v-if="typeof item.description !== 'undefined'"
         placement="right-start"
@@ -10,7 +10,7 @@
         width="50%"
         trigger="hover"
         :content="item.description">
-        <el-input slot="reference" v-model="form[item.prop]"></el-input>
+        <el-input slot="reference" :autosize="{minRows: 2, maxRows: 16}" :type="item.type || 'text'" v-model="form[item.prop]"></el-input>
       </el-popover>
     </el-form-item>
     <el-form-item>
@@ -44,7 +44,30 @@
       }
     },
     methods: {
+      parseTypeBeforeSubmit() {
+        let isOk = true;
+        this.options.items.forEach(item => {
+          try {
+            if (item.sourceType === 'Object') {
+              this.form[item.prop] = JSON.parse(this.form[item.prop]);
+            }
+          } catch (err) {
+            isOk = false;
+          }
+        });
+        return isOk;
+      },
+      parseTypeAfterFetch() {
+        this.options.items.forEach(item => {
+          if (item.sourceType === 'Object') {
+            this.form[item.prop] = JSON.stringify(this.form[item.prop]);
+          }
+        });
+      },
       onSubmit() {
+        if (this.parseTypeBeforeSubmit() === false) {
+          return this.$message.error('属性验证失败');
+        }
         let id = this.$route.params.id;
         if (typeof id !== 'undefined') {
           // patch
@@ -52,6 +75,7 @@
             id: this.$route.params.id,
             form: this.form
           }, this.options)).then(data => {
+            this.parseTypeAfterFetch();
             this.$message({
               message: '已成功提交',
               type: 'success'
@@ -62,6 +86,7 @@
           return this.$store.dispatch('POST', Object.assign({}, {
             form: this.form
           }, this.options)).then(data => {
+            this.parseTypeAfterFetch();
             this.$message({
               message: '已成功提交',
               type: 'success'

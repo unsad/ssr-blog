@@ -1,7 +1,8 @@
 <template>
   <nav id="sidebar" class="behavior_1"
        :class="{'sidebar-image': option.sidebarImageUrl !== ''}"
-       :style="{'background-image': option.sidebarImageUrl ? 'url(' + option.sidebarImageUrl + ')' : ''}">
+       :style="{'background-image': option.sidebarImageUrl ? 'url(' + option.sidebarImageUrl + ')' : '',
+       'transition': option.sidebarImageUrl ? 'background 2s ease-in-out;' : ''}">
     <div class="profile">
       <a href="/">
         <img :src="siteInfo.logoUrl.value" :alt="siteInfo.title.value" ref="logo">

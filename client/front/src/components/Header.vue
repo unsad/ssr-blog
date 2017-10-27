@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div id="header">
+    <div id="header" :style="{'background-image': option.sidebarImageUrl ? 'url(' + option.sidebarImageUrl + ')' : ''}">
       <div><i></i></div>
-      <h1><a href="/">{{siteInfo.title.value}}</a></h1>
+      <h1><a href="/" :style="{'color': option.sidebarFontColor || ''}">{{siteInfo.title.value}}</a></h1>
       <a href="/about"><img :src="siteInfo.logoUrl.value" :alt="siteInfo.title.value"></a>
     </div>
     <div id="sidebar-mask"></div>
@@ -17,6 +17,11 @@
 
       return {
         siteInfo: this.$store.getters.siteInfo
+      }
+    },
+    computed: {
+      option() {
+        return this.$store.state.theme.option;
       }
     },
     serverCacheKey: props => {

@@ -34,6 +34,7 @@
           isPublic: true
         },
         select: {
+          _id: 0,
           title: 1,
           summary: 1,
           commentNum: 1,

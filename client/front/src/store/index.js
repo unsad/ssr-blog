@@ -13,7 +13,7 @@ const prefix = `${host}/api`;
 const aboutAPI = `${host}/api/post?title=关于`;
 const blogAPI = `${host}/api/post`;
 const tagAPI = `${host}/api/tag`;
-const themeAPI = `${host}/api/theme?conditions={"name": "firekylin"}`;
+const themeAPI = `${host}/api/theme?conditions={"name": "firekylin"}&select={"_id": 0}`;
 const perPage = 10;
 
 const store = {};
@@ -71,6 +71,6 @@ store.fetchTheme = () => {
 // option CRUD
 
 store.fetchOption = () => {
-  return axios.get(`${prefix}/option?select={"key": 1, "value": 1}`).then(response => response.data, err => console.log(err));
+  return axios.get(`${prefix}/option?select={"_id": 0, "key": 1, "value": 1}`).then(response => response.data, err => console.log(err));
 };
 

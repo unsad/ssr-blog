@@ -20,6 +20,7 @@
     return store.dispatch('FETCH_TAGS', {
       conditions: {},
       select: {
+        _id: 0,
         tags: 1
       },
       callback

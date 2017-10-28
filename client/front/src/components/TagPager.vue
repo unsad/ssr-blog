@@ -16,6 +16,7 @@
         tags: params.tagName
       },
       select: {
+        _id: 0,
         tags: 1,
         title: 1,
         summary: 1,

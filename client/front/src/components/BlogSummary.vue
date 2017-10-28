@@ -25,7 +25,7 @@
       }
     },
     serverCacheKey: props => {
-      return `${props.article._id}::${props.article.updatedAt}`
+      return `${props.article.pathName}::${props.article.updatedAt}`
     }
   }
 </script>

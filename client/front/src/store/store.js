@@ -62,6 +62,7 @@ export function createStore() {
             sort: 1,
             limit: 1,
             select: {
+              _id: 0,
               title: 1,
               pathName: 1,
               type: 1
@@ -74,6 +75,7 @@ export function createStore() {
           }, {
             limit: 1,
             select: {
+              _id: 0,
               title: 1,
               pathName: 1,
               type: 1

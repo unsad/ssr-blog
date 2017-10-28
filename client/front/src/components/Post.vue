@@ -6,11 +6,6 @@
           <div class="date">
             {{article.createdAt}}
           </div>
-          <div class="comment">
-            <a href="#comments">
-              {{article.commentNum}} comments
-            </a>
-          </div>
         </div>
         <h1 class="title">{{article.title}}</h1>
         <div class="entry-content" v-html="article.content">
@@ -83,7 +78,6 @@
           createdAt: 1,
           content: 1,
           updatedAt: 1,
-          commentNum: 1,
           pathName: 1,
           category: 1,
           allowComment: 1,

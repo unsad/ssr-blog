@@ -13,9 +13,6 @@
       return {
         siteInfo: this.$store.getters.siteInfo
       }
-    },
-    serverCacheKey: props => {
-      return 'static-footer'
     }
   }
 </script>

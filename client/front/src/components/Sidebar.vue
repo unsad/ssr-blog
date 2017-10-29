@@ -77,9 +77,6 @@
       if (img) {
         img.onerror = ({target}) => (img.src = target.currentSrc.replace('.webp', '.png'));
       }
-    },
-    serverCacheKey: props => {
-      return 'static-sidebar'
     }
   }
 </script>

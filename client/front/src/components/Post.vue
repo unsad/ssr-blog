@@ -72,7 +72,11 @@
     asyncData({store, route: {path: pathName, params, query}}, callback) {
       pathName = pathName.replace(/^\/post\//g, '');
       return store.dispatch('FETCH_BLOG', {
-        conditions: {pathName},
+        conditions: {
+          pathName,
+          isPublic: true,
+          type: 'post'
+        },
         select: {
           title: 1,
           createdAt: 1,

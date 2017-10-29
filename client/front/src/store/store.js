@@ -129,7 +129,7 @@ export function createStore() {
           callback && callback();
           if (state.totalPage === -1) {
             return api.fetchPost(
-              {type: 'post'}, {count: 1}).then(totalPage => {
+              {type: 'post', isPublic: true}, {count: 1}).then(totalPage => {
               commit('SET_PAGES', {totalPage: Math.ceil(totalPage / 10)});
             });
           }

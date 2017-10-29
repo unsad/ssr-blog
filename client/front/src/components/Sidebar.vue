@@ -19,7 +19,22 @@
     </ul>
     <ul class="buttons">
       <li>
-        <a :style="{'color': option.sidebarFontColor || ''}" :href="'https://github.com' + siteInfo.githubUrl.value" target="_blank" class="inline">
+        <a :style="{'color': option.sidebarFontColor || ''}"
+           :href="'https://github.com' + siteInfo.githubUrl.value"
+           target="_blank"
+           class="inline"
+           v-if="siteInfo.githubUrl.value"
+           ref="nofollow">
+          <i title="GitHub"></i>
+        </a>
+      </li>
+      <li>
+        <a :style="{'color': option.sidebarFontColor || ''}"
+           :href="siteInfo.weiboUrl.value"
+           target="_blank"
+           class="inline"
+           v-if="siteInfo.weiboUrl.value"
+           ref="nofollow">
           <i title="GitHub"></i>
         </a>
       </li>
@@ -29,7 +44,11 @@
         </a>
       </li>
       <li>
-        <a :style="{'color': option.sidebarFontColor || ''}" :href="'https://www.google.com/webhp#newwindow=1&safe=strict&q=site:' + siteInfo.siteUrl.value" target="_blank" class="inline">
+        <a :style="{'color': option.sidebarFontColor || ''}"
+           :href="'https://www.google.com/webhp#newwindow=1&safe=strict&q=site:' + siteInfo.siteUrl.value"
+           target="_blank"
+           class="inline"
+           v-if="siteInfo.siteUrl.value">
           <i title="Search"></i>
         </a>
       </li>

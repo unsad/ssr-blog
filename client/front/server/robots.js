@@ -1,9 +1,7 @@
 /**
  * Created by unsad on 2017/10/8.
  */
-let {siteUrl} = require('./config');
-
-module.exports =
+module.exports = config =>
   `User-agent: *
   Disallow: /beacon
 

@@ -1,6 +1,8 @@
 /**
  * Created by unsad on 2017/9/24.
  */
+const isProd = process.env.NODE_ENV === 'production';
+
 const fs = require('fs');
 const path = require('path');
 const LRU = require('lru-cache');
@@ -8,46 +10,52 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const microcache = require('route-cache');
-const robots = require('./server/robots.js');
+const schedule = require('node-schedule');
 const axios = require('axios');
+
+const getRobotsFromConfig = require('./server/robots.js');
 const { api: sitemapApi, getSitemapFromBody } = require('./server/sitemap.js');
 const { api: rssApi, getRssBodyFromBody } = require('./server/rss.js');
-let { title } = require('./server/config');
+const inline = fs.readFileSync(resolve('./dist/styles.css'), 'utf-8');
+const config = require('./server/config');
 
-axios.get('localhost:3000/api/options?conditions={"key": "title"}').then(result => {
-  if (Array.isArray(result) && result.length !== 0) {
-    title = result[0].value;
-  }
-});
-
-const schedule = require('node-schedule');
-
+let html = flushHtml();
 let sitemap = '';
-axios.get(sitemapApi).then(result => {
-  sitemap = getSitemapFromBody(result);
-});
-
-let sitemapJob = schedule.scheduleJob(`30 3 * * *`, () => {
-  axios.get(sitemapApi).then(result => {
-    sitemap = getSitemapFromBody(result);
-  });
-});
-
 let rss = '';
-axios.get(rssApi).then(result => {
-  rss = getRssBodyFromBody(result);
-});
+let robots = '';
 
-let rssJob = schedule.scheduleJob(`30 3 * * *`, () => {
-  axios.get(rssApi).then(result => {
-    rss = getRssBodyFromBody(result);
+config.flushOption().then(() => {
+  robots = getRobotsFromConfig(config);
+  html = flushHtml();
+
+  const flushSitemap = () => axios.get(sitemapApi).then(result => {
+    sitemap = getSitemapFromBody(result, config);
+  });
+  const flushRss = () => axios.get(rssApi).then(result => {
+    rss = getRssBodyFromBody(result, config);
+  });
+
+  flushSitemap();
+  flushRss();
+
+  schedule.scheduleJob('30 3 * * *', function() {
+    flushRss();
+    flushSitemap();
   });
 });
 
+function flushHtml() {
+  const template = fs.readFileSync(resolve('./index.html'), 'utf-8');
+  const i = template.indexOf('<div id=app></div>');
+  const style = isProd ? `<style>${inline}</style>` : '<link rel=stylesheet href=/dist/styles.css>';
+  return {
+    head: template.slice(0, i).replace('vue_client_side', config.title).replace('<link rel=stylesheet href=/dist/styles.css>', style),
+    tail: template.slice(i + '<div id=app></div>'.length)
+  }
+}
 const resolve = file => path.resolve(__dirname, file);
 const {createBundleRenderer} = require('vue-server-renderer');
 
-const isProd = process.env.NODE_ENV === 'production';
 const useMicroCache = process.env.MIRCO_CACHE !== 'false';
 const serverInfo =
   `express/${require('express/package.json').version}` +
@@ -87,6 +95,11 @@ const serve = (path, cache) => express.static(resolve(path), {
 });
 
 app.use(compression({threshold: 0}));
+
+isProd && app.use((req, res, next) => {
+  console.log(`${req.method} ${decodeURIComponent(req.url)}`);
+  return next();
+});
 app.use('./dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
 app.use('/service-worker.js', serve('./dist/service-worker.js'));
@@ -126,18 +139,18 @@ function render (req, res) {
   });
 }
 
-app.get('/robots.txt', (req, res) => {
-  res.end(robots);
+app.get('/robots.txt', (req, res, next) => {
+  return res.end(robots);
 });
 
-app.get('./rss.xml', (req, res) => {
+app.get('./rss.xml', (req, res, next) => {
   res.header('Content-Type', 'application/xml');
   res.end(rss);
 });
 
-app.get('/sitemap.xml', (req, res) => {
+app.get('/sitemap.xml', (req, res, next) => {
   res.header('Content-Type', 'application/xml');
-  res.end(sitemap);
+  return res.end(sitemap);
 });
 
 app.use((req, res, next) => {

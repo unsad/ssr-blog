@@ -64,19 +64,12 @@ let user = new Schema({
   email: String
 });
 
-let version = new Schema({
-  name: String,
-  version: String,
-  path: String
-});
-
 post = mongoose.model('post', post);
 category = mongoose.model('category', category);
 option = mongoose.model('option', option);
 theme = mongoose.model('theme', theme);
 tag = mongoose.model('tag', tag);
 user = mongoose.model('user', user);
-version = mongoose.model('version', version);
 
 module.exports = {
   post,
@@ -84,7 +77,6 @@ module.exports = {
   option,
   tag,
   user,
-  version,
   theme
 };
 

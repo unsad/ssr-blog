@@ -29,7 +29,7 @@
         </a>
       </li>
       <li>
-        <a :style="{'color': option.sidebarFontColor || ''}" href="/search" target="_blank" class="inline">
+        <a :style="{'color': option.sidebarFontColor || ''}" :href="'https://www.google.com/webhp#newwindow=1&safe=strict&q=site:' + siteInfo.siteUrl.value" target="_blank" class="inline">
           <i title="Search"></i>
         </a>
       </li>

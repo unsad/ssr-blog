@@ -15,6 +15,8 @@ const config = require('./conf/config');
 const option = require('./conf/option');
 const getQiniuTokenFromFileName = require('./service/qiniu');
 const {login, logout, permission} = require('./routes/admin');
+const bluebird = require('bluebird');
+global.Promise = bluebird;
 
 const app = new Koa();
 app.use(bodyParser());
@@ -66,17 +68,6 @@ Object.keys(models).forEach(value => {
   log.debug('koa2 is running at 3000');
 
 })();
-
-// async function initMenu() {
-//   for (let i = 0, len = menu.length; i < len; i++) {
-//     let url = menu[i].url;
-//     let count = await models.menu.find({url}).count().exec();
-//     if (count === 0) {
-//       await models.menu.create(menu[i]);
-//       log.info( `Menu ${url} created`);
-//     }
-//   }
-// }
 
 async function installTheme() {
   let fileArr = fs.readdirSync('./theme');

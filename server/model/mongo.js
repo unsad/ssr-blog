@@ -5,7 +5,7 @@ const config = require('../conf/config');
 const mongoose = require('mongoose');
 const log = require('../utils/log');
 mongoose.Promise = global.Promise;
-let mongoUrl = '127.0.0.1:27017/blog';
+let mongoUrl = `${config.mongoHost}:${config.mongoPort}/${config.mongoDatabase}`;
 
 mongoose.connect(mongoUrl);
 

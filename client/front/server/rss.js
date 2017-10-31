@@ -14,7 +14,7 @@ let getRssBodyFromBody = (result, config) => {
     <title>${title}</title>
     <link>${siteUrl}</link>
     <description>${description}</description>
-    <atom:link href="${siteUrl}/rss.html" rel="self"/>
+    <atom:link href="${siteUrl}/rss.xml" rel="self"/>
     <language>zh-cn</language>\r\n`
   let body = res.reduce((prev, curr)=>{
     let date = new Date(curr.updatedAt).toUTCString()

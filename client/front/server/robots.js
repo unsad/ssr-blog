@@ -3,9 +3,6 @@
  */
 module.exports = config =>
   `User-agent: *
-  Disallow: /beacon
-
-  Disallow: /search
   
   Allow: /
   Sitemap: ${siteUrl}/sitemap.xml

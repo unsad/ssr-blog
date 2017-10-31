@@ -39,7 +39,7 @@ Object.defineProperty(exports, 'siteUrl', {
   }
 });
 
-Object.defineProperty(exports, 'siteUrl', {
+Object.defineProperty(exports, 'description', {
   enumerable: true,
   get: function() {
     return description;

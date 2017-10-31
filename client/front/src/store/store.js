@@ -49,7 +49,6 @@ export function createStore() {
         return interval;
       },
       FETCH_BLOG: ({commit, state, dispatch}, {conditions, callback, ...args}) => {
-        let loadingPromise = dispatch('LOOP_LOADING');
         return api.fetchPost(conditions, args).then(result => {
           let blog = result[0];
           commit('SET_BLOG', {blog});
@@ -115,7 +114,6 @@ export function createStore() {
         });
       },
       FETCH_PAGE: ({commit, state, dispatch}, {conditions, callback, ...args}) => {
-        let loadingPromise = dispatch('LOOP_LOADING');
         return api.fetchPost(conditions, args).then(result => {
           let blog = result[0];
           commit('SET_PAGE', {blog});
@@ -123,7 +121,6 @@ export function createStore() {
         });
       },
       FETCH_ITEMS: ({commit, state}, {conditions, callback, ...args}) => {
-        let loadingPromise = dispatch('LOOP_LOADING');
         return api.fetchPost(conditions, args).then(items => {
           commit('SET_ITEMS', {items});
           callback && callback();

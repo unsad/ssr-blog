@@ -22,7 +22,7 @@
 
       }
     },
-    asyncData({store, route: {path, query, params}}, callback) {
+    asyncData({store, route: {path, query, params}, callback}) {
       if (path !== '/') return resolve();
       let page = query ? (typeof query.page !== 'undefined') ? parseInt(query.page) : 1 : 1;
       if (page < 0) {

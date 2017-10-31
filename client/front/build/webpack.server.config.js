@@ -34,7 +34,7 @@ module.exports = merge(baseConfig, {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warning: false
+        warnings: false
       },
       output: {
         comments: false

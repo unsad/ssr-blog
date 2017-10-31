@@ -14,14 +14,10 @@
 </template>
 
 <script>
-  import sidebar from './components/Sidebar';
-  import myHeader from './components/Header';
   import LoadingBar from './components/Loading';
   export default {
     name: 'app',
     components: {
-      sidebar,
-      myHeader,
       LoadingBar
     },
     methods: {

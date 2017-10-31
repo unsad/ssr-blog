@@ -5,6 +5,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const fs = require('fs');
 const path = require('path');
+const resolve = file => path.resolve(__dirname, file);
 const LRU = require('lru-cache');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -16,7 +17,6 @@ const axios = require('axios');
 const getRobotsFromConfig = require('./server/robots.js');
 const { api: sitemapApi, getSitemapFromBody } = require('./server/sitemap.js');
 const { api: rssApi, getRssBodyFromBody } = require('./server/rss.js');
-const inline = fs.readFileSync(resolve('./dist/styles.css'), 'utf-8');
 const config = require('./server/config');
 
 let html = flushHtml();
@@ -53,7 +53,7 @@ function flushHtml() {
     tail: template.slice(i + '<div id=app></div>'.length)
   }
 }
-const resolve = file => path.resolve(__dirname, file);
+
 const {createBundleRenderer} = require('vue-server-renderer');
 
 const useMicroCache = process.env.MIRCO_CACHE !== 'false';

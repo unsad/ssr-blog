@@ -58,7 +58,6 @@ Object.keys(models).forEach(value => {
     log.info(`account '${result.name}' with password '${result.password}' is created`);
 
     await initOption();
-    await initMenu();
   }
 
   await installTheme();

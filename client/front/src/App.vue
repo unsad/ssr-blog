@@ -24,6 +24,11 @@
       onProgressDone() {
 
       }
+    },
+    computed: {
+      progress() {
+        return this.$store.state.progress;
+      }
     }
   }
 </script>

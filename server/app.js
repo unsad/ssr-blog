@@ -41,6 +41,7 @@ Object.keys(models).forEach(value => {
 
 (async () => {
   let count = await models.user.find().count().exec();
+  console.log(count)
   if (count === 0) {
     if (config.defaultAdminPassword === 'admin') {
       log.error('you must change the default password at ./conf/confjg.js');

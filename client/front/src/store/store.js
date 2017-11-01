@@ -28,7 +28,16 @@ export function createStore() {
         title: {
           value: ''
         },
+        faviconUrl: {
+          value: ''
+        },
         logoUrl: {
+          value: ''
+        },
+        weiboUrl: {
+          value: ''
+        },
+        siteUrl: {
           value: ''
         }
       }
@@ -154,7 +163,7 @@ export function createStore() {
           callback && callback();
         });
       },
-      FETCH_MENU: ({commit, state}) => {
+      FETCH_FIREKYLIN: ({commit, state}) => {
         return api.fetchTheme().then(obj => {
           if (obj[0]) {
             commit('SET_FIREKYLIN', { obj: obj[0] });

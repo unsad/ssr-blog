@@ -5,13 +5,13 @@ const config = require('../conf/config');
 const mongoose = require('mongoose');
 const log = require('../utils/log');
 mongoose.Promise = global.Promise;
-let mongoUrl = `${config.mongoHost}:${config.mongoPort}/${config.mongoDatabase}`;
+let mongoUrl = `${config.mongoHost}:${config.mongoPort}/${config.mongoDataBase}`;
 
 mongoose.connect(mongoUrl);
 
 let db = mongoose.connection; // 监控数据库变化
 db.on('error', (err) => log.error('connect error:', err));
-db.once('open', () => log.debug('MongoDB is ready!'));
+db.once('open', () => log.debug(`MongoDB is ready on ${mongoUrl}`));
 
 let Schema = mongoose.Schema;
 let ObjectId = Schema.ObjectId;

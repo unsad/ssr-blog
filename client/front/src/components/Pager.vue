@@ -23,16 +23,14 @@
   import disqus from './Disqus.vue';
 
   export default {
+    name: 'pager',
     props: ['page'],
     data () {
       return {}
     },
-    serverCacheKey: props => {
-      return `${props.page.pathName}::${props.page.updatedAt}`
-    },
     computed: {
       article () {
-        return this.page
+        return this.page || {}
       },
       commentType () {
         return this.$store.state.siteInfo.commentType.value || 'disqus'

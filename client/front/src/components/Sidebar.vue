@@ -10,7 +10,7 @@
       <span :style="{'color': option.sidebarFontColor || ''}">{{siteInfo.title.value}}</span>
     </div>
     <ul class="buttons">
-      <li v-for="menu of option.menus">
+      <li v-for="menu of option.menu">
         <router-link :style="{'color': option.sidebarFontColor || ''}" :to="{path: menu.url}" :title="menu.label">
           <i class="iconfont" :class="'icon-' + menu.option"></i>
           <span>{{menu.label}}</span>
@@ -75,7 +75,7 @@
     mounted() {
       let img = this.$refs.logo;
       if (img) {
-        img.onerror = ({target}) => (img.src = target.currentSrc.replace('.webp', '.png'));
+//        img.onerror = ({target}) => (img.src = target.currentSrc.replace('.webp', '.png'));
       }
     }
   }

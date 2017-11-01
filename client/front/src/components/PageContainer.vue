@@ -26,7 +26,7 @@
   }
 
   export default {
-    name: 'about',
+    name: 'pageContainer',
     data() {
       return {
       }

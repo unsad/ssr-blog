@@ -28,15 +28,6 @@ export function createRouter() {
         }
       },
       {
-        path: '/:page',
-        name: 'page',
-        components: {
-          default: PageContainer,
-          sidebar: Sidebar,
-          header: Header
-        }
-      },
-      {
         path: '/post/:pathName',
         name: 'post',
         components: {
@@ -72,6 +63,15 @@ export function createRouter() {
           header: Header
         }
       },
+      {
+        path: '/:page',
+        name: 'page',
+        components: {
+          default: PageContainer,
+          sidebar: Sidebar,
+          header: Header
+        }
+      }
     ]
   });
 }

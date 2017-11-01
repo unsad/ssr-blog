@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const resolve = file => path.resolve(__dirname, file);
 const LRU = require('lru-cache');
+const favicon = require('serve-favicon');
 const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
@@ -100,6 +101,8 @@ isProd && app.use((req, res, next) => {
   console.log(`${req.method} ${decodeURIComponent(req.url)}`);
   return next();
 });
+
+app.use(favicon('./static/logo.jpg'));
 app.use('./dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
 app.use('/service-worker.js', serve('./dist/service-worker.js'));

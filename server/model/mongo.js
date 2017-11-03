@@ -28,7 +28,7 @@ let post = new Schema({
   createdAt: {type: String, default: ''},
   updatedAt: {type: String, default: ''},
   // 1为公开，0为不公开
-  isPubilc: {type: Boolean, default: true},
+  isPublic: {type: Boolean, default: true},
   commentNum: Number,
   options: Object,
   category: String,

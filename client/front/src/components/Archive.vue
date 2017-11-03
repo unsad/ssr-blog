@@ -19,7 +19,7 @@
 <script>
   import myFooter from './Footer.vue';
 
-  function fetchArchive(store, route, callback) {
+  function fetchArchive({store, route}, callback) {
     return store.dispatch('FETCH_ACHIEVE', {
       conditions: {type: 'post'},
       select: {

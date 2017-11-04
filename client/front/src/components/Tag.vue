@@ -46,7 +46,7 @@
       },
       sortedKeys() {
         let ref = this.items;
-        return Object.keys(ref).sort((a, b) => ref[a] < ref[b]);
+        return Object.keys(ref).sort((a, b) => ref[b] < ref[a]);
       }
     },
     asyncData(context) {

@@ -2,9 +2,8 @@
   <div>
     <div v-if="show" class="loading-bar loading-bar--to_right"
        :class="{'loading-bar--full': full}" :style="styling()">
-
+      <div class="loading-bar-glow"></div>
     </div>
-    <div class="loading-bar-glow"></div>
   </div>
 </template>
 

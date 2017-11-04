@@ -5,7 +5,7 @@
        'transition': option.sidebarImageUrl ? 'background 2s ease-in-out;' : ''}">
     <div class="profile">
       <a href="/">
-        <img :src="siteInfo.logoUrl.value" :alt="siteInfo.title.value" ref="logo">
+        <img :src="option.logoUrl.value" :alt="siteInfo.title.value" ref="logo">
       </a>
       <span :style="{'color': option.sidebarFontColor || ''}">{{siteInfo.title.value}}</span>
     </div>

@@ -31,9 +31,6 @@ export function createStore() {
         faviconUrl: {
           value: ''
         },
-        logoUrl: {
-          value: ''
-        },
         weiboUrl: {
           value: ''
         },

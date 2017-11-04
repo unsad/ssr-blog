@@ -54,7 +54,7 @@ router.onReady(() => {
       window.ga.l = +new Date;
       window.ga('create', 'UA-86299315-1', 'auto');
       window.ga('send', 'pageview');
-      router.beforeEach(route => {
+      router.afterEach(route => {
         window.ga('send', {
           hitType: 'pageview',
           page: route.path,

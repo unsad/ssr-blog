@@ -15,6 +15,7 @@ const config = require('./conf/config');
 const option = require('./conf/option');
 const getQiniuTokenFromFileName = require('./service/qiniu');
 const {login, logout, permission} = require('./routes/admin');
+const restc = require('restc');
 const bluebird = require('bluebird');
 global.Promise = bluebird;
 
@@ -28,7 +29,9 @@ app.use(async (ctx, next) => {
   log.info(`${ctx.method} ${decodeURIComponent(ctx.url)} - ${ms}ms`);
 });
 
-router.post('/admin/token', permission, (ctx, next) => {
+app.use(restc.koa2());
+
+router.post('/admin/qiniu', permission, (ctx, next) => {
   const { key } = ctx.request.body;
   ctx.body = getQiniuTokenFromFileName(key);
 });

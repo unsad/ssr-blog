@@ -4,7 +4,7 @@
       <h1 class="title">{{title}}</h1>
       <div class="entry-content">
         <section>
-          <router-link v-for="(item, key, index) of items" :key="item" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">{{key}}({{item}})</router-link>
+          <router-link v-for="key of sortedKeys" :key="item" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">{{key}}({{items[key]}})</router-link>
         </section>
       </div>
     </article>
@@ -43,6 +43,10 @@
     computed: {
       items() {
         return this.$store.state.tags
+      },
+      sortedKeys() {
+        let ref = this.items;
+        return Object.keys(ref).sort((a, b) => ref[a] < ref[b]);
       }
     },
     asyncData(context) {

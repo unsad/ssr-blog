@@ -30,6 +30,8 @@ export default context => {
         context.state = store.state;
         resolve(app);
       }).catch(reject);
-    }, reject);
+    }, reject => {
+      console.error(Date.now().toLocaleString(), reject);
+    });
   });
 }

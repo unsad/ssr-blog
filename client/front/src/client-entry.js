@@ -32,20 +32,24 @@ router.onReady(() => {
       return diffed || (diffed = (prevMatched[i] !== c));
     });
     const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _);
-    if (!asyncDataHooks.length) return next();
-
     let loadingPromise = store.dispatch('START_LOADING');
-    let endLoadingCallback = () => {
+    let endLoadingCallback = (path) => {
       return loadingPromise.then(interval => {
         clearInterval(interval);
         store.dispatch('SET_PROGRESS', 100);
+        next(path);
       });
     };
 
+    if (!asyncDataHooks.length) return endLoadingCallback('');
+
+
     Promise.all(asyncDataHooks.map(hook => hook({store, route: to}))).then(() => {
       endLoadingCallback();
-      next();
-    }).catch(next);
+    }).catch(err => {
+      console.error(Date.now().toLocaleString(), err);
+      endLoadingCallback('/');
+    });
   });
 
   if (window.__INITIAL_STATE__.siteInfo) {

@@ -57,6 +57,9 @@ export function createStore() {
       FETCH_BLOG: ({commit, state, dispatch}, {conditions, callback, ...args}) => {
         return api.fetchPost(conditions, args).then(result => {
           let blog = result[0];
+          if (!blog) {
+            return Promise.reject('post not exist');
+          }
           commit('SET_BLOG', {blog});
           callback && callback();
           let first = api.fetchPost({
@@ -122,6 +125,9 @@ export function createStore() {
       FETCH_PAGE: ({commit, state, dispatch}, {conditions, callback, ...args}) => {
         return api.fetchPost(conditions, args).then(result => {
           let blog = result[0];
+          if (blog) {
+            commit('SET_PAGE', {blog});
+          }
           commit('SET_PAGE', {blog});
           callback && callback();
         });

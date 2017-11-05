@@ -1,10 +1,10 @@
 /**
  * Created by unsad on 2017/11/5.
  */
-const log = require('log4js').getLogger('googleAnalytic')
+const log = require('log4js').getLogger('google analytic')
 
 const config = require('../server/config')
-const request = require('superagent')
+const request = require('axios')
 const uuid = require('uuid')
 const EMPTY_GIF = new Buffer('R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==', 'base64')
 const expires = 3600 * 1000 * 24 * 365 * 2
@@ -76,6 +76,6 @@ module.exports = (req, res, next, query) => {
       log.error(response, form)
       return
     }
-    log.debug('Google Analytics sended', form.cid)
+    log.debug('Google Analytic sended', form.cid, form.ua)
   })
 }

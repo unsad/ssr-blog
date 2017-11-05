@@ -3,6 +3,7 @@
  */
 import Vue from 'vue';
 import { createApp } from './main';
+import clientGoogleAnalyse from './utils/clientGoogleAnalyse';
 Vue.mixin({
   beforeRouteUpdate(to, from, next) {
     const { asyncData } = this.$options;
@@ -50,17 +51,8 @@ router.onReady(() => {
   if (window.__INITIAL_STATE__.siteInfo) {
     let analyzeCode = window.__INITIAL_STATE__.siteInfo.analyzeCode;
     if (analyzeCode && analyzeCode.value !== '') {
-      window.ga = window.ga|| function(){(ga.q=ga.q||[]).push(arguments)};
-      window.ga.l = +new Date;
-      window.ga('create', 'UA-86299315-1', 'auto');
-      window.ga('send', 'pageview');
       router.afterEach(route => {
-        window.ga('send', {
-          hitType: 'pageview',
-          page: route.path,
-          location: window.location.origin + route.path,
-          title: route.name || ''
-        })
+        clientGoogleAnalyse(route.path);
       });
     }
   }

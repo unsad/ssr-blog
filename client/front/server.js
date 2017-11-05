@@ -3,6 +3,7 @@
  */
 const isProd = process.env.NODE_ENV === 'production';
 
+const log = require('log4js').getLogger('ssr server');
 const fs = require('fs');
 const path = require('path');
 const resolve = file => path.resolve(__dirname, file);
@@ -13,7 +14,9 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const microcache = require('route-cache');
 const schedule = require('node-schedule');
+const serialize = require('serialize-javascript');
 const axios = require('axios');
+const sendGoogleAnalytic = require('./middleware/serverGoogleAnalytic');
 
 const getRobotsFromConfig = require('./server/robots.js');
 const { api: sitemapApi, getSitemapFromBody } = require('./server/sitemap.js');
@@ -63,6 +66,7 @@ const serverInfo =
   `vue-server-renderer/${require('vue-server-renderer/package.json').version}`;
 
 const app = express();
+app.enable('trust proxy');
 
 const template = fs.readFileSync(resolve('./index.html'), 'utf-8');
 
@@ -97,8 +101,10 @@ const serve = (path, cache) => express.static(resolve(path), {
 
 app.use(compression({threshold: 0}));
 
-isProd && app.use((req, res, next) => {
-  console.log(`${req.method} ${decodeURIComponent(req.url)}`);
+app.use(require('cookie-parser'));
+
+app.use((req, res, next) => {
+  log.debug(`${req.method} ${decodeURIComponent(req.url)}`);
   return next();
 });
 
@@ -109,7 +115,7 @@ app.use('/service-worker.js', serve('./dist/service-worker.js'));
 app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl));
 app.use(bodyParser.json());
 
-function render (req, res) {
+function render (req, res, next) {
   const s = Date.now();
 
   res.setHeader('Content-Type', 'text/html');
@@ -135,12 +141,26 @@ function render (req, res) {
     if (err) {
       return handleError(err);
     }
+    if (context.initialState) {
+      let siteInfo = context.inintialState.siteInfo;
+      sendGoogleAnalytic(req, res, next, {
+        dt: siteInfo.title.value,
+        dr: req.url,
+        z: Date.now()
+      });
+      res.write(
+        `<script>window.__INITIAL_STATE__=${
+          serialize(context.initialState, { isJSON: true })
+          }</script>`);
+    }
     res.send(html);
     if (!isProd) {
-      console.log(`whole request: ${Date.now() - s}ms`);
+      log.debug(`whole request: ${Date.now() - s}ms`);
     }
   });
 }
+
+app.get('/_.gif', (req, res, next) => sendGoogleAnalytic(req, res, next));
 
 app.get('/robots.txt', (req, res, next) => {
   return res.end(robots);
@@ -157,7 +177,7 @@ app.get('/sitemap.xml', (req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
+  log.debug(`${req.method} ${req.url}`);
   return next();
 });
 
@@ -167,6 +187,6 @@ app.get('*', isProd ? render : (req, res) => {
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`server started at localhost:${port}`);
+  log.debug(`server started at localhost:${port}`);
 });
 

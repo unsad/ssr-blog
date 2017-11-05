@@ -14,7 +14,6 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const microcache = require('route-cache');
 const schedule = require('node-schedule');
-const serialize = require('serialize-javascript');
 const axios = require('axios');
 const sendGoogleAnalytic = require('./middleware/serverGoogleAnalytic');
 
@@ -137,21 +136,17 @@ function render (req, res, next) {
     title: 'Vue HN 2.0',
     url: req.url
   };
+
+  sendGoogleAnalytic(req, res, next, {
+    dt: config.title,
+    dr: req.url,
+    dp: req.url,
+    z: Date.now()
+  });
+
   renderer.renderToString(context, (err, html) => {
     if (err) {
       return handleError(err);
-    }
-    if (context.initialState) {
-      let siteInfo = context.inintialState.siteInfo;
-      sendGoogleAnalytic(req, res, next, {
-        dt: siteInfo.title.value,
-        dr: req.url,
-        z: Date.now()
-      });
-      res.write(
-        `<script>window.__INITIAL_STATE__=${
-          serialize(context.initialState, { isJSON: true })
-          }</script>`);
     }
     res.send(html);
     if (!isProd) {

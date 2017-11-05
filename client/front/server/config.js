@@ -12,22 +12,10 @@ let ga = {
   api: 'https://www.google-analytics.com/collect',
   required: ['dt', 'dr', 'dp', 'z'],
   spider: [
-    'Baiduspider',
-    'Googlebot',
-    'Sogou web spider',
-    'Sogou spider2',
-    'Sogou blog',
-    'Sogou News Spider',
-    'Sogou Orion spider',
-    'Sogou inst spider',
-    'Yahoo! Slurp',
-    'MSNBot',
-    'YoudaoBot',
-    'JikeSpider',
-    'Sosospider',
-    '360Spider',
-    'iaskspider'
-  ]
+    'spider',
+    'bot',
+    'appid'
+  ].map(item => item.toLowerCase().replace(/\s+/g, ''))
 }
 
 function flushOption() {

@@ -23,23 +23,11 @@
   import disqus from './Disqus.vue';
 
   export default {
-    name: 'pager',
+    name: 'page',
     props: ['page'],
-    data () {
-      return {}
-    },
     computed: {
       article () {
         return this.page || {}
-      },
-      commentType () {
-        return this.$store.state.siteInfo.commentType.value || 'disqus'
-      },
-      commentName () {
-        return this.$store.state.siteInfo.commentName.value || ''
-      },
-      siteURL () {
-        return this.$store.state.siteInfo.siteUrl.value || 'localhost'
       }
     },
     watch: {

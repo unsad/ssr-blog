@@ -2,7 +2,8 @@
   <pager :page="page"></pager>
 </template>
 <script>
-  import pager from './Pager';
+  import pager from './Page';
+  import mock404 from '../utils/404';
 
   function fetchPage({store, route: {path: pathName, params, query}}, callback) {
     pathName = pathName.replace(/^\//g, '');
@@ -36,13 +37,7 @@
     },
     computed: {
       page() {
-        return this.$store.state.pathName ? this.$store.state.page : {
-          pathName: 404,
-          createdAt: '2017-01-01 00:00:00',
-          updatedAt: '2017-01-01 00:00:00',
-          title: '404 Not Found',
-          content: '不存在'
-        };
+        return this.$store.state.pathName ? this.$store.state.page : mock404
       }
     },
     components: {

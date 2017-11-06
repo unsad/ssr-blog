@@ -9,40 +9,44 @@
         </div>
         <h1 class="title">{{article.title}}</h1>
         <div class="entry-content" v-html="article.content">
+        </div>
 
-        </div>
-        <p>--
-          <attr title="End of File">EOF</attr>
-          --
-        </p>
-        <div class="post-info">
-          <p>发表于
-            <time>{{article.createAt}}</time>
-            <template v-if="article.category">
-              <div>
-              ，添加在分类
-              <a :data-cate="article.category">
-                <code class="notebook">{{article.category}}</code>
-              </a>
-              </div>
-            </template>
-            <template v-if="article.category">
-              下,
-            </template>
-            <template v-if="article.tags && article.tags.length !== 0">
-              <div>
-              ,并被添加[
-              <router-link v-for="tag of article.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
-                           :data-tag="tag"><code class="notebook">{{tag}}</code></router-link>
-              ]标签下，
-              </div>
-            </template>
-            最后修改于
-            <time>{{article.updatedAt}}</time>
+        <template v-if="shouldShow">
+          <p>本文链接：<a :href="siteURL+ '/post/'+ article.pathName">{{siteURL}}/post/{{article.pathName}}</a></p>
+          <p>--
+            <attr title="End of File">EOF</attr>
+            --
           </p>
-        </div>
+          <div class="post-info">
+            <p>发表于
+              <time>{{article.createAt}}</time>
+              <template v-if="article.category">
+                <div>
+                ，添加在分类
+                <a :data-cate="article.category">
+                  <code class="notebook">{{article.category}}</code>
+                </a>
+                </div>
+              </template>
+              <template v-if="article.category">
+                下,
+              </template>
+              <template v-if="article.tags && article.tags.length !== 0">
+                <div>
+                ,并被添加[
+                <router-link v-for="tag of article.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
+                             :data-tag="tag"><code class="notebook">{{tag}}</code></router-link>
+                ]标签下，
+                </div>
+              </template>
+              最后修改于
+              <time>{{article.updatedAt}}</time>
+            </p>
+          </div>
+        </template>
       </article>
-      <nav class="pagination">
+      <template v-if="shouldShow">
+       <nav class="pagination">
         <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
                      class="prev">&laquo;{{prev.title}}
         </router-link>
@@ -50,9 +54,10 @@
                      class="next">&raquo;{{next.title}}
         </router-link>
       </nav>
-      <div class="comments" v-if="article.allowComment === true && commentName!== ''">
+       <div class="comments" v-if="article.allowComment === true && commentName!== ''">
         <disqus :shortname="commentName"></disqus>
       </div>
+      </template>
     </div>
     <my-footer></my-footer>
   </div>
@@ -64,31 +69,9 @@
 
   export default {
     name: 'Post',
-    data() {
-      return {
-
-      }
-    },
-    asyncData({store, route: {path: pathName, params, query}}, callback) {
-      pathName = pathName.replace(/^\/post\//g, '');
-      return store.dispatch('FETCH_BLOG', {
-        conditions: {
-          pathName,
-          isPublic: true,
-          type: 'post'
-        },
-        select: {
-          title: 1,
-          createdAt: 1,
-          content: 1,
-          updatedAt: 1,
-          pathName: 1,
-          category: 1,
-          allowComment: 1,
-          tags: 1
-        },
-        callback
-      });
+    props: ['post', 'prev', 'next', 'siteInfo'],
+    serverCacheKey: props => {
+      return `${props.post.pathName}::${props.post.updateAt}`
     },
     watch: {
       '$route': 'resetDisqus'
@@ -112,23 +95,20 @@
       }
     },
     computed: {
+      shouldShow() {
+        return this.post.pathName !== 404;
+      },
       article() {
-        return this.$store.state.blog;
-      },
-      prev() {
-        return this.$store.state.prev;
-      },
-      next() {
-        return this.$store.state.next;
+        return this.post;
       },
       commentType() {
-        return this.$store.state.siteInfo.commentType || 'disqus';
+        return this.siteInfo.commentType.value || 'disqus';
       },
       commentName() {
-        return this.$store.state.siteInfo.commentName || '';
+        return this.siteInfo.commentName.value || '';
       },
       siteURL() {
-        return this.$store.state.siteInfo.siteUrl.value || 'localhost';
+        return this.siteInfo.siteUrl.value || 'localhost';
       }
     },
     components: {

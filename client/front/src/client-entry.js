@@ -48,7 +48,6 @@ router.onReady(() => {
       endLoadingCallback();
     }).catch(err => {
       console.error(Date.now().toLocaleString(), err);
-      endLoadingCallback('/');
     });
   });
 

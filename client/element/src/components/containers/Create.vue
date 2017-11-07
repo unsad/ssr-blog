@@ -49,7 +49,7 @@
         this.options.items.forEach(item => {
           try {
             if (item.sourceType === 'Object') {
-              this.form[item.prop] = JSON.parse(this.form[item.prop]);
+              this.form[item.prop] = JSON.parse(this.form[item.prop], null, 2);
             }
           } catch (err) {
             isOk = false;
@@ -60,7 +60,7 @@
       parseTypeAfterFetch() {
         this.options.items.forEach(item => {
           if (item.sourceType === 'Object') {
-            this.form[item.prop] = JSON.stringify(this.form[item.prop]);
+            this.form[item.prop] = JSON.stringify(this.form[item.prop], null, 2);
           }
         });
       },

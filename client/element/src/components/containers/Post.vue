@@ -117,6 +117,11 @@
             message: '文章已成功提交',
             type: 'success'
           });
+          if (response._id && this.id === -1) {
+            this.$router.replace({params: {id: response._id}});
+            this.form = response;
+            this.id = response.id;
+          }
         }).catch(err => console.error(err));
       },
       handleAddTag(tag) {

@@ -14,10 +14,6 @@
       progress: {
         type: Number,
         default: 0
-      },
-      onProgressDone: {
-        type: Function,
-        required: true
       }
     },
     data() {
@@ -52,7 +48,6 @@
               this.$nextTick(() => {
                 this.full = '';
                 this.show = true;
-                this.onProgressDone();
               });
             }, 400);
           }, 400);

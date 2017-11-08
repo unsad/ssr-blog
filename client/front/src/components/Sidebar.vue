@@ -5,7 +5,7 @@
        'transition': option.sidebarImageUrl ? 'background 2s ease-in-out;' : ''}">
     <div class="profile">
       <a href="/">
-        <img :src="option.logoUrl.value" :alt="siteInfo.title.value" ref="logo">
+        <img :src="option.logoUrl.value" :alt="siteInfo.title.value">
       </a>
       <span :style="{'color': option.sidebarFontColor || ''}">{{siteInfo.title.value}}</span>
     </div>
@@ -70,12 +70,6 @@
     computed: {
       option() {
         return this.$store.state.theme.option;
-      }
-    },
-    mounted() {
-      let img = this.$refs.logo;
-      if (img) {
-//        img.onerror = ({target}) => (img.src = target.currentSrc.replace('.webp', '.png'));
       }
     }
   }

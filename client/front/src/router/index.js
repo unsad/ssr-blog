@@ -22,56 +22,32 @@ export function createRouter() {
       {
         path: '/',
         name: 'main',
-        components: {
-          default: BlogPager,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: BlogPager
       },
       {
         path: '/post/:pathName',
         name: 'post',
-        components: {
-          default: PostContainer,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: PostContainer
       },
       {
         path: '/archive',
         name: 'archive',
-        components: {
-          default: Archive,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: Archive
       },
       {
         path: '/tag',
         name: 'tag',
-        components: {
-          default: Tag,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: Tag
       },
       {
         path: '/tag/:tagName',
         name: 'tagPager',
-        components: {
-          default: TagPager,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: TagPager
       },
       {
         path: '/:page',
         name: 'page',
-        components: {
-          default: PageContainer,
-          sidebar: Sidebar,
-          header: Header
-        }
+        component: PageContainer
       }
     ]
   });

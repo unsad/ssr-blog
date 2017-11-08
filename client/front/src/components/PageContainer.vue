@@ -28,10 +28,6 @@
 
   export default {
     name: 'pageContainer',
-    data() {
-      return {
-      }
-    },
     asyncData(context) {
       return fetchPage(context);
     },

@@ -24,10 +24,13 @@
 
   export default {
     name: 'page',
-    props: ['page'],
+    props: ['page', 'siteInfo'],
     computed: {
       article () {
         return this.page || {}
+      },
+      commentName() {
+        return this.siteInfo.commentName.value || '';
       }
     },
     watch: {

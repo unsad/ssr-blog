@@ -20,25 +20,14 @@
           <div class="post-info">
             <p>发表于
               <time>{{article.createAt}}</time>
-              <template v-if="article.category">
-                <div>
-                ，添加在分类
+                ,添加在分类
                 <a :data-cate="article.category">
                   <code class="notebook">{{article.category}}</code>
-                </a>
-                </div>
-              </template>
-              <template v-if="article.category">
-                下,
-              </template>
-              <template v-if="article.tags && article.tags.length !== 0">
-                <div>
-                ,并被添加[
+                </a>下,并被添加
                 <router-link v-for="tag of article.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
-                             :data-tag="tag"><code class="notebook">{{tag}}</code></router-link>
-                ]标签下，
-                </div>
-              </template>
+                             :data-tag="tag"><code class="notebook">{{tag}}</code>
+                ]标签，
+                </router-link>
               最后修改于
               <time>{{article.updatedAt}}</time>
             </p>
@@ -100,9 +89,6 @@
       },
       article() {
         return this.post;
-      },
-      commentType() {
-        return this.siteInfo.commentType.value || 'disqus';
       },
       commentName() {
         return this.siteInfo.commentName.value || '';

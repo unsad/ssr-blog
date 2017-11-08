@@ -1,5 +1,5 @@
 <template>
-  <pager :page="page"></pager>
+  <pager :page="page" :siteInfo="siteInfo"></pager>
 </template>
 <script>
   import pager from './Page';
@@ -33,7 +33,10 @@
     },
     computed: {
       page() {
-        return this.$store.state.pathName ? this.$store.state.page : mock404
+        return this.$store.state.pathName ? this.$store.state.page : mock404;
+      },
+      siteInfo() {
+        return this.$store.state.siteInfo;
       }
     },
     components: {

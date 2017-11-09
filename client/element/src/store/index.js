@@ -59,6 +59,7 @@ const store = new Vuex.Store({
             if (model === 'user') {
               commit('SET_USER', {user: result});
             }
+            return result;
           });
         } else {
           return api.post(model, form);

@@ -3,6 +3,7 @@
  */
 import Vue from 'vue';
 import { createApp } from './main';
+import './assets/js/base';
 import clientGoogleAnalyse from './utils/clientGoogleAnalyse';
 Vue.mixin({
   beforeRouteUpdate(to, from, next) {

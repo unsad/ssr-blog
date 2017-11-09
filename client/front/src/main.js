@@ -5,7 +5,6 @@ import App from './App.vue';
 import { createStore } from './store/store';
 import { createRouter } from './router';
 import { sync } from 'vuex-router-sync';
-import './assets/res/js/base'
 
 Vue.config.productionTip = false;
 

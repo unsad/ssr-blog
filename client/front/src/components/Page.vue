@@ -48,7 +48,7 @@
         })
       },
       resetDisqus (val, oldVal) {
-        if (val.name !== 'page') return
+        if (val.name !== 'page' || val.path === oldVal.path) return
         if (window.DISQUS) {
           this.reset(window.DISQUS)
         }

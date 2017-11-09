@@ -77,7 +77,7 @@
         });
       },
       resetDisqus(val, oldVal) {
-        if (val.name !== 'post') return;
+        if (val.name !== 'post' || val.path === oldVal.path) return;
         if (window.DISQUS) {
           this.reset(window.DISQUS);
         }

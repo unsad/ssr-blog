@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { getElementRealPosition } from '../utils/scroll'
 
 const BlogPager = () => import('@/components/BlogPager');
 const PageContainer = () => import('@/components/PageContainer');
@@ -17,7 +18,17 @@ export function createRouter() {
   return new Router({
     mode: 'history',
     fallback: false,
-    scrollBehavior: () => ({y: 0}),
+    scrollBehavior: function (to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition;
+      } else {
+        let position = {x: 0, y: 0};
+        if (to.hash) {
+          position = getElementRealPosition(to.hash);
+        }
+        return position;
+      }
+    },
     routes: [
       {
         path: '/',

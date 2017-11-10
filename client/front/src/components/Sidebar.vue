@@ -57,20 +57,18 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
     name: 'sideBar',
-    data() {
-      return {
-        siteInfo: this.$store.getters.siteInfo
-      }
-    },
     asyncData({store, route: {path, params, query}}) {
       return Promise.all([store.dispatch('FETCH_OPTIONS'), store.dispatch('FETCH_FIREKYLIN')]);
     },
     computed: {
-      option() {
-        return this.$store.state.theme.option;
-      }
+      ...mapGetters([
+        'option',
+        'siteInfo'
+      ])
     }
   }
 </script>

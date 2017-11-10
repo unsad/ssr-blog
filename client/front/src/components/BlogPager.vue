@@ -14,6 +14,7 @@
   import myFooter from './Footer.vue';
   import blogSummary from './BlogSummary.vue';
   import pagination from './Pagination.vue';
+  import { mapGetters } from 'vuex';
 
   export default {
     name: 'blogPager',
@@ -43,16 +44,11 @@
       });
     },
     computed: {
-      items() {
-        return this.$store.getters.items;
-      },
-      totalPage() {
-        return this.$store.state.totalPage;
-      },
-      page() {
-        let page = this.$store.state.route.query.page || 1;
-        return parseInt(page);
-      }
+      ...mapGetters([
+        'items',
+        'page',
+        'totalPage'
+      ])
     },
     components: {
       myFooter,

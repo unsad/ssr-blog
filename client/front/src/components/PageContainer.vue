@@ -2,6 +2,7 @@
   <pager :page="page" :siteInfo="siteInfo"></pager>
 </template>
 <script>
+  import { mapGetters } from 'vuex';
   import pager from './Page';
   import mock404 from '../utils/404';
 
@@ -32,12 +33,9 @@
       return fetchPage(context);
     },
     computed: {
-      page() {
-        return this.$store.state.pathName ? this.$store.state.page : mock404;
-      },
-      siteInfo() {
-        return this.$store.state.siteInfo;
-      }
+      ...mapGetters([
+        'siteInfo'
+      ])
     },
     components: {
       pager

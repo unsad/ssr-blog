@@ -3,14 +3,14 @@
     <div id="page-post">
       <article class="post detail">
         <div class="meta">
-          <div class="date">{{ article.createdAt }}</div>
+          <div class="date">{{ page.createdAt }}</div>
         </div>
-        <h1 class="title">{{ article.title }}</h1>
+        <h1 class="title">{{ page.title }}</h1>
 
-        <div class="entry-content" v-html="article.content">
+        <div class="entry-content" v-html="page.content">
         </div>
       </article>
-      <div class="comments" v-if="article.allowComment === true && commentName !== ''">
+      <div class="comments" v-if="page.allowComment === true && commentName !== ''">
         <disqus :shortname="commentName" ></disqus>
       </div>
     </div>
@@ -26,9 +26,6 @@
     name: 'page',
     props: ['page', 'siteInfo'],
     computed: {
-      article () {
-        return this.page || {}
-      },
       commentName() {
         return this.siteInfo.commentName.value || '';
       }
@@ -48,7 +45,7 @@
         })
       },
       resetDisqus (val, oldVal) {
-        if (val.name !== 'page' || val.path === oldVal.path) return
+        if (val.path === oldVal.path) return
         if (window.DISQUS) {
           this.reset(window.DISQUS)
         }

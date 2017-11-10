@@ -10,19 +10,15 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
     name: 'header',
-    data() {
-      const isInitialRender = !this.$root._isMounted;
-
-      return {
-        siteInfo: this.$store.getters.siteInfo
-      }
-    },
     computed: {
-      option() {
-        return this.$store.state.theme.option;
-      }
+      ...mapGetters([
+        'siteInfo',
+        'option'
+      ])
     }
   }
 </script>

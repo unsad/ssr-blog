@@ -2,7 +2,7 @@
   <div id='main'>
     <article class="post archive">
       <h1 class="title">{{title}}</h1>
-      <div class="entry-content" v-for="(item, key) of items">
+      <div class="entry-content" v-for="(item, key) of achieves">
         <h3>{{key}} ({{item.length}})</h3>
         <ul>
           <li v-for="subItem of item">
@@ -18,12 +18,18 @@
 
 <script>
   import myFooter from './Footer.vue';
+  import { mapGetters } from 'vuex';
 
   function fetchArchive({store, route}, callback) {
     return store.dispatch('FETCH_ACHIEVE', {
       conditions: {
         type: 'post',
         isPublic: true
+      },
+      computed: {
+        ...mapGetters([
+          'achieves'
+        ])
       },
       select: {
         _id: 0,
@@ -45,11 +51,6 @@
     },
     asyncData(store) {
       return fetchArchive(store);
-    },
-    computed: {
-      items() {
-        return this.$store.getters.achieves;
-      }
     },
     components: {
       myFooter

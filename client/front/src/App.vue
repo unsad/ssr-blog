@@ -13,15 +13,17 @@
   import LoadingBar from './components/Loading';
   import sidebar from './components/Sidebar';
   import myHeader from './components/Header';
+  import { mapGetters } from 'vuex';
+
   export default {
     name: 'app',
     components: {
       LoadingBar
     },
     computed: {
-      progress() {
-        return this.$store.state.progress;
-      }
+      ...mapGetters([
+        'progress'
+      ])
     }
   }
 </script>

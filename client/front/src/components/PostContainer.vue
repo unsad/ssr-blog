@@ -5,6 +5,7 @@
 <script>
   import mock404 from '../utils/404';
   import blogPost from './Post';
+  import { mapGetters } from 'vuex';
 
   function fetchBlog ({store, route: {path: pathName, params, query}}, callback) {
     pathName = pathName.replace(/^\/post\//g, '');
@@ -34,15 +35,11 @@
           ? this.$store.state.blog
           : mock404
       },
-      prev () {
-        return this.$store.state.prev
-      },
-      next () {
-        return this.$store.state.next
-      },
-      siteInfo () {
-        return this.$store.state.siteInfo
-      }
+      ...mapGetters([
+        'prev',
+        'next',
+        'siteInfo'
+      ])
     },
     asyncData(context) {
       return fetchBlog(context);

@@ -4,32 +4,32 @@
       <article class="post detail">
         <div class="meta">
           <div class="date">
-            {{article.createdAt}}
+            {{post.createdAt}}
           </div>
         </div>
-        <h1 class="title">{{article.title}}</h1>
-        <div class="entry-content" v-html="article.content">
+        <h1 class="title">{{post.title}}</h1>
+        <div class="entry-content" v-html="post.content">
         </div>
 
         <template v-if="shouldShow">
-          <p>本文链接：<a :href="siteURL+ '/post/'+ article.pathName">{{siteURL}}/post/{{article.pathName}}</a></p>
+          <p>本文链接：<a :href="siteURL+ '/post/'+ post.pathName">{{siteURL}}/post/{{post.pathName}}</a></p>
           <p>--
             <attr title="End of File">EOF</attr>
             --
           </p>
           <div class="post-info">
             <p>发表于
-              <time>{{article.createAt}}</time>
+              <time>{{post.createAt}}</time>
                 ,添加在分类
-                <a :data-cate="article.category">
-                  <code class="notebook">{{article.category}}</code>
+                <a :data-cate="post.category">
+                  <code class="notebook">{{post.category}}</code>
                 </a>下,并被添加
-                <router-link v-for="tag of article.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
+                <router-link v-for="tag of post.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
                              :data-tag="tag"><code class="notebook">{{tag}}</code>
                 ]标签，
                 </router-link>
               最后修改于
-              <time>{{article.updatedAt}}</time>
+              <time>{{post.updatedAt}}</time>
             </p>
           </div>
         </template>
@@ -43,7 +43,7 @@
                      class="next">&raquo;{{next.title}}
         </router-link>
       </nav>
-       <div class="comments" v-if="article.allowComment === true && commentName!== ''">
+       <div class="comments" v-if="post.allowComment === true && commentName!== ''">
         <disqus :shortname="commentName"></disqus>
       </div>
       </template>
@@ -86,9 +86,6 @@
     computed: {
       shouldShow() {
         return this.post.pathName !== 404;
-      },
-      article() {
-        return this.post;
       },
       commentName() {
         return this.siteInfo.commentName.value || '';

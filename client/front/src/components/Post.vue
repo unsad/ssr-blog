@@ -55,33 +55,14 @@
 <script>
   import myFooter from './Footer.vue';
   import disqus from './Disqus.vue';
+  import mixin from '../mixin/disqus';
 
   export default {
     name: 'Post',
     props: ['post', 'prev', 'next', 'siteInfo'],
+    mixins: [mixin],
     serverCacheKey: props => {
       return `${props.post.pathName}::${props.post.updateAt}`
-    },
-    watch: {
-      '$route': 'resetDisqus'
-    },
-    methods: {
-      reset(dsq) {
-        const self = this;
-        dsq.reset({
-          reload: true,
-          config: function() {
-            this.page.identifier = (self.$route.path || window.location.pathname);
-            this.page.url = window.location.href;
-          }
-        });
-      },
-      resetDisqus(val, oldVal) {
-        if (val.name !== 'post' || val.path === oldVal.path) return;
-        if (window.DISQUS) {
-          this.reset(window.DISQUS);
-        }
-      }
     },
     computed: {
       shouldShow() {

@@ -106,6 +106,23 @@
     methods: {
       jump(type) {
         if (this.id === -1) return;
+        let key = type === 'prev' ? '$lt' : '$gt';
+        let query = Object.assign({}, this.options.query);
+        query.condition['_id'] = { [key] : this.form._id};
+        query.limit = 1;
+        if (type === 'prev') {
+          query.sort = 1;
+        }
+        this.$store.dispatch('FETCH', {
+          model: this.options.model,
+          query
+        }).then(item => {
+          if (item.length !== 0) {
+            let id = item[0]._id;
+            this.$router.push({params: {id}});
+            this.id = id;
+          }
+        });
       },
       onSaveToc() {
         toc.length = 0;

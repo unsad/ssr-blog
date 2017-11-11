@@ -108,7 +108,8 @@ export default new Router({
                 label: '内容',
                 type: 'markdown',
                 default: '',
-                width: 170
+                width: 170,
+                subProp: 'markdownToc'
               },
               {
                 type: 'split'
@@ -246,7 +247,8 @@ export default new Router({
                 label: '内容',
                 type: 'markdown',
                 default: '',
-                width: 170
+                width: 170,
+                subProp: 'markdownToc'
               },
               {
                 type: 'split'

@@ -19,6 +19,7 @@
         title: 1,
         createdAt: 1,
         content: 1,
+        toc: 1,
         updatedAt: 1,
         pathName: 1,
         allowComment: 1

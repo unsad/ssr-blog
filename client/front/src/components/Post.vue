@@ -8,7 +8,7 @@
           </div>
         </div>
         <h1 class="title">{{post.title}}</h1>
-        <div class="entry-content" v-html="post.content">
+        <div class="entry-content" v-html="content">
         </div>
 
         <template v-if="shouldShow">
@@ -73,6 +73,10 @@
       },
       siteURL() {
         return this.siteInfo.siteUrl.value || 'localhost';
+      },
+      content() {
+        let post = this.post;
+        return `<div id="toc" class="toc">${post.toc}</div>${post.content}`
       }
     },
     components: {

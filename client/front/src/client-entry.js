@@ -7,13 +7,13 @@ import './assets/js/base';
 import clientGoogleAnalyse from './utils/clientGoogleAnalyse';
 import { getElementRealPosition } from './utils/scroll';
 
-window.onhashchange = function () {
-  const hash = window.location.hash;
-  const position = getElementRealPosition(hash);
-  window.scrollTo(position.x, position.y);
-};
+// window.onhashchange = function () {
+//   const hash = window.location.hash;
+//   const position = getElementRealPosition(hash);
+//   window.scrollTo(position.x, position.y);
+// };
 
-const supportScrollRestoration = 'scrollRestoration' in window.history;
+// const supportScrollRestoration = 'scrollRestoration' in window.history;
 Vue.mixin({
   beforeRouteUpdate(to, from, next) {
     const { asyncData } = this.$options;
@@ -32,14 +32,14 @@ const {app, router, store} = createApp();
 if (window.__INITIAL_STATE__) {
   if (window.location.hash !== '') {
     window.__INITIAL_STATE__.route.hash = window.location.hash;
-    if (supportScrollRestoration) {
-      window.history.scrollRestoration = 'manual';
-    }
-    window.onhashchange();
+    // if (supportScrollRestoration) {
+    //   window.history.scrollRestoration = 'manual';
+    // }
+    // window.onhashchange();
   } else {
-    if (supportScrollRestoration) {
-      window.history.scrollRestoration = 'auto';
-    }
+    // if (supportScrollRestoration) {
+    //   window.history.scrollRestoration = 'auto';
+    // }
   }
   store.replaceState(window.__INITIAL_STATE__);
 }

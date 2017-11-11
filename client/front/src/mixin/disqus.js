@@ -1,6 +1,9 @@
 /**
  * Created by unsad on 2017/11/10.
  */
+
+const TYPES = ['post', 'page'];
+
 export default {
   watch: {
     '$route': 'resetDisqus'
@@ -17,6 +20,7 @@ export default {
       })
     },
     resetDisqus (val, oldVal) {
+      if (TYPES.indexOf(val.name) === -1) return
       if (val.path === oldVal.path) return
       if (window.DISQUS) {
         this.reset(window.DISQUS)

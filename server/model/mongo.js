@@ -24,6 +24,8 @@ let post = new Schema({
   summary: {type: String},
   markdownContent: {type: String},
   content: {type: String},
+  markdownToc: {type: String, default: ''},
+  toc: {type: String, default: ''},
   allowComment: {type: Boolean, default: true},
   createdAt: {type: String, default: ''},
   updatedAt: {type: String, default: ''},

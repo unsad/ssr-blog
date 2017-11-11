@@ -55,7 +55,7 @@
 <script>
   import myFooter from './Footer.vue';
   import disqus from './Disqus.vue';
-  import mixinm from '../mixin/disqus';
+  import mixin from '../mixin/disqus';
 
   export default {
     name: 'Post',

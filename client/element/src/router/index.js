@@ -170,7 +170,8 @@ export default new Router({
                 updatedAt: 1,
                 createdAt: 1,
                 markdownContent: 1,
-                type: 1
+                type: 1,
+                markdownToc: 1
               }
             }
           })
@@ -291,7 +292,8 @@ export default new Router({
                 updatedAt: 1,
                 createdAt: 1,
                 markdownContent: 1,
-                type: 1
+                type: 1,
+                markdownToc: 1
               }
             }
           })

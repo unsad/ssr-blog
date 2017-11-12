@@ -51,7 +51,7 @@ function flushHtml(template) {
   const style = isProd ? `<style type="text/css">${inline}</style>` : '';
   const i = template.indexOf('<div id=app></div>');
   return {
-    head: template.slice(0, i).replace('vue_client_side', config.title).replace('<link rel=stylesheet href=/dist/styles.css>', style),
+    head: template.slice(0, i).replace('<link>', style),
     tail: template.slice(i + '<div id=app></div>'.length)
   }
 }
@@ -143,15 +143,27 @@ function render (req, res, next) {
     z: Date.now()
   });
 
-  renderer.renderToString(context, (err, html) => {
-    if (err) {
-      return handleError(err);
-    }
-    res.send(html);
-    if (!isProd) {
-      log.debug(`whole request: ${Date.now() - s}ms`);
-    }
+  const renderStream = renderer.renderToStream(context);
+
+  renderStream.once('data', () => {
+    const {title, link, meta} = context.meta.inject();
+    const metaData = `${title.text()}${meta.text()}${link.text()}`;
+    let chunk = html.head.replace('<title></title>', metaData);
+    res.write(chunk);
   });
+  renderStream.on('data', chunk => {
+    res.write(chunk);
+  });
+
+  renderStream.on('end', () => {
+    res.end(html.tail);
+    log.debug(`whole request: ${Date.now} - s}ms`);
+  });
+
+  renderStream.on('error', err => {
+    res.end(html.tail);
+    log.error(err);
+  })
 }
 
 app.get('/_.gif', (req, res, next) => sendGoogleAnalytic(req, res, next));

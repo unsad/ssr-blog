@@ -2,6 +2,7 @@
  * Created by unsad on 2017/9/24.
  */
 const isProd = process.env.NODE_ENV === 'production';
+const serverInfo = `express/${require('express/package.json').version}` + `vue-server-renderer/${require('vue-server-renderer/package.json')}`;
 
 const log = require('log4js').getLogger('ssr server');
 const fs = require('fs');
@@ -21,15 +22,14 @@ const getRobotsFromConfig = require('./server/robots.js');
 const { api: sitemapApi, getSitemapFromBody } = require('./server/sitemap.js');
 const { api: rssApi, getRssBodyFromBody } = require('./server/rss.js');
 const config = require('./server/config');
+const inline = isProd ? fs.readFileSync(resolve('./dist/styles.css'), 'utf-8') : '';
 
-let html = flushHtml();
 let sitemap = '';
 let rss = '';
 let robots = '';
 
 config.flushOption().then(() => {
   robots = getRobotsFromConfig(config);
-  html = flushHtml();
 
   const flushSitemap = () => axios.get(sitemapApi).then(result => {
     sitemap = getSitemapFromBody(result, config);
@@ -47,10 +47,9 @@ config.flushOption().then(() => {
   });
 });
 
-function flushHtml() {
-  const template = fs.readFileSync(resolve('./index.html'), 'utf-8');
+function flushHtml(template) {
+  const style = isProd ? `<style type="text/css">${inline}</style>` : '';
   const i = template.indexOf('<div id=app></div>');
-  const style = isProd ? `<style>${inline}</style>` : '<link rel=stylesheet href=/dist/styles.css>';
   return {
     head: template.slice(0, i).replace('vue_client_side', config.title).replace('<link rel=stylesheet href=/dist/styles.css>', style),
     tail: template.slice(i + '<div id=app></div>'.length)
@@ -60,9 +59,6 @@ function flushHtml() {
 const {createBundleRenderer} = require('vue-server-renderer');
 
 const useMicroCache = process.env.MIRCO_CACHE !== 'false';
-const serverInfo =
-  `express/${require('express/package.json').version}` +
-  `vue-server-renderer/${require('vue-server-renderer/package.json').version}`;
 
 const app = express();
 app.enable('trust proxy');
@@ -80,6 +76,7 @@ function createRenderer(bundle, options) {
   }));
 }
 let renderer;
+let html;
 let readyPromise;
 
 if (isProd) {
@@ -88,6 +85,7 @@ if (isProd) {
   renderer = createRenderer(bundle, {
     clientManifest
   });
+  html = flushHtml(template);
 } else {
   readyPromise = require('./build/setup-dev-server')(app, (bundle, options) => {
     renderer = createRenderer(bundle, options);
@@ -119,6 +117,7 @@ function render (req, res, next) {
 
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Server', serverInfo);
+  res.write(html.head);
 
   const handleError = err => {
     if (err.url) {

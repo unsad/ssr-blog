@@ -6,7 +6,7 @@
           <el-input v-if="item.type === 'input'" v-model="form[item.prop]"
                     :placeholder="item.description || ''"></el-input>
           <markdown v-if="item.type === 'markdown'" v-model="form[item.prop]" :toc="form[item.subProp]"
-                    @toc-change="form[item.subProp] = arguments[0]"></markdown>
+                    @change="form[item.subProp] = arguments[0]"></markdown>
           <el-radio v-if="item.type === 'radio'" v-model="form[item.prop]" :label="item.label"></el-radio>
         </el-form-item>
       </el-col>

@@ -144,7 +144,7 @@
       }, 300),
       handleTocInput: _.debounce(function(e) {
         let value = e.target.value;
-        this.$emit('tocChange', value);
+        this.$emit('change', value);
       }, 300),
       _preInputText(text, preStart, preEnd) {
         let textControl = this.$refs.markdown;

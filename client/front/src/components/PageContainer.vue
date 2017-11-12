@@ -1,9 +1,9 @@
 <template>
-  <pager :page="page" :siteInfo="siteInfo"></pager>
+  <blog-post type="page" :post="page" :siteInfo="siteInfo"></blog-post>
 </template>
 <script>
   import { mapGetters } from 'vuex';
-  import pager from './Page';
+  import blogPost from './Post';
   import mock404 from '../utils/404';
 
   function fetchPage({store, route: {path: pathName, params, query}}, callback) {
@@ -39,7 +39,8 @@
       ])
     },
     components: {
-      pager
+      pager,
+      blogPost
     }
   }
 </script>

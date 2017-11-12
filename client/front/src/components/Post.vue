@@ -59,19 +59,19 @@
 
   export default {
     name: 'Post',
-    props: ['post', 'prev', 'next', 'siteInfo'],
+    props: ['post', 'prev', 'next', 'siteInfo', 'type'],
     mixins: [mixin],
     serverCacheKey: props => {
       return `${props.post.pathName}::${props.post.updateAt}`
     },
     metaInfo() {
       return {
-        title: this.post.title;
+        title: this.post.title
       }
     },
     computed: {
       shouldShow() {
-        return this.post.pathName !== 404;
+        return this.post.pathName !== 404 && this.type === 'post';
       },
       commentName() {
         return this.siteInfo.commentName.value || '';
@@ -81,7 +81,7 @@
       },
       content() {
         let post = this.post;
-        return `<div id="toc" class="toc">${post.toc}</div>${post.content}`
+        return post.toc ? `<div id="toc" class="toc">${post.toc}</div>${post.content}` : post.content;
       }
     },
     components: {

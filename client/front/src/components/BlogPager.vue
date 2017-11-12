@@ -43,11 +43,17 @@
         callback
       });
     },
+    metaInfo() {
+      return {
+        title: '首页'
+      }
+    },
     computed: {
       ...mapGetters([
         'items',
         'page',
-        'totalPage'
+        'totalPage',
+        'siteInfo'
       ])
     },
     components: {

@@ -44,6 +44,11 @@
 
   export default {
     name: 'archive',
+    metaInfo() {
+      return {
+        title: this.title
+      }
+    },
     data() {
       return {
         title: '归档'

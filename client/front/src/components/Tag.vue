@@ -38,6 +38,11 @@
         title: '标签'
       }
     },
+    metaInfo() {
+      return {
+        title: this.title
+      }
+    },
     components: {
       myFooter
     },

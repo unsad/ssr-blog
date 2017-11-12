@@ -17,6 +17,9 @@ export default context => {
     }
 
     router.push(url);
+
+    context.meta = app.$meta();
+
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents();
       console.log(matchedComponents, url);

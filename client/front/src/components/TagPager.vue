@@ -44,6 +44,11 @@
       blogSummary,
       pagination
     },
+    metaInfo() {
+      return {
+        title: `标签${this.$route.params.tagName}下的文章`
+      }
+    },
     computed: {
       ...mapGetters([
         'tagPager',

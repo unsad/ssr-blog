@@ -64,6 +64,11 @@
     serverCacheKey: props => {
       return `${props.post.pathName}::${props.post.updateAt}`
     },
+    metaInfo() {
+      return {
+        title: this.post.title;
+      }
+    },
     computed: {
       shouldShow() {
         return this.post.pathName !== 404;

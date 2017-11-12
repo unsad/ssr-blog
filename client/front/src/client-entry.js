@@ -41,15 +41,15 @@ router.onReady(() => {
     }
 
     let loadingPromise = store.dispatch('START_LOADING');
-    let endLoadingCallback = (path) => {
+    let endLoadingCallback = () => {
       return loadingPromise.then(interval => {
         clearInterval(interval);
         store.dispatch('SET_PROGRESS', 100);
-        next(path);
+        next();
       });
     };
 
-    if (!asyncDataHooks.length) return endLoadingCallback('');
+    if (!asyncDataHooks.length) return endLoadingCallback();
 
 
     Promise.all(asyncDataHooks.map(hook => hook({store, route: to}))).then(() => {

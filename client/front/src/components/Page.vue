@@ -27,6 +27,11 @@
     name: 'page',
     props: ['page', 'siteInfo'],
     mixins: [mixin],
+    metaInfo() {
+      return {
+        title: this.page.title;
+      }
+    },
     computed: {
       commentName() {
         return this.siteInfo.commentName.value || '';

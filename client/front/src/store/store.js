@@ -19,6 +19,7 @@ export function createStore() {
       next: {},
       page: {},
       tagPager: [],
+      tags: [],
       theme: {},
       progress: 100,
       siteInfo: {

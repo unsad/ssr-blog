@@ -20,22 +20,22 @@
           <div class="post-info">
             <p>发表于
               <time>{{post.createAt}}</time>
-                ,添加在分类
-                <a :data-cate="post.category">
-                  <code class="notebook">{{post.category}}</code>
-                </a>下,并被添加
-                <router-link v-for="tag of post.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
-                             :data-tag="tag"><code class="notebook">{{tag}}</code>
+              ,添加在分类
+              <a :data-cate="post.category">
+                <code class="notebook">{{post.category}}</code>
+              </a>下,并被添加
+              <router-link v-for="tag of post.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
+                           :data-tag="tag"><code class="notebook">{{tag}}</code>
                 ]标签，
-                </router-link>
+              </router-link>
               最后修改于
               <time>{{post.updatedAt}}</time>
             </p>
           </div>
         </template>
       </article>
-      <template v-if="shouldShow">
-       <nav class="pagination">
+
+      <nav class="pagination" v-if="shouldShow">
         <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
                      class="prev">&laquo;{{prev.title}}
         </router-link>
@@ -43,10 +43,9 @@
                      class="next">&raquo;{{next.title}}
         </router-link>
       </nav>
-       <div class="comments" v-if="post.allowComment === true && commentName!== ''">
+      <div class="comments" v-if="post.allowComment === true && commentName!== ''">
         <disqus :shortname="commentName"></disqus>
       </div>
-      </template>
     </div>
     <my-footer></my-footer>
   </div>

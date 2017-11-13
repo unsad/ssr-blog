@@ -57,16 +57,20 @@ router.onReady(() => {
     }).catch(err => {
       console.error(Date.now().toLocaleString(), err);
     });
-  });
 
-  if (window.__INITIAL_STATE__.siteInfo) {
-    let analyzeCode = window.__INITIAL_STATE__.siteInfo.analyzeCode;
-    if (analyzeCode && analyzeCode.value !== '') {
-      router.afterEach(route => {
-        clientGoogleAnalyse(route.path);
-      });
+    if (window.__INITIAL_STATE__.siteInfo) {
+      let analyzeCode = window.__INITIAL_STATE__.siteInfo.analyzeCode;
+      if (analyzeCode && analyzeCode.value !== '') {
+        router.afterEach(route => {
+          setTimeout(() => {
+            clientGoogleAnalyse(route.path);
+          })
+        });
+      }
     }
-  }
+  }).catch(err => {
+    console.error('Loading async component', err);
+  });
   app.$mount('#app');
 });
 

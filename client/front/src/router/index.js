@@ -55,7 +55,7 @@ export function createRouter() {
         component: TagPager
       },
       {
-        path: '/:page',
+        path: '/:page*',
         name: 'page',
         component: PageContainer
       }

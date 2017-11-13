@@ -14,7 +14,8 @@ let ga = {
   spider: [
     'spider',
     'bot',
-    'appid'
+    'appid',
+    'go-http-client'
   ].map(item => item.toLowerCase().replace(/\s+/g, ''))
 }
 

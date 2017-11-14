@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import CreatePostView from '../views/CreatePostView'
 
 const BlogPager = () => import('@/components/BlogPager');
 const PageContainer = () => import('@/components/PageContainer');
@@ -37,7 +38,7 @@ export function createRouter() {
       {
         path: '/post/:pathName',
         name: 'post',
-        component: PostContainer
+        component: CreatePostView('post')
       },
       {
         path: '/archive',
@@ -57,7 +58,7 @@ export function createRouter() {
       {
         path: '/:page*',
         name: 'page',
-        component: PageContainer
+        component: CreatePostView('page')
       }
     ]
   });

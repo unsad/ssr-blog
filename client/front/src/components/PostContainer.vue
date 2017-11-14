@@ -30,6 +30,11 @@
     })
   }
   export default {
+    metaInfo() {
+      return {
+        title: this.post.title
+      }
+    },
     computed: {
       post () {
         return this.$store.state.blog.pathName

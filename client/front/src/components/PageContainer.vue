@@ -33,6 +33,11 @@
     asyncData(context) {
       return fetchPage(context);
     },
+    metaInfo() {
+      return {
+        title: this.page.title
+      }
+    },
     computed: {
       ...mapGetters([
         'siteInfo'

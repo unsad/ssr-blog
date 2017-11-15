@@ -1,12 +1,14 @@
 /**
  * Created by unsad on 2017/10/8.
  */
+const isProd = process.env.NODE_ENV === 'production';
 let axios = require('axios');
 
 let siteUrl = 'http://localhost:8080';
 let title = 'Blog';
 let description = '';
 let googleTrackID = '';
+let favicon = isProd ? './dist' : '.';
 let ga = {
   version: 1,
   api: 'https://www.google-analytics.com/collect',
@@ -29,8 +31,18 @@ function flushOption() {
     title = options['title'];
     description = options['description'];
     googleTrackID = options['analyzeCode'];
+    favicon += options['faviconUrl'];
   });
 }
+Object.defineProperty(exports, 'favicon', {
+  enumerable: true,
+  get: function() {
+    return favicon;
+  },
+  set: function(value) {
+    favicon = value;
+  }
+});
 
 Object.defineProperty(exports, 'title', {
   enumerable: true,

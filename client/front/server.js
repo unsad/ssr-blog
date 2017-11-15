@@ -108,7 +108,7 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.use(favicon('./static/logo.jpg'));
+app.use(favicon(config.favicon));
 app.use('./dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
 app.use('/service-worker.js', serve('./dist/service-worker.js'));

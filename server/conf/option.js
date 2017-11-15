@@ -20,7 +20,7 @@ module.exports = [
   },
   {
     'key': 'faviconUrl',
-    'value': '/static/favicon.ico'
+    'value': '/static/logo.jpg'
   },
   {
     'key': 'githubUrl',

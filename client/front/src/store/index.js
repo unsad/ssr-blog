@@ -2,11 +2,7 @@
  * Created by unsad on 2017/5/23.
  */
 import axios from 'axios';
-
-const host = typeof location === 'undefined' ?
-              process.env.NODE_ENV === 'production' ?
-                'http://localhost:3000' :
-                  'http://localhost:8080/proxyPrefix' : '/proxyPrefix';
+import api from 'create-api';
 
 const prefix = `${host}/api`;
 
@@ -17,6 +13,8 @@ const themeAPI = `${host}/api/theme?conditions={"name": "firekylin"}&select={"_i
 const perPage = 10;
 
 const store = {};
+
+const shouldCache = api.onServer;
 
 export default store;
 

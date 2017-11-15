@@ -28,23 +28,26 @@ export default function (type) {
         return target.pathName ? target : mock404
       }
     },
-    asyncData({store, route: { path: pathName, params, query }, callback}) {
+    asyncData({store, route: { path: pathName, params, query }}, callback) {
       pathName = pathName.replace(regExp, '')
       return store.dispatch(action, {
-        conditions: {
-          pathName,
-          isPublic: true,
-          type
+        model: 'post',
+        query: {
+          conditions: {
+            pathName,
+            isPublic: true,
+            type
+          },
+          select: Object.assign({
+            title: 1,
+            createdAt: 1,
+            content: 1,
+            toc: 1,
+            updatedAt: 1,
+            pathName: 1,
+            allowComment: 1
+          }, select)
         },
-        select: Object.assign({
-          title: 1,
-          createdAt: 1,
-          content: 1,
-          toc: 1,
-          updatedAt: 1,
-          pathName: 1,
-          allowComment: 1
-        }, select),
         callback
       })
     },

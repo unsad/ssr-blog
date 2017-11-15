@@ -22,22 +22,20 @@
 
   function fetchArchive({store, route}, callback) {
     return store.dispatch('FETCH_ACHIEVE', {
-      conditions: {
-        type: 'post',
-        isPublic: true
+      model: 'post',
+      query: {
+        conditions: {
+          model: 'post',
+          isPublic: true
+        },
+        select: {
+          _id: 0,
+          title: 1,
+          createdAt: 1,
+          pathName: 1
+        },
+        sort: 1
       },
-      computed: {
-        ...mapGetters([
-          'achieves'
-        ])
-      },
-      select: {
-        _id: 0,
-        title: 1,
-        createdAt: 1,
-        pathName: 1
-      },
-      sort: 1,
       callback
     });
   }
@@ -49,13 +47,18 @@
         title: this.title
       }
     },
+    computed: {
+      ...mapGetters([
+        'achieves'
+      ])
+    },
     data() {
       return {
         title: '归档'
       }
     },
-    asyncData(store) {
-      return fetchArchive(store);
+    asyncData(context) {
+      return fetchArchive(context);
     },
     components: {
       myFooter

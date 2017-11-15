@@ -47,7 +47,7 @@ export function createStore() {
       START_LOADING: ({commit, state, dispatch}) => {
         dispatch('SET_PROGRESS', 30);
         let interval = setInterval(() => {
-          let progress= state.progress;
+          let progress = state.progress;
           if (progress < 90) {
             let target = progress + 10;
             dispatch('SET_PROGRESS', target);
@@ -55,40 +55,42 @@ export function createStore() {
         }, 400);
         return interval;
       },
-      FETCH_BLOG: ({commit, state, dispatch}, {conditions, callback, ...args}) => {
-        return api.fetchPost(conditions, args).then(result => {
+      FETCH_BLOG: ({commit, state, dispatch}, {model, query, callback}) => {
+        return api.fetch(model, query).then(result => {
           let blog = result[0];
           if (!blog) {
             return Promise.reject('post not exist');
           }
           commit('SET_BLOG', {blog});
           callback && callback();
-          let first = api.fetchPost({
-            _id: {$lt: blog._id},
-            type: 'post',
-            isPublic: true
-          }, {
+          let first = api.fetch({
+            conditions: {
+              _id: {$lt: blog._id},
+              type: 'post',
+              isPublic: true
+            },
+            select: {
+              _id: 0,
+              title: 1,
+              pathName: 1,
+              type: 1
+            },
             sort: 1,
             limit: 1,
-            select: {
-              _id: 0,
-              title: 1,
-              pathName: 1,
-              type: 1
-            }
           });
-          let second = api.fetchPost({
-            _id: {$gt: blog._id},
-            type: 'post',
-            isPublic: true
-          }, {
-            limit: 1,
+          let second = api.fetch('post', {
+            conditions: {
+              _id: {$gt: blog._id},
+              type: 'post',
+              isPublic: true
+            },
             select: {
               _id: 0,
               title: 1,
               pathName: 1,
               type: 1
-            }
+            },
+            limit: 1
           });
           return Promise.all([first, second]).then(result => {
             let prevPost = result[0][0];
@@ -107,8 +109,8 @@ export function createStore() {
           });
         });
       },
-      FETCH_TAGS: ({commit, state, dispatch}, {conditions, callback, ...args}) => {
-        return api.fetchPost(conditions, args).then(result => {
+      FETCH_TAGS: ({commit, state, dispatch}, {model, query, callback}) => {
+        return api.fetch(model, query).then(result => {
           let tags = result.reduce((prev, curr) => {
             curr.tags.forEach(tag => {
               if (typeof prev[tag] === 'undefined') {
@@ -123,8 +125,8 @@ export function createStore() {
           callback && callback();
         });
       },
-      FETCH_PAGE: ({commit, state, dispatch}, {conditions, callback, ...args}) => {
-        return api.fetchPost(conditions, args).then(result => {
+      FETCH_PAGE: ({commit, state, dispatch}, {model, query, callback}) => {
+        return api.fetch(model, query).then(result => {
           let blog = result[0];
           if (blog) {
             commit('SET_PAGE', {blog});
@@ -133,27 +135,32 @@ export function createStore() {
           callback && callback();
         });
       },
-      FETCH_ITEMS: ({commit, state}, {conditions, callback, ...args}) => {
-        return api.fetchPost(conditions, args).then(items => {
+      FETCH_ITEMS: ({commit, state, dispatch}, {model, query, callback}) => {
+        return api.fetch(model, query).then(items => {
           commit('SET_ITEMS', {items});
           callback && callback();
           if (state.totalPage === -1) {
-            return api.fetchPost(
-              {type: 'post', isPublic: true}, {count: 1}).then(totalPage => {
+            return api.fetch(model, {
+              conditions: {
+                type: 'post',
+                isPublic: true
+              },
+              count: 1
+            }).then(totalPage => {
               commit('SET_PAGES', {totalPage: Math.ceil(totalPage / 10)});
             });
           }
           return Promise.resolve();
         })
       },
-      FETCH_TAG_PAGER: ({commit, state, dispatch}, {conditions, callback, ...args}) => {
-        return api.fetchPost(conditions, args).then(items => {
+      FETCH_TAG_PAGER: ({commit, state, dispatch}, {model, query, callback}) => {
+        return api.fetch(model, query).then(items => {
           commit('SET_TAG_PAGER', {items});
           callback && callback();
         });
       },
-      FETCH_ACHIEVE: ({commit, state, dispatch}, {conditions, callback, ...args}) => {
-        return api.fetchPost(conditions, args).then(items => {
+      FETCH_ACHIEVE: ({commit, state, dispatch}, {model, query, callback}) => {
+        return api.fetch(model, query).then(items => {
           let sortedItem = items.reduce((prev, curr) => {
             let time = curr.createdAt.slice(0, 7).replace('-', '年') + '月';
             if (typeof prev[time] === 'undefined') {
@@ -168,14 +175,27 @@ export function createStore() {
         });
       },
       FETCH_FIREKYLIN: ({commit, state}) => {
-        return api.fetchTheme().then(obj => {
+        return api.fetch('theme', {
+          conditions: {
+            name: 'firekylin'
+          },
+          select: {
+            _id: 0
+          }
+        }).then(obj => {
           if (obj[0]) {
-            commit('SET_FIREKYLIN', { obj: obj[0] });
+            commit('SET_FIREKYLIN', {obj: obj[0]});
           }
         });
       },
       FETCH_OPTIONS: ({commit, state}) => {
-        return api.fetchOption().then(optionArr => {
+        return api.fetch('option', {
+          select: {
+            _id: 0,
+            key: 1,
+            value: 1
+          }
+        }).then(optionArr => {
           let obj = optionArr.reduce((prev, curr) => {
             prev[curr.key] = curr;
             return prev;
@@ -215,7 +235,7 @@ export function createStore() {
       SET_ACHIEVE: (state, {sortedItem}) => {
         Vue.set(state, 'achieves', sortedItem);
       },
-      SET_FIREKYLIN: (state, { obj }) => {
+      SET_FIREKYLIN: (state, {obj}) => {
         Vue.set(state, 'theme', obj);
       },
       SET_OPTIONS: (state, {obj}) => {

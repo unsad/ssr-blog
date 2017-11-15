@@ -19,13 +19,16 @@
 
   function fetchTags({store, route: {path: pathName, params, query}}, callback) {
     return store.dispatch('FETCH_TAGS', {
-      conditions: {
-        type: 'post',
-        isPublic: true
-      },
-      select: {
-        _id: 0,
-        tags: 1
+      model: 'post',
+      query: {
+        conditions: {
+          type: 'post',
+          isPublic: true
+        },
+        select: {
+          _id: 0,
+          tags: 1
+        }
       },
       callback
     });

@@ -18,21 +18,24 @@
 
   function getItems({store, route: {path, query, params}}, callback) {
     return store.dispatch('FETCH_TAG_PAGER', {
-      conditions: {
-        tags: params.tagName,
-        type: 'post',
-        isPublic: true
+      model: 'post',
+      query: {
+        conditions: {
+          tags: params.tagName,
+          type: 'post',
+          isPublic: true
+        },
+        select: {
+          _id: 0,
+          tags: 1,
+          title: 1,
+          summary: 1,
+          createdAt: 1,
+          updatedAt: 1,
+          pathName: 1
+        },
+        sort: 1
       },
-      select: {
-        _id: 0,
-        tags: 1,
-        title: 1,
-        summary: 1,
-        createdAt: 1,
-        updatedAt: 1,
-        pathName: 1
-      },
-      sort: 1,
       callback
     });
   }

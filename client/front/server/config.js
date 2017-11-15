@@ -17,13 +17,14 @@ let ga = {
     'spider',
     'bot',
     'appid',
-    'go-http-client'
+    'go-http-client',
+    'loadtest'
   ].map(item => item.toLowerCase().replace(/\s+/g, ''))
 }
 
 function flushOption() {
-  return axios.get('localhost:3000/api/option').then(res  => {
-    let options = res.body.reduce((prev, curr) => {
+  return axios.get('//localhost:3000/api/option').then(res  => {
+    let options = res.data.reduce((prev, curr) => {
       prev[curr.key] = curr.value;
       return prev;
     }, {});

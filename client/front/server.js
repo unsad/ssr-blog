@@ -2,7 +2,6 @@
  * Created by unsad on 2017/9/24.
  */
 const isProd = process.env.NODE_ENV === 'production';
-const serverInfo = `express/${require('express/package.json').version}` + `vue-server-renderer/${require('vue-server-renderer/package.json')}`;
 
 const log = require('log4js').getLogger('ssr server');
 const fs = require('fs');
@@ -206,5 +205,5 @@ app.get('*', isProd ? render : (req, res) => {
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
   log.debug(`server started at localhost:${port}`);
-});
+}).catch(err => log.error(err));
 

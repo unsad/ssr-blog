@@ -71,15 +71,13 @@ module.exports = (req, res, next, query) => {
     an: config.title,
     dh: config.siteUrl
   })
-  request.get(config.ga.api).query(form).end((err, response) => {
-    if (err) {
-      log.error(err, form)
-      return
-    }
-    if (response.statusCode !== 200) {
+  request.get(config.ga.api, {
+    params: form
+  }).then(response => {
+    if (response.status !== 200) {
       log.error(response, form)
       return
     }
     log.info('Google Analytic sended', form.cid, form.ua)
-  })
+  }).catch(err => log.error(err, form))
 }

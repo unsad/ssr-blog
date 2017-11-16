@@ -26,6 +26,11 @@ if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__);
 }
 
+//service worker
+if (isProd && 'serviceWorker' in navigator && window.location.protocol === 'https:') {
+  navigator.serviceWorker.register('/service-worker.js')
+}
+
 router.onReady(() => {
   router.beforeResolve((to, from, next) => {
     const matched = router.getMatchedComponents(to);

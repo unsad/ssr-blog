@@ -17,8 +17,18 @@ const store = {};
 const shouldCache = api.onServer;
 
 store.fetch = (model, query) => {
-  let target = `${prefix}/${model}`;
-  return axios.get(target, {params: query}).then(response => response.data).catch(err => console.error(err));
+  const target = `${prefix}/${model}`;
+  const key = target + JSON.stringify(query);
+  if (shouldCache && api.cache.has(key)) {
+    return Promise.resolve(api.cache.get(key));
+  }
+  return axios.get(target, {params: query}).then(response => {
+    const result = response.data;
+    if (shouldCache) {
+      api.cache.set(key, result);
+    }
+    return result;
+  });
 };
 
 export default store;

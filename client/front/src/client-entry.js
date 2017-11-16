@@ -61,9 +61,9 @@ router.onReady(() => {
     if (window.__INITIAL_STATE__.siteInfo) {
       let analyzeCode = window.__INITIAL_STATE__.siteInfo.analyzeCode;
       if (analyzeCode && analyzeCode.value !== '') {
-        router.afterEach(route => {
-          setTimeout(() => {
-            clientGoogleAnalyse(route.path);
+        router.afterEach((to, from) => {
+          from.name && setTimeout(() => {
+            clientGoogleAnalyse(to.path);
           })
         });
       }

@@ -1,16 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import CreatePostView from '../views/CreatePostView'
+
+const CreatePostView = type => resolve => {
+  import('@/views/CreatePostView').then(component => {
+    const target = component(type);
+    resolve(target);
+  })
+};
 
 const BlogPager = () => import('@/components/BlogPager');
 const PageContainer = () => import('@/components/PageContainer');
 const PostContainer = () => import('@/components/PostContainer');
 const Archive = () => import('@/components/Archive');
 const Tag = () => import('@/components/Tag');
-const Post = () => import('@/components/Post');
 const TagPager = () => import('@/components/TagPager');
 const Sidebar = () => import('@/components/Sidebar');
 const Header = () => import('@/components/Header');
+const Post = CreatePostView('post');
+const Page = CreatePostView('page');
 
 Vue.use(Router);
 
@@ -38,7 +45,7 @@ export function createRouter() {
       {
         path: '/post/:pathName',
         name: 'post',
-        component: CreatePostView('post')
+        component: Post
       },
       {
         path: '/archive',
@@ -58,7 +65,7 @@ export function createRouter() {
       {
         path: '/:page*',
         name: 'page',
-        component: CreatePostView('page')
+        component: Page
       }
     ]
   });

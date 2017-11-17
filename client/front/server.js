@@ -133,7 +133,7 @@ function render (req, res, next) {
     }
   };
 
-  const supportWebp = !!req.accepts('image/webp');
+  const supportWebp = req.header('accept').includes('image/webp');
 
   const context = {
     title: 'Vue HN 2.0',

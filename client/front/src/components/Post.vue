@@ -61,7 +61,7 @@
     props: ['post', 'prev', 'next', 'siteInfo', 'type', 'supportWebp'],
     mixins: [mixin],
     serverCacheKey: props => {
-      return `${props.post.pathName}::${props.post.updateAt}`
+      return `${props.post.pathName}::${props.post.updateAt}::webp::${props.supportWebp}`
     },
     computed: {
       shouldShow() {
@@ -81,7 +81,7 @@
     },
     methods: {
       filterWebp(content) {
-        if (!this.supportWebp) return content.replace(/\/webp/g, '');
+        if (!this.supportWebp) return content.replace(/\/webp/gm, '');
         return content
       }
     },

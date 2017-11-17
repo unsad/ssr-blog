@@ -23,13 +23,13 @@
     methods: {
       filterWebp(content)  {
         if (!this.supportWebp) {
-          return content.replace(/\/webp/g, '');
+          return content.replace(/\/webp/gm, '');
         }
         return content;
       }
     },
     serverCacheKey: props => {
-      return `${props.article.pathName}::${props.article.updatedAt}`
+      return `${props.article.pathName}::${props.article.updatedAt}::webp::${props.supportWebp}`
     }
   }
 </script>

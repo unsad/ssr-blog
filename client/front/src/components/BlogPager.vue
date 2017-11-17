@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <section id="page-index">
-      <blog-summary v-for="item of items" :key="item._id" :article="item">
+      <blog-summary v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
 
       </blog-summary>
       <pagination :page='page' :total-page="totalPage"></pagination>
@@ -56,7 +56,8 @@
         'items',
         'page',
         'totalPage',
-        'siteInfo'
+        'siteInfo',
+        'supportWebp'
       ])
     },
     components: {

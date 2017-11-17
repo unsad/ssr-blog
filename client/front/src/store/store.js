@@ -10,6 +10,7 @@ Vue.use(Vuex);
 export function createStore() {
   return new Vuex.Store({
     state: {
+      supportWebp: false,
       itemsPerPage: 10,
       totalPage: -1,
       item: [],
@@ -278,6 +279,9 @@ export function createStore() {
       },
       tagPager (state) {
         return state.tagPager
+      },
+      supportWebp(state) {
+        return state.supportWebp
       }
     }
   });

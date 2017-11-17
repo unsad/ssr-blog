@@ -20,6 +20,8 @@ export default context => {
 
     context.meta = app.$meta();
 
+    store.state.supportWebp = context.supportWebp;
+
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents();
       console.log(matchedComponents, url);

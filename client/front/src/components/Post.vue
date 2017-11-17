@@ -58,7 +58,7 @@
 
   export default {
     name: 'Post',
-    props: ['post', 'prev', 'next', 'siteInfo', 'type'],
+    props: ['post', 'prev', 'next', 'siteInfo', 'type', 'supportWebp'],
     mixins: [mixin],
     serverCacheKey: props => {
       return `${props.post.pathName}::${props.post.updateAt}`
@@ -74,8 +74,15 @@
         return this.siteInfo.siteUrl.value || 'localhost';
       },
       content() {
-        let post = this.post;
-        return post.toc ? `<div id="toc" class="toc">${post.toc}</div>${post.content}` : post.content;
+        const post = this.post;
+        const result = post.toc ? `<div id="toc" class="toc">${post.toc}</div>${post.content}` : post.content;
+        return this.filterWebp(result);
+      }
+    },
+    methods: {
+      filterWebp(content) {
+        if (!this.supportWebp) return content.replace(/\/webp/g, '');
+        return content
       }
     },
     components: {

@@ -133,9 +133,12 @@ function render (req, res, next) {
     }
   };
 
+  const supportWebp = !!req.accepts('image/webp');
+
   const context = {
     title: 'Vue HN 2.0',
-    url: req.url
+    url: req.url,
+    supportWebp
   };
 
   const renderStream = renderer.renderToStream(context);

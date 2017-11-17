@@ -1,11 +1,11 @@
 <template>
   <nav id="sidebar" class="behavior_1"
-       :class="{'sidebar-image': option.sidebarImageUrl !== ''}"
-       :style="{'background-image': option.sidebarImageUrl ? 'url(' + option.sidebarImageUrl + ')' : '',
-       'transition': option.sidebarImageUrl ? 'background 2s ease-in-out;' : ''}">
+       :class="{'sidebar-image': sidebarUrl !== ''}"
+       :style="{'background-image': sidebarUrl ? 'url(' + sidebarUrl + ')' : '',
+       'transition': sidebarUrl ? option.sidebarMoveCss : ''}">
     <div class="profile">
       <a href="/">
-        <img :src="option.logoUrl.value" :alt="siteInfo.title.value">
+        <img :src="logoUrl" :alt="siteInfo.title.value">
       </a>
       <span :style="{'color': option.sidebarFontColor || ''}">{{siteInfo.title.value}}</span>
     </div>
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import mixin from '../mixin/image'
 
   export default {
     name: 'sideBar',
@@ -86,12 +86,7 @@
         ]
       }
     },
-    computed: {
-      ...mapGetters([
-        'option',
-        'siteInfo'
-      ])
-    }
+    mixins: [mixin]
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">

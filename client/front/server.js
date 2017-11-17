@@ -8,7 +8,6 @@ const fs = require('fs');
 const path = require('path');
 const resolve = file => path.resolve(__dirname, file);
 const LRU = require('lru-cache');
-const favicon = require('serve-favicon');
 const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
@@ -22,6 +21,7 @@ const getRobotsFromConfig = require('./server/robots.js');
 const { api: sitemapApi, getSitemapFromBody } = require('./server/sitemap.js');
 const { api: rssApi, getRssBodyFromBody } = require('./server/rss.js');
 const config = require('./server/config');
+const favicon = require('./server/favicon');
 const titleReg = /<.*?>(.+?)<.*?>/;
 const expires = 3600 * 1000 * 24 * 365 * 2;
 const inline = isProd ? fs.readFileSync(resolve('./dist/styles.css'), 'utf-8') : '';
@@ -107,7 +107,7 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.use(favicon(config.favicon));
+app.get('/favicon.ico', favicon(config.favicon));
 app.use('./dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
 app.use('/service-worker.js', serve('./dist/service-worker.js'));

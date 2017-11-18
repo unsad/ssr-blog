@@ -18,7 +18,8 @@ let ga = {
     'bot',
     'appid',
     'go-http-client',
-    'loadtest'
+    'loadtest',
+    'feed'
   ].map(item => item.toLowerCase().replace(/\s+/g, ''))
 }
 

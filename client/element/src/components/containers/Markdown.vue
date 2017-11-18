@@ -20,15 +20,13 @@
       </el-submenu>
       <el-menu-item index="8"><i class="el-icon-deit"></i>编辑TOC</el-menu-item>
     </el-menu>
-    <el-dialog title="图片上传" v-model="isUploadShow">
+    <el-dialog title="图片上传" v-model="isUploadShow" :modal="false">
       <el-upload
         action="//up.qbox.me/"
-        type="drag"
-        :thumbnail-mode="true"
-        :on-preview="handlePreview"
+        drag
         :on-success="handleSuccess"
         :on-error="handleError"
-        :show-upload-list="true"
+        :show-file-list="true"
         :data="form"
         :before-upload="beforeUpload">
         <i class="el-icon-upload"></i>
@@ -50,7 +48,7 @@
 </template>
 
 <script>
-  import { marked }  from '../utils/marked'
+  import {marked}  from '../utils/marked'
   import moment from 'moment'
   import _ from 'lodash'
 
@@ -78,7 +76,9 @@
     },
     computed: {
       compiledMarkdown() {
-        return marked(this.value.replace(/<!--more-->/g, ''));
+        return marked(this.value.replace( /<!--more--> / g, '')
+      )
+        ;
       }
     },
     methods: {
@@ -88,24 +88,30 @@
       handleSuccess(response, file, filelist) {
         let key = response.key;
         let name = file.name;
-        let prefix = key.split('/')[0];
-        let text = `![${name}](${this.bucketHost}/${prefix}/${encodeURI(key)})`;
-        this.$confirm(text, '上传成功，是否插入图片链接？', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          closeOnClickModal: false
-        }).then(() => {
-          this.isUploadShow = false;
-          this._preInputText(text, 12, 12);
-          this.$message({
-            type: 'success',
-            message: '已插入图片链接'
+        let prefix = this.supportWebp ? 'webp/' : '';
+        const url = `${this.bucketHost}/${prefix}${encodeURI(key)}`;
+
+        this.$store.dispatch('GET_IMAGE_HEIGHT', {
+          url
+        }).then(height => {
+          const target = `<img height="${height}" src="${url}"/>`;
+          this.$confirm(text, '上传成功，是否插入图片链接？', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            closeOnClickModal: false
+          }).then(() => {
+            this.isUploadShow = false;
+            this._preInputText(text, 12, 12);
+            this.$message({
+              type: 'success',
+              message: '已插入图片链接'
+            });
           }).catch(() => {
             this.isUploadShow = false;
             this.$message({
               type: 'info',
               message: '已取消图片链接'
-            })
+            });
           });
         });
       },
@@ -119,30 +125,54 @@
       handleSelect(key, keyPath) {
         if (keyPath.length === 1) {
           switch (key) {
-            case '1': this._boldText(); break;
-            case '2': this._italicText(); break;
-            case '3': this._blockquoteText(); break;
-            case '4': this._codeText(); break;
-            case '6': this._insertMore(); break;
-            case '8': this.mode = 'toc'; break;
+            case '1':
+              this._boldText();
+              break;
+            case '2':
+              this._italicText();
+              break;
+            case '3':
+              this._blockquoteText();
+              break;
+            case '4':
+              this._codeText();
+              break;
+            case '6':
+              this._insertMore();
+              break;
+            case '8':
+              this.mode = 'toc';
+              break;
           }
         } else if (keyPath.length === 2) {
           switch (key) {
-            case '5-1': this._uploadImage(); break;
-            case '5-2': this._importImage(); break;
-            case '7-1': this.mode = 'edit'; break;
-            case '7-2': this.mode = 'split'; break;
-            case '7-3': this.mode = 'preview'; break;
-            case '7-4': this.mode = 'edit'; break;
+            case '5-1':
+              this._uploadImage();
+              break;
+            case '5-2':
+              this._importImage();
+              break;
+            case '7-1':
+              this.mode = 'edit';
+              break;
+            case '7-2':
+              this.mode = 'split';
+              break;
+            case '7-3':
+              this.mode = 'preview';
+              break;
+            case '7-4':
+              this.mode = 'edit';
+              break;
           }
         }
       },
-      handleInput: _.debounce(function(e) {
+      handleInput: _.debounce(function (e) {
         let value = e.target.value;
         this.input = value;
         this.$emit('input', value);
       }, 300),
-      handleTocInput: _.debounce(function(e) {
+      handleTocInput: _.debounce(function (e) {
         let value = e.target.value;
         this.$emit('change', value);
       }, 300),
@@ -220,14 +250,14 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.md-editor
-  width: 100%
-  position: relative
-  textarea
-    box-sizing: border-box
-    resize: none
-    height: 100%
+  .md-editor
     width: 100%
-    min-height: 500px
-    padding: 15px 15px 0
+    position: relative
+    textarea
+      box-sizing: border-box
+      resize: none
+      height: 100%
+      width: 100%
+      min-height: 500px
+      padding: 15px 15px 0
 </style>

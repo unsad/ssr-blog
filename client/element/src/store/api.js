@@ -30,6 +30,10 @@ store.logout = (conditions, args) => {
   return axios.post(`/proxyPrefix/admin/logout`, conditions);
 };
 
+store.getImageHeight = url => {
+  return axios.get(`${url}?imageInfo`).then(response => response.data);
+};
+
 store.getImageToken = body => {
   return axios.post(`/proxyPrefix/admin/token`, body).then(response => response.data);
 };

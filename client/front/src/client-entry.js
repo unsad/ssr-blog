@@ -28,7 +28,9 @@ if (window.__INITIAL_STATE__) {
 
 //service worker
 if (isProd && 'serviceWorker' in navigator && window.location.protocol === 'https:') {
-  navigator.serviceWorker.register('/service-worker.js')
+  navigator.serviceWorker.register('/service-worker.js').then(() => {
+    clientGoogleAnalyse(store.state.route.path || '/');
+  });
 }
 
 router.onReady(() => {
@@ -63,12 +65,12 @@ router.onReady(() => {
       console.error(Date.now().toLocaleString(), err);
     });
 
-    if (window.__INITIAL_STATE__.siteInfo) {
+    if (isPord && window.__INITIAL_STATE__.siteInfo) {
       let analyzeCode = window.__INITIAL_STATE__.siteInfo.analyzeCode;
       if (analyzeCode && analyzeCode.value !== '') {
         router.afterEach((to, from) => {
           from.name && setTimeout(() => {
-            clientGoogleAnalyse(to.path);
+            clientGoogleAnalyse(to.path || '/');
           })
         });
       }

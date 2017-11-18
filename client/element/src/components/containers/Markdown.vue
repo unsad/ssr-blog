@@ -87,7 +87,6 @@
       },
       handleSuccess(response, file, filelist) {
         let key = response.key;
-        let name = file.name;
         let prefix = this.supportWebp ? 'webp/' : '';
         const url = `${this.bucketHost}/${prefix}${encodeURI(key)}`;
 

@@ -69,6 +69,7 @@
         title: { value: title },
         description: { value: description },
         keywords: { value: keywords },
+        logoUrl: {value: logoUrl},
         faviconUrl: { value: favicon }
       } = this.siteInfo;
       return {
@@ -82,6 +83,7 @@
         ],
         link: [
           { rel: 'icon', href: favicon },
+          { rel: 'apple-touch-icon', href: logoUrl},
           { rel: 'alternate', type: 'application/rss+xml', title: 'RSS 2.0', href: '/rss.xml' }
         ]
       }

@@ -15,12 +15,11 @@ const microcache = require('route-cache');
 const schedule = require('node-schedule');
 const axios = require('axios');
 const sendGoogleAnalytic = require('./middleware/serverGoogleAnalytic');
-
+const favicon = require('./server/favicon');
 const getRobotsFromConfig = require('./server/robots.js');
 const { api: sitemapApi, getSitemapFromBody } = require('./server/sitemap.js');
 const { api: rssApi, getRssBodyFromBody } = require('./server/rss.js');
 const config = require('./server/config');
-const favicon = require('./server/favicon');
 const inline = isProd ? fs.readFileSync(resolve('./dist/styles.css'), 'utf-8') : '';
 
 let sitemap = '';

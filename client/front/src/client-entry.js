@@ -31,6 +31,8 @@ if (isProd && 'serviceWorker' in navigator && window.location.protocol === 'http
   navigator.serviceWorker.register('/service-worker.js').then(() => {
     clientGoogleAnalyse(store.state.route.path || '/');
   });
+} else {
+  clientGoogleAnalyse(store.state.route.path || '/');
 }
 
 router.onReady(() => {
@@ -48,11 +50,11 @@ router.onReady(() => {
     }
 
     let loadingPromise = store.dispatch('START_LOADING');
-    let endLoadingCallback = () => {
+    let endLoadingCallback = (path) => {
       return loadingPromise.then(interval => {
         clearInterval(interval);
         store.dispatch('SET_PROGRESS', 100);
-        next();
+        next(path);
       });
     };
 
@@ -63,14 +65,17 @@ router.onReady(() => {
       endLoadingCallback();
     }).catch(err => {
       console.error(Date.now().toLocaleString(), err);
+      endLoadingCallback(false);
     });
 
-    if (isPord && window.__INITIAL_STATE__.siteInfo) {
+    if (window.__INITIAL_STATE__.siteInfo) {
       let analyzeCode = window.__INITIAL_STATE__.siteInfo.analyzeCode;
       if (analyzeCode && analyzeCode.value !== '') {
         router.afterEach((to, from) => {
           from.name && setTimeout(() => {
-            clientGoogleAnalyse(to.path || '/');
+            if (to.path !== from.path) {
+              clientGoogleAnalyse(to.path || '/');
+            }
           })
         });
       }

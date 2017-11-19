@@ -2,13 +2,14 @@
  * Created by unsad on 2017/9/20.
  */
 import Vue from 'vue';
-import { createApp } from './main';
+import {createApp, preFetchComponent} from './main';
 import './assets/js/base';
 import clientGoogleAnalyse from './utils/clientGoogleAnalyse';
+import makeResponsive from './assets/js/base';
 
 Vue.mixin({
   beforeRouteUpdate(to, from, next) {
-    const { asyncData } = this.$options;
+    const {asyncData} = this.$options;
     if (asyncData) {
       asyncData({
         store: this.$store,
@@ -21,22 +22,23 @@ Vue.mixin({
 });
 const {app, router, store} = createApp();
 
-if (window.__INITIAL_STATE__) {
-  window.__INITIAL_STATE__.route.hash = window.location.hash;
-  store.replaceState(window.__INITIAL_STATE__);
-}
-
-//service worker
-if (isProd && 'serviceWorker' in navigator && window.location.protocol === 'https:') {
-  navigator.serviceWorker.register('/service-worker.js').then(() => {
-    clientGoogleAnalyse(store.state.route.path || '/');
-  });
-} else {
-  clientGoogleAnalyse(store.state.route.path || '/');
-}
-
 router.onReady(() => {
-  router.beforeResolve((to, from, next) => {
+  if (window.__INITIAL_STATE__) {
+    makeResponsive();
+    window.__INITIAL_STATE__.route.hash = window.location.hash;
+    store.replaceState(window.__INITIAL_STATE__);
+  }
+
+// service worker
+  if (isProd && 'serviceWorker' in navigator && window.location.protocol === 'https:') {
+    navigator.serviceWorker.register('/service-worker.js').then(() => {
+      clientGoogleAnalyse(store.state.route.path || '/');
+    });
+  } else {
+    clientGoogleAnalyse(store.state.route.path || '/');
+  }
+
+  const beforeResolveHook = (to, from, next) => {
     const matched = router.getMatchedComponents(to);
     const prevMatched = router.getMatchedComponents(from);
     let diffed = false;
@@ -67,22 +69,31 @@ router.onReady(() => {
       console.error(Date.now().toLocaleString(), err);
       endLoadingCallback(false);
     });
+  };
 
-    if (window.__INITIAL_STATE__.siteInfo) {
-      let analyzeCode = window.__INITIAL_STATE__.siteInfo.analyzeCode;
-      if (analyzeCode && analyzeCode.value !== '') {
-        router.afterEach((to, from) => {
-          from.name && setTimeout(() => {
-            if (to.path !== from.path) {
-              clientGoogleAnalyse(to.path || '/');
-            }
-          })
-        });
-      }
-    }
-  }).catch(err => {
+  router.beforeResolve(beforeResolveHook).catch(err => {
     console.error('Loading async component', err);
   });
+
+  if (window.__INITIAL_STATE__ && window.__INITIAL_STATE__.siteInfo) {
+    let analyzeCode = window.__INITIAL_STATE__.siteInfo.analyzeCode;
+    if (analyzeCode && analyzeCode.value !== '') {
+      router.afterEach((to, from) => {
+        from.name && setTimeout(() => {
+          if (to.path !== from.path) {
+            clientGoogleAnalyse(to.path || '/');
+          }
+        })
+      });
+    }
+  }
+
+  if (typeof window.__INITIAL_STATE__ === 'undefined') {
+    beforeResolveHook(router.currentRoute, {}, () => {});
+    Promise.all(
+      preFetchComponent.map(component => component.asyncData(store, store.state.route))
+    ).then(() => makeResponsive());
+  }
   app.$mount('#app');
 });
 

@@ -30,13 +30,16 @@ export function createStore() {
         title: {
           value: ''
         },
+        logoUrl: {
+          value: ''
+        },
         faviconUrl: {
           value: ''
         },
-        weiboUrl: {
+        description: {
           value: ''
         },
-        siteUrl: {
+        keywords: {
           value: ''
         }
       }

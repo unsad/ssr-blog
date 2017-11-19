@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import App from './App.vue';
+import Sidebar from '@/components/Sidebar';
 import { createStore } from './store/store';
 import { createRouter } from './router';
 import { sync } from 'vuex-router-sync';
@@ -19,6 +20,9 @@ export function createApp() {
     store,
     render: h => h(App)
   });
-  return { app, router, store };
+  const preFetchComponent = [
+    Sidebar
+  ];
+  return { app, router, store, preFetchComponent };
 }
 

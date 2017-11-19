@@ -1,7 +1,7 @@
-const {
-  ssrPort
-} = process.env;
+const env = process.env;
 
 module.exports = {
-  ssrPort: ssrPost || 8080
+  ssrPort: env.ssrPost || 8080,
+  serverPort: env.serverPort || 3000,
+  redisPassword: env.redisPassword || ''
 }

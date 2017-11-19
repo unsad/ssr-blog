@@ -178,9 +178,20 @@ app.get('/sitemap.xml', (req, res, next) => {
   return res.end(sitemap);
 });
 
+const prefix = '/proxyPrefix';
 app.use((req, res, next) => {
+  const url = decodeURIComponent(req.url);
   log.debug(`${req.method} ${req.url}`);
-  return next();
+  if (!isProd) return next();
+  if (url.startsWith(prefix)) {
+    const rewriteUrl = ` http://localhost:${config.serverPort}/${url.replace(prefix, '')}`
+    console.log('rewrite', rewriteUrl);
+    axios.get(rewriteUrl).on('error', err => {
+      res.end(err).pipe(res);
+    });
+  } else {
+    return next();
+  }
 });
 
 app.get('*', isProd ? render : (req, res) => {

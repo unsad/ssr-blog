@@ -6,7 +6,19 @@ let head = `<?xml version="1.0" encoding="UTF-8"?>
 
 let tail = `</urlset>`
 
-let api = '//localhost:3000/api/post?conditions={"type":"post", "isPublic": true}&select={"pathName":1,"updatedAt":1}&sort=1'
+let api = 'http://localhost:3000/api/post';
+
+let params = {
+  conditions: {
+    type: 'post',
+    isPublic: true
+  },
+  select: {
+    pathName: 1,
+    updatedAt: 1
+  },
+  sort: 1
+};
 
 let getSitemapFromBody = (result, config) => {
   let res = result.data;
@@ -23,5 +35,6 @@ let getSitemapFromBody = (result, config) => {
 
 module.exports = {
   api,
+  params,
   getSitemapFromBody
 }

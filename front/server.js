@@ -17,8 +17,8 @@ const axios = require('axios');
 const sendGoogleAnalytic = require('./middleware/serverGoogleAnalytic');
 const favicon = require('./server/favicon');
 const getRobotsFromConfig = require('./server/robots.js');
-const { api: sitemapApi, getSitemapFromBody } = require('./server/sitemap.js');
-const { api: rssApi, getRssBodyFromBody } = require('./server/rss.js');
+const { api: sitemapApi, params: sitemapParams, getSitemapFromBody } = require('./server/sitemap.js');
+const { api: rssApi, params: rssParams, getRssBodyFromBody } = require('./server/rss.js');
 const config = require('./server/config');
 const inline = isProd ? fs.readFileSync(resolve('./dist/styles.css'), 'utf-8') : '';
 
@@ -29,10 +29,10 @@ let robots = '';
 config.flushOption().then(() => {
   robots = getRobotsFromConfig(config);
 
-  const flushSitemap = () => axios.get(sitemapApi).then(result => {
+  const flushSitemap = () => axios.get(sitemapApi, sitemapParams).then(result => {
     sitemap = getSitemapFromBody(result, config);
   });
-  const flushRss = () => axios.get(rssApi).then(result => {
+  const flushRss = () => axios.get(rssApi, rssParams).then(result => {
     rss = getRssBodyFromBody(result, config);
   });
 

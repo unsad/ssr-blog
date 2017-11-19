@@ -44,7 +44,7 @@ if (process.env.NODE_ENV === 'production') {
       cacheId: 'blog',
       filename: 'service-worker.js',
       minify: true,
-      dontCacheBustUrlsMatching: /./,
+      dontCacheBustUrlsMatching: false,
       staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
       runtimeCaching: [
         {

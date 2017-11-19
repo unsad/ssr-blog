@@ -1,6 +1,6 @@
 <template>
   <footer id='footer' class='inner'> &copy; 2016&nbsp;-&nbsp; {{siteInfo.title.value}} &nbsp;-&nbsp;<a href="/">smallpath.me</a> <br> Powered by&nbsp;<a target="_blank"
-     href="https://github.com/vuejs/vue">Vue</a>&nbsp;&amp;&nbsp;<a target="_blank" href="https://github.com/koajs/koa/tree/v2.x">Koa2</a>
+     href="https://github.com/vuejs/vue">Vue2</a>&nbsp;&amp;&nbsp;<a target="_blank" href="https://github.com/koajs/koa">Koa2</a>
   </footer>
 </template>
 

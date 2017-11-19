@@ -88,10 +88,11 @@
       handleSuccess(response, file, filelist) {
         let key = response.key;
         let prefix = this.supportWebp ? 'webp/' : '';
+        const preUrl = `${this.bucketHost}/${encodeURI(key)}`;
         const url = `${this.bucketHost}/${prefix}${encodeURI(key)}`;
 
         this.$store.dispatch('GET_IMAGE_HEIGHT', {
-          url
+          url: preUrl
         }).then(height => {
           const target = `<img height="${height}" src="${url}">`;
           this.$confirm(text, '上传成功，是否插入图片链接？', {

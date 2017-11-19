@@ -4,8 +4,9 @@
       <div class="date">{{article.createdAt}}</div>
     </div>
     <h1 class="title"><router-link :to="{name:'post', params: {pathName: article.pathName}}">{{article.title}}</router-link></h1>
-    <div class="entry-content" v-html="filterWebp(article.summary)">
-
+    <div class="entry-content">
+      <div v-html="filterWebp(article.summary)"></div>
+      <router-link :to="{name: 'post', params: {pathName: article.pathName}}">阅读更多</router-link>
     </div>
   </article>
 </template>

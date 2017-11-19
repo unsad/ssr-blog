@@ -29,7 +29,7 @@ export default function (type) {
       }
     },
     asyncData({store, route: { path: pathName, params, query }}, callback) {
-      pathName = pathName.replace(regExp, '')
+      pathName = decodeURIComponent(pathName.replace(regExp, ''));
       return store.dispatch(action, {
         model: 'post',
         query: {

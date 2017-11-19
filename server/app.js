@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 
 const bodyParser = require('koa-bodyparser');
-const koa2RestMongoose = require('./mongo_rest/index');
+const koa2RestMongoose = require('./mongoRest/index');
 const models = require('./model/mongo');
 const tokenService = require('./service/token');
 const redis = require('./model/redis');

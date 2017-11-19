@@ -187,8 +187,9 @@ app.use((req, res, next) => {
     const rewriteUrl = ` http://localhost:${config.serverPort}/${url.replace(prefix, '')}`
     console.log('rewrite', rewriteUrl);
     axios.get(rewriteUrl).on('error', err => {
-      res.end(err).pipe(res);
-    });
+      res.end(err);
+      log.error(err);
+    }).pipe(res);
   } else {
     return next();
   }

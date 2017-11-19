@@ -1,19 +1,22 @@
 /**
  * Created by unsad on 2017/5/9.
  */
+const env = process.env;
+
 module.exports = {
-  appName: 'blog',
-  mongoHost: '127.0.0.1',
-  mongoDataBase: 'blog',
-  mongoPort: 27017,
-  redisHost: '127.0.0.1',
-  redisPort: 6379,
-  tokenSecret: 'test',
-  tokenExpiresIn: 3600,
-  qiniuBucketHost: '',
-  qiniuAccessKey: '',
-  qiniuSecretKey: '',
-  qiniuBucketName: '',
-  defaultAdminName: 'unsad',
-  defaultAdminPassword: 'unsad'
+  serverPort: env.serverPort || 3000,
+  mongoHost: env.mongoHost || '127.0.0.1',
+  mongoDatabase: env.mongoDatabase || 'blog',
+  mongoPort: env.mongoPort || 27017,
+  redisHost: env.redisHost || '127.0.0.1',
+  redisPort: env.redisPort || 6379,
+  tokenSecret: env.tokenSecret || 'test',
+  tokenExpiresIn: env.tokenExpiresIn || 3600,
+  defaultAdminName: env.defaultAdminName || 'admin',
+  defaultAdminPassword: env.defaultAdminPassword || 'admin',
+  qiniuAccessKey: env.qiniuAccessKey || '',
+  qiniuSecretKey: env.qiniuSecretKey || '',
+  qiniuBucketHost: env.qiniuBucketHost || '',
+  qiniuBucketName: env.qiniuBucketName || '',
+  qiniuPipeline: env.qiniuPipeline || ''
 };

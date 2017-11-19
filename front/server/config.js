@@ -3,6 +3,7 @@
  */
 const isProd = process.env.NODE_ENV === 'production';
 let axios = require('axios');
+const { ssrPort } = require('./mongo');
 
 let siteUrl = 'http://localhost:8080';
 let title = 'Blog';
@@ -36,6 +37,8 @@ function flushOption() {
     favicon += options['faviconUrl'];
   });
 }
+
+exports.ssrPort = ssrPort;
 Object.defineProperty(exports, 'favicon', {
   enumerable: true,
   get: function() {

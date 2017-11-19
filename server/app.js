@@ -12,7 +12,7 @@ const koa2RestMongoose = require('./mongo_rest/index');
 const models = require('./model/mongo');
 const tokenService = require('./service/token');
 const redis = require('./model/redis');
-const config = require('./conf/config');
+const config = require('./conf/config.tpl');
 const option = require('./conf/option');
 const getQiniuTokenFromFileName = require('./service/qiniu');
 const {login, logout, permission} = require('./routes/admin');
@@ -68,9 +68,9 @@ Object.keys(models).forEach(value => {
 
   await installTheme();
 
-  app.listen(3000);
+  app.listen(config.serverPort);
 
-  log.debug('koa2 is running at 3000');
+  log.debug(`koa2 is running at ${config.serverPort}`);
 
 })();
 

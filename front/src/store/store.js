@@ -36,6 +36,9 @@ export function createStore() {
         faviconUrl: {
           value: ''
         },
+        miitbeian: {
+
+        },
         description: {
           value: ''
         },
@@ -79,7 +82,9 @@ export function createStore() {
               pathName: 1,
               type: 1
             },
-            sort: 1,
+            sort: {
+              createdAt: -1
+            },
             limit: 1,
           });
           let second = api.fetch('post', {

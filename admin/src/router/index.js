@@ -77,7 +77,9 @@ export default new Router({
                 tags: 1,
                 category: 1
               },
-              sort: 1
+              sort: {
+                updatedAt: -1
+              }
             }
           })
         },
@@ -216,6 +218,9 @@ export default new Router({
                 pathName: 1,
                 createdAt: 1,
                 updatedAt: 1
+              },
+              sort: {
+                updatedAt: -1
               }
             }
           })

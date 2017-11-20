@@ -34,7 +34,9 @@
           updatedAt: 1,
           pathName: 1
         },
-        sort: 1
+        sort: {
+          updatedAt: -1
+        }
       },
       callback
     });

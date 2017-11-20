@@ -74,7 +74,9 @@
             title: 1,
             type: 1
           },
-          sort: 1,
+          sort: {
+            updatedAt: -1
+          },
           limit: 10
         }
       }).then(list => {

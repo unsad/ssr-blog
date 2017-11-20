@@ -41,7 +41,9 @@
           },
           limit: 10,
           skip: (page - 1) * 10,
-          sort: 1
+          sort: {
+            createdAt: -1
+          }
         },
         callback
       });

@@ -46,4 +46,6 @@ const getQiniuTokenFromFileName = fileName => {
   }
 };
 
-module.exports = getQiniuTokenFromFileName;
+module.exports = ({request, response}, next) => {
+  return response.body = getQiniuTokenFromFileName(request.body.key);
+};

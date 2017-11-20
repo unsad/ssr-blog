@@ -78,7 +78,7 @@ export default new Router({
                 category: 1
               },
               sort: {
-                updatedAt: -1
+                createdAt: -1
               }
             }
           })
@@ -220,7 +220,7 @@ export default new Router({
                 updatedAt: 1
               },
               sort: {
-                updatedAt: -1
+                createdAt: -1
               }
             }
           })

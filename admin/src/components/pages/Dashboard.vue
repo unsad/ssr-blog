@@ -75,7 +75,7 @@
             type: 1
           },
           sort: {
-            updatedAt: -1
+            createdAt: -1
           },
           limit: 10
         }

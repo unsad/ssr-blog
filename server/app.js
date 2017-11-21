@@ -12,8 +12,17 @@ const models = require('./model/mongo');
 const redis = require('./model/redis');
 const config = require('./conf/config');
 const plugins = require('./plugins');
+const ratelimit = require('koa-ratelimit');
 
 const app = new Koa();
+
+app.use(ratelimit({
+  db: redis,
+  duration: 1000,
+  errorMessage: 'Slow Down Your Request',
+  id: ctx => ctx.ip,
+  max: 10
+}));
 
 app.use(bodyParser());
 

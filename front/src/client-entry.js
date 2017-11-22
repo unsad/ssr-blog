@@ -31,9 +31,7 @@ router.onReady(() => {
 
 // service worker
   if (isProd && 'serviceWorker' in navigator && window.location.protocol === 'https:') {
-    navigator.serviceWorker.register('/service-worker.js').then(() => {
-      clientGoogleAnalyse(store.state.route.path || '/');
-    });
+    navigator.serviceWorker.register('/service-worker.js');
   } else {
     clientGoogleAnalyse(store.state.route.path || '/');
   }

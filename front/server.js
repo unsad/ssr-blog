@@ -22,6 +22,9 @@ const { api: rssApi, params: rssParams, getRssBodyFromBody } = require('./server
 const config = require('./server/config');
 const inline = isProd ? fs.readFileSync(resolve('./dist/styles.css'), 'utf-8') : '';
 
+const uuid = require('uuid');
+const titleReg = /<.*?>(.+?)<.*?>/;
+const expires = 3600 * 1000 * 24 * 365 * 2;
 let sitemap = '';
 let rss = '';
 let robots = '';
@@ -144,8 +147,23 @@ function render (req, res, next) {
     const {title, link, meta} = context.meta.inject();
     const titleText = title.text();
     const metaData = `${title.text()}${meta.text()}${link.text()}`;
+    const matched = titleText.match(titleReg);
+    let clientId = req.cookies.id;
+    if (!clientId) {
+      clientId = uuid.v4();
+      res.cookie('id', clientId, {
+        expires: new Date(Date.now() + expires)
+      })
+    }
     let chunk = html.head.replace('<title></title>', metaData);
     res.write(chunk);
+    sendGoogleAnalytic(req, res, next, {
+      dt: matched ? matched[1] : config.title,
+      dr: req.url,
+      dp: req.url,
+      z: +Date.now(),
+      cid: clientId
+    })
   });
   renderStream.on('data', chunk => {
     res.write(chunk);

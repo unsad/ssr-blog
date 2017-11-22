@@ -12,47 +12,50 @@ const config = require('./conf/config');
 
 const configName = process.env.NODE_ENV === '"development"' ? 'dev' : 'prod';
 
-const devConfig = require(`./build/blogpack.${configName}.config`);
+const blogpackConfig = require(`./build/blogpack.${configName}.config`);
+blogpackConfig.models = models;
+blogpackConfig.redis = redis;
 const Blogpack = require('./blogpack');
-const lifecycle = new Blogpack(devConfig);
+const lifecycle = global.lifecycle = new Blogpack(blogpackConfig);
 
 const app = new Koa();
 const router = require('koa-router')();
 
 (async () => {
-  await lifecycle.beforeUseRoutes({
-    config: lifecycle.config,
-    app,
-    router,
-    models,
-    redis
-  })
-
-  const beforeRestfulRoutes = lifecycle.getBeforeRestfulRoutes();
-  const afterRestfulRoutes = lifecycle.getAfterRestfulRoutes();
-
-  const middlewareRoutes = lifecycle.getMiddlewareRoutes();
-
-  for (const item of middlewareRoutes) {
-    const middlewares = [...item.middleware];
-    item.needBeforeRoutes && middlewares.unshift(...beforeRestfulRoutes);
-    item.needAfterRoutes && middlewares.push(...afterRestfulRoutes);
-
-    router[item.method](item.path, ...middlewares);
-  }
-
-  Object.keys(models).map(name => models[name]).forEach(model => {
-    mongoRest(router, model, '/api', {
-      beforeRestfulRoutes,
-      afterRestfulRoutes
-    })
-  });
-
-  app.use(router.routes());
-
-  const beforeServerStartArr = lifecycle.getBeforeServerStartFuncs();
-
   try {
+    await lifecycle.beforeUseRoutes({
+      config: lifecycle.config,
+      app,
+      router,
+      models,
+      redis
+    })
+
+    const beforeRestfulRoutes = lifecycle.getBeforeRestfulRoutes();
+    const afterRestfulRoutes = lifecycle.getAfterRestfulRoutes();
+
+    const middlewareRoutes = await lifecycle.getMiddlewareRoutes();
+
+    for (const item of middlewareRoutes) {
+      const middlewares = [...item.middleware];
+      item.needBeforeRoutes && middlewares.unshift(...beforeRestfulRoutes);
+      item.needAfterRoutes && middlewares.push(...afterRestfulRoutes);
+
+      router[item.method](item.path, ...middlewares);
+    }
+
+    Object.keys(models).map(name => models[name]).forEach(model => {
+      mongoRest(router, model, '/api', {
+        beforeRestfulRoutes,
+        afterRestfulRoutes
+      })
+    });
+
+    app.use(router.routes());
+
+    const beforeServerStartArr = lifecycle.getBeforeServerStartFuncs();
+
+
     for (const middleware of beforeServerStartArr) {
       await middleware();
     }

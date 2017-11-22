@@ -5,12 +5,8 @@ class blogpack {
   constructor(options) {
     this.config = options.config || {}
     this.plugins = options.plugins || []
-  }
-
-  run() {
-    for (const plugin of this.plugins) {
-      plugin.apply()
-    }
+    this.models = options.models
+    this.redis = options.redis
   }
 
   async beforeUseRoutes(...args) {
@@ -18,14 +14,18 @@ class blogpack {
       plugin.beforeUseRoutes && await plugin.beforeUseRoutes(...args)
     }
   }
-  getMiddlewareRoutes(...args) {
-    return this.plugins
-      .filter(plugin => {
-        return Object.assign({}, plugin.mountingRoute(), {
-          needBeforeRoutes: plugin.needBeforeRoutes || false,
-          needAfterRoutes: plugin.needAfterRoutes || false
-        })
-      })
+
+  async getMiddlewareRoutes(...args) {
+    const plugins = this.plugins.filter(plugin => plugin['mountingRoute']);
+    const result = [];
+    for (const plugin of plugins) {
+      const routeObj = await plugin.mountingRoute();
+      result.push(Object.assign({}, routeObj, {
+        needBeforeRoutes: plugin.needBeforeRoutes || false,
+        needAfterRoutes: plugin.needAfterRoutes || false
+      }));
+    }
+    return result;
   }
 
   getBeforeRestfulRoutes() {
@@ -46,19 +46,5 @@ class blogpack {
       .map(plugin => plugin['beforeServerStart'])
   }
 }
-
-class DefinePlugin {
-  constructor(options) {
-    this.options = options
-  }
-
-  apply() {
-    for (const i in this.options) {
-      console.log(i, this.options[i])
-    }
-  }
-}
-
-blogpack.DefinePlugin = DefinePlugin
 
 module.exports = blogpack

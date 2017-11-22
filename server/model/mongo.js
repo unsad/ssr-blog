@@ -11,7 +11,7 @@ mongoose.connect(mongoUrl);
 
 let db = mongoose.connection; // 监控数据库变化
 db.on('error', (err) => log.error('connect error:', err));
-db.once('open', () => log.debug(`MongoDB is ready on ${mongoUrl}`));
+db.once('open', () => log.info(`MongoDB is ready on ${mongoUrl}`));
 
 let Schema = mongoose.Schema;
 let ObjectId = Schema.ObjectId;

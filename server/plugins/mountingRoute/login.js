@@ -1,19 +1,33 @@
-const redis = require('../model/redis');
-const tokenService = require('../service/token');
-const {user: model} = require('../model/mongo');
+/**
+ * Created by unsad on 2017/11/22.
+ */
+const redis = require('../../model/redis');
+const tokenService = require('../../service/token');
+const {user: model} = require('../../model/mongo');
 
-module.exports = async (ctx, next) => {
-  let error, result;
+module.exports = class {
+  mountingRoute() {
+    return {
+      method: 'post',
+      path: '/admin/login',
+      middleware: [middleware]
+    }
+  }
+};
+
+async function middleware(ctx, next) {
   let users, user;
 
   try {
     users = await model.find({name: ctx.request.body.name}).exec();
     user = {
       name: users[0].name,
-      password: users[0].password
+      timestamp: (new Date()).valueOf()
     };
 
-    if (user.password === ctx.request.body.password) {
+    let password = users[0].password;
+
+    if (password === ctx.request.body.password) {
       let token = tokenService.createToken(user);
       redis.set('token', token, 'EX', tokenService.expiresIn, () => {
 
@@ -29,7 +43,6 @@ module.exports = async (ctx, next) => {
       }
     }
   } catch (_error) {
-    error = _error;
     return ctx.body = {
       status: 'fail',
       description: 'Get token failed.Check the name'

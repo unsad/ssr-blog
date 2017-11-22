@@ -18,6 +18,6 @@ let client = redis.createClient(Object.assign({}, auth, {
 
 client.on('error', (err) => log.error('Redis Error', err));
 
-client.on('connect', () => log.debug('Redis is ready'));
+client.on('connect', () => log.info('Redis is ready'));
 
 module.exports = client;

@@ -1,7 +1,18 @@
-const redis = require('../model/redis');
-const tokenService = require('../service/token');
+const redis = require('../../model/redis');
+const tokenService = require('../../service/token');
 
-module.exports = async (ctx, next) => {
+module.exports = {
+  mountingRoute() {
+    return {
+      method: 'post',
+      path: '/admin/logout',
+      middleware: [middleware]
+    }
+  }
+};
+
+
+async function middleware(ctx, next) {
   const headers = ctx.request.headers;
   let token;
   try {
@@ -34,4 +45,4 @@ module.exports = async (ctx, next) => {
       description: 'Token delete!'
     };
   }
-};
+}

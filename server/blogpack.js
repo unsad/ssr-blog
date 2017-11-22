@@ -18,6 +18,15 @@ class blogpack {
       plugin.beforeUseRoutes && await plugin.beforeUseRoutes(...args)
     }
   }
+  getMiddlewareRoutes(...args) {
+    return this.plugins
+      .filter(plugin => {
+        return Object.assign({}, plugin.mountingRoute(), {
+          needBeforeRoutes: plugin.needBeforeRoutes || false,
+          needAfterRoutes: plugin.needAfterRoutes || false
+        })
+      })
+  }
 
   getBeforeRestfulRoutes() {
     return this.plugins

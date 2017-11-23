@@ -52,10 +52,10 @@ module.exports = class {
       needBeforeRoutes: true,
       middleware: [
         function({request, response}, next) {
-          return response.body = getQiniuTokenFromFileName({
-            key: request.body.key,
-            options: this.options
-          })
+          return response.body = getQiniuTokenFromFileName(
+            request.body.key,
+            this.options
+          )
         }
       ],
       needAfterRoutes: false

@@ -17,7 +17,7 @@ renderer.heading = function (text, level) {
   return `<h${level}><a href='#${slug}' id='${slug}' class='anchor'></a><a href='#${slug}'>${text}</a></h${level}>`
 }
 
-marked.setOptions({
+Marked.setOptions({
   highlight: function(code, lang) {
     if (hljs.getLanguage(lang)) {
       return hljs.highlightAuto(lang, code).value;

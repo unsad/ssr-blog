@@ -48,7 +48,7 @@
 </template>
 
 <script>
-  import {marked}  from '../utils/marked'
+  import {marked} from '../utils/marked'
   import moment from 'moment'
   import _ from 'lodash'
 
@@ -76,7 +76,7 @@
     },
     computed: {
       compiledMarkdown() {
-        return marked(this.value.replace( /<!--more--> / g, '')
+        return marked(this.value.replace(/<!--more-->/g, '')
       )
         ;
       }
@@ -95,13 +95,13 @@
           url: preUrl
         }).then(height => {
           const target = `<img height="${height}" src="${url}">`;
-          this.$confirm(text, '上传成功，是否插入图片链接？', {
+          this.$confirm(target, '上传成功，是否插入图片链接？', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             closeOnClickModal: false
           }).then(() => {
             this.isUploadShow = false;
-            this._preInputText(text, 12, 12);
+            this._preInputText(target, 12, 12);
             this.$message({
               type: 'success',
               message: '已插入图片链接'
@@ -168,7 +168,7 @@
         }
       },
       handleTab(e) {
-        thie._preInputText('\t');
+        this._preInputText('\t');
         e.preventDefault();
       },
       handleInput: _.debounce(function (e) {

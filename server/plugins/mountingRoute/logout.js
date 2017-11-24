@@ -1,7 +1,7 @@
 const redis = require('../../model/redis');
 const tokenService = require('../../service/token');
 
-module.exports = {
+module.exports = class {
   async mountingRoute() {
     return {
       method: 'post',

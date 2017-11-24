@@ -133,7 +133,7 @@
         if (this.id === -1) return;
         let key = type === 'prev' ? '$lt' : '$gt';
         let query = Object.assign({}, this.options.query);
-        query.condition['_id'] = { [key] : this.form._id};
+        query.condition['_id'] = {[key]: this.form._id};
         query.limit = 1;
         if (type === 'prev') {
           query.sort = 1;

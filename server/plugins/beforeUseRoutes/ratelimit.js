@@ -12,6 +12,6 @@ module.exports = class {
     const config = Object.assign({}, this.options, {
       db: redis
     });
-    app.use(ratelimit(ratelimit(config)))
+    app.use(ratelimit(config))
   }
 }

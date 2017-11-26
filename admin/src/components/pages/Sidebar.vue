@@ -68,8 +68,8 @@
       push(name) {
         this.$router.push({name});
       },
-      handleSelect(index, indexPath) {
-
+      handleSelect(indexPath) {
+        this.$router.push({path: indexPath});
       }
     },
     beforeMount() {

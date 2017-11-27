@@ -77,8 +77,7 @@
     computed: {
       compiledMarkdown() {
         return marked(this.value.replace(/<!--more-->/g, '')
-      )
-        ;
+      );
       }
     },
     methods: {
@@ -257,6 +256,20 @@
   .md-editor
     width: 100%
     position: relative
+    .md-preview
+      box-sizing: border-box
+      position: absolute
+      word-wrap: break-word
+      word-break: normal
+      width: 50%
+      height: 100%
+      left: 100%
+      top: 0;
+      background-color: #F9FAFC
+      border-left: 1px solid #ccc
+      overflow: auto;
+      transition: left .3s, width .3s
+      padding: 15px 15px 0
     textarea
       box-sizing: border-box
       resize: none
@@ -264,4 +277,26 @@
       width: 100%
       min-height: 500px
       padding: 15px 15px 0
+    &.edit
+      textarea
+        width: 100%
+    &.split
+      textarea
+        width: 50%
+      .md-preview
+        left: 50%
+        width: 50%
+    &.toc
+      textarea
+        width: 50%
+      .md-preview
+        left: 50%
+        width: 50%
+    &.preview
+      textarea
+        width: 50%
+      .md-preview
+        left: 0
+        width: 100%
+        border-left-style: none
 </style>

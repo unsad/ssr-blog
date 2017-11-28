@@ -24,6 +24,13 @@
         }).catch(() => {});
       }
     },
+    watch: {
+      '$route': function(route) {
+        if (route.name === 'logout') {
+          this.logout();
+        }
+      }
+    },
     created() {
       this.logout();
     }

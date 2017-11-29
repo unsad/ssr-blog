@@ -133,10 +133,10 @@
         if (this.id === -1) return;
         let key = type === 'prev' ? '$lt' : '$gt';
         let query = Object.assign({}, this.options.query);
-        query.condition['_id'] = {[key]: this.form._id};
+        query.conditions['_id'] = {[key]: this.form._id};
         query.limit = 1;
         if (type === 'prev') {
-          query.sort = 1;
+          query.sort = {'_id': -1};
         }
         this.$store.dispatch('FETCH', {
           model: this.options.model,

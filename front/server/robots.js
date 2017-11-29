@@ -5,7 +5,7 @@ module.exports = config =>
   `User-agent: *
   
   Allow: /
-  Sitemap: ${siteUrl}/sitemap.xml
+  Sitemap: ${config.siteUrl}/sitemap.xml
   
   User-agent: YisouSpider
   Disallow: /

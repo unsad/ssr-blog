@@ -25,7 +25,7 @@ let ga = {
 }
 
 function flushOption() {
-  return axios.get('//localhost:3000/api/option').then(res  => {
+  return axios.get('http://localhost:3000/api/option').then(res => {
     let options = res.data.reduce((prev, curr) => {
       prev[curr.key] = curr.value;
       return prev;

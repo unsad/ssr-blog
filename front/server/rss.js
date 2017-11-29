@@ -28,9 +28,9 @@ let params = {
 let getRssBodyFromBody = (result, config) => {
   let head = `<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>${title}</title>
+    <title>${config.title}</title>
     <link>${config.siteUrl}</link>
-    <description>${description}</description>
+    <description>${config.description}</description>
     <atom:link href="${config.siteUrl}/rss.xml" rel="self"/>
     <language>zh-cn</language>\r\n`
   let body = result.data.reduce((prev, curr)=>{

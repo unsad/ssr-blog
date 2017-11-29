@@ -2,7 +2,7 @@
  * Created by unsad on 2017/9/20.
  */
 import Vue from 'vue';
-import {createApp, preFetchComponent} from './main';
+import {createApp} from './main';
 import './assets/js/base';
 import clientGoogleAnalyse from './utils/clientGoogleAnalyse';
 import makeResponsive from './assets/js/base';
@@ -20,7 +20,7 @@ Vue.mixin({
     }
   }
 });
-const {app, router, store} = createApp();
+const {app, router, store, isProd, preFetchComponent} = createApp();
 
 router.onReady(() => {
   if (window.__INITIAL_STATE__) {

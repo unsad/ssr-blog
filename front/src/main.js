@@ -7,6 +7,8 @@ import { createStore } from './store/store';
 import { createRouter } from './router';
 import { sync } from 'vuex-router-sync';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
@@ -23,6 +25,6 @@ export function createApp() {
   const preFetchComponent = [
     Sidebar
   ];
-  return { app, router, store, preFetchComponent };
+  return { app, router, store, preFetchComponent, isProd };
 }
 

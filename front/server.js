@@ -100,7 +100,7 @@ config.flushOption().then(() => {
 
   app.use(compression({threshold: 0}));
 
-  app.use(require('cookie-parser'));
+  app.use(require('cookie-parser')());
 
   app.use((req, res, next) => {
     log.debug(`${req.method} ${decodeURIComponent(req.url)}`);
@@ -209,7 +209,6 @@ config.flushOption().then(() => {
       return next();
     }
   });
-
   app.get('*', isProd ? render : (req, res) => {
     readyPromise.then(() => render(req, res));
   });

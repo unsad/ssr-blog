@@ -87,7 +87,6 @@ config.flushOption().then(() => {
     renderer = createRenderer(bundle, {
       clientManifest
     });
-    html = flushHtml(template);
   } else {
     readyPromise = require('./build/setup-dev-server')(app, (bundle, options) => {
       renderer = createRenderer(bundle, options);
@@ -140,7 +139,8 @@ config.flushOption().then(() => {
 
     const renderStream = renderer.renderToStream(context);
 
-    renderStream.once('data', () => {
+    renderStream.once('data', (data) => {
+      console.log('1', data);
       const {title, link, meta} = context.meta.inject();
       const titleText = title.text();
       const metaData = `${title.text()}${meta.text()}${link.text()}`;
@@ -152,7 +152,7 @@ config.flushOption().then(() => {
           expires: new Date(Date.now() + expires)
         })
       }
-      let chunk = html.head.replace('<title></title>', metaData);
+      let chunk = data.replace('<title></title>', metaData);
       res.write(chunk);
       sendGoogleAnalytic(req, res, next, {
         dt: matched ? matched[1] : config.title,
@@ -167,12 +167,12 @@ config.flushOption().then(() => {
     });
 
     renderStream.on('end', () => {
-      res.end(html.tail);
+      res.end();
       log.debug(`whole request: ${Date.now} - s}ms`);
     });
 
     renderStream.on('error', err => {
-      res.end(html.origin);
+      res.end('err');
       log.error(err);
     })
   }

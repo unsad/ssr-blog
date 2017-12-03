@@ -140,7 +140,6 @@ config.flushOption().then(() => {
     const renderStream = renderer.renderToStream(context);
 
     renderStream.once('data', (data) => {
-      console.log('1', data);
       const {title, link, meta} = context.meta.inject();
       const titleText = title.text();
       const metaData = `${title.text()}${meta.text()}${link.text()}`;

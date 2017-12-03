@@ -17,7 +17,6 @@ export default context => {
     }
 
     router.push(url);
-
     context.meta = app.$meta();
 
     store.state.supportWebp = context.supportWebp;

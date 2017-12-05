@@ -9,13 +9,6 @@
 
   export default {
     name: 'footer',
-    data() {
-      const isInitialRender = !this.$root._isMounted;
-
-      return {
-        siteInfo: this.$store.getters.siteInfo
-      }
-    },
     computed: {
       ...mapGetters([
         'siteInfo'

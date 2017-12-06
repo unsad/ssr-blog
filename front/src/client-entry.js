@@ -69,9 +69,7 @@ router.onReady(() => {
     });
   };
 
-  router.beforeResolve(beforeResolveHook).catch(err => {
-    console.error('Loading async component', err);
-  });
+  router.beforeResolve(beforeResolveHook);
 
   if (window.__INITIAL_STATE__ && window.__INITIAL_STATE__.siteInfo) {
     let analyzeCode = window.__INITIAL_STATE__.siteInfo.analyzeCode;

@@ -16,7 +16,7 @@ const microcache = require('route-cache');
 const schedule = require('node-schedule');
 const axios = require('axios');
 const sendGoogleAnalytic = require('./middleware/serverGoogleAnalytic');
-const favicon = require('./server/favicon');
+const favicon = require('./middleware/favicon');
 const getRobotsFromConfig = require('./server/robots.js');
 const {api: sitemapApi, params: sitemapParams, getSitemapFromBody} = require('./server/sitemap.js');
 const {api: rssApi, params: rssParams, getRssBodyFromBody} = require('./server/rss.js');
@@ -109,6 +109,7 @@ config.flushOption().then(() => {
   app.get('/favicon.ico', favicon(config.favicon));
   app.use('./dist', serve('./dist', true));
   app.use('/public', serve('./public', true));
+  app.use('/static', serve('./static', true));
   app.use('/service-worker.js', serve('./dist/service-worker.js'));
   app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl));
   app.use(bodyParser.json());

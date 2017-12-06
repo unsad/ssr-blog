@@ -10,7 +10,7 @@ module.exports = function (faviconPath, options) {
   let _middleware
   return function(req, res, next) {
     if (_middleware) return _middleware(req, res, next);
-    const target = path.join(__dirname, '../${faviconPath}');
+    const target = path.join(__dirname, `../${faviconPath}`);
     fs.readFile(target, function(err, buf) {
       if (err) {
         log.error(err);

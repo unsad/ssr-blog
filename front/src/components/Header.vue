@@ -13,7 +13,7 @@
   import mixin from '../mixin/image';
 
   export default {
-    name: 'header',
+    name: 'myHeader',
     mixins: [mixin]
   }
 </script>

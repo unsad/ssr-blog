@@ -24,7 +24,7 @@ module.exports = [
   },
   {
     'key': 'logoUrl',
-    'value': '/static/logo.png'
+    'value': '/static/logo.jpg'
   },
   {
     'key': 'githubUrl',

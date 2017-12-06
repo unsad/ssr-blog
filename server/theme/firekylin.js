@@ -5,7 +5,7 @@ module.exports = {
   name: 'firekylin',
   author: 'github.com/75team/firekylin',
   option: {
-    logoUrl: '/static/logo.png',
+    logoUrl: '/static/logo.jpg',
     sidebarImageUrl: 'https://oebegwmfv.qnssl.com/webp/20161202/234424_bg8.jpg',
     sidebarMoveCss: '',
     sidebarFontColor: '#fff !important',

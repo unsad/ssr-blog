@@ -9,14 +9,16 @@
 
 <script>
   import LoadingBar from './components/Loading';
-  import sidebar from './components/Sidebar';
+  import Sidebar from './components/Sidebar';
   import myHeader from './components/Header';
   import { mapGetters } from 'vuex';
 
   export default {
     name: 'app',
     components: {
-      LoadingBar
+      LoadingBar,
+      Sidebar,
+      myHeader
     },
     computed: {
       ...mapGetters([

@@ -195,7 +195,6 @@ config.flushOption().then(() => {
   const prefix = '/proxyPrefix';
   app.use((req, res, next) => {
     const url = decodeURIComponent(req.url);
-    log.debug(`${req.method} ${req.url}`);
     if (!isProd) return next();
     if (url.startsWith(prefix)) {
       const rewriteUrl = ` http://localhost:${config.serverPort}/${url.replace(prefix, '')}`

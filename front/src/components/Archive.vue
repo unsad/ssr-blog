@@ -25,7 +25,7 @@
       model: 'post',
       query: {
         conditions: {
-          model: 'post',
+          type: 'post',
           isPublic: true
         },
         select: {

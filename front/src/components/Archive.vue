@@ -7,7 +7,7 @@
         <ul>
           <li v-for="subItem of item">
             <router-link :to="{name: 'post', params: {pathName: subItem.pathName}}" :title="subItem.title">{{subItem.title}}</router-link>&nbsp;
-            <span class="date">{{subItem.createdAt.split('')[0]}}</span>
+            <span class="date">{{subItem.createdAt.split(' ')[0]}}</span>
           </li>
         </ul>
       </div>

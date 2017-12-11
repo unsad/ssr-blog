@@ -4,7 +4,7 @@
       <h1 class="title">{{title}}</h1>
       <div class="entry-content">
         <section>
-          <router-link v-for="key of sortedKeys" :key="item" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">{{key}}({{tags[key]}})</router-link>
+          <router-link v-for="key of sortedKeys" :key="key" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">{{key}}({{tags[key]}})</router-link>
         </section>
       </div>
     </article>
@@ -54,7 +54,7 @@
         'tags'
       ]),
       sortedKeys() {
-        let ref = this.items;
+        let ref = this.tags;
         return Object.keys(ref).sort((a, b) => ref[b] < ref[a]);
       }
     },

@@ -140,7 +140,6 @@ export function createStore() {
           if (blog) {
             commit('SET_PAGE', {blog});
           }
-          commit('SET_PAGE', {blog});
           callback && callback();
         });
       },

@@ -4,7 +4,7 @@ import VueMeta from 'vue-meta'
 
 const CreatePostView = type => resolve => {
   import('@/views/CreatePostView').then(component => {
-    const target = component(type);
+    const target = component.default(type);
     resolve(target);
   })
 };

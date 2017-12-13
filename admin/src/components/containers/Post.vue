@@ -114,7 +114,7 @@
           const key = `${url}|${path}`;
           const temp = this.getLS(key) || '';
 
-          const realVal = temp.replace(/|\d+$/gm, '');
+          const realVal = temp.replace(/\|\d+$/gm, '');
           const matched = temp.match(/\d+$/gm);
           const historyTimestamp = parseInt(matched ? matched.slice(-1) : Date.now());
           const currentTimestamp = new Date(this.form.updatedAt).valueOf();

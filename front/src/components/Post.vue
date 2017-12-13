@@ -14,20 +14,20 @@
         <template v-if="shouldShow">
           <p>本文链接：<a :href="siteURL+ '/post/'+ post.pathName">{{siteURL}}/post/{{post.pathName}}</a></p>
           <p>--
-            <attr title="End of File">EOF</attr>
+            <dfn title="End of File">EOF</dfn>
             --
           </p>
           <div class="post-info">
             <p>发表于
               <time>{{post.createAt}}</time>
-              ,添加在分类
+              ,添加在分类「
               <a :data-cate="post.category">
                 <code class="notebook">{{post.category}}</code>
-              </a>下,并被添加
+              </a>」下,并被添加「
               <router-link v-for="tag of post.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
                            :data-tag="tag"><code class="notebook">{{tag}}</code>
-                ]标签，
               </router-link>
+                」标签，
               最后修改于
               <time>{{post.updatedAt}}</time>
             </p>
@@ -39,7 +39,7 @@
         <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
                      class="prev">&laquo;{{prev.title}}
         </router-link>
-        <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
+        <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof next.pathName !== 'undefined'"
                      class="next">&raquo;{{next.title}}
         </router-link>
       </nav>

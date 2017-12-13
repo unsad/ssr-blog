@@ -70,7 +70,7 @@ export function createStore() {
           }
           commit('SET_BLOG', {blog});
           callback && callback();
-          let first = api.fetch({
+          let first = api.fetch('post', {
             conditions: {
               _id: {$lt: blog._id},
               type: 'post',

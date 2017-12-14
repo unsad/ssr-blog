@@ -31,11 +31,11 @@ config.plugins.push(
   new CheckAuthPlugin(),
   // moutingRoute
   new QiniuUploadPlugin({
-    qiniuAccessKey: env.qiniuAccessKey || '',
-    qiniuSecretKey: env.qiniuSecretKey || '',
-    qiniuBucketHost: env.qiniuBucketHost || '',
-    qiniuBucketName: env.qiniuBucketName || '',
-    qiniuPipeline: env.qiniuPipeline || ''
+    qiniuAccessKey: env.qiniuAccessKey || config.config.qiniuAccessKey,
+    qiniuSecretKey: env.qiniuSecretKey || config.config.qiniuSecretKey,
+    qiniuBucketHost: env.qiniuBucketHost || config.config.qiniuBucketHost,
+    qiniuBucketName: env.qiniuBucketName || config.config.qiniuBucketName,
+    qiniuPipeline: env.qiniuPipeline || config.config.qiniuPipeline
   }),
   new LoginPlugin(),
   new LogoutPlugin(),

@@ -5,7 +5,7 @@ let qiniu = require('qiniu');
 
 const fops = 'imageMogr2/format/webp';
 
-const policy = (name, fileName, { qiniuBucketName, qiniuPipeline}) => {
+const policy = (name, fileName, {qiniuBucketName, qiniuPipeline}) => {
   let encoded = new Buffer(`${qiniuBucketName}:webp/${fileName}`).toString('base64');
   const persist = {};
   if (qiniuPipeline !== '') {
@@ -24,12 +24,11 @@ const getQiniuTokenFromFileName = (fileName, {
   qiniuBucketHost
 }) => {
   const key = `${qiniuBucketName}:${fileName}`;
-  const putPolicy = new qiniu.rs.PutPolicy2(policy(key, fileName, {
+  const putPolicy = new qiniu.rs.PutPolicy(policy(key, fileName, {
     qiniuPipeline,
     qiniuBucketName
   }));
-
-  const upToken = putPolicy.token();
+  const upToken = putPolicy.uploadToken();
 
   return {
     upToken,
@@ -45,13 +44,14 @@ module.exports = class {
     qiniu.conf.ACCESS_KEY = this.options.qiniuAccessKey;
     qiniu.conf.SECRET_KEY = this.options.qiniuSecretKey;
   }
+
   async mountingRoute() {
     return {
       method: 'post',
       path: '/admin/qiniu',
       needBeforeRoutes: true,
       middleware: [
-        function({request, response}, next) {
+        ({request, response}, next) => {
           return response.body = getQiniuTokenFromFileName(
             request.body.key,
             this.options

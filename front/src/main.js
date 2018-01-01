@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import { createStore } from './store/store';
 import { createRouter } from './router';
 import { sync } from 'vuex-router-sync';
+import 'normalize.css';
 
 const isProd = process.env.NODE_ENV === 'production';
 

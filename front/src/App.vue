@@ -2,7 +2,7 @@
   <div id="app">
     <loading-bar :progress="progress"></loading-bar>
     <sidebar></sidebar>
-    <my-header></my-header>
+    <my-header v-if="false"></my-header>
     <router-view></router-view>
   </div>
 </template>
@@ -28,13 +28,11 @@
   }
 </script>
 
-<style>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
+<style lang="stylus" rel="stylesheet/stylus">
+  ul
+    list-style-type: none 
+  a
+    text-decoration: none
+  #app
+    background: red
 </style>

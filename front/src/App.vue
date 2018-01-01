@@ -29,10 +29,14 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  html 
+    font-size: 12px
   ul
     list-style-type: none 
   a
     text-decoration: none
   #app
     background: red
+    display: flex
+    height: 100vh
 </style>

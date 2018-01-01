@@ -1,8 +1,8 @@
 <template>
-  <nav id="sidebar" class="behavior_1"
+  <nav id="sidebar"
        :class="{'sidebar-image': sidebarUrl !== ''}"
        :style="imageStyle">
-    <div class="profile">
+    <div class="profile" v-if="false">
       <a href="/">
         <img :src="logoUrl" :alt="siteInfo.title.value">
       </a>
@@ -109,5 +109,7 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-
+#sidebar 
+  background: black
+  border-right: 0.25rem solid white
 </style>

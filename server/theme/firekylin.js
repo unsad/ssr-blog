@@ -6,24 +6,23 @@ module.exports = {
   author: 'github.com/75team/firekylin',
   option: {
     logoUrl: '/static/logo.jpg',
-    sidebarImageUrl: 'https://oebegwmfv.qnssl.com/webp/20161202/234424_bg8.jpg',
+    sidebarImageUrl: '',
     sidebarMoveCss: '',
     sidebarFontColor: '#fff !important',
     menu: [{
       "option": "home",
       "url": "/",
-      "label": "首页" ,
-
+      "label": "首页",
     },
-      {
-        "option": "archive",
-        "url": "/archive",
-        "label": "归档"
-      },
-      {
-        "option": "tags",
-        "url": "/tag",
-        "label": "标签"
-      }]
+    {
+      "option": "archive",
+      "url": "/archive",
+      "label": "归档"
+    },
+    {
+      "option": "tags",
+      "url": "/tag",
+      "label": "标签"
+    }]
   }
 }

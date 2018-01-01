@@ -3,7 +3,6 @@
  */
 import Vue from 'vue';
 import {createApp} from './main';
-import './assets/js/base';
 import clientGoogleAnalyse from './utils/clientGoogleAnalyse';
 import makeResponsive from './assets/js/base';
 

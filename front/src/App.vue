@@ -29,18 +29,8 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @font-face {
-    font-family: 'special-for-me';
-    src: url('assets/fonts/ljh.ttf') format('truetype')
-    font-weight: normal;
-    font-style: normal;
-}
-  html 
-    font-size: 12px
-  ul
-    list-style-type: none 
-  a
-    text-decoration: none
+  @import './assets/css/index.styl';
+
   #app
     font-family: 'special-for-me' 
     background: red

@@ -1,3 +1,5 @@
+@import './variable.styl'
+
 @font-face 
   font-family: 'special-for-me'
   src: url('assets/fonts/ljh.ttf') format('truetype')
@@ -5,8 +7,9 @@
   font-style: normal
 
 html 
-  font-size: 12px
+  font-size: $font-size-small
 ul
   list-style-type: none 
 a
   text-decoration: none
+  color: $font-color

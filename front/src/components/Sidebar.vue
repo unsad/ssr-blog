@@ -8,18 +8,16 @@
       </a>
       <span :style="{'color': sidebarUrl ? option.sidebarFontColor : ''}">{{siteInfo.title.value}}</span>
     </div>
-    <ul class="buttons" v-if="option && option.menu">
+    <ul class="sidebar-link" v-if="option && option.menu">
       <li v-for="menu of option.menu">
-        <router-link :style="buttonColor" :to="{path: menu.url}" :title="menu.label">
-          <i class="iconfont" :class="'icon-' + menu.option"></i>
+        <router-link :to="{path: menu.url}" :title="menu.label">
           <span>{{menu.label}}</span>
         </router-link>
       </li>
     </ul>
-    <ul class="buttons" v-if="siteInfo && siteInfo.weiboUrl">
+    <ul class="sidebar-buttons" v-if="siteInfo && siteInfo.weiboUrl">
       <li>
-        <a :style="buttonColor"
-           :href="'https://github.com' + siteInfo.githubUrl.value"
+        <a :href="'https://github.com' + siteInfo.githubUrl.value"
            target="_blank"
            class="inline"
            v-if="siteInfo.githubUrl.value"
@@ -28,8 +26,7 @@
         </a>
       </li>
       <li>
-        <a :style="buttonColor"
-           :href="siteInfo.weiboUrl.value"
+        <a :href="siteInfo.weiboUrl.value"
            target="_blank"
            class="inline"
            v-if="siteInfo.weiboUrl.value"
@@ -38,13 +35,12 @@
         </a>
       </li>
       <li>
-        <a :style="buttonColor" href="/rss.xml" target="_blank" class="inline">
+        <a href="/rss.xml" target="_blank" class="inline">
           <i title="RSS"></i>
         </a>
       </li>
       <li>
-        <a :style="buttonColor"
-           :href="'https://www.google.com/webhp#newwindow=1&safe=strict&q=site:' + siteInfo.siteUrl.value"
+        <a :href="'https://www.google.com/webhp#newwindow=1&safe=strict&q=site:' + siteInfo.siteUrl.value"
            target="_blank"
            class="inline"
            v-if="siteInfo.siteUrl.value">
@@ -89,27 +85,14 @@
         ]
       }
     },
-    mixins: [mixin],
-    computed: {
-      buttonColor() {
-        return {
-          'color': this.sidebarUrl ? this.option.sidebarFontColor : ''
-        }
-      },
-      imageStyle() {
-        const sidebarUrl = this.sidebarUrl;
-        const sidebarMoveCss = sidebarUrl ? this.option.sidebarMoveCss : '';
-        const result = {
-          'background-image': sidebarUrl ? 'url(' + sidebarUrl + ')' : '',
-          'transition': sidebarMoveCss
-        };
-        return result;
-      }
-    }
+    mixins: [mixin]
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
 #sidebar 
   background: black
   border-right: 0.25rem solid white
+  .sidebar-link
+    padding: 0
+    font-size: 4rem
 </style>

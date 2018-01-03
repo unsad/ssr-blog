@@ -1,7 +1,6 @@
 <template>
   <nav id="sidebar"
-       :class="{'sidebar-image': sidebarUrl !== ''}"
-       :style="imageStyle">
+       :class="{'sidebar-image': sidebarUrl !== ''}">
     <div class="profile" v-if="false">
       <a href="/">
         <img :src="logoUrl" :alt="siteInfo.title.value">
@@ -94,5 +93,6 @@
   border-right: 0.25rem solid white
   .sidebar-link
     padding: 0
+    text-align: center
     font-size: 4rem
 </style>

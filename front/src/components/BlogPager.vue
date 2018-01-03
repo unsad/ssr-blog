@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <section id="page-index">
-      <blog-summary v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
+      <blog-summary class="summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
 
       </blog-summary>
       <pagination :page='page' :total-page="totalPage"></pagination>
@@ -70,5 +70,11 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-
+#page-index
+  color: #fff
+  background: #000 
+  margin: 4rem
+  border: 1rem solid #fff
+  .summary
+    border-bottom: 1px solid red
 </style>

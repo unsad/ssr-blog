@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <loading-bar :progress="progress"></loading-bar>
-    <sidebar></sidebar>
+    <sidebar class="sidebar"></sidebar>
     <my-header v-if="false"></my-header>
-    <router-view></router-view>
+    <router-view class="content"></router-view>
   </div>
 </template>
 
@@ -36,4 +36,8 @@
     background: red
     display: flex
     height: 100vh
+    .sidebar
+      width: 20%
+    .content
+      flex: 1
 </style>

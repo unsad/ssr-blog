@@ -1,5 +1,5 @@
 <template>
-  <footer id='footer' class='inner'> &copy; 2016&nbsp;-&nbsp; {{siteInfo.title.value}} &nbsp;-&nbsp;<a href="/">smallpath.me</a> <br> Powered by&nbsp;<a target="_blank"
+  <footer id='footer' class='inner'> &copy; 2018&nbsp;-&nbsp; {{siteInfo.title.value}} &nbsp;-&nbsp;<a href="/">sweetalkto.me</a> <br> Powered by&nbsp;<a target="_blank"
      href="https://github.com/vuejs/vue">Vue2</a>&nbsp;&amp;&nbsp;<a target="_blank" href="https://github.com/koajs/koa">Koa2</a>
   </footer>
 </template>

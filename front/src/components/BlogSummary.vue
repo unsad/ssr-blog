@@ -35,5 +35,8 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-
+.meta 
+  float: right
+.title a
+  color: red
 </style>

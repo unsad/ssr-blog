@@ -21,7 +21,6 @@ const getRobotsFromConfig = require('./server/robots.js');
 const {api: sitemapApi, params: sitemapParams, getSitemapFromBody} = require('./server/sitemap.js');
 const {api: rssApi, params: rssParams, getRssBodyFromBody} = require('./server/rss.js');
 const config = require('./server/config');
-const inline = isProd ? fs.readFileSync(resolve('./dist/styles.css'), 'utf-8') : '';
 
 const uuid = require('uuid');
 const titleReg = /<.*?>(.+?)<.*?>/;
@@ -48,7 +47,6 @@ config.flushOption().then(() => {
   });
 
   function flushHtml(template) {
-    const style = isProd ? `<style type="text/css">${inline}</style>` : '';
     const i = template.indexOf('<div id=app></div>');
     return {
       head: template.slice(0, i).replace('<link href="/dist/styles.css" rel="stylesheet">', style),

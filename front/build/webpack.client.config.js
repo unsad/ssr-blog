@@ -33,6 +33,7 @@ const config = merge(base, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest'
     }),
+    new webpack.NamedModulesPlugin(),
     new VueSSRClientPlugin()
   ]
 });
@@ -69,5 +70,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = config;
-
 

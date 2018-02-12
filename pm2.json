@@ -10,7 +10,10 @@
     "node_args": [],
     "args": [],
     "env": {
-
+      "HOST": "localhost"
+    },
+    "env_production": {
+      "NODE_ENV": "production"
     }
   },
     {
@@ -26,5 +29,14 @@
       "env": {
 
       }
-    }]
+    }],
+    "deploy": {
+      "user": "unsad",
+      "host": "47.100.112.11",
+      "ssh_options": ["Port=3999"],
+      "repo": "git@github.com:unsad/ssr-blog.git",
+      "ref": "origin/master",
+      "path": "/root/deploy/ssr-blog",
+      "post-deploy": "cd front && npm install && npm build && pm2 startOrRestart pm2.json --env production"
+    }
 }

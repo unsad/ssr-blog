@@ -1,21 +1,22 @@
 {
-  "apps": [{
-    "name": "backend",
-    "script": "server/app.js",
-    "cwd": "",
-    "exec_mode": "cluster",
-    "instances": 0,
-    "max_memory_restart": "256M",
-    "autorestart": true,
-    "node_args": [],
-    "args": [],
-    "env": {
-      "HOST": "localhost"
+  "apps": [
+    {
+      "name": "backend",
+      "script": "server/app.js",
+      "cwd": "",
+      "exec_mode": "cluster",
+      "instances": 0,
+      "max_memory_restart": "256M",
+      "autorestart": true,
+      "node_args": [],
+      "args": [],
+      "env": {
+        "HOST": "localhost"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
     },
-    "env_production": {
-      "NODE_ENV": "production"
-    }
-  },
     {
       "name": "frontend",
       "script": "front/server.js",
@@ -26,17 +27,20 @@
       "autorestart": true,
       "node_args": [],
       "args": [],
-      "env": {
-
-      }
-    }],
-    "deploy": {
+      "env": {}
+    }
+  ],
+  "deploy": {
+    "production": {
       "user": "unsad",
       "host": "47.100.112.11",
-      "ssh_options": ["Port=3999"],
+      "ssh_options": [
+        "Port=3999"
+      ],
       "repo": "git@github.com:unsad/ssr-blog.git",
       "ref": "origin/master",
       "path": "/root/deploy/ssr-blog",
       "post-deploy": "cd front && npm install && npm build && pm2 startOrRestart pm2.json --env production"
     }
+  }
 }

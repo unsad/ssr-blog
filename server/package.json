@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node app.js"
+    "start": "cross-env mongoPort=27017 node app.js"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
@@ -14,5 +14,8 @@
     "qiniu": "^7.0.9",
     "redis": "^2.8.0",
     "restc": "^0.2.2"
+  },
+  "devDependencies": {
+    "cross-env": "^5.1.3"
   }
 }

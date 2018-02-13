@@ -35,11 +35,12 @@
       "user": "unsad",
       "host": "47.100.112.11",
       "ssh_options": [
-        "Port=3999"
+        "Port=3999",
+        "StrictHostKeyChecking=no"
       ],
       "repo": "git@github.com:unsad/ssr-blog.git",
       "ref": "origin/master",
-      "path": "/root/deploy/ssr-blog",
+      "path": "/home/unsad/www/deploy/ssr-blog",
       "post-deploy": "cd front && npm install && npm build && pm2 startOrRestart pm2.json --env production"
     }
   }

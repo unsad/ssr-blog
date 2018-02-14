@@ -1,8 +1,5 @@
 <template>
   <div class="wrapper">
-    <div class="pic">
-      <img src="../../static/sidebar.png" alt="" width="180%">
-    </div>
     <nav id="sidebar"
         :class="{'sidebar-image': sidebarUrl !== ''}">
       <div class="profile" v-if="false">
@@ -14,10 +11,13 @@
       <ul class="sidebar-link" v-if="option && option.menu">
         <li v-for="menu of option.menu" :key="menu.label">
           <router-link :to="{path: menu.url}" :title="menu.label">
-            <span>{{menu.label}}</span>
+            <span class="rotate-1">{{menu.label[0]}}</span><span class="rotate-2">{{menu.label[1]}}</span>
           </router-link>
         </li>
       </ul>
+      <div class="pic">
+        <img src="../../static/sidebar.png" alt="" width="180%">
+      </div>
       <ul class="sidebar-buttons" v-if="siteInfo && siteInfo.weiboUrl">
         <li>
           <a :href="'https://github.com' + siteInfo.githubUrl.value"
@@ -100,7 +100,7 @@
     bottom: -1rem
     left: calc(22% - 30vh)
     width: 100%
-    z-index: 1
+    z-index: -1
   #sidebar 
     height: 100%
     background: black
@@ -118,4 +118,16 @@
       padding: 0
       text-align: center
       font-size: 4rem
+      transform: rotate(20deg) translate(26%)
+      line-height: 2
+
+.rotate-1 
+  display: inline-block
+  transform: rotate(-45deg)
+  -webkit-text-stroke: 2px black;
+.rotate-2 
+  display: inline-block
+  color: black
+  -webkit-text-stroke: 2px white;
+  transform: rotate(15deg) translate(5%)
 </style>

@@ -85,7 +85,7 @@ export function createStore() {
             sort: {
               createdAt: -1
             },
-            limit: 1,
+            limit: 1
           });
           let second = api.fetch('post', {
             conditions: {

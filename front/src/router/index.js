@@ -17,6 +17,7 @@ const Tag = () => import('@/components/Tag');
 const TagPager = () => import('@/components/TagPager');
 const Sidebar = () => import('@/components/Sidebar');
 const Header = () => import('@/components/Header');
+const About = () => import('@/components/About');
 const Post = CreatePostView('post');
 const Page = CreatePostView('page');
 
@@ -53,6 +54,11 @@ export function createRouter() {
         path: '/archive',
         name: 'archive',
         component: Archive
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: About
       },
       {
         path: '/tag',

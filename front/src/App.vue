@@ -37,7 +37,7 @@
     display: flex
     height: 100vh
     .sidebar
-      width: 20%
+      width: 25%
     .content
       flex: 1
 </style>

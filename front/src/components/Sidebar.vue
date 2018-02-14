@@ -8,7 +8,7 @@
       <span :style="{'color': sidebarUrl ? option.sidebarFontColor : ''}">{{siteInfo.title.value}}</span>
     </div>
     <ul class="sidebar-link" v-if="option && option.menu">
-      <li v-for="menu of option.menu">
+      <li v-for="menu of option.menu" :key="menu.label">
         <router-link :to="{path: menu.url}" :title="menu.label">
           <span>{{menu.label}}</span>
         </router-link>
@@ -90,7 +90,17 @@
 <style scoped lang="stylus" rel="stylesheet/stylus">
 #sidebar 
   background: black
-  border-right: 0.25rem solid white
+  position: relative
+  clip-path: polygon(0 0, 100% 0, 30% 100%, 0% 100%)
+  &::before 
+    position: absolute
+    content: ''
+    left: 0 
+    right: 0
+    top: 0
+    bottom: 0
+    background: white
+    clip-path: polygon(97% 0, 100% 0, 30% 100%, 27% 100%)
   .sidebar-link
     padding: 0
     text-align: center

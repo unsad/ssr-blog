@@ -5,6 +5,8 @@
 
       </blog-summary>
       <pagination :page='page' :total-page="totalPage"></pagination>
+      <div class="deco deco-1"></div>
+      <div class="deco deco-2"></div>
     </section>
     <my-footer></my-footer>
   </div>
@@ -75,6 +77,29 @@
   background: #000 
   margin: 4rem
   border: 1rem solid #fff
+  outline: 0.2rem solid #000
   .summary
-    border-bottom: 1px solid red
+    border-bottom: 2px solid #fff
+    margin: 1rem
+
+.deco
+  width: 10rem
+  height: 3rem 
+  background: #000
+  position: absolute 
+  right: 1rem
+  clip-path: polygon(0 45%, 100% 19%, 100% 85%, 0 73%);
+  &::before 
+    content: ''
+    position: absolute
+    top: 0 
+    left: 0 
+    right: 0
+    bottom: 0
+    background: #fff
+    clip-path: polygon(2% 50%, 98% 24%, 98% 80%, 2% 68%);
+.deco-2 
+  transform: rotate(-20deg) translate(10%, -70%)
+.deco-1 
+  transform: rotate(30deg) translate(0, 80%) scaleX(0.7)
 </style>

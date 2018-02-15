@@ -38,5 +38,5 @@
 .meta 
   float: right
 .title a
-  color: red
+  color: #fff
 </style>

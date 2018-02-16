@@ -2,10 +2,10 @@
   <div id='main'>
     <article class="post archive">
       <h1 class="title">{{title}}</h1>
-      <div class="entry-content" v-for="(item, key) of achieves">
+      <div class="entry-content" v-for="(item, key) of achieves" :key="key">
         <h3>{{key}} ({{item.length}})</h3>
         <ul>
-          <li v-for="subItem of item">
+          <li v-for="subItem of item" :key="subItem.title">
             <router-link :to="{name: 'post', params: {pathName: subItem.pathName}}" :title="subItem.title">{{subItem.title}}</router-link>&nbsp;
             <span class="date">{{subItem.createdAt.split(' ')[0]}}</span>
           </li>

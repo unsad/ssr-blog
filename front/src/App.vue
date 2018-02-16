@@ -40,4 +40,5 @@
       width: 30%
     .content
       flex: 1
+      margin-left: 10%
 </style>

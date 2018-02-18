@@ -41,7 +41,7 @@
       "repo": "git@github.com:unsad/ssr-blog.git",
       "ref": "origin/master",
       "path": "/home/unsad/www/deploy/ssr-blog",
-      "post-deploy": "cd front && cnpm install && npm run build && cd ../server && cnpm install && cd ../admin && cnpm install && npm run build && cd.. && pm2 startOrRestart pm2.json --env production"
+      "post-deploy": "cd front && cnpm install && npm run build && cd ../server && cnpm install && cd ../admin && cnpm install && npm run build && cd .. && pm2 startOrRestart pm2.json --env production"
     }
   }
 }

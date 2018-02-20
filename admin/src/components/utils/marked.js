@@ -20,7 +20,7 @@ renderer.heading = function (text, level) {
 Marked.setOptions({
   highlight: function(code, lang) {
     if (hljs.getLanguage(lang)) {
-      return hljs.highlightAuto(lang, code).value;
+      return hljs.highlight(lang, code).value;
     } else {
       return hljs.highlightAuto(code).value;
     }

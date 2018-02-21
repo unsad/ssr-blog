@@ -27,7 +27,12 @@
       "autorestart": true,
       "node_args": [],
       "args": [],
-      "env": {}
+      "env": {
+        "HOST": "localhost"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
     }
   ],
   "deploy": {

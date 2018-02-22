@@ -95,9 +95,11 @@
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .wrapper 
   position: relative
+  font-family: 'special-for-me' 
   .pic 
     position: absolute
-    bottom: -1rem
+    font-size: 0
+    bottom: 0
     left: calc(22% - 30vh)
     width: 100%
     z-index: -1

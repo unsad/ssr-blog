@@ -32,7 +32,6 @@
   @import './assets/css/index.styl';
 
   #app
-    font-family: 'special-for-me' 
     background: red
     display: flex
     height: 100vh

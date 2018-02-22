@@ -264,7 +264,7 @@ export function createStore() {
         return state.menu;
       },
       page(state) {
-        return state.route.query.page || 1;
+        return +state.route.query.page || 1;
       },
       totalPage(state) {
         return state.totalPage;

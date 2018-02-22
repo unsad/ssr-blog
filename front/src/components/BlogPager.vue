@@ -5,9 +5,9 @@
 
       </blog-summary>
       <pagination :page='page' :total-page="totalPage"></pagination>
-      <div class="deco deco-1"></div>
-      <div class="deco deco-2"></div>
     </section>
+    <div class="deco deco-1"></div>
+    <div class="deco deco-2"></div>
     <my-footer></my-footer>
   </div>
 </template>
@@ -72,15 +72,19 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-#page-index
-  color: #fff
-  background: #000 
-  margin: 4rem
-  border: 1rem solid #fff
-  outline: 0.2rem solid #000
-  .summary
-    border-bottom: 2px solid #fff
-    margin: 1rem
+#main
+  padding: 4rem
+  position: relative
+  #page-index
+    color: #fff
+    overflow: auto
+    background: #000 
+    border: 1rem solid #fff
+    outline: 0.2rem solid #000
+    height: 100%
+    .summary
+      border-bottom: 2px solid #fff
+      margin: 1rem
 
 .deco
   width: 10rem
@@ -88,6 +92,7 @@
   background: #000
   position: absolute 
   right: 1rem
+  bottom: 4rem
   clip-path: polygon(0 45%, 100% 19%, 100% 85%, 0 73%);
   &::before 
     content: ''

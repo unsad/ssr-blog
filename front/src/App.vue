@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <loading-bar :progress="progress"></loading-bar>
-    <sidebar class="sidebar"></sidebar>
     <my-header v-if="false"></my-header>
     <router-view class="content"></router-view>
   </div>
@@ -9,7 +8,6 @@
 
 <script>
   import LoadingBar from './components/Loading';
-  import Sidebar from './components/Sidebar';
   import myHeader from './components/Header';
   import { mapGetters } from 'vuex';
 
@@ -17,7 +15,6 @@
     name: 'app',
     components: {
       LoadingBar,
-      Sidebar,
       myHeader
     },
     computed: {
@@ -33,11 +30,4 @@
 
   #app
     background: red
-    display: flex
-    height: 100vh
-    .sidebar
-      width: 30%
-    .content
-      flex: 1
-      margin-left: 10%
 </style>

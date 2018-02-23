@@ -1,21 +1,25 @@
 <template>
-  <div id="main">
-    <section id="page-index">
-      <blog-summary class="summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
+  <div class="home">
+    <sidebar class="sidebar"></sidebar>
+    <div id="main">
+      <section id="page-index">
+        <blog-summary class="summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
 
-      </blog-summary>
-      <pagination :page='page' :total-page="totalPage"></pagination>
-    </section>
-    <div class="deco deco-1"></div>
-    <div class="deco deco-2"></div>
-    <my-footer></my-footer>
+        </blog-summary>
+        <pagination :page='page' :total-page="totalPage"></pagination>
+      </section>
+      <div class="deco deco-1"></div>
+      <div class="deco deco-2"></div>
+      <my-footer></my-footer>
+    </div>
   </div>
 </template>
 
 <script>
-  import myFooter from './Footer.vue';
-  import blogSummary from './BlogSummary.vue';
-  import pagination from './Pagination.vue';
+  import myFooter from './Footer';
+  import blogSummary from './BlogSummary';
+  import Sidebar from './Sidebar';
+  import pagination from './Pagination';
   import { mapGetters } from 'vuex';
 
   export default {
@@ -67,24 +71,34 @@
     components: {
       myFooter,
       blogSummary,
-      pagination
+      pagination,
+      Sidebar
     }
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-#main
-  padding: 4rem
-  position: relative
-  #page-index
-    color: #fff
-    overflow: auto
-    background: #000 
-    border: 1rem solid #fff
-    outline: 0.2rem solid #000
-    height: 100%
-    .summary
-      border-bottom: 2px solid #fff
-      margin: 1rem
+.home 
+  display: flex
+  height: 100vh 
+  .sidebar
+    width: 30%
+  #main
+    flex: 1
+    margin-left: 10%
+    padding: 4rem
+    position: relative
+    display: flex 
+    flex-direction: column
+    #page-index
+      color: #fff
+      overflow: auto
+      background: #000 
+      border: 1rem solid #fff
+      outline: 0.2rem solid #000
+      height: 100%
+      .summary
+        border-bottom: 2px solid #fff
+        margin: 1rem
 
 .deco
   width: 10rem

@@ -12,7 +12,6 @@
         </div>
 
         <template v-if="shouldShow">
-          <p>本文链接：<a :href="siteURL+ '/post/'+ post.pathName">{{siteURL}}/post/{{post.pathName}}</a></p>
           <p>--
             <dfn title="End of File">EOF</dfn>
             --

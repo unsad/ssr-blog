@@ -77,6 +77,8 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
+@import '../assets/css/mixin.styl';
+
 .home 
   display: flex
   height: 100vh 
@@ -90,11 +92,7 @@
     display: flex 
     flex-direction: column
     #page-index
-      color: #fff
-      overflow: auto
-      background: #000 
-      border: 1rem solid #fff
-      outline: 0.2rem solid #000
+      two-color-border()
       height: 100%
       .summary
         border-bottom: 2px solid #fff

@@ -182,8 +182,7 @@
       tocToTree(toc) {
         return toc.map(item => {
           let times = (item.level - 1) * 2;
-          return `${' '.repeat(times)} - [${item.title}]
-          (#${item.slug})`
+          return `${' '.repeat(times)} - [${item.title}](#${item.slug})`
         }).join('\n');
       },
       validate() {

@@ -29,7 +29,7 @@ export function createRouter() {
     mode: 'history',
     fallback: false,
     scrollBehavior: function (to, from, savedPosition) {
-      if (savedPosition) {
+      if (savedPosition.y) {
         return savedPosition;
       } else {
         let position = {x: 0, y: 0};

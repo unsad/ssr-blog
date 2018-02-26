@@ -92,6 +92,7 @@
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
+
 #main 
   padding: 1rem
 .post

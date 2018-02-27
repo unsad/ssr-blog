@@ -29,14 +29,13 @@ export function createRouter() {
     mode: 'history',
     fallback: false,
     scrollBehavior: function (to, from, savedPosition) {
-      if (savedPosition.y) {
+      if (to.hash) {
+        return {selector: to.hash};
+      }
+      if (savedPosition) {
         return savedPosition;
       } else {
-        let position = {x: 0, y: 0};
-        if (to.hash) {
-          position = {selector: to.hash};
-        }
-        return position;
+        return {x: 0, y: 0};
       }
     },
     routes: [

@@ -68,5 +68,6 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-
+#main 
+  padding: 1rem
 </style>

@@ -107,6 +107,8 @@
     height: 100%
     background: black
     clip-path: polygon(0 0, 100% 0, calc(100% - 30vh) 100%, 0% 100%)
+    a
+      color: #fff
     &::before 
       position: absolute
       content: ''

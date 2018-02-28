@@ -107,10 +107,21 @@
         background: #000
         position: relative 
         width: 40rem
-        padding: 2rem
+        padding: 1rem
         top: 0.5rem
+        ul
+          line-height: 1.7
+          font-size: 1.2rem
+          li 
+            display: flex 
+            justify-content: space-between
+            a
+              color: #fff
         h3 
           text-align: center
+          font-size: 1.5rem
+          padding-bottom: 1rem;
+          border-bottom: 1px solid #fff;
         &:before 
           content: ''
           background: #000 

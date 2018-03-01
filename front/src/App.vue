@@ -2,7 +2,7 @@
   <div id="app">
     <loading-bar :progress="progress"></loading-bar>
     <my-header v-if="false"></my-header>
-    <router-view class="content"></router-view>
+    <router-view class="switch-content"></router-view>
   </div>
 </template>
 
@@ -30,4 +30,6 @@
 
   #app
     background: red
+    .switch-content 
+      min-height: 100vh
 </style>

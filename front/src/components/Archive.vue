@@ -70,6 +70,8 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
+@import '../assets/css/mixin.styl';
+
 #main  
   padding: 1rem
   .timeline
@@ -89,25 +91,29 @@
       border: 3px solid #000;
       border-radius: 50%;
     .content 
+      two-color-border()
+      color: #fff
       background: #000
       position: relative 
       width: 40rem
       padding: 2rem
       top: 0.5rem
+      h3 
+        text-align: center
       &:before 
         content: ''
         background: #000 
         position: absolute 
-        top: 0
+        top: -0.7rem
         width: 3rem 
         height: 0.3rem 
     &:nth-child(odd) .content
       left: 4rem 
       background: #000 
       &:before 
-        left: -3rem
+        left: -4rem
     &:nth-child(even) .content
-      left: calc(-40rem - 4rem)
+      left: calc(-40rem - 3.5rem)
       &:before 
-        right: -3rem
+        right: -4rem
 </style>

@@ -93,6 +93,7 @@
     flex-direction: column
     #page-index
       two-color-border()
+      overflow: auto
       height: 100%
       .summary
         border-bottom: 2px solid #fff

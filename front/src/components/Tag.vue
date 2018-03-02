@@ -4,7 +4,7 @@
       <h1 class="title">{{title}}</h1>
       <div class="entry-content">
         <section>
-          <router-link v-for="key of sortedKeys" :key="key" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">{{key}}({{tags[key]}})</router-link>
+          <router-link class="tag" tag="span" v-for="key of sortedKeys" :key="key" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">{{key}}({{tags[key]}})</router-link>
         </section>
       </div>
     </article>
@@ -64,5 +64,9 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
+@import '../assets/css/mixin.styl';
+
+.tag 
+  two-color-border()
 
 </style>

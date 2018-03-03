@@ -73,7 +73,8 @@
 @import '../assets/css/mixin.styl';
 
 #main  
-  padding: 1rem
+  .title 
+    title-base()
   .timeline
     position: relative
     width: 0.5rem

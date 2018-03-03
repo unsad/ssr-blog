@@ -65,8 +65,9 @@
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
+#main  
+  .title 
+    title-base()
 
-.tag 
-  two-color-border()
 
 </style>

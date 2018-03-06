@@ -2,7 +2,10 @@
   <div id="main">
       <h1 class="title">{{title}}</h1>
       <h2 class="second-title">
-        <span class="title-deco">WANTED</span>
+        <span class="second-title-text">
+          <object class="second-title-deco" type="image/svg+xml" data="../../static/mask.svg">This browser sucks</object>
+          "Took the mask off to feel free"
+        </span>
       </h2>
       <div class="entry-content">
         <div class="object-box">
@@ -93,6 +96,9 @@
           </div>
         </div>
       </div>
+      <router-link tag="div" :to="{path: '/'}" class="back">
+        <object class="back-deco" type="image/svg+xml" data="../../static/back.svg">This browser sucks</object>
+      </router-link>
     <my-footer></my-footer>
   </div>
 </template>
@@ -114,12 +120,23 @@ export default {
 <style lang="stylus" scoped rel="stylesheet/stylus">
  @import '../assets/css/mixin.styl';
 
- .title
-   title-base()
-  .second-title
-    color: #fff 
-    text-align: center
-    margin: 1rem 0
+.title
+  title-base()
+.second-title
+  color: #fff 
+  text-align: center
+  margin: 1rem 0
+  .second-title-text
+    position: relative
+    background: #000
+    padding: 1rem
+    display: inline-block
+  .second-title-deco 
+    position: absolute
+    height: 100%
+    transform: rotate(-20deg)
+    left: -10%
+    top: -50%
 .entry-content 
   text-align: center
   .object-box  
@@ -140,41 +157,51 @@ export default {
       font-size: 2rem
       padding: 0.5rem
       two-color-border(0.5rem, 0.2rem)
+.back
+  width: 10rem
+  position: fixed
+  cursor: pointer
+  bottom: 1rem
+  z-index: 1
+  left: 1rem
+  .back-deco
+    pointer-events: none
 
-  .box-1 
-    left: 70%
-    bottom: 4rem
-  .box-2 
-    left: 65% 
-    bottom: 9rem
-  .box-3
-    left: 70%
-    top: 3rem
-  .box-4
-    left: 50%
-    top: 8rem
-  .box-5 
-    left: -20%
-    bottom: 0
-  .box-6
-    left: -30%
-    top: 9rem
-  .box-7 
-    left: -10%
-    top: 3rem
-  .box-8
-    left: -35%
-    bottom: 5rem
-  .box-9
-    left: 50%
-    top: 17rem
-  .box-10
-    left: 68%
-    top: 16rem
-  .box-11
-    left: -5%
-    top: 15rem
-  .box-12
-    left: -30% 
-    bottom: 18rem
+
+.box-1 
+  left: 70%
+  bottom: 4rem
+.box-2 
+  left: 65% 
+  bottom: 9rem
+.box-3
+  left: 70%
+  top: 3rem
+.box-4
+  left: 50%
+  top: 8rem
+.box-5 
+  left: -20%
+  bottom: 0
+.box-6
+  left: -30%
+  top: 9rem
+.box-7 
+  left: -10%
+  top: 3rem
+.box-8
+  left: -35%
+  bottom: 5rem
+.box-9
+  left: 50%
+  top: 17rem
+.box-10
+  left: 68%
+  top: 16rem
+.box-11
+  left: -5%
+  top: 15rem
+.box-12
+  left: -30% 
+  bottom: 18rem
 </style>

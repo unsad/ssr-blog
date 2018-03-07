@@ -55,7 +55,7 @@
       },
       styling() {
         if (!this.wait) {
-          return {width: `${this.width}`};
+          return {width: `${this.width}%`};
         } else {
           return {width: `100%`};
         }
@@ -69,7 +69,7 @@
     position: fixed
     top: 0
     background: #77b6ff
-    height: 2px
+    height: 5px
     opacity: 1
 
   .loading-bar-glow
@@ -77,7 +77,7 @@
     position: absolute
     width: 100%
     height: 100%
-    box-shadow: -2px 0 15px 1px rgba(119, 182, 255, 0.7)
+    box-shadow: -4px 0 15px 1px rgba(119, 182, 255, 0.7)
 
   .loading-bar--to_right
     left: 0

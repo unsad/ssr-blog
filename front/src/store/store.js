@@ -22,7 +22,7 @@ export function createStore() {
       tagPager: [],
       tags: [],
       theme: {},
-      progress: 100,
+      progress: 0,
       siteInfo: {
         githubUrl: {
           value: ''

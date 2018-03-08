@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div id="tagpager">
     <section id="page-index">
       <h1 class="intro">标签<a href="javascript: void(0)">{{$route.params.tagName}}</a>下的文章</h1>
       <blog-summary v-for="item of tagPager" :key="item" :article="item" :support-webp="supportWebp"></blog-summary>
@@ -67,6 +67,6 @@
     }
   }
 </script>
-<style scoped lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 
 </style>

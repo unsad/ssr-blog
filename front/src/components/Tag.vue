@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div id="tag">
     <article class="post tags">
       <h1 class="title">{{title}}</h1>
       <div class="entry-content">
@@ -66,9 +66,9 @@
     }
   }
 </script>
-<style scoped lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
-#main  
+#tag 
   .title 
     title-base()
   .tag 

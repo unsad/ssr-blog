@@ -16,7 +16,7 @@
     }
   }
 </script>
-<style scoped lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 #footer 
   margin-top: 1rem
   text-align: center

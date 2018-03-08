@@ -47,7 +47,6 @@ router.onReady(() => {
     if (to.path === from.path && to.hash !== from.hash) {
       return next();
     }
-
     let loadingPromise = store.dispatch('START_LOADING');
     let endLoadingCallback = (path) => {
       return loadingPromise.then(interval => {

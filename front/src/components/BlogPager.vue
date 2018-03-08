@@ -1,7 +1,8 @@
 <template>
-  <div class="home">
+  <div id="blogpager">
     <sidebar class="sidebar"></sidebar>
     <div id="main">
+      
       <section id="page-index">
         <blog-summary class="summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
 
@@ -76,10 +77,10 @@
     }
   }
 </script>
-<style scoped lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
-.home 
+#blogpager
   display: flex
   height: 100vh 
   .sidebar

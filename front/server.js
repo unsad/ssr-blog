@@ -138,7 +138,7 @@ config.flushOption().then(() => {
 
     const renderStream = renderer.renderToStream(context);
 
-    renderStream.once('data', chunk => {
+    renderStream.once('data', () => {
       const {title, link, meta} = context.meta.inject();
       const titleText = title.text();
       const metaData = `${title.text()}${meta.text()}${link.text()}`;
@@ -150,7 +150,6 @@ config.flushOption().then(() => {
           expires: new Date(Date.now() + expires)
         })
       }
-      res.write(chunk);
       sendGoogleAnalytic(req, res, next, {
         dt: matched ? matched[1] : config.title,
         dr: req.url,

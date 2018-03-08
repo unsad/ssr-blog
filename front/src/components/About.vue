@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div id="about">
       <h1 class="title">{{title}}</h1>
       <h2 class="second-title">
         <span class="second-title-text">
@@ -117,46 +117,46 @@ export default {
     }
 }
 </script>
-<style lang="stylus" scoped rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
  @import '../assets/css/mixin.styl';
-
-.title
-  title-base()
-.second-title
-  color: #fff 
-  text-align: center
-  margin: 1rem 0
-  .second-title-text
-    position: relative
-    background: #000
-    padding: 1rem
-    display: inline-block
-  .second-title-deco 
-    position: absolute
-    height: 100%
-    transform: rotate(-20deg)
-    left: -10%
-    top: -50%
-.entry-content 
-  text-align: center
-  .object-box  
-    position: relative
-    width: 500px
-    display: inline-block
-    object  
-      z-index: 1
+#about
+  .title
+    title-base()
+  .second-title
+    color: #fff 
+    text-align: center
+    margin: 1rem 0
+    .second-title-text
       position: relative
-  .direct-box 
-    position: absolute
-    display: flex 
-    width: max-content
-    align-items: center
-    .direct-line 
-      width: 200px
-    .direct-content 
-      font-size: 2rem
-      padding: 0.5rem
-      two-color-border(0.5rem, 0.2rem)
+      background: #000
+      padding: 1rem
+      display: inline-block
+    .second-title-deco 
+      position: absolute
+      height: 100%
+      transform: rotate(-20deg)
+      left: -10%
+      top: -50%
+  .entry-content 
+    text-align: center
+    .object-box  
+      position: relative
+      width: 500px
+      display: inline-block
+      object  
+        z-index: 1
+        position: relative
+    .direct-box 
+      position: absolute
+      display: flex 
+      width: max-content
+      align-items: center
+      .direct-line 
+        width: 200px
+      .direct-content 
+        font-size: 2rem
+        padding: 0.5rem
+        two-color-border(0.5rem, 0.2rem)
 .back
   width: 10rem
   position: fixed

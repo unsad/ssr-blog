@@ -1,5 +1,5 @@
 <template>
-  <div id='main'>
+  <div id='archive'>
     <article class="post archive">
       <h1 class="title">{{title}}</h1>
       <div class="timeline" v-for="(item, key) of achieves" :key="key">
@@ -69,10 +69,10 @@
     }
   }
 </script>
-<style scoped lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
-#main  
+#archive 
   .title 
     title-base()
   .timeline

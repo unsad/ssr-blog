@@ -1,7 +1,7 @@
 <template>
-  <div id="main">
+  <div id="post">
     <div id="page-post">
-      <article class="post detail">
+      <article class="post-detail">
         <div class="meta">
           <div class="date">
             {{post.createdAt}}
@@ -90,13 +90,13 @@
     }
   }
 </script>
-<style scoped lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
-#main 
+#post
   padding: 1rem
-.post
-  two-color-border()
-  .meta 
-    float: right
+  .post-detail
+    two-color-border()
+    .meta 
+      float: right
 </style>

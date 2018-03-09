@@ -82,6 +82,7 @@
 
 #blogpager
   display: flex
+  overflow: hidden
   height: 100vh 
   .sidebar
     width: 30%

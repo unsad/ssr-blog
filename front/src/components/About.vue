@@ -4,7 +4,7 @@
       <h2 class="second-title">
         <span class="second-title-text">
           <object class="second-title-deco" type="image/svg+xml" data="../../static/mask.svg">This browser sucks</object>
-          "Took the mask off to feel free"
+          " Took the mask off to feel free "
         </span>
       </h2>
       <div class="entry-content">
@@ -106,15 +106,15 @@
 import myFooter from './Footer.vue';
 
 export default {
-  name: "about",
+  name: 'about',
   data() {
     return {
       title: '关于'
     };
   },
-   components: {
-      myFooter
-    }
+  components: {
+    myFooter
+  }
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
@@ -132,6 +132,7 @@ export default {
       font-family: 'jackey_handwriteregular';
       font-size: 2rem
       background: #000
+      letter-spacing: 0.1rem 
       padding: 1rem
       display: inline-block
     .second-title-deco 

@@ -4,39 +4,45 @@
     <h2 class="second-title">
       <span class="second-title-text">
         <object class="second-title-deco" type="image/svg+xml" data="../../static/mask.svg">This browser sucks</object>
-        "I was turning my back on you my friend"
+        " I was turning my back on you my friend "
       </span>
     </h2>
     <div class="content">
-        <ul class="linklist-box">
-            <li v-for="(item, index) of linkitems" :key="item" :style="{'margin-left': `-${index * 5}rem`}">{{item}}</li>
-        </ul>
-        <div class="object-box">
-         <object class="second-title-deco" type="image/svg+xml" data="../../static/link-bg.svg">This browser sucks</object>
-        </div>
+      <ul class="linklist-box">
+        <li v-for="(item, index) of linkitems" :key="item" :style="{'margin-left': `-${index * 5}rem`}">{{item}}</li>
+      </ul>
+      <div class="object-box">
+        <object class="second-title-deco" type="image/svg+xml" data="../../static/link-bg.svg">This browser sucks</object>
+      </div>
     </div>
+    <my-footer></my-footer>
   </div>
 </template>
-<script>
-  export default {
-    name: "Link",
-    data() {
-      return {
-          title: '友链',
-          linkitems: [
-              'a',
-              'b',
-              'c',
-              'd',
-              'e',
-              'f'
-          ]
-      };
-    }
-  }
 
+<script>
+import myFooter from './Footer.vue';
+
+export default {
+  name: 'Link',
+  data() {
+    return {
+      title: '友链',
+      linkitems: [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f'
+      ]
+    };
+  },
+  components: {
+    myFooter
+  }
+}
 </script>
-<style lang="stylus" scoped rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
 #link    
@@ -48,7 +54,8 @@
     margin: 1rem 0
     .second-title-text
       position: relative
-      font-family: 'jackey_handwriteregular';
+      font-family: 'jackey_handwriteregular'
+      letter-spacing: 0.1rem 
       font-size: 2rem
       background: #000
       padding: 1rem

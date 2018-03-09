@@ -1,6 +1,11 @@
 <template>
-  <footer id='footer' class='inner'> &copy;2018&nbsp;-&nbsp; {{siteInfo.title.value}} &nbsp;<br> Powered by&nbsp;<a target="_blank"
-     href="https://github.com/vuejs/vue">Vue2</a>&nbsp;&amp;&nbsp;<a target="_blank" href="https://github.com/koajs/koa">Koa2</a>
+  <footer id="footer"> 
+    <div class="inner">
+      <span>&copy;2018&nbsp;&nbsp; {{siteInfo.title.value}}</span> &nbsp;<br> 
+      <span>Powered by&nbsp;
+        <a target="_blank" href="https://github.com/vuejs/vue">Vue</a>&nbsp;&amp;&nbsp;<a target="_blank" href="https://github.com/koajs/koa">Koa</a>
+      </span>
+    </div>
   </footer>
 </template>
 
@@ -18,6 +23,20 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 #footer 
+  position: absolute
+  left: 0
+  right: 0
+  bottom: 0
   margin-top: 1rem
   text-align: center
+  .inner 
+    display: inline-block
+    width: 30%
+    border-top: .1rem solid #fff
+    font-size: 1rem
+    line-height: 1.5
+    padding: 0.5rem 0
+    color: #fff
+    a 
+      color: #000
 </style>

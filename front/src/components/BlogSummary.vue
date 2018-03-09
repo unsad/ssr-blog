@@ -22,7 +22,7 @@
       supprotWebp: Boolean
     },
     methods: {
-      filterWebp(content)  {
+      filterWebp(content) {
         if (!this.supportWebp) {
           return content.replace(/\/webp/gm, '');
         }

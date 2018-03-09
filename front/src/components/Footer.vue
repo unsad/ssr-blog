@@ -23,15 +23,12 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 #footer 
-  position: absolute
-  left: 0
-  right: 0
-  bottom: 0
   margin-top: 1rem
   text-align: center
   .inner 
     display: inline-block
     width: 30%
+    min-width: max-content
     border-top: .1rem solid #fff
     font-size: 1rem
     line-height: 1.5

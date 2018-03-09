@@ -46,8 +46,11 @@ export default {
 @import '../assets/css/mixin.styl';
 
 #link    
+  display: flex 
+  flex-direction: column
   .title
-    title-base()   
+    title-base() 
+    margin: 0  
   .second-title
     color: #fff 
     text-align: center
@@ -68,6 +71,7 @@ export default {
       top: -50%
   .content 
     display: flex
+    flex-grow: 1
     padding-left: 15rem
     align-items: center 
     justify-content: center

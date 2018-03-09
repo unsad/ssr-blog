@@ -1,8 +1,7 @@
 <template>
   <div id="blogpager">
     <sidebar class="sidebar"></sidebar>
-    <div id="main">
-      
+    <div id="main"> 
       <section id="page-index">
         <blog-summary class="summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
 
@@ -88,11 +87,11 @@
     width: 30%
   #main
     flex: 1
-    margin-left: 10%
-    padding: 4rem
+    padding: 4rem 4rem 0 calc(4rem + 10%)
     position: relative
     display: flex 
     flex-direction: column
+    flex-grow: 1
     #page-index
       two-color-border()
       overflow: auto

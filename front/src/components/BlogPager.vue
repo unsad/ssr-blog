@@ -83,6 +83,8 @@
   display: flex
   overflow: hidden
   height: 100vh 
+  background: linear-gradient(-40deg, transparent 52%, red 0),
+              linear-gradient(-30deg, transparent 28%, #000 0)
   .sidebar
     width: 30%
   #main

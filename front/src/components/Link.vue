@@ -33,7 +33,9 @@ export default {
         'c',
         'd',
         'e',
-        'f'
+        'f',
+        'g',
+        'h'
       ]
     };
   },
@@ -47,7 +49,9 @@ export default {
 
 #link    
   display: flex 
-  flex-direction: column
+  flex-direction: column 
+  background: linear-gradient(-40deg, transparent 42%, red 0),
+              linear-gradient(-30deg, transparent 22%, #090909 0)
   .title
     title-base() 
     margin: 0  
@@ -71,11 +75,17 @@ export default {
       top: -50%
   .content 
     display: flex
+    border-top: 0.4rem solid #fff
+    border-bottom: 0.4rem solid #fff
+    box-shadow:0 0 0 1rem #000, 0 0 0 1.4rem #fff
+    margin: 6rem 0
     flex-grow: 1
     padding-left: 15rem
-    align-items: center 
+    align-items: flex-end
+    font-size: 0
     justify-content: center
     .linklist-box
+      font-size: 1rem
       margin-left: -5rem
       position: absolute
       li 
@@ -97,6 +107,6 @@ export default {
           transform: skew(-25deg)
           two-color-border(0.4rem, 0.3rem)
     .object-box 
-        width: 40rem
+        width: 50rem
 
 </style>

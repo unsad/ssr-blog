@@ -35,5 +35,5 @@
     padding: 0.5rem 0
     color: #fff
     a 
-      color: #000
+      color: #fff
 </style>

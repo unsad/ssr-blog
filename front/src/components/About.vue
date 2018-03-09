@@ -118,7 +118,8 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
- @import '../assets/css/mixin.styl';
+@import '../assets/css/mixin.styl';
+
 #about
   .title
     title-base()
@@ -128,6 +129,8 @@ export default {
     margin: 1rem 0
     .second-title-text
       position: relative
+      font-family: 'jackey_handwriteregular';
+      font-size: 2rem
       background: #000
       padding: 1rem
       display: inline-block

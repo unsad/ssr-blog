@@ -18,6 +18,7 @@ const TagPager = () => import('@/components/TagPager');
 const Sidebar = () => import('@/components/Sidebar');
 const Header = () => import('@/components/Header');
 const About = () => import('@/components/About');
+const Link = () => import('@/components/Link');
 const Post = CreatePostView('post');
 const Page = CreatePostView('page');
 
@@ -58,6 +59,11 @@ export function createRouter() {
         path: '/about',
         name: 'about',
         component: About
+      },
+      {
+        path: '/link',
+        name: 'link',
+        component: Link
       },
       {
         path: '/tag',

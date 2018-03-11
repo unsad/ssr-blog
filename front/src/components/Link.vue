@@ -1,12 +1,7 @@
 <template>
   <div id="link">
     <h1 class="title">{{title}}</h1>
-    <h2 class="second-title">
-      <span class="second-title-text">
-        <object class="second-title-deco" type="image/svg+xml" data="../../static/mask.svg">This browser sucks</object>
-        " I was turning my back on you my friend "
-      </span>
-    </h2>
+    <second-title second-text="I was turning my back on you my friend"></second-title>
     <div class="content">
       <ul class="linklist-box">
         <li v-for="(item, index) of linkitems" :key="item" :style="{'margin-left': `-${index * 5}rem`}">{{item}}</li>
@@ -21,6 +16,7 @@
 
 <script>
 import myFooter from './Footer.vue';
+import secondTitle from './SecondTitle.vue';
 
 export default {
   name: 'Link',
@@ -40,7 +36,8 @@ export default {
     };
   },
   components: {
-    myFooter
+    myFooter,
+    secondTitle
   }
 }
 </script>

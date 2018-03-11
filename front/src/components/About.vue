@@ -1,12 +1,7 @@
 <template>
   <div id="about">
       <h1 class="title">{{title}}</h1>
-      <h2 class="second-title">
-        <span class="second-title-text">
-          <object class="second-title-deco" type="image/svg+xml" data="../../static/mask.svg">This browser sucks</object>
-          " Took the mask off to feel free "
-        </span>
-      </h2>
+      <second-title second-text="Took the mask off to feel free"></second-title>
       <div class="entry-content">
         <div class="object-box">
           <object style="width: 100%" type="image/svg+xml" data="../../static/me.svg">This browser sucks</object>
@@ -104,6 +99,7 @@
 </template>
 <script>
 import myFooter from './Footer.vue';
+import secondTitle from './SecondTitle.vue';
 
 export default {
   name: 'about',
@@ -113,7 +109,8 @@ export default {
     };
   },
   components: {
-    myFooter
+    myFooter,
+    secondTitle
   }
 }
 </script>
@@ -128,24 +125,6 @@ export default {
   .title
     title-base()
     margin: 0
-  .second-title
-    color: #fff 
-    text-align: center
-    margin: 1rem 0
-    .second-title-text
-      position: relative
-      font-family: 'jackey_handwriteregular';
-      font-size: 2rem
-      background: #000
-      letter-spacing: 0.1rem 
-      padding: 1rem
-      display: inline-block
-    .second-title-deco 
-      position: absolute
-      height: 100%
-      transform: rotate(-20deg)
-      left: -10%
-      top: -50%
   .entry-content 
     text-align: center
     flex-grow: 1

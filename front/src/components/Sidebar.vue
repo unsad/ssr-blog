@@ -1,5 +1,8 @@
 <template>
   <div class="wrapper">
+     <div class="pic">
+        <img src="../../static/sidebar.png" alt="" width="180%">
+    </div>
     <nav id="sidebar"
         :class="{'sidebar-image': sidebarUrl !== ''}">
       <div class="profile" v-if="false">
@@ -15,9 +18,6 @@
           </router-link>
         </li>
       </ul>
-      <div class="pic">
-        <img src="../../static/sidebar.png" alt="" width="180%">
-      </div>
       <ul class="sidebar-buttons" v-if="siteInfo && siteInfo.weiboUrl">
         <li>
           <a :href="'https://github.com' + siteInfo.githubUrl.value"
@@ -95,21 +95,26 @@
 <style lang="stylus" rel="stylesheet/stylus">
 .wrapper 
   position: relative
-  font-family: 'special-for-me' 
+  font-family: 'special-for-me'
+  &::before
+    position: absolute
+    content: ''
+    left: 0 
+    right: 0
+    top: 0
+    bottom: 0
+    background: black
+    clip-path: polygon(0 0, 100% 0, calc(100% - 30vh) 100%, 0% 100%) 
   .pic 
     position: absolute
     font-size: 0
     bottom: 0
     left: calc(22% - 30vh)
     width: 100%
-    z-index: -1
   #sidebar 
     height: 100%
-    background: black
-    clip-path: polygon(0 0, 100% 0, calc(100% - 30vh) 100%, 0% 100%)
-    a
-      color: #fff
-    &::before 
+    position: relative
+    &::before
       position: absolute
       content: ''
       left: 0 
@@ -118,6 +123,8 @@
       bottom: 0
       background: white
       clip-path: polygon(97% 0, 100% 0, calc(100% - 30vh) 100%, calc(97% - 30vh) 100%)
+    a
+      color: #fff
     .sidebar-link
       padding: 0
       text-align: center

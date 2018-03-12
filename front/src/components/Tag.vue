@@ -2,6 +2,7 @@
   <div id="tag">
     <article class="post tags">
       <h1 class="title">{{title}}</h1>
+      <second-title second-text="the sky , the earth , the sun , a wind"></second-title>
       <div class="entry-content">
         <section>
           <router-link class="tag" tag="span" v-for="key of sortedKeys" :key="key" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">
@@ -18,6 +19,7 @@
 <script>
   import store from '../store/index';
   import myFooter from './Footer.vue';
+  import secondTitle from './SecondTitle.vue';
   import { mapGetters } from 'vuex';
 
   function fetchTags({store, route: {path: pathName, params, query}}, callback) {
@@ -50,7 +52,8 @@
       }
     },
     components: {
-      myFooter
+      myFooter,
+      secondTitle
     },
     computed: {
       ...mapGetters([

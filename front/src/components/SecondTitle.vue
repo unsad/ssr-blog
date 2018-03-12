@@ -3,7 +3,7 @@
      <h2 class="second-title">
         <span class="second-title-text">
           <object class="second-title-deco" type="image/svg+xml" data="../../static/mask.svg">This browser sucks</object>
-          {{ secondText }}
+          {{ `" ${secondText} "` }}
         </span>
       </h2>
   </div>

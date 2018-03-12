@@ -2,6 +2,7 @@
   <div id='archive'>
     <article class="post archive">
       <h1 class="title">{{title}}</h1>
+      <second-title second-text="Took the mask off to feel free"></second-title>
       <div class="timeline" v-for="(item, key) of achieves" :key="key">
         <div class="content">
           <h3>{{key}} ({{item.length}})</h3>
@@ -20,6 +21,7 @@
 
 <script>
   import myFooter from './Footer.vue';
+  import secondTitle from './SecondTitle.vue';
   import { mapGetters } from 'vuex';
 
   function fetchArchive({store, route}, callback) {
@@ -65,7 +67,8 @@
       return fetchArchive(context);
     },
     components: {
-      myFooter
+      myFooter,
+      secondTitle
     }
   }
 </script>

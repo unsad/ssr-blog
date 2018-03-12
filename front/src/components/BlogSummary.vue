@@ -1,5 +1,5 @@
 <template>
-  <article class="post">
+  <article id="post-summary">
     <div class="meta">
       <div class="date">{{article.createdAt}}</div>
     </div>
@@ -35,7 +35,7 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-.post
+#post-summary
   h1 
     font-size: 2rem
     margin: 0.5rem 0

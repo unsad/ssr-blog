@@ -97,6 +97,18 @@
   padding: 1rem
   .post-detail
     two-color-border()
+    padding: 1rem
+    background: #1e1e1e
+    color: #c6c6c6
+    h1 
+      color: #d9d9d9
+      margin: 0
     .meta 
       float: right
+    .entry-content 
+      margin-top: 1rem
+      font-size: 1.1rem
+      line-height: 1.6
+      a
+        color: #d9d9d9
 </style>

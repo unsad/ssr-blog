@@ -1,39 +1,43 @@
 <template>
   <div id="post">
     <div id="page-post">
-      <article class="post-detail">
-        <div class="meta">
-          <div class="date">
-            {{post.createdAt}}
+      <div class="post-main">
+        <article class="post-detail">
+          <div class="meta">
+            <div class="date">
+              {{post.createdAt}}
+            </div>
           </div>
-        </div>
-        <h1 class="title">{{post.title}}</h1>
-        <div class="entry-content" v-html="content">
-        </div>
+          <h1 class="title">{{post.title}}</h1>
+          <div class="entry-content" v-html="content">
+          </div>
 
-        <template v-if="shouldShow">
-          <p>--
-            <dfn title="End of File">EOF</dfn>
-            --
-          </p>
-          <div class="post-info">
-            <p>发表于
-              <time>{{post.createAt}}</time>
-              ,添加在分类「
-              <a :data-cate="post.category">
-                <code class="notebook">{{post.category}}</code>
-              </a>」下,并被添加「
-              <router-link v-for="tag of post.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
-                           :data-tag="tag"><code class="notebook">{{tag}}</code>
-              </router-link>
-                」标签，
-              最后修改于
-              <time>{{post.updatedAt}}</time>
+          <template v-if="shouldShow">
+            <p>--
+              <dfn title="End of File">EOF</dfn>
+              --
             </p>
-          </div>
-        </template>
-      </article>
+            <div class="post-info">
+              <p>发表于
+                <time>{{post.createAt}}</time>
+                ,添加在分类「
+                <a :data-cate="post.category">
+                  <code class="notebook">{{post.category}}</code>
+                </a>」下,并被添加「
+                <router-link v-for="tag of post.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
+                            :data-tag="tag"><code class="notebook">{{tag}}</code>
+                </router-link>
+                  」标签，
+                最后修改于
+                <time>{{post.updatedAt}}</time>
+              </p>
+            </div>
+          </template>
+        </article>
+        <div class="post-index">
 
+        </div>
+      </div>
       <nav class="pagination" v-if="shouldShow">
         <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
                      class="prev">&laquo;{{prev.title}}
@@ -94,9 +98,13 @@
 @import '../assets/css/mixin.styl';
 
 #post
-  padding: 1rem
+  .post-main 
+    display: flex 
+    .post-index 
+      min-width: 30%
+      background: url(../../static/post-bg.svg) no-repeat bottom left,
+                  linear-gradient(to left, #000 30%, #1e1e1e)
   .post-detail
-    two-color-border()
     padding: 1rem
     background: #1e1e1e
     color: #c6c6c6

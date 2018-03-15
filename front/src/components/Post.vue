@@ -33,24 +33,24 @@
               </p>
             </div>
           </template>
+
+            <nav class="pagination" v-if="shouldShow">
+              <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
+                          class="prev">&laquo; {{prev.title}}
+              </router-link>
+              <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof next.pathName !== 'undefined'"
+                          class="next">{{next.title}} &raquo;
+              </router-link>
+            </nav>
         </article>
         <div class="post-index">
 
         </div>
       </div>
-      <nav class="pagination" v-if="shouldShow">
-        <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
-                     class="prev">&laquo;{{prev.title}}
-        </router-link>
-        <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof next.pathName !== 'undefined'"
-                     class="next">&raquo;{{next.title}}
-        </router-link>
-      </nav>
       <div class="comments" v-if="post.allowComment === true && commentName!== ''">
         <disqus :shortname="commentName"></disqus>
       </div>
     </div>
-    <my-footer></my-footer>
   </div>
 </template>
 
@@ -101,11 +101,13 @@
   .post-main 
     display: flex 
     .post-index 
-      min-width: 30%
-      background: url(../../static/post-bg.svg) no-repeat bottom left,
+      min-width: 35%
+      background: url(../../static/post-bg.svg) no-repeat bottom left/80%,
                   linear-gradient(to left, #000 30%, #1e1e1e)
   .post-detail
-    padding: 1rem
+    padding: 1rem 1rem 0
+    max-height: 100vh
+    overflow: auto
     background: #1e1e1e
     color: #c6c6c6
     h1 
@@ -119,4 +121,14 @@
       line-height: 1.6
       a
         color: #d9d9d9
+    .pagination
+      display: flex 
+      padding: 1rem 0
+      align-items: center 
+      justify-content: space-between
+      .prev,.next 
+        background: #d9d9d9
+        color: #000
+        display: inline-block 
+        padding: 0.5rem
 </style>

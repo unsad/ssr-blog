@@ -13,7 +13,7 @@
   import { mapGetters } from 'vuex';
 
   export default {
-    name: 'footer',
+    name: 'myFooter',
     computed: {
       ...mapGetters([
         'siteInfo'

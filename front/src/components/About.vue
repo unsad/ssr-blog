@@ -91,14 +91,13 @@
           </div>
         </div>
       </div>
-      <router-link tag="div" :to="{path: '/'}" class="back">
-        <object class="back-deco" type="image/svg+xml" data="../../static/back.svg">This browser sucks</object>
-      </router-link>
+      <back></back>
     <my-footer></my-footer>
   </div>
 </template>
 <script>
 import myFooter from './Footer.vue';
+import back from './Back.vue';
 import secondTitle from './SecondTitle.vue';
 
 export default {
@@ -110,7 +109,8 @@ export default {
   },
   components: {
     myFooter,
-    secondTitle
+    secondTitle,
+    back
   }
 }
 </script>
@@ -146,15 +146,6 @@ export default {
         font-size: 2rem
         padding: 0.5rem
         two-color-border(0.5rem, 0.2rem)
-.back
-  width: 10rem
-  position: fixed
-  cursor: pointer
-  bottom: 1rem
-  z-index: 1
-  left: 1rem
-  .back-deco
-    pointer-events: none
 
 
 .box-1 

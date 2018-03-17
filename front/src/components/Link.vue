@@ -10,12 +10,14 @@
         <object class="second-title-deco" type="image/svg+xml" data="../../static/link-bg.svg">This browser sucks</object>
       </div>
     </div>
+    <back></back>
     <my-footer></my-footer>
   </div>
 </template>
 
 <script>
 import myFooter from './Footer.vue';
+import back from './Back.vue';
 import secondTitle from './SecondTitle.vue';
 
 export default {
@@ -37,7 +39,8 @@ export default {
   },
   components: {
     myFooter,
-    secondTitle
+    secondTitle,
+    back
   }
 }
 </script>

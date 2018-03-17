@@ -1,6 +1,6 @@
 <template>
   <div id='archive'>
-    <article class="post archive">
+    <article class="archive-main">
       <h1 class="title">{{title}}</h1>
       <second-title second-text="Took the mask off to feel free"></second-title>
       <div class="timeline" v-for="(item, key) of achieves" :key="key">
@@ -15,6 +15,7 @@
         </div>
       </div>
     </article>
+    <back></back>
     <my-footer></my-footer>
   </div>
 </template>
@@ -22,6 +23,7 @@
 <script>
   import myFooter from './Footer.vue';
   import secondTitle from './SecondTitle.vue';
+  import back from './Back.vue';
   import { mapGetters } from 'vuex';
 
   function fetchArchive({store, route}, callback) {
@@ -68,7 +70,8 @@
     },
     components: {
       myFooter,
-      secondTitle
+      secondTitle,
+      back
     }
   }
 </script>
@@ -76,48 +79,52 @@
 @import '../assets/css/mixin.styl';
 
 #archive 
-  .title 
-    title-base()
-  .timeline
-    position: relative
-    width: 0.5rem
-    margin: 0 auto 
-    background: #000
-    &:before
-      content: '';
-      background: red;
-      position: absolute;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      width: 2rem;
-      height: 2rem;
-      border: 3px solid #000;
-      border-radius: 50%;
-    .content 
-      two-color-border()
-      color: #fff
+  display: flex 
+  flex-direction: column
+  .archive-main
+    flex-grow: 1
+    .title 
+      title-base()
+    .timeline
+      position: relative
+      width: 0.5rem
+      margin: 0 auto 
       background: #000
-      position: relative 
-      width: 40rem
-      padding: 2rem
-      top: 0.5rem
-      h3 
-        text-align: center
-      &:before 
-        content: ''
+      &:before
+        content: '';
+        background: red;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 2rem;
+        height: 2rem;
+        border: 3px solid #000;
+        border-radius: 50%;
+      .content 
+        two-color-border()
+        color: #fff
+        background: #000
+        position: relative 
+        width: 40rem
+        padding: 2rem
+        top: 0.5rem
+        h3 
+          text-align: center
+        &:before 
+          content: ''
+          background: #000 
+          position: absolute 
+          top: -0.7rem
+          width: 3rem 
+          height: 0.3rem 
+      &:nth-child(odd) .content
+        left: 4rem 
         background: #000 
-        position: absolute 
-        top: -0.7rem
-        width: 3rem 
-        height: 0.3rem 
-    &:nth-child(odd) .content
-      left: 4rem 
-      background: #000 
-      &:before 
-        left: -4rem
-    &:nth-child(even) .content
-      left: calc(-40rem - 3.5rem)
-      &:before 
-        right: -4rem
+        &:before 
+          left: -4rem
+      &:nth-child(even) .content
+        left: calc(-40rem - 3.5rem)
+        &:before 
+          right: -4rem
 </style>

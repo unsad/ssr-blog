@@ -64,7 +64,7 @@
     props: ['post', 'prev', 'next', 'siteInfo', 'type', 'supportWebp'],
     mixins: [mixin],
     serverCacheKey: props => {
-      return `${props.post.pathName}::${props.post.updateAt}::webp::${props.supportWebp}`
+      return `${props.post.pathName}::${props.post.updateAt}::webp::${props.supportWebp}`;
     },
     computed: {
       shouldShow() {
@@ -85,14 +85,14 @@
     methods: {
       filterWebp(content) {
         if (!this.supportWebp) return content.replace(/\/webp/gm, '');
-        return content
+        return content;
       }
     },
     components: {
       myFooter,
       disqus
     }
-  }
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';

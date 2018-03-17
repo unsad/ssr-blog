@@ -30,9 +30,9 @@
       }
     },
     serverCacheKey: props => {
-      return `${props.article.pathName}::${props.article.updatedAt}::webp::${props.supportWebp}`
+      return `${props.article.pathName}::${props.article.updatedAt}::webp::${props.supportWebp}`;
     }
-  }
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 #post-summary

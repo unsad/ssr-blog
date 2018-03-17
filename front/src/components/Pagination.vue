@@ -12,7 +12,7 @@
       totalPage: Number,
       page: Number
     }
-  }
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 

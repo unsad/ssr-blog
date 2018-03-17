@@ -2,7 +2,7 @@
  * Created by unsad on 2017/11/5.
  */
 export default function (fullPath) {
-  let screen = window.screen
+  let screen = window.screen;
   let params = {
     dt: document.title,
     dr: fullPath,
@@ -12,13 +12,13 @@ export default function (fullPath) {
     dpr: window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || 1,
     dp: fullPath,
     z: +new Date()
-  }
+  };
 
-  let queryArr = []
+  let queryArr = [];
   for (let i in params) {
-    queryArr.push(i + '=' + encodeURIComponent(params[i]))
+    queryArr.push(i + '=' + encodeURIComponent(params[i]));
   }
-  let queryString = '?' + queryArr.join('&')
-  window.ga_image = new window.Image()
-  window.ga_image.src = '/_.gif' + queryString
+  let queryString = '?' + queryArr.join('&');
+  window.ga_image = new window.Image();
+  window.ga_image.src = '/_.gif' + queryString;
 }

@@ -15,7 +15,7 @@
   export default {
     name: 'myHeader',
     mixins: [mixin]
-  }
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 

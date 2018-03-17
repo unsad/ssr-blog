@@ -46,12 +46,12 @@
     data() {
       return {
         title: '标签'
-      }
+      };
     },
     metaInfo() {
       return {
         title: this.title
-      }
+      };
     },
     components: {
       myFooter,
@@ -70,7 +70,7 @@
     asyncData(context) {
       return fetchTags(context);
     }
-  }
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';

@@ -56,7 +56,7 @@
 </template>
 
 <script>
-  import mixin from '../mixin/image'
+  import mixin from '../mixin/image';
 
   function fetchInfo({store, route: {path, params, query}}) {
     return Promise.all([store.dispatch('FETCH_OPTIONS'), store.dispatch('FETCH_FIREKYLIN')]);
@@ -87,10 +87,10 @@
           { rel: 'apple-touch-icon', href: logoUrl },
           { rel: 'alternate', type: 'application/rss+xml', title: 'RSS 2.0', href: '/rss.xml' }
         ]
-      }
+      };
     },
     mixins: [mixin]
-  }
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .wrapper 

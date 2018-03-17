@@ -58,7 +58,6 @@ router.onReady(() => {
 
     if (!asyncDataHooks.length) return endLoadingCallback();
 
-
     Promise.all(asyncDataHooks.map(hook => hook({store, route: to}))).then(() => {
       endLoadingCallback();
     }).catch(err => {
@@ -77,7 +76,7 @@ router.onReady(() => {
           if (to.path !== from.path) {
             clientGoogleAnalyse(to.path || '/');
           }
-        })
+        });
       });
     }
   }
@@ -90,5 +89,4 @@ router.onReady(() => {
   }
   app.$mount('#app');
 });
-
 

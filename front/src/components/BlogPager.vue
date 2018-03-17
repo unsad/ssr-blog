@@ -57,7 +57,7 @@
     metaInfo() {
       return {
         title: '首页'
-      }
+      };
     },
     computed: {
       ...mapGetters([
@@ -74,7 +74,7 @@
       pagination,
       Sidebar
     }
-  }
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';

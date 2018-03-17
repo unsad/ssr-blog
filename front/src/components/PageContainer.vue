@@ -36,7 +36,7 @@
     metaInfo() {
       return {
         title: this.page.title
-      }
+      };
     },
     computed: {
       ...mapGetters([
@@ -47,7 +47,7 @@
       pager,
       blogPost
     }
-  }
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 

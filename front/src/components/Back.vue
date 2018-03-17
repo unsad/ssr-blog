@@ -5,13 +5,13 @@
 </template>
 <script>
 export default {
-  name: "back",
+  name: 'back',
   data() {
     return {
 
     };
   }
-}
+};
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 #back

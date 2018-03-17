@@ -27,19 +27,19 @@
         tags: 1
       },
       callback
-    })
+    });
   }
   export default {
     metaInfo() {
       return {
         title: this.post.title
-      }
+      };
     },
     computed: {
       post () {
         return this.$store.state.blog.pathName
           ? this.$store.state.blog
-          : mock404
+          : mock404;
       },
       ...mapGetters([
         'prev',
@@ -53,7 +53,7 @@
     components: {
       blogPost
     }
-  }
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 

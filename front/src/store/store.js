@@ -125,7 +125,7 @@ export function createStore() {
               if (typeof prev[tag] === 'undefined') {
                 prev[tag] = 1;
               } else {
-                prev[tag] = prev[tag] + 1
+                prev[tag] = prev[tag] + 1;
               }
             });
             return prev;
@@ -159,7 +159,7 @@ export function createStore() {
             });
           }
           return Promise.resolve();
-        })
+        });
       },
       FETCH_TAG_PAGER: ({commit, state, dispatch}, {model, query, callback}) => {
         return api.fetch(model, query).then(items => {
@@ -270,25 +270,25 @@ export function createStore() {
         return state.totalPage;
       },
       progress (state) {
-        return state.progress
+        return state.progress;
       },
       option (state) {
-        return state.theme.option
+        return state.theme.option;
       },
       prev (state) {
-        return state.prev
+        return state.prev;
       },
       next (state) {
-        return state.next
+        return state.next;
       },
       tags (state) {
-        return state.tags
+        return state.tags;
       },
       tagPager (state) {
-        return state.tagPager
+        return state.tagPager;
       },
       supportWebp(state) {
-        return state.supportWebp
+        return state.supportWebp;
       }
     }
   });

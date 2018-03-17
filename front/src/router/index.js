@@ -1,12 +1,12 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import VueMeta from 'vue-meta'
+import Vue from 'vue';
+import Router from 'vue-router';
+import VueMeta from 'vue-meta';
 
 const CreatePostView = type => resolve => {
   import('@/views/CreatePostView').then(component => {
     const target = component.default(type);
     resolve(target);
-  })
+  });
 };
 
 const BlogPager = () => import('@/components/BlogPager');
@@ -23,7 +23,7 @@ const Post = CreatePostView('post');
 const Page = CreatePostView('page');
 
 Vue.use(Router);
-Vue.use(VueMeta)
+Vue.use(VueMeta);
 
 export function createRouter() {
   return new Router({

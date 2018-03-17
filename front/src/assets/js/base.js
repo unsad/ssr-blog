@@ -1,12 +1,11 @@
 export default function () {
   if (typeof window !== 'undefined') {
-
     (function (win, doc) {
       var getById = function (el) {
         return document.getElementById(el);
       };
 
-      //from qwrap
+      // from qwrap
       var getDocRect = function (doc) {
         doc = doc || document;
         var win = doc.defaultView || doc.parentWindow,
@@ -18,7 +17,7 @@ export default function () {
           scrollY = win.pageYOffset || 0,
           scrollW = root.scrollWidth,
           scrollH = root.scrollHeight;
-        if (mode != 'CSS1Compat') { // Quirks
+        if (mode !== 'CSS1Compat') { // Quirks
           root = doc.body;
           scrollW = root.scrollWidth;
           scrollH = root.scrollHeight;
@@ -77,7 +76,7 @@ export default function () {
       var utils = {
         isMob: (function () {
           var ua = navigator.userAgent.toLowerCase();
-          var agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+          var agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod'];
           var result = false;
           for (var i = 0; i < agents.length; i++) {
             if (ua.indexOf(agents[i].toLowerCase()) > -1) {
@@ -86,15 +85,13 @@ export default function () {
           }
           return result;
         })()
-      }
-
+      };
 
       if (utils.isMob) {
         document.documentElement.className += ' mob';
       } else {
         document.documentElement.className += ' pc';
       }
-
 
       var Dom = {
         $sidebar: document.querySelector('#sidebar'),
@@ -106,9 +103,8 @@ export default function () {
       };
 
       Dom.bindEvent = function () {
-
         var _this = this,
-          body_class_name = 'side',
+          bodyClassName = 'side',
           eventFirst = 'click',
           eventSecond = 'click';
 
@@ -118,42 +114,31 @@ export default function () {
         }
 
         try {
-
           this.$btn_side.addEventListener(eventSecond, function () {
-
-            if (_this.$body.className.indexOf(body_class_name) > -1) {
-              _this.$body.className = _this.$body.className.replace(body_class_name, '');
+            if (_this.$body.className.indexOf(bodyClassName) > -1) {
+              _this.$body.className = _this.$body.className.replace(bodyClassName, '');
               _this.$sidebar_mask.style.display = 'none';
             } else {
-              _this.$body.className += (' ' + body_class_name);
+              _this.$body.className += (' ' + bodyClassName);
               _this.$sidebar_mask.style.display = 'block';
             }
-
           }, false);
-
         } catch (err) {}
-
         try {
-
           this.$sidebar_mask.addEventListener(eventFirst, function (e) {
-            _this.$body.className = _this.$body.className.replace(body_class_name, '');
+            _this.$body.className = _this.$body.className.replace(bodyClassName, '');
             _this.$sidebar_mask.style.display = 'none';
             e.preventDefault();
           }, false);
-
         } catch (err) {}
-
-
         window.addEventListener('resize', function () {
           try {
-            _this.$body.className = _this.$body.className.replace(body_class_name, '');
+            _this.$body.className = _this.$body.className.replace(bodyClassName, '');
             _this.$sidebar_mask.style.display = 'none';
           } catch (err) {}
         }, false);
-      }
-
+      };
       Dom.bindEvent();
-
     })(window, document);
   }
 }

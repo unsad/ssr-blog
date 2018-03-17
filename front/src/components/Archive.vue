@@ -53,7 +53,7 @@
     metaInfo() {
       return {
         title: this.title
-      }
+      };
     },
     computed: {
       ...mapGetters([
@@ -63,7 +63,7 @@
     data() {
       return {
         title: '归档'
-      }
+      };
     },
     asyncData(context) {
       return fetchArchive(context);
@@ -73,7 +73,7 @@
       secondTitle,
       back
     }
-  }
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';

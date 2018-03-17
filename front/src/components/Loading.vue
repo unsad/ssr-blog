@@ -22,7 +22,7 @@
         full: '',
         width: 0,
         wait: false
-      }
+      };
     },
     watch: {
       progress(val, old) {
@@ -30,7 +30,7 @@
           this.width = val;
           this.$nextTick(() => {
             this.isFull();
-          })
+          });
         }
       }
     },
@@ -61,7 +61,7 @@
         }
       }
     }
-  }
+  };
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .loading-bar

@@ -17,7 +17,7 @@ export default {
     };
   },
   props: ['secondText']
-}
+};
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   .second-title

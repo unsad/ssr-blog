@@ -37,4 +37,4 @@ export default context => {
       console.error(Date.now().toLocaleString(), reject);
     });
   });
-}
+};

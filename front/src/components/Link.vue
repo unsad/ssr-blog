@@ -42,7 +42,7 @@ export default {
     secondTitle,
     back
   }
-}
+};
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';

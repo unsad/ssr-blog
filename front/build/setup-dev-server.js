@@ -77,7 +77,7 @@ module.exports = function setupDevServer(app, cb) {
   const mfs = new MFS();
   serverCompiler.outputFileSystem = mfs;
   serverCompiler.watch({}, (err, stats) => {
-    if (err)  throw err;
+    if (err) throw err;
     stats = stats.toJson();
     if (stats.errors.length) return;
 

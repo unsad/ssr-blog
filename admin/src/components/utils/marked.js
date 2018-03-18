@@ -8,7 +8,7 @@ const renderer = new Marked.Renderer();
 export const toc = [];
 
 renderer.heading = function (text, level) {
-  let slug = text.toLowerCase().replace(/\s+/g, '-');
+  let slug = text.toLowerCase().replace(/[:~/+\s]/g, '-');
   toc.push({
     level,
     slug,

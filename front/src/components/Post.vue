@@ -11,7 +11,6 @@
           <h1 class="title">{{post.title}}</h1>
           <div class="entry-content" v-html="content">
           </div>
-
           <template v-if="shouldShow">
             <p>--
               <dfn title="End of File">EOF</dfn>
@@ -44,7 +43,7 @@
             </nav>
         </article>
         <div class="post-index">
-
+          <div class="toc" id="toc" v-if="post.toc" v-html="post.toc"></div>
         </div>
       </div>
       <div class="comments" v-if="post.allowComment === true && commentName!== ''">
@@ -77,9 +76,7 @@
         return this.siteInfo.siteUrl.value || 'localhost';
       },
       content() {
-        const post = this.post;
-        const result = post.toc ? `<div id="toc" class="toc">${post.toc}</div>${post.content}` : post.content;
-        return this.filterWebp(result);
+        return this.filterWebp(this.post.content);
       }
     },
     methods: {
@@ -99,42 +96,41 @@
 
 #post
   .post-main 
+    font-size: 1.1rem
+    line-height: 1.6
+    a
+      color: #d9d9d9
     display: flex 
     .post-index 
       min-width: 35%
       background: url(../../static/post-bg.svg) no-repeat bottom left/80%,
                   linear-gradient(to left, #000 30%, #1e1e1e)
-  .post-detail
-    padding: 1rem 1rem 0
-    max-height: 100vh
-    overflow: auto
-    background: #1e1e1e
-    color: #c6c6c6
-    h1 
-      color: #d9d9d9
-      margin: 0
-    .meta 
-      float: right
-    .entry-content 
-      margin-top: 1rem
-      font-size: 1.1rem
-      line-height: 1.6
-      a
-        color: #d9d9d9
       #toc 
-        position: absolute
-        width: 25%
-        top: 1rem
-        right: 5%
-        color: #fff
-    .pagination
-      display: flex 
-      padding: 1rem 0
-      align-items: center 
-      justify-content: space-between
-      .prev,.next 
-        background: #d9d9d9
-        color: #000
-        display: inline-block 
-        padding: 0.5rem
+        padding: 1rem
+        strong 
+          font-size: 2rem
+          color: #d9d9d9
+    .post-detail
+      padding: 1rem 1rem 0
+      max-height: 100vh
+      overflow: auto
+      background: #1e1e1e
+      color: #c6c6c6
+      h1 
+        color: #d9d9d9
+        margin: 0
+      .meta 
+        float: right
+      .entry-content 
+        margin-top: 1rem
+      .pagination
+        display: flex 
+        padding: 1rem 0
+        align-items: center 
+        justify-content: space-between
+        .prev,.next 
+          background: #d9d9d9
+          color: #000
+          display: inline-block 
+          padding: 0.5rem
 </style>

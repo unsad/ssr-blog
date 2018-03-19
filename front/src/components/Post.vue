@@ -94,8 +94,9 @@
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
-#post
-  .post-main 
+#page-post
+  .post-main
+    min-height: 100vh
     font-size: 1.1rem
     line-height: 1.6
     a

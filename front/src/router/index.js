@@ -26,7 +26,7 @@ Vue.use(Router);
 Vue.use(VueMeta);
 
 export function createRouter() {
-  return new Router({
+  let router = new Router({
     mode: 'history',
     fallback: false,
     scrollBehavior: function (to, from, savedPosition) {
@@ -82,4 +82,5 @@ export function createRouter() {
       }
     ]
   });
-}
+  return router;
+};

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <loading-bar :progress="progress"></loading-bar>
-    <div class="page-move" :class="{'page-access': circle}"></div>
+    <div class="page-move" :class="{'page-access': progress !== 100}"></div>
     <my-header v-if="false"></my-header>
     <router-view class="switch-content"></router-view>
   </div>
@@ -14,22 +14,9 @@
 
   export default {
     name: 'app',
-    data() {
-      return {
-        circle: false
-      };
-    },
     components: {
       LoadingBar,
       myHeader
-    },
-    watch: {
-      progress() {
-        this.circle = true;
-        setTimeout(() => {
-          this.circle = false;
-        }, 500);
-      }
     },
     computed: {
       ...mapGetters([

@@ -47,20 +47,21 @@ router.onReady(() => {
     if (to.path === from.path && to.hash !== from.hash) {
       return next();
     }
+
     let loadingPromise = store.dispatch('START_LOADING');
     let endLoadingCallback = (path) => {
       return loadingPromise.then(interval => {
         clearInterval(interval);
-        store.dispatch('SET_PROGRESS', 100);
-        next(path);
+        setTimeout(() => {
+          store.dispatch('SET_PROGRESS', 100);
+          next(path);
+        }, 500);
       });
     };
 
     if (!asyncDataHooks.length) return endLoadingCallback();
 
-    Promise.all(asyncDataHooks.map(hook => hook({store, route: to}))).then(() => {
-      endLoadingCallback();
-    }).catch(err => {
+    Promise.all(asyncDataHooks.map(hook => hook({store, route: to}))).then(endLoadingCallback).catch(err => {
       console.error(Date.now().toLocaleString(), err);
       endLoadingCallback(false);
     });

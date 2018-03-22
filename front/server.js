@@ -15,6 +15,7 @@ const compression = require('compression');
 const microcache = require('route-cache');
 const schedule = require('node-schedule');
 const axios = require('axios');
+const { JSDOM } = require('jsdom');
 const sendGoogleAnalytic = require('./middleware/serverGoogleAnalytic');
 const favicon = require('./middleware/favicon');
 const getRobotsFromConfig = require('./server/robots.js');
@@ -25,9 +26,14 @@ const config = require('./server/config');
 const uuid = require('uuid');
 const titleReg = /<.*?>(.+?)<.*?>/;
 const expires = 3600 * 1000 * 24 * 365 * 2;
+const dom = new JSDOM('<!doctype html><html><body></body></html>', { url: 'http://localhost' });
 let sitemap = '';
 let rss = '';
 let robots = '';
+
+global.window = dom.window;
+global.document = window.document;
+global.navigator = window.navigator;
 
 config.flushOption().then(() => {
   robots = getRobotsFromConfig(config);
@@ -101,15 +107,6 @@ config.flushOption().then(() => {
 
   app.use((req, res, next) => {
     log.debug(`${req.method} ${decodeURIComponent(req.url)}`);
-    global.window = {
-      navigator: {
-        userAgent: req.get('User-Agent')
-      },
-      location: {
-        protocol: req.protocol + ':',
-        hostname: req.hostname
-      }
-    };
     return next();
   });
 

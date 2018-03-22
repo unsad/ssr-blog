@@ -2,6 +2,14 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import VueMeta from 'vue-meta';
 
+const isServer = process.env.VUE_ENV === 'server';
+
+if (isServer) {
+  window.scrollTo = function(x, y) {
+      // hack服务端scroll报错
+  };
+}
+
 const CreatePostView = type => resolve => {
   import('@/views/CreatePostView').then(component => {
     const target = component.default(type);

@@ -17,6 +17,7 @@
 
 <script>
   import {parseLrc} from '../utils';
+  import axios from 'axios';
   export default {
     props: {
       currentMusic: {
@@ -61,11 +62,9 @@
         }
       },
       fetchLrc (src) {
-        fetch(src)
-          .then(response => response.text())
-          .then((lrc) => {
-            this.displayLrc = lrc;
-          });
+        axios(src).then(response => response.data).then((lrc) => {
+          this.displayLrc = lrc;
+        }).catch(err => console.log(err));
       },
       hideLrc () {
         this.displayLrc = '';

@@ -16,6 +16,7 @@
     "body-parser": "^1.18.2",
     "compression": "^1.7.0",
     "glob": "^7.1.2",
+    "hls.js": "^0.8.9",
     "memory-fs": "^0.4.1",
     "node-schedule": "^1.2.5",
     "normalize.css": "^7.0.0",

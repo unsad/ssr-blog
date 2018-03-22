@@ -52,7 +52,7 @@ config.flushOption().then(() => {
       head: template.slice(0, i).replace('<link href="/dist/styles.css" rel="stylesheet">', style),
       tail: template.slice(i + '<div id=app></div>'.length),
       origin: template
-    }
+    };
   }
 
   const {createBundleRenderer} = require('vue-server-renderer');
@@ -101,6 +101,15 @@ config.flushOption().then(() => {
 
   app.use((req, res, next) => {
     log.debug(`${req.method} ${decodeURIComponent(req.url)}`);
+    global.window = {
+      navigator: {
+        userAgent: req.get('User-Agent')
+      },
+      location: {
+        protocol: req.protocol + ':',
+        hostname: req.hostname
+      }
+    };
     return next();
   });
 
@@ -148,7 +157,7 @@ config.flushOption().then(() => {
         clientId = uuid.v4();
         res.cookie('id', clientId, {
           expires: new Date(Date.now() + expires)
-        })
+        });
       }
       sendGoogleAnalytic(req, res, next, {
         dt: matched ? matched[1] : config.title,
@@ -156,7 +165,7 @@ config.flushOption().then(() => {
         dp: req.url,
         z: +Date.now(),
         cid: clientId
-      })
+      });
     });
     renderStream.on('data', chunk => {
       res.write(chunk);
@@ -170,7 +179,7 @@ config.flushOption().then(() => {
     renderStream.on('error', err => {
       res.end('err');
       log.error(err);
-    })
+    });
   }
 
   app.get('/_.gif', (req, res, next) => sendGoogleAnalytic(req, res, next));
@@ -194,7 +203,7 @@ config.flushOption().then(() => {
     const url = decodeURIComponent(req.url);
     if (!isProd) return next();
     if (url.startsWith(prefix)) {
-      const rewriteUrl = ` http://localhost:${config.serverPort}/${url.replace(prefix, '')}`
+      const rewriteUrl = ` http://localhost:${config.serverPort}/${url.replace(prefix, '')}`;
       console.log('rewrite', rewriteUrl);
       axios.get(rewriteUrl).on('error', err => {
         res.end(err);

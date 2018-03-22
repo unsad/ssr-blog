@@ -2,6 +2,18 @@
   <div id="blogpager">
     <sidebar class="sidebar"></sidebar>
     <div id="main"> 
+      <music-player 
+        float
+        theme="rgb(173, 122, 134)"
+        show-lrc
+        mode="circulation"
+        :music="{
+          title: '雪月花',
+          author: '小仓唯',
+          url: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.mp3',
+          lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.lrc'
+        }"
+      />
       <section id="page-index">
         <blog-summary class="summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
 
@@ -20,6 +32,7 @@
   import blogSummary from './BlogSummary';
   import Sidebar from './Sidebar';
   import pagination from './Pagination';
+  import musicPlayer from './musicplayer/MusicPlayer';
   import { mapGetters } from 'vuex';
 
   export default {
@@ -72,7 +85,8 @@
       myFooter,
       blogSummary,
       pagination,
-      Sidebar
+      Sidebar,
+      musicPlayer
     }
   };
 </script>

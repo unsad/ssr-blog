@@ -1,10 +1,9 @@
 <template>
   <div id="app">
     <loading-bar :progress="progress"></loading-bar>
-    <div class="page-move" :class="{'page-access': progress !== 100}"></div>
     <my-header v-if="false"></my-header>
     <music-player 
-      theme="rgb(173, 122, 134)"
+      theme="rgb(0, 0, 0)"
       mode="circulation"
       :music="{
         title: '雪月花',
@@ -14,6 +13,7 @@
       }"
     />
     <router-view class="switch-content"></router-view>
+    <div class="page-move" :class="{'page-access': progress !== 100}"></div>
   </div>
 </template>
 

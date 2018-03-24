@@ -43,7 +43,7 @@
     padding: 0;
     margin: 0;
     display: inline;
-    .aplayer-fill 
+    .aplayer-fill
       transition: all .2s ease-in-out;
       fill: #fff
     

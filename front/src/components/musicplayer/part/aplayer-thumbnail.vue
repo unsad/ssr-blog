@@ -75,15 +75,18 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .aplayer-pic
+  box-sizing: border-box
+  margin: 2px
   width: 6rem
   height: 6rem 
   background: #000
   border: 1rem solid red
+  box-shadow: 0 0 0 2px #fff
   border-radius: 50%
   display: flex 
   align-items: center 
   justify-content: center
-  .aplayer-icon-play
+  .aplayer-icon-play, .aplayer-icon-pause
     width: 2rem
     height: 2rem
 </style>

@@ -42,6 +42,7 @@
         let percentage = (e.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
         percentage = percentage > 0 ? percentage : 0;
         percentage = percentage < 1 ? percentage : 1;
+        console.log(e.clientX, getElementViewLeft(this.$refs.barWrap));
         this.$emit('dragbegin', percentage);
         document.addEventListener('mousemove', this.onDocumentMouseMove);
         document.addEventListener('mouseup', this.onDocumentMouseUp);
@@ -95,22 +96,23 @@
 <style lang="stylus" rel="stylesheet/stylus">
  .aplayer-bar-wrap 
     min-width: 10rem
-    margin: 0 0 0 5px
+    margin: 0 0.3rem
     padding: 4px 0
     cursor: pointer !important
     flex: 1
     .aplayer-bar 
       position: relative
-      height: 2px
+      height: 1rem
+      background: rgb(200,200,200)
       width: 100%
-      background: #cdcdcd
+      border: 2px solid #fff
       .aplayer-loaded 
         position: absolute
         left: 0
         top: 0
         bottom: 0
         background: #aaa
-        height: 2px
+        height: 100%
         transition: all 0.5s ease
         will-change: width   
       .aplayer-played 
@@ -118,23 +120,22 @@
         left: 0
         top: 0
         bottom: 0
-        height: 2px
+        height: 100%
         transition: background-color .3s
         will-change: width
         .aplayer-thumb 
           position: absolute
           top: 0
           right: 5px
-          margin-top: -5px
+          margin-top: -0.3rem
           margin-right: -10px
-          width: 10px
-          height: 10px
+          width: 1.5rem
+          height: 1.5rem
           border: 1px solid
-          transform: scale(.8)
           will-change: transform
           transition: transform 300ms, background-color .3s, border-color .3s
           border-radius: 50%
-          background: #fff
+          background: #000
           cursor: pointer !important
           &:hover 
             transform: scale(1)

@@ -561,9 +561,9 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
   .aplayer 
     position: fixed
-    left: 50%
+    right: 3%
     z-index: 2
-    top: 0
+    top: 1rem
     overflow: hidden
     user-select: none
     .aplayer-lrc-content 
@@ -591,9 +591,9 @@ export default {
           cursor: default
           padding-bottom: 2px
           .aplayer-title 
-            font-size: 14p         
+            font-size: 1.2rem      
           .aplayer-author 
-            font-size: 12px
+            margin-left: .5rem
             color: #666       
     audio[controls] 
       display: block

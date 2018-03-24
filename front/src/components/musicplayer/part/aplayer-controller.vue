@@ -9,8 +9,8 @@
       @dragging="val => $emit('dragging', val)"
     />
     <div class="aplayer-time">
-      <div class="aplayer-time-inner">
-        - <span class="aplayer-ptime">{{secondToTime(stat.playedTime)}}</span> / <span
+      <div class="aplayer-time-inner" v-if="false">
+        <span class="aplayer-ptime">{{secondToTime(stat.playedTime)}}</span> / <span
         class="aplayer-dtime">{{secondToTime(stat.duration)}}</span>
       </div>
       <volume
@@ -20,8 +20,8 @@
         @togglemute="$emit('togglemute')"
         @setvolume="v => $emit('setvolume', v)"
       />
-      <icon-button class="aplayer-icon-mode" :icon="mode" @click.native="$emit('nextmode')"/>
-      <icon-button class="aplayer-icon-menu" icon="menu" @click.native="$emit('togglelist')"/>
+      <icon-button v-if="false" class="aplayer-icon-mode" :icon="mode" @click.native="$emit('nextmode')"/>
+      <icon-button v-if="false" class="aplayer-icon-menu" icon="menu" @click.native="$emit('togglelist')"/>
     </div>
   </div>
 </template>
@@ -67,9 +67,13 @@
 <style lang="stylus" rel="stylesheet/stylus">
 .aplayer-controller
   display: flex
-  align-items: center 
+  align-items: center
   .aplayer-time 
     display: flex 
+    line-height: 1.2
+    padding: 0 0.5rem
     align-items: center 
-
+    background: #000
+    color: #fff
+    border: 2px solid #fff
 </style>

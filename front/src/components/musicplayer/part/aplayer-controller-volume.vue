@@ -92,32 +92,35 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   .aplayer-volume-wrap 
+    cursor: pointer
+    font-size: 0
     position: relative
     &:hover .aplayer-volume-bar-wrap 
       height: 3rem
     .aplayer-volume-bar-wrap 
+      box-sizing: content-box
+      border-left: 1rem solid transparent 
+      border-right: 1rem solid transparent 
       position: absolute 
-      bottom: 1rem
-      right: -0.2rem
-      width: 2rem
+      bottom: 120%
+      left: 50%
+      transform: translateX(-50%)
+      width: 50%
       height: 0
       z-index: 2
       overflow: hidden 
-      transition: all .2s ease 
+      transition: all .2s ease .2s
       .aplayer-volume-bar 
         position: absolute 
-        bottom: 0 
-        right: 1rem 
-        width: 0.3rem
-        height: 3rem
+        width: 100%
+        height: 100%
         background: #aaa 
         border-radius: 0.1rem
         overflow: hidden
         .aplayer-volume 
           position: absolute 
           bottom: 0 
-          right: 0 
-          width: 0.3rem
+          width: 100%
           transition: all 0.1 ease
           will-change: height
 </style>

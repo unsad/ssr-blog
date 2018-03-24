@@ -575,15 +575,19 @@ export default {
         flex-grow: 1
         display: flex
         flex-direction: column
-        padding: 14px 7px 0 10px
-        background: #fff
+        padding: 1.5rem 0
         .aplayer-music 
           flex-grow: 1
+          background: #000
+          color: #fff
           overflow: hidden
           white-space: nowrap
           text-overflow: ellipsis
-          margin-left: 5px
+          border: 2px solid #fff
           user-select: text
+          margin-left: -1rem
+          padding-left: 1rem
+          z-index: -1
           cursor: default
           padding-bottom: 2px
           .aplayer-title 

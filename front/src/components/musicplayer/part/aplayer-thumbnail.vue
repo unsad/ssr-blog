@@ -83,4 +83,7 @@
   display: flex 
   align-items: center 
   justify-content: center
+  .aplayer-icon-play
+    width: 2rem
+    height: 2rem
 </style>

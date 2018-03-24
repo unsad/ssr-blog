@@ -32,8 +32,8 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   .aplayer-icon 
-    width: 2rem;
-    height: 2rem;
+    width: 1rem;
+    height: 1rem;
     color: #fff
     border: none;
     background-color: transparent;

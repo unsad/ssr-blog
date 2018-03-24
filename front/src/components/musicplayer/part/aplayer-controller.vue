@@ -64,6 +64,12 @@
     }
   };
 </script>
-<style lang="stylus" scoped rel="stylesheet/stylus">
- 
+<style lang="stylus" rel="stylesheet/stylus">
+.aplayer-controller
+  display: flex
+  align-items: center 
+  .aplayer-time 
+    display: flex 
+    align-items: center 
+
 </style>

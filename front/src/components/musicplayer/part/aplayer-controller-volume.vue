@@ -90,6 +90,34 @@
     }
   };
 </script>
-<style lang="stylus" scoped rel="stylesheet/stylus">
- 
+<style lang="stylus" rel="stylesheet/stylus">
+  .aplayer-volume-wrap 
+    position: relative
+    &:hover .aplayer-volume-bar-wrap 
+      height: 3rem
+    .aplayer-volume-bar-wrap 
+      position: absolute 
+      bottom: 1rem
+      right: -0.2rem
+      width: 2rem
+      height: 0
+      z-index: 2
+      overflow: hidden 
+      transition: all .2s ease 
+      .aplayer-volume-bar 
+        position: absolute 
+        bottom: 0 
+        right: 1rem 
+        width: 0.3rem
+        height: 3rem
+        background: #aaa 
+        border-radius: 0.1rem
+        overflow: hidden
+        .aplayer-volume 
+          position: absolute 
+          bottom: 0 
+          right: 0 
+          width: 0.3rem
+          transition: all 0.1 ease
+          will-change: height
 </style>

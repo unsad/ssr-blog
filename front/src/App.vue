@@ -3,12 +3,23 @@
     <loading-bar :progress="progress"></loading-bar>
     <div class="page-move" :class="{'page-access': progress !== 100}"></div>
     <my-header v-if="false"></my-header>
+    <music-player 
+      theme="rgb(173, 122, 134)"
+      mode="circulation"
+      :music="{
+        title: '雪月花',
+        author: '小仓唯',
+        url: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.mp3',
+        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.lrc'
+      }"
+    />
     <router-view class="switch-content"></router-view>
   </div>
 </template>
 
 <script>
   import LoadingBar from './components/Loading';
+  import musicPlayer from './components/musicplayer/MusicPlayer';
   import myHeader from './components/Header';
   import { mapGetters } from 'vuex';
 
@@ -16,7 +27,8 @@
     name: 'app',
     components: {
       LoadingBar,
-      myHeader
+      myHeader,
+      musicPlayer
     },
     computed: {
       ...mapGetters([

@@ -30,6 +30,22 @@
     }
   };
 </script>
-<style lang="stylus" scoped rel="stylesheet/stylus">
- 
+<style lang="stylus" rel="stylesheet/stylus">
+  .aplayer-icon 
+    width: 2rem;
+    height: 2rem;
+    color: #fff
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    .aplayer-fill 
+      transition: all .2s ease-in-out;
+      fill: #fff
+    
+  
 </style>

@@ -24,7 +24,7 @@
           <span class="aplayer-author">{{ currentMusic.author }}</span>
         </div>
         <slot name="display" :current-music="currentMusic" :play-stat="playStat">
-          <lyrics :current-music="currentMusic" :play-stat="playStat" v-show="shouldShowLrc"/>
+          <lyrics :current-music="currentMusic" :play-stat="playStat" v-if="shouldShowLrc"/>
         </slot>
         <controls
           :mode="playMode"
@@ -49,7 +49,7 @@
       :current-music="currentMusic"
       :music-list="musicList"
       :play-index="playIndex"
-      :listmaxheight="listmaxheight || listMaxHeight"
+      :listmaxheight="listMaxHeight"
       :theme="currentTheme"
       @selectsong="onSelectSong"
     />
@@ -164,44 +164,6 @@ export default {
       controls: {
         type: Boolean,
         default: false
-      },
-      /**
-       * @deprecated since 1.1.2, use listMaxHeight instead
-       */
-      listmaxheight: {
-        type: String,
-        validator (value) {
-          if (value) {
-            deprecatedProp('listmaxheight', '1.1.2', 'listMaxHeight');
-          }
-          return true;
-        }
-      },
-      /**
-       * @deprecated since 1.1.2, use mini instead
-       */
-      narrow: {
-        type: Boolean,
-        default: false,
-        validator (value) {
-          if (value) {
-            deprecatedProp('narrow', '1.1.2', 'mini');
-          }
-          return true;
-        }
-      },
-      /**
-       * @deprecated since 1.2.2
-       */
-      showlrc: {
-        type: Boolean,
-        default: false,
-        validator (value) {
-          if (value) {
-            deprecatedProp('showlrc', '1.2.2', 'showLrc');
-          }
-          return true;
-        }
       }
     },
     data () {
@@ -596,6 +558,46 @@ export default {
 };
 
 </script>
-<style lang="stylus" scoped rel="stylesheet/stylus">
- 
+<style lang="stylus" rel="stylesheet/stylus">
+  .aplayer 
+    position: fixed
+    left: 50%
+    z-index: 2
+    top: 0
+    overflow: hidden
+    user-select: none
+    .aplayer-lrc-content 
+      display: none
+    .aplayer-body 
+      display: flex
+      position: relative
+      .aplayer-info 
+        flex-grow: 1
+        display: flex
+        flex-direction: column
+        padding: 14px 7px 0 10px
+        background: #fff
+        .aplayer-music 
+          flex-grow: 1
+          overflow: hidden
+          white-space: nowrap
+          text-overflow: ellipsis
+          margin-left: 5px
+          user-select: text
+          cursor: default
+          padding-bottom: 2px
+          .aplayer-title 
+            font-size: 14p         
+          .aplayer-author 
+            font-size: 12px
+            color: #666       
+    audio[controls] 
+      display: block
+      width: 100%
+
+  @keyframes aplayer-roll 
+    0% 
+      left: 0 
+    100% 
+      left: -100%
 </style>

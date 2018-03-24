@@ -73,6 +73,14 @@
     }
   };
 </script>
-<style lang="stylus" scoped rel="stylesheet/stylus">
- 
+<style lang="stylus" rel="stylesheet/stylus">
+.aplayer-pic
+  width: 6rem
+  height: 6rem 
+  background: #000
+  border: 1rem solid red
+  border-radius: 50%
+  display: flex 
+  align-items: center 
+  justify-content: center
 </style>

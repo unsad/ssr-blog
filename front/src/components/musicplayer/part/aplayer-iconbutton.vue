@@ -16,6 +16,6 @@
     props: ['icon']
   };
 </script>
-<style lang="stylus" scoped rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
  
 </style>

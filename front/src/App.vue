@@ -13,7 +13,7 @@
       }"
     />
     <router-view class="switch-content"></router-view>
-    <div class="page-move" :class="{'page-access': progress !== 100}"></div>
+    <div class="page-move" :class="{'page-access': progress !== 100 && tran}"></div>
   </div>
 </template>
 
@@ -32,7 +32,8 @@
     },
     computed: {
       ...mapGetters([
-        'progress'
+        'progress',
+        'tran'
       ])
     }
   };

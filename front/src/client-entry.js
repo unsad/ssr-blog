@@ -44,6 +44,8 @@ router.onReady(() => {
     });
     const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _);
 
+    store.dispatch('SET_TRAN', to.name !== from.name);
+
     if (to.path === from.path && to.hash !== from.hash) {
       return next();
     }

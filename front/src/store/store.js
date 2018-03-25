@@ -23,6 +23,7 @@ export function createStore() {
       tags: [],
       theme: {},
       progress: 100,
+      tran: true,
       siteInfo: {
         githubUrl: {
           value: ''
@@ -50,6 +51,9 @@ export function createStore() {
     actions: {
       SET_PROGRESS: ({commit, state}, progress) => {
         commit('SET_PROGRESS_VALUE', progress);
+      },
+      SET_TRAN: ({commit, state}, tran) => {
+        commit('SET_TRAN_VALUE', tran);
       },
       START_LOADING: ({commit, state, dispatch}) => {
         dispatch('SET_PROGRESS', 30);
@@ -225,6 +229,9 @@ export function createStore() {
       SET_PROGRESS_VALUE: (state, progress) => {
         Vue.set(state, 'progress', progress);
       },
+      SET_TRAN_VALUE: (state, tran) => {
+        Vue.set(state, 'tran', tran);
+      },
       SET_TAGS: (state, {tags}) => {
         Vue.set(state, 'tags', tags);
       },
@@ -271,6 +278,9 @@ export function createStore() {
       },
       progress (state) {
         return state.progress;
+      },
+      tran(state) {
+        return state.tran;
       },
       option (state) {
         return state.theme.option;

@@ -13,7 +13,7 @@
       </div>
       <ul class="sidebar-link" v-if="option && option.menu">
         <li v-for="menu of option.menu" :key="menu.label">
-          <router-link :to="{path: menu.url}" :title="menu.label">
+          <router-link class="sidebar-link-item" :to="{path: menu.url}" :title="menu.label">
             <span class="rotate-1">{{menu.label[0]}}</span><span class="rotate-2">{{menu.label[1]}}</span>
           </router-link>
         </li>
@@ -131,14 +131,22 @@
       font-size: 4rem
       transform: rotate(20deg) translate(26%)
       line-height: 2
+      .sidebar-link-item:hover 
+        .rotate-1
+          transform: rotate(-20deg) translate(-10%, 10%)
+        .rotate-2
+          transform: rotate(-20deg) translate(10%)
+      .rotate-1 
+        display: inline-block
+        transition: all .2s ease-out
+        transform: rotate(-40deg)
+        -webkit-text-stroke: 2px black;
+      .rotate-2 
+        display: inline-block
+        transition: all .2s ease-out
+        color: black
+        -webkit-text-stroke: 2px white;
+        transform: rotate(15deg) translate(5%)
 
-.rotate-1 
-  display: inline-block
-  transform: rotate(-45deg)
-  -webkit-text-stroke: 2px black;
-.rotate-2 
-  display: inline-block
-  color: black
-  -webkit-text-stroke: 2px white;
-  transform: rotate(15deg) translate(5%)
+
 </style>

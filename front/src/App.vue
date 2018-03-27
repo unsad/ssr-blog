@@ -2,16 +2,12 @@
   <div id="app">
     <loading-bar :progress="progress"></loading-bar>
     <my-header v-if="false"></my-header>
-    <music-player 
-      theme="rgb(0, 0, 0)"
-      mode="circulation"
-      :music="{
-        title: '雪月花',
-        author: '小仓唯',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.mp3',
-        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.lrc'
-      }"
-    />
+      <music-player 
+        theme="rgb(0, 0, 0)"
+        mode="circulation"
+        autoplay
+        :music="music"
+      />
     <router-view class="switch-content"></router-view>
     <div class="page-move" :class="{'page-access': progress !== 100 && tran}"></div>
   </div>
@@ -25,6 +21,15 @@
 
   export default {
     name: 'app',
+    data() {
+      return {
+        music: {
+          title: 'Life Will Change',
+          author: 'Lyn',
+          url: 'http://oisoz7txr.bkt.clouddn.com/music1-04%20Life%20Will%20Change.mp3'
+        }
+      };
+    },
     components: {
       LoadingBar,
       myHeader,

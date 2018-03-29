@@ -26,7 +26,7 @@
         music: {
           title: 'Life Will Change',
           author: 'Lyn',
-          url: 'http://oisoz7txr.bkt.clouddn.com/music1-04%20Life%20Will%20Change.mp3'
+          url: 'https://src.sweetalkos.com/music1-04%20Life%20Will%20Change.mp3'
         }
       };
     },

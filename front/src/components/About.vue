@@ -138,6 +138,7 @@ export default {
     .object-box  
       position: relative
       width: 500px
+      height: 556px
       display: inline-block
       object  
         z-index: 1

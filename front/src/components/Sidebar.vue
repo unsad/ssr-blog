@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
      <div class="pic">
-        <img src="../../static/sidebar.png" alt="" width="180%">
+        <img src="../../static/sidebar.svg" alt="" width="125%">
     </div>
     <nav id="sidebar"
         :class="{'sidebar-image': sidebarUrl !== ''}">
@@ -109,7 +109,7 @@
     position: absolute
     font-size: 0
     bottom: 0
-    left: calc(22% - 30vh)
+    left: calc(75% - 30vh)
     width: 100%
   #sidebar 
     height: 100%

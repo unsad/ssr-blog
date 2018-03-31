@@ -20,7 +20,7 @@
           <el-submenu index="4">
             <template slot="title"><i class="el-icon-menu"></i>主题管理</template>
             <el-menu-item index="/theme/list">主题列表</el-menu-item>
-            <el-menu-item index="/theme/create"编辑主题</el-menu-item>
+            <el-menu-item index="/theme/create">编辑主题</el-menu-item>
           </el-submenu>
 
           <el-submenu index="5">
@@ -35,9 +35,15 @@
             <el-menu-item index="/tag/create">添加标签</el-menu-item>
           </el-submenu>
 
+           <el-submenu index="7">
+            <template slot="title"><i class="el-icon-star-off"></i>音乐管理</template>
+            <el-menu-item index="/music/list">音乐列表</el-menu-item>
+            <el-menu-item index="/music/create">添加音乐</el-menu-item>
+          </el-submenu>
+
           <el-menu-item index="/user/edit"><i class="el-icon-star-off"></i>用户设置</el-menu-item>
 
-          <el-submenu index="8">
+          <el-submenu index="9">
             <template slot="title"><i class="el-icon-setting"></i>系统设置</template>
             <el-menu-item index="/option/general">基本设置</el-menu-item>
             <el-menu-item index="/option/comment">评论设置</el-menu-item>

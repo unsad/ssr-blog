@@ -442,6 +442,60 @@ export default new Router({
       ]
     },
     {
+      path: '/music',
+      name: 'music',
+      component: Main,
+      children: [
+        {
+          path: 'list',
+          name: 'musicList',
+          component: createListView({
+            name: 'music',
+            model: 'music',
+            items: [
+              {
+                prop: 'name',
+                label: '音乐名称',
+                width: 250
+              }
+            ],
+            query: {}
+          })
+        },
+        {
+          path: 'create/:id?',
+          name: 'musicCreate',
+          component: createEditView({
+            name: 'music',
+            model: 'music',
+            items: [
+              {
+                prop: 'title',
+                label: '音乐名称',
+                width: 250
+              },
+              {
+                prop: 'author',
+                label: '歌手',
+                width: 250
+              },
+              {
+                prop: 'url',
+                label: '外链地址',
+                width: 250
+              },
+              {
+                prop: 'lyric',
+                label: '歌词地址',
+                width: 250
+              }
+            ],
+            query: {}
+          })
+        }
+      ]
+    },
+    {
       path: '/user',
       name: 'user',
       component: Main,

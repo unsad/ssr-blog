@@ -66,12 +66,21 @@ let user = new Schema({
   email: String
 });
 
+let music = new Schema({
+  title: String,
+  author: String,
+  url: String,
+  lyric: String
+});
+
+
 post = mongoose.model('post', post);
 category = mongoose.model('category', category);
 option = mongoose.model('option', option);
 theme = mongoose.model('theme', theme);
 tag = mongoose.model('tag', tag);
 user = mongoose.model('user', user);
+music = mongoose.model('music', music);
 
 module.exports = {
   post,
@@ -79,7 +88,8 @@ module.exports = {
   option,
   tag,
   user,
-  theme
+  theme,
+  music
 };
 
 

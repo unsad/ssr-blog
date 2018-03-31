@@ -24,7 +24,8 @@ export function createApp() {
     render: h => h(App)
   });
   const preFetchComponent = [
-    Sidebar
+    Sidebar,
+    App
   ];
   return { app, router, store, preFetchComponent, isProd };
 }

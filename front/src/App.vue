@@ -6,7 +6,8 @@
         theme="rgb(0, 0, 0)"
         mode="circulation"
         autoplay
-        :music="music"
+        :music="music[0]"
+        :list="music"
       />
     <router-view class="switch-content"></router-view>
     <div class="page-move" :class="{'page-access': progress !== 100 && tran}"></div>
@@ -19,16 +20,16 @@
   import myHeader from './components/Header';
   import { mapGetters } from 'vuex';
 
+  function fetchMusic({store}) {
+    return store.dispatch('FETCH_MUSIC', {
+      model: 'music'
+    });
+  }
+
   export default {
     name: 'app',
-    data() {
-      return {
-        music: {
-          title: 'Life Will Change',
-          author: 'Lyn',
-          url: 'https://src.sweetalkos.com/music1-04%20Life%20Will%20Change.mp3'
-        }
-      };
+    asyncData(context) {
+      return fetchMusic(context);
     },
     components: {
       LoadingBar,
@@ -38,7 +39,8 @@
     computed: {
       ...mapGetters([
         'progress',
-        'tran'
+        'tran',
+        'music'
       ])
     }
   };

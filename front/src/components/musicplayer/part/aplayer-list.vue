@@ -16,7 +16,7 @@
         @click="$emit('selectsong', aMusic)"
       >
         <span class="aplayer-list-cur" :style="{background: theme}"></span>
-        <span class="aplayer-list-index">{{ index + 1}}</span>
+        <span class="aplayer-list-index">{{ index + 1 }}</span>
         <span class="aplayer-list-title">{{ aMusic.title }}</span>
         <span class="aplayer-list-author">{{ aMusic.author }}</span>
       </li>
@@ -51,6 +51,8 @@
     }
   };
 </script>
-<style lang="stylus" scoped rel="stylesheet/stylus">
- 
+<style lang="stylus" rel="stylesheet/stylus">
+.aplayer-list-hide
+  display: none
+  
 </style>

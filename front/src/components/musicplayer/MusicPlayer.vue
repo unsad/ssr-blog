@@ -181,7 +181,7 @@ export default {
         },
         volume: 0.8,
         muted: false,
-        showList: true,
+        showList: false,
         // handle Promise returned from audio.play()
         // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play
         audioPlayPromise: Promise.resolve(),

@@ -141,9 +141,17 @@
   blockquote 
     border-left: 5px solid #c6c6c6
     margin: 0.5rem 0
-    padding: 15px 0 15px 30px
-  li 
-    list-style: circle
+    padding: 0.5rem 0
+  h2,h3,h4,h5,h6 
+    margin: 1rem 0
+  ol,ul 
+    padding-left: 40px
+  ol 
+    list-style-type: upper-roman
+  ul  
+    list-style-type: circle
+  p,ul,ol
+    margin: 1em 0
   hr  
     margin: 20px 0 
     border: none

@@ -89,13 +89,13 @@
                   stroke="black" fill="transparent" stroke-width="6"/>
             </svg>
           </div>
-          <div class="catch-box">
+          <router-link to="/catchme" tag="div" class="catch-box">
              <svg width="200" height="80" version="1.1" xmlns="http://www.w3.org/2000/svg">
               <polyline points="0,50 50,50 45,60 155,55 150,80 200,40 140,0 150,25 120,25 122,15 0,50"
                   stroke="black" fill="white" stroke-width="6"/>
               <text x="80" y="45" font-family="jackey_handwriteregular" font-size="2rem">Catch me !</text> 
             </svg>
-          </div>
+          </router-link>
         </div>
       </div>
       <back></back>

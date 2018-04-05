@@ -27,6 +27,7 @@ const Sidebar = () => import('@/components/Sidebar');
 const Header = () => import('@/components/Header');
 const About = () => import('@/components/About');
 const Link = () => import('@/components/Link');
+const CatchMe = () => import('@/components/CatchMe');
 const Post = CreatePostView('post');
 const Page = CreatePostView('page');
 
@@ -72,6 +73,11 @@ export function createRouter() {
         path: '/link',
         name: 'link',
         component: Link
+      },
+      {
+        path: '/catchme',
+        name: 'catchme',
+        component: CatchMe
       },
       {
         path: '/tag',

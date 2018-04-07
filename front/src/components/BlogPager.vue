@@ -86,7 +86,7 @@
   background: linear-gradient(-40deg, transparent 52%, red 0),
               linear-gradient(-30deg, transparent 28%, #000 0)
   .sidebar
-    width: 30%
+    min-width: 30%
   #main
     flex: 1
     padding: 4rem 4rem 0 calc(4rem + 10%)

@@ -10,9 +10,12 @@
              <a :href="value">{{value}}</a><span :style="{'margin-right': `${index * 12 - 15}vh`}" class="bottom-box-key">{{key}}</span>
         </li>
      </ul>
+     <back :position="{right: '1rem', bottom: '1rem'}"></back>
   </div>
 </template>
 <script>
+import back from './Back.vue';
+
 export default {
   name: 'catchme',
   data() {
@@ -33,13 +36,15 @@ export default {
         'PSN': 'pre-unsad'
       }
     };
+  },
+  components: {
+    back
   }
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
     #catchme 
         font-size: 2rem 
-        min-width: 1400px
         color: #fff
         font-family: 'jackey_handwriteregular'
         background: url(../../static/catchme.svg) no-repeat left bottom/78vh,

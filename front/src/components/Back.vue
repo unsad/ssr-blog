@@ -1,11 +1,20 @@
 <template>
-    <router-link tag="div" :to="{path: '/'}" id="back">
+    <router-link tag="div" :to="{path: '/'}" id="back" :style="position">
         <object class="back-deco" type="image/svg+xml" data="../../static/back.svg">This browser sucks</object>
     </router-link>
 </template>
 <script>
 export default {
   name: 'back',
+  props: {
+    position: {
+      type: Object,
+      default: {
+        left: '1rem',
+        bottom: '1rem'
+      }
+    }
+  },
   data() {
     return {
 
@@ -18,8 +27,6 @@ export default {
   width: 10rem
   position: fixed
   cursor: pointer
-  bottom: 1rem
-  left: 1rem
   .back-deco
     pointer-events: none
 </style>

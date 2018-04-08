@@ -76,7 +76,7 @@
     },
     computed: {
       compiledMarkdown() {
-        return marked(this.value.replace(/<!--more-->/g, '')
+        return marked(this.value.replace(/<!-- more -->/g, '')
       );
       }
     },
@@ -235,7 +235,7 @@
         });
       },
       _insertMore() {
-        this._preInputText('<!--more-->', 12, 12)
+        this._preInputText('<!-- more -->', 12, 12)
       },
       _boldText () {
         this._preInputText('**加粗文字**', 2, 6)

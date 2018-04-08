@@ -10,7 +10,7 @@
     :style="floatStyleObj"
   >
     <div class="aplayer-body">
-      <thumbnail
+      <thumbnail class="aplayer-thumbnail"
         :pic="currentMusic.pic"
         :playing="isPlaying"
         :enable-drag="isFloatMode"
@@ -571,6 +571,8 @@ export default {
     .aplayer-body 
       display: flex
       position: relative
+      .aplayer-thumbnail
+        position: relative
       .aplayer-info 
         flex-grow: 1
         display: flex

@@ -88,10 +88,10 @@
   .sidebar
     min-width: 30%
   #main
-    flex: 1
     padding: 4rem 4rem 0 calc(4rem + 10%)
     position: relative
     display: flex 
+    height: 100%
     flex-direction: column
     flex-grow: 1
     #page-index

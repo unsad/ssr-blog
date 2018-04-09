@@ -9,10 +9,10 @@ export default {
   props: {
     position: {
       type: Object,
-      default: {
+      default: () => ({
         left: '1rem',
         bottom: '1rem'
-      }
+      })
     }
   },
   data() {

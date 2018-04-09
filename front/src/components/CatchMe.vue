@@ -1,13 +1,13 @@
 <template>
   <div id="catchme">
      <ul class="top-box">
-         <li v-for="(value, key, index) of topBoxData" :key="key" :style="{'padding-left': `${30 - index * 4}vh`}">
+         <li v-for="(value, key, index) of topBoxData" :key="key" :style="{'padding-left': `${32 - index * 4}vh`}">
              <span class="top-box-key">{{key}}</span><a :href="value">{{value}}</a>
         </li>
      </ul>
      <ul class="bottom-box">
           <li v-for="(value, key, index) of bottomBoxData" :key="key">
-             <a :href="value">{{value}}</a><span :style="{'margin-right': `${index * 12 - 15}vh`}" class="bottom-box-key">{{key}}</span>
+             <a :href="value">{{value}}</a><span :style="{'margin-right': `${index * 8 - 15}vh`}" class="bottom-box-key">{{key}}</span>
         </li>
      </ul>
      <back :position="{right: '1rem', bottom: '1rem'}"></back>
@@ -48,12 +48,12 @@ export default {
         color: #fff
         font-family: 'jackey_handwriteregular'
         background: url(../../static/catchme.svg) no-repeat left bottom/78vh,
-                    linear-gradient(145deg, transparent, transparent calc(50vw + 40vh + 1rem), red 0),
-                    linear-gradient(145deg, transparent, transparent calc(50vw + 40vh), white 0),
+                    linear-gradient(135deg, transparent, transparent calc(65vw + 30vh + 1rem), red 0),
+                    linear-gradient(135deg, transparent, transparent calc(65vw + 30vh), white 0),
                     linear-gradient(130deg, black, black 20vh, transparent 0),
                     linear-gradient(-50deg, transparent, transparent calc(100% - 20vh - 1rem), white 0),
-                    linear-gradient(110deg, transparent, transparent calc(45vh + 1rem), black 0),
-                    linear-gradient(110deg, red, red 45vh, white 0)
+                    linear-gradient(110deg, transparent, transparent calc(48vh + 1rem), black 0),
+                    linear-gradient(110deg, red, red 48vh, white 0)
         display: flex
         flex-direction: column
         .bottom-box 
@@ -70,8 +70,7 @@ export default {
                 justify-content: flex-end
                 display: flex 
                 align-items: center
-                &:not(:last-child)
-                    border-bottom: 0.3rem solid white
+                border-bottom: 0.3rem solid white
                 a 
                     flex-grow: 1
                     color: #fff
@@ -85,7 +84,7 @@ export default {
             .top-box-key
                 text-align: right
                 min-width: 6rem
-                margin-right: 15vh
+                margin-right: 16vh
             li 
                 flex-grow: 1
                 display: flex 

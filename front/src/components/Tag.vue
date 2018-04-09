@@ -93,8 +93,9 @@
       .tag-number 
         position: absolute
         right: 0
+        bottom: -40%
         padding: 0.3rem
-        transform: translate(0.5rem, -0.5rem) rotate(15deg) skew(-5deg)
+        transform: translate(1rem, -0.5rem) rotate(15deg) skew(-5deg)
         background: #000
       &::after
         content: ''

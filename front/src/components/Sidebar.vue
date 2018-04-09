@@ -112,7 +112,7 @@
     left: calc(75% - 30vh)
     width: 100%
   #sidebar 
-    height: 100%
+    height: 100vh
     position: relative
     &::before
       position: absolute

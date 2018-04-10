@@ -112,6 +112,7 @@
           font-size: 2rem
           color: #d9d9d9
     .post-detail
+      flex-grow: 1
       padding: 1rem 1rem 0
       max-height: 100vh
       overflow: auto
@@ -134,44 +135,45 @@
           color: #000
           display: inline-block 
           padding: 0.5rem
-  img 
-    max-width: 100%
-    border:1px solid #c6c6c6
-    padding: 3px
-  blockquote 
-    border-left: 5px solid #c6c6c6
-    margin: 0.5rem 0
-    padding: 0.5rem 0
-  h2,h3,h4,h5,h6 
-    margin: 1rem 0
-  ol,ul 
-    padding-left: 40px
-  ol 
-    list-style-type: upper-roman
-  ul  
-    list-style-type: circle
-  p,ul,ol
-    margin: 1em 0
-  hr  
-    margin: 20px 0 
-    border: none
-    height: 2px
-    background: repeating-linear-gradient(-45deg, #a6a6a6, #a6a6a6 6px, transparent 6px, transparent 12px)
-  article table th,
-  article table td 
-    border: 0
+          
+      img 
+        max-width: 100%
+        border:1px solid #c6c6c6
+        padding: 3px
+      blockquote 
+        border-left: 5px solid #c6c6c6
+        margin: 0.5rem 0
+        padding: 0.5rem 0
+      h2,h3,h4,h5,h6 
+        margin: 1rem 0
+      ol,ul 
+        padding-left: 40px
+      ol 
+        list-style-type: upper-roman
+      ul  
+        list-style-type: circle
+      p,ul,ol
+        margin: 1em 0
+      hr  
+        margin: 20px 0 
+        border: none
+        height: 2px
+        background: repeating-linear-gradient(-45deg, #a6a6a6, #a6a6a6 6px, transparent 6px, transparent 12px)
+      article table th,
+      article table td 
+        border: 0
 
 
-  article table th 
-    border-bottom: 2px solid #848484
-    padding: 6px 20px
-    text-align: left
-  
+      article table th 
+        border-bottom: 2px solid #848484
+        padding: 6px 20px
+        text-align: left
+      
 
-  article table td 
-    border-bottom: 1px solid #d0d0d0
-    padding: 6px 20px
-  
+      article table td 
+        border-bottom: 1px solid #d0d0d0
+        padding: 6px 20px
+      
 
 .hljs 
   display: block

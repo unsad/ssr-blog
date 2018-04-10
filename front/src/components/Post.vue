@@ -22,11 +22,11 @@
                 ，添加在分类「
                 <a :data-cate="post.category">
                   <code class="notebook">{{post.category}}</code>
-                </a> 」下，并被添加「
+                </a> 」下，并被添加
                 <router-link v-for="tag of post.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
-                            :data-tag="tag"><code class="notebook">{{tag}}</code>
+                            :data-tag="tag"><code class="notebook">「{{tag}}」</code>
                 </router-link>
-                  」标签，
+                  标签，
                 最后修改于
                 <time>{{post.updatedAt}}</time>
               </p>
@@ -135,7 +135,7 @@
           color: #000
           display: inline-block 
           padding: 0.5rem
-          
+
       img 
         max-width: 100%
         border:1px solid #c6c6c6

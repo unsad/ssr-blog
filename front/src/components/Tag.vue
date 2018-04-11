@@ -85,7 +85,7 @@
       cursor: pointer
       position: relative
       display: inline-block
-      margin: 0 4rem
+      margin: 1rem 4rem
       z-index: 1
       font-size: 2rem
       padding: 1rem

@@ -1,6 +1,6 @@
 <template>
   <el-row class="sidebar">
-      <el-col :span="4">
+      <el-col :span="4" class="full-height">
         <el-menu default-active="2" class="full-height" :unique-opened="true"
                  @select="handleSelect">
           <el-menu-item index="/dashboard"><i class="el-icon-date"></i>概述</el-menu-item>
@@ -84,5 +84,8 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
+.full-height 
+  height: 100%
+  width: 148px
 
 </style>

@@ -26,5 +26,14 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-
+ .main 
+    box-sizing: border-box
+    padding-bottom: 60px
+    position: fixed
+    top: 60px
+    left: 148px
+    height: 100%
+    width: calc(100% - 148px)
+    overflow: auto;
+  
 </style>

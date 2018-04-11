@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="form" v-loading.body="isLoading" :model="form" label-width="80px">
+  <el-form class="post-form" ref="form" v-loading.body="isLoading" :model="form" label-width="80px">
     <el-row :gutter="0">
       <el-col :span="18">
         <el-form-item v-for="(item, index) in prevItems" :key="index" :label="item.label">
@@ -256,5 +256,6 @@
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-
+.post-form
+  margin-top: 2rem
 </style>

@@ -454,7 +454,7 @@ export default new Router({
             model: 'music',
             items: [
               {
-                prop: 'name',
+                prop: 'title',
                 label: '音乐名称',
                 width: 250
               }

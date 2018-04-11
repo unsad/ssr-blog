@@ -2,7 +2,7 @@
   <div id='archive'>
     <article class="archive-main">
       <h1 class="title">{{title}}</h1>
-      <second-title second-text="Took the mask off to feel free"></second-title>
+      <second-title second-text="Dust to Dust , Ash to Ash"></second-title>
       <div class="timeline" v-for="(item, key) of achieves" :key="key">
         <div class="content">
           <h3>{{key}} ({{item.length}})</h3>

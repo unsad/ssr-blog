@@ -79,48 +79,53 @@
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
-#blogpager
-  display: flex
-  overflow: hidden
-  height: 100vh 
-  background: linear-gradient(-40deg, transparent 52%, red 0),
-              linear-gradient(-30deg, transparent 28%, #000 0)
-  .sidebar
-    min-width: 30%
-  #main
-    padding: 4rem 4rem 0 calc(4rem + 10%)
-    position: relative
-    display: flex 
-    height: 100%
-    flex-direction: column
-    flex-grow: 1
-    #page-index
-      two-color-border()
-      overflow: auto
-      height: 100%
-      .summary
-        border-bottom: 2px solid #fff
-        margin: 1rem
+@media only screen and (max-width : 768px) {
 
-.deco
-  width: 10rem
-  height: 3rem 
-  background: #000
-  position: absolute 
-  right: 1rem
-  bottom: 4rem
-  clip-path: polygon(0 45%, 100% 19%, 100% 85%, 0 73%);
-  &::before 
-    content: ''
-    position: absolute
-    top: 0 
-    left: 0 
-    right: 0
-    bottom: 0
-    background: #fff
-    clip-path: polygon(2% 50%, 98% 24%, 98% 80%, 2% 68%);
-.deco-2 
-  transform: rotate(-20deg) translate(10%, -70%)
-.deco-1 
-  transform: rotate(30deg) translate(0, 80%) scaleX(0.7)
+}
+
+@media only screen and (min-width : 769px) 
+  #blogpager
+    display: flex
+    overflow: hidden
+    height: 100vh 
+    background: linear-gradient(-40deg, transparent 52%, red 0),
+                linear-gradient(-30deg, transparent 28%, #000 0)
+    .sidebar
+      min-width: 30%
+    #main
+      padding: 4rem 4rem 0 calc(4rem + 10%)
+      position: relative
+      display: flex 
+      height: 100%
+      flex-direction: column
+      flex-grow: 1
+      #page-index
+        two-color-border()
+        overflow: auto
+        height: 100%
+        .summary
+          border-bottom: 2px solid #fff
+          margin: 1rem
+
+  .deco
+    width: 10rem
+    height: 3rem 
+    background: #000
+    position: absolute 
+    right: 1rem
+    bottom: 4rem
+    clip-path: polygon(0 45%, 100% 19%, 100% 85%, 0 73%);
+    &::before 
+      content: ''
+      position: absolute
+      top: 0 
+      left: 0 
+      right: 0
+      bottom: 0
+      background: #fff
+      clip-path: polygon(2% 50%, 98% 24%, 98% 80%, 2% 68%);
+  .deco-2 
+    transform: rotate(-20deg) translate(10%, -70%)
+  .deco-1 
+    transform: rotate(30deg) translate(0, 80%) scaleX(0.7)
 </style>

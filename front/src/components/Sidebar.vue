@@ -93,27 +93,11 @@
   };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-.wrapper 
-  position: relative
-  font-family: 'special-for-me'
-  &::before
-    position: absolute
-    content: ''
-    left: 0 
-    right: 0
-    top: 0
-    bottom: 0
-    background: black
-    clip-path: polygon(0 0, 100% 0, calc(100% - 30vh) 100%, 0% 100%) 
-  .pic 
-    position: absolute
-    font-size: 0
-    bottom: 0
-    left: calc(75% - 30vh)
-    width: 100%
-  #sidebar 
-    height: 100vh
+
+@media only screen and (min-width : 769px)
+  .wrapper 
     position: relative
+    font-family: 'special-for-me'
     &::before
       position: absolute
       content: ''
@@ -121,32 +105,50 @@
       right: 0
       top: 0
       bottom: 0
-      background: white
-      clip-path: polygon(97% 0, 100% 0, calc(100% - 30vh) 100%, calc(97% - 30vh) 100%)
-    a
-      color: #fff
-    .sidebar-link
-      padding: 0
-      text-align: center
-      font-size: 4rem
-      transform: rotate(20deg) translate(26%)
-      line-height: 2
-      .sidebar-link-item:hover 
-        .rotate-1
-          transform: rotate(-20deg) translate(-10%, 10%)
-        .rotate-2
-          transform: rotate(-20deg) translate(10%)
-      .rotate-1 
-        display: inline-block
-        transition: all .2s ease-out
-        transform: rotate(-40deg)
-        -webkit-text-stroke: 2px black;
-      .rotate-2 
-        display: inline-block
-        transition: all .2s ease-out
-        color: black
-        -webkit-text-stroke: 2px white;
-        transform: rotate(15deg) translate(5%)
+      background: black
+      clip-path: polygon(0 0, 100% 0, calc(100% - 30vh) 100%, 0% 100%) 
+    .pic 
+      position: absolute
+      font-size: 0
+      bottom: 0
+      left: calc(75% - 30vh)
+      width: 100%
+    #sidebar 
+      height: 100vh
+      position: relative
+      &::before
+        position: absolute
+        content: ''
+        left: 0 
+        right: 0
+        top: 0
+        bottom: 0
+        background: white
+        clip-path: polygon(97% 0, 100% 0, calc(100% - 30vh) 100%, calc(97% - 30vh) 100%)
+      a
+        color: #fff
+      .sidebar-link
+        padding: 0
+        text-align: center
+        font-size: 4rem
+        transform: rotate(20deg) translate(26%)
+        line-height: 2
+        .sidebar-link-item:hover 
+          .rotate-1
+            transform: rotate(-20deg) translate(-10%, 10%)
+          .rotate-2
+            transform: rotate(-20deg) translate(10%)
+        .rotate-1 
+          display: inline-block
+          transition: all .2s ease-out
+          transform: rotate(-40deg)
+          -webkit-text-stroke: 2px black;
+        .rotate-2 
+          display: inline-block
+          transition: all .2s ease-out
+          color: black
+          -webkit-text-stroke: 2px white;
+          transform: rotate(15deg) translate(5%)
 
 
 </style>

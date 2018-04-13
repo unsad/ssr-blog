@@ -124,6 +124,48 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
+@media only screen and (min-width : 769px) 
+  .object-box 
+    width: 500px
+    height: 556px
+  .direct-box 
+    position: absolute  
+    display: flex 
+    width: max-content
+    align-items: center
+    .direct-content 
+      font-size: 2rem
+      two-color-border(0.5rem, 0.2rem)
+      padding: 0.5rem
+    .direct-line 
+      width: 200px
+
+@media only screen and (max-width : 768px) 
+  .object-box 
+    width: 60%
+    display: flex
+  .direct-content 
+    font-size: 1rem
+    two-color-border(0.2rem, 0.1rem)
+    padding: 0.5rem
+  .direct-box
+    display: inline-block
+    margin: 0.5rem 1rem
+    .direct-content 
+      display: inline-block
+  .direct-line 
+    display: none
+  .catch-box 
+    position: absolute
+    z-index: 1
+    right: 0
+    bottom: 30%
+    transition: all .3s ease
+    &:hover
+      cursor: pointer
+      transform: translateX(0.5rem)
+  
+
 #about
   display: flex 
   flex-direction: column
@@ -133,72 +175,63 @@ export default {
     title-base()
     margin: 0
   .entry-content 
-    text-align: center
+    display: flex
+    align-items: flex-start
+    justify-content: center
     flex-grow: 1
     .object-box  
       position: relative
-      width: 500px
-      height: 556px
       display: inline-block
       object  
         z-index: 1
         position: relative
-    .direct-box 
-      position: absolute
-      display: flex 
-      width: max-content
-      align-items: center
-      .direct-line 
-        width: 200px
-      .direct-content 
-        font-size: 2rem
-        padding: 0.5rem
-        two-color-border(0.5rem, 0.2rem)
+ 
 
-
-.box-1 
-  left: 70%
-  bottom: 4rem
-.box-2 
-  left: 65% 
-  bottom: 9rem
-.box-3
-  left: 70%
-  top: 3rem
-.box-4
-  left: 50%
-  top: 8rem
-.box-5 
-  left: -20%
-  bottom: 0
-.box-6
-  left: -30%
-  top: 9rem
-.box-7 
-  left: -10%
-  top: 3rem
-.box-8
-  left: -35%
-  bottom: 5rem
-.box-9
-  left: 50%
-  top: 17rem
-.box-10
-  left: 68%
-  top: 16rem
-.box-11
-  left: -5%
-  top: 15rem
-.box-12
-  left: -30% 
-  bottom: 18rem
-.catch-box 
-  position: absolute
-  z-index: 1
-  right: 0
-  bottom: 0
-  transition: all .3s ease
-  &:hover
-    cursor: pointer
-    transform: translateX(0.5rem)
+      
+@media only screen and (min-width : 769px) 
+  .box-1 
+    left: 70%
+    bottom: 4rem
+  .box-2 
+    left: 65% 
+    bottom: 9rem
+  .box-3
+    left: 70%
+    top: 3rem
+  .box-4
+    left: 50%
+    top: 8rem
+  .box-5 
+    left: -20%
+    bottom: 0
+  .box-6
+    left: -30%
+    top: 9rem
+  .box-7 
+    left: -10%
+    top: 3rem
+  .box-8
+    left: -35%
+    bottom: 5rem
+  .box-9
+    left: 50%
+    top: 17rem
+  .box-10
+    left: 68%
+    top: 16rem
+  .box-11
+    left: -5%
+    top: 15rem
+  .box-12
+    left: -30% 
+    bottom: 18rem
+  .catch-box 
+    position: absolute
+    z-index: 1
+    right: 0
+    bottom: 0
+    transition: all .3s ease
+    &:hover
+      cursor: pointer
+      transform: translateX(0.5rem)
 </style>

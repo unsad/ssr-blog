@@ -48,6 +48,7 @@
     font-size: 2rem
     margin: 0.5rem 0
     .meta 
+      flex-shrink: 0
       font-size: 1.1rem
     .title-link 
       min-width: 75%

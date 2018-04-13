@@ -9,7 +9,7 @@
           <ul>
             <li v-for="subItem of item" :key="subItem.title">
               <router-link :to="{name: 'post', params: {pathName: subItem.pathName}}" :title="subItem.title">{{subItem.title}}</router-link>&nbsp;
-              <span class="date">{{subItem.createdAt.split(' ')[0]}}</span>
+              <span class="date no-phone">{{subItem.createdAt.split(' ')[0]}}</span>
             </li>
           </ul>
         </div>
@@ -78,64 +78,97 @@
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
-#archive 
-  display: flex 
-  flex-direction: column
-  .archive-main
-    flex-grow: 1
-    .title 
-      title-base()
-    .timeline
-      position: relative
-      width: 0.5rem
-      margin: 0 auto 
-      background: #000
-      &:before
-        content: '';
-        background: red;
-        position: absolute;
-        left: 50%;
-        top: 0;
-        transform: translateX(-50%);
-        width: 2rem;
-        height: 2rem;
-        border: 3px solid #000;
-        border-radius: 50%;
-      .content 
-        two-color-border()
-        color: #fff
+@media only screen and (max-width : 768px)
+  #archive 
+    display: flex 
+    flex-direction: column
+    .archive-main
+      flex-grow: 1
+      .title 
+        title-base()
+      .timeline
+        margin: 1rem
+        .content 
+          two-color-border()
+          color: #fff
+          background: #000
+          position: relative 
+          padding: 1rem
+          top: 0.5rem
+          ul
+            line-height: 1.7
+            font-size: 1.2rem
+            li 
+              display: flex 
+              justify-content: space-between
+              a
+                color: #fff
+                no-wrap()
+          h3 
+            text-align: center
+            font-size: 1.5rem
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #fff;
+
+@media only screen and (min-width : 769px)
+  #archive 
+    display: flex 
+    flex-direction: column
+    .archive-main
+      flex-grow: 1
+      .title 
+        title-base()
+      .timeline
+        position: relative
+        width: 0.5rem
+        margin: 0 auto 
         background: #000
-        position: relative 
-        width: 40rem
-        padding: 1rem
-        top: 0.5rem
-        ul
-          line-height: 1.7
-          font-size: 1.2rem
-          li 
-            display: flex 
-            justify-content: space-between
-            a
-              color: #fff
-        h3 
-          text-align: center
-          font-size: 1.5rem
-          padding-bottom: 1rem;
-          border-bottom: 1px solid #fff;
-        &:before 
-          content: ''
+        &:before
+          content: '';
+          background: red;
+          position: absolute;
+          left: 50%;
+          top: 0;
+          transform: translateX(-50%);
+          width: 2rem;
+          height: 2rem;
+          border: 3px solid #000;
+          border-radius: 50%;
+        .content 
+          two-color-border()
+          color: #fff
+          background: #000
+          position: relative 
+          width: 40rem
+          padding: 1rem
+          top: 0.5rem
+          ul
+            line-height: 1.7
+            font-size: 1.2rem
+            li 
+              display: flex 
+              justify-content: space-between
+              a
+                color: #fff
+          h3 
+            text-align: center
+            font-size: 1.5rem
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #fff;
+          &:before 
+            content: ''
+            background: #000 
+            position: absolute 
+            top: -0.7rem
+            width: 3rem 
+            height: 0.3rem 
+        &:nth-child(odd) .content
+          left: 4rem 
           background: #000 
-          position: absolute 
-          top: -0.7rem
-          width: 3rem 
-          height: 0.3rem 
-      &:nth-child(odd) .content
-        left: 4rem 
-        background: #000 
-        &:before 
-          left: -4rem
-      &:nth-child(even) .content
-        left: calc(-40rem - 3.5rem)
-        &:before 
-          right: -4rem
+          &:before 
+            left: -4rem
+        &:nth-child(even) .content
+          left: calc(-40rem - 3.5rem)
+          &:before 
+            right: -4rem
 </style>

@@ -79,10 +79,6 @@
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
-@media only screen and (max-width : 768px) {
-
-}
-
 @media only screen and (min-width : 769px) 
   #blogpager
     display: flex

@@ -24,9 +24,18 @@ export default {
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 #back
-  width: 10rem
   position: fixed
   cursor: pointer
   .back-deco
     pointer-events: none
+
+@media only screen and (min-width : 769px)
+  #back 
+    width: 10rem
+
+
+@media only screen and (max-width : 768px)
+  #back 
+    width: 6rem
+
 </style>

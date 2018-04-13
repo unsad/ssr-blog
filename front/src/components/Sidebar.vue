@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-     <div class="pic">
+     <div class="pic no-phone">
         <img src="../../static/sidebar.svg" alt="" width="125%">
     </div>
     <nav id="sidebar"
@@ -93,8 +93,18 @@
   };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-
-@media only screen and (min-width : 769px)
+@media only screen and (max-width: 768px)
+  .wrapper
+    font-family: 'special-for-me'
+    a
+      color: #fff
+    .sidebar-link
+      display: flex
+      justify-content: space-around
+      line-height: 2
+      background: #000
+      font-size: 2rem
+@media only screen and (min-width: 769px)
   .wrapper 
     position: relative
     font-family: 'special-for-me'

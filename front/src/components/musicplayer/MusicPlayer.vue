@@ -18,7 +18,7 @@
         @dragbegin="onDragBegin"
         @dragging="onDragAround"
       />
-      <div class="aplayer-info" v-show="!isMiniMode">
+      <div class="aplayer-info no-phone">
         <div class="aplayer-music">
           <span class="aplayer-title">{{ currentMusic.title }}</span>
           <span class="aplayer-author">{{ currentMusic.author }}</span>
@@ -563,7 +563,6 @@ export default {
     position: fixed
     right: 3%
     z-index: 2
-    top: 1rem
     overflow: hidden
     user-select: none
     .aplayer-lrc-content 
@@ -606,4 +605,11 @@ export default {
       left: 0 
     100% 
       left: -100%
+@media only screen and (min-width: 769px)
+  .aplayer 
+    top: 1rem
+@media only screen and (max-width: 768px)
+  .aplayer 
+    bottom: 1rem
 </style>
+

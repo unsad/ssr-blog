@@ -2,7 +2,7 @@
   <article id="post-summary">
     <h1 class="title">
       <router-link class="title-link" :to="{name:'post', params: {pathName: article.pathName}}">{{article.title}}</router-link>
-      <div class="meta">
+      <div class="meta no-phone">
         <div class="date">{{article.createdAt}}</div>
       </div>
     </h1>
@@ -50,7 +50,7 @@
     .meta 
       font-size: 1.1rem
     .title-link 
-      width: 75%
+      min-width: 75%
       no-wrap()
   .title a
     color: #fff

@@ -125,45 +125,47 @@ export default {
 @import '../assets/css/mixin.styl';
 
 @media only screen and (min-width : 769px) 
-  .object-box 
-    width: 500px
-    height: 556px
-  .direct-box 
-    position: absolute  
-    display: flex 
-    width: max-content
-    align-items: center
-    .direct-content 
-      font-size: 2rem
-      two-color-border(0.5rem, 0.2rem)
-      padding: 0.5rem
-    .direct-line 
-      width: 200px
+  #about
+    .object-box 
+      width: 500px
+      height: 556px
+    .direct-box 
+      position: absolute  
+      display: flex 
+      width: max-content
+      align-items: center
+      .direct-content 
+        font-size: 2rem
+        two-color-border(0.5rem, 0.2rem)
+        padding: 0.5rem
+      .direct-line 
+        width: 200px
 
 @media only screen and (max-width : 768px) 
-  .object-box 
-    width: 60%
-    display: flex
-  .direct-content 
-    font-size: 1rem
-    two-color-border(0.2rem, 0.1rem)
-    padding: 0.5rem
-  .direct-box
-    display: inline-block
-    margin: 0.5rem 1rem
+  #about
+    .object-box 
+      width: 60%
+      display: flex
     .direct-content 
+      font-size: 1rem
+      two-color-border(0.2rem, 0.1rem)
+      padding: 0.5rem
+    .direct-box
       display: inline-block
-  .direct-line 
-    display: none
-  .catch-box 
-    position: absolute
-    z-index: 1
-    right: 0
-    bottom: 30%
-    transition: all .3s ease
-    &:hover
-      cursor: pointer
-      transform: translateX(0.5rem)
+      margin: 0.5rem 1rem
+      .direct-content 
+        display: inline-block
+    .direct-line 
+      display: none
+    .catch-box 
+      position: absolute
+      z-index: 1
+      right: 0
+      bottom: 30%
+      transition: all .3s ease
+      &:hover
+        cursor: pointer
+        transform: translateX(0.5rem)
   
 
 #about

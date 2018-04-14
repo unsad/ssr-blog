@@ -17,7 +17,7 @@ module.exports = {
   defaultAdminPassword: env.defaultAdminPassword || 'unsad',
   qiniuAccessKey: 'KMTVIK74xzTFkJ_kFEKlD86q1hC7dg-lHaI2RTMm',
   qiniuSecretKey: 'V13BAPuLiF5yQHup7MnPUz8ia0hJvXegfYiXD7f-',
-  qiniuBucketHost: '//oisoz7txr.bkt.clouddn.com',
+  qiniuBucketHost: '//src.sweetalkos.com',
   qiniuBucketName: 'unsad',
   qiniuPipeline: ''
 };

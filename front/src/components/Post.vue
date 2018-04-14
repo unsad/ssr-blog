@@ -153,6 +153,7 @@
 
       img 
         max-width: 100%
+        height: auto
         border:1px solid #c6c6c6
         padding: 3px
       blockquote 

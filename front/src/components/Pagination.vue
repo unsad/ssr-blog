@@ -16,9 +16,9 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .pagination 
-  margin: 1rem
+  margin: 1rem 3rem
   display: flex 
-  justify-content: space-around
+  justify-content: space-between
   a
     color: #fff
 </style>

@@ -4,9 +4,9 @@
     <second-title second-text="I was turning my back on you my friend"></second-title>
     <div class="content">
       <ul class="linklist-box">
-        <li v-for="(item, index) of linkitems" :key="item" :style="{'margin-left': `-${index * 5}rem`}">{{item}}</li>
+        <li class="clear-inline-style" v-for="(item, index) of linkitems" :key="item" :style="{'margin-left': `-${index * 5}rem`}">{{item}}</li>
       </ul>
-      <div class="object-box">
+      <div class="object-box no-phone">
         <object class="second-title-deco" type="image/svg+xml" data="../../static/link-bg.svg">This browser sucks</object>
       </div>
     </div>
@@ -46,6 +46,10 @@ export default {
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
+
+@media only screen and (max-width : 768px)
+  .clear-inline-style 
+    margin-left: 0!important
 
 #link    
   display: flex 

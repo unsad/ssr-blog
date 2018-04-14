@@ -3,7 +3,7 @@
     <div id="page-post">
       <div class="post-main">
         <article class="post-detail">
-          <div class="meta">
+          <div class="meta no-phone">
             <div class="date">
               {{post.createdAt}}
             </div>
@@ -94,6 +94,27 @@
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
+@media only screen and (max-width : 768px)
+  #page-post 
+    .post-main 
+      flex-direction: column
+      .post-index
+        order: -1
+        background: #1e1e1e
+        border-bottom: 1px solid #c6c6c6
+
+
+@media only screen and (min-width : 769px)  
+  #page-post 
+    .post-main 
+      .post-index
+         background: url(../../static/post-bg.svg) no-repeat bottom left/80%,
+                     linear-gradient(to left, #000 30%, #1e1e1e)  
+      .post-detail
+        flex-grow: 1
+        padding: 1rem 1rem 0
+        max-height: 100vh
+        overflow: auto
 #page-post
   .post-main
     min-height: 100vh
@@ -104,18 +125,12 @@
     display: flex 
     .post-index 
       min-width: 35%
-      background: url(../../static/post-bg.svg) no-repeat bottom left/80%,
-                  linear-gradient(to left, #000 30%, #1e1e1e)
       #toc 
         padding: 1rem
         strong 
           font-size: 2rem
           color: #d9d9d9
     .post-detail
-      flex-grow: 1
-      padding: 1rem 1rem 0
-      max-height: 100vh
-      overflow: auto
       background: #1e1e1e
       color: #c6c6c6
       h1 

@@ -17,19 +17,14 @@
               --
             </p>
             <div class="post-info">
-              <p>发表于
-                <time>{{post.createdAt}}</time>
-                ，添加在分类「
+              添加在分类「
                 <a :data-cate="post.category">
                   <code class="notebook">{{post.category}}</code>
                 </a> 」下，并被添加
                 <router-link v-for="tag of post.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
                             :data-tag="tag"><code class="notebook">「{{tag}}」</code>
                 </router-link>
-                  标签，
-                最后修改于
-                <time>{{post.updatedAt}}</time>
-              </p>
+                  标签。
             </div>
           </template>
 
@@ -44,6 +39,9 @@
         </article>
         <div class="post-index">
           <div class="toc" id="toc" v-if="post.toc" v-html="post.toc"></div>
+            <router-link class="post-back" :to="{path: '/'}">
+              回到首页
+            </router-link>
         </div>
       </div>
       <div class="comments" v-if="post.allowComment === true && commentName!== ''">
@@ -102,6 +100,10 @@
         order: -1
         background: #1e1e1e
         border-bottom: 1px solid #c6c6c6
+      .post-back
+        position: absolute
+        top: 0
+        right: 0
 
 
 @media only screen and (min-width : 769px)  
@@ -126,10 +128,13 @@
     .post-index 
       min-width: 35%
       #toc 
-        padding: 1rem
+        padding: 1rem 1rem 0
         strong 
           font-size: 2rem
           color: #d9d9d9
+    .post-back
+      padding: 1rem
+      line-height: 2
     .post-detail
       background: #1e1e1e
       color: #c6c6c6

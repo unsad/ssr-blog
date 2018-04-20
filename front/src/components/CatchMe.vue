@@ -10,11 +10,13 @@
              <a :href="value">{{value}}</a><span :style="{'margin-right': `${index * 8 - 15}vh`}" class="bottom-box-key clear-inline-style">{{key}}</span>
         </li>
      </ul>
+      <second-title class="catchme-title" second-text="Switch my current from DC to AC "></second-title>
      <back class="clear-inline-style" :position="{right: '1rem', bottom: '1rem'}"></back>
   </div>
 </template>
 <script>
 import back from './Back.vue';
+import secondTitle from './SecondTitle.vue';
 
 export default {
   name: 'catchme',
@@ -38,7 +40,8 @@ export default {
     };
   },
   components: {
-    back
+    back,
+    secondTitle
   }
 };
 </script>
@@ -57,6 +60,10 @@ export default {
                     linear-gradient(110deg, red, red 48vh, white 0)
         display: flex
         flex-direction: column
+        .catchme-title 
+            position: absolute 
+            bottom: 0 
+            right: 5%
         .bottom-box 
             clip-path: polygon(40% 0, 100% 0, 100% 100%, 51% 100%)
             overflow: hidden

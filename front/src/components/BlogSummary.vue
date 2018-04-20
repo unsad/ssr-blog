@@ -51,7 +51,7 @@
       flex-shrink: 0
       font-size: 1.1rem
     .title-link 
-      min-width: 75%
+      min-width: 50%
       no-wrap()
   .title a
     color: #fff

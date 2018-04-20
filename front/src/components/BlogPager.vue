@@ -89,12 +89,13 @@
     .sidebar
       min-width: 30%
     #main
-      padding: 4rem 4rem 0 calc(4rem + 10%)
+      padding: 4rem 5% 0 10%
       position: relative
       display: flex 
       height: 100%
       flex-direction: column
       flex-grow: 1
+      min-width: 0
       #page-index
         two-color-border()
         overflow: auto
@@ -108,8 +109,8 @@
     height: 3rem 
     background: #000
     position: absolute 
-    right: 1rem
-    bottom: 4rem
+    right: 0
+    bottom: 10rem
     clip-path: polygon(0 45%, 100% 19%, 100% 85%, 0 73%);
     &::before 
       content: ''

@@ -18,7 +18,7 @@
 .pagination 
   margin: 1rem 3rem
   display: flex 
-  justify-content: space-between
+  justify-content: space-around
   a
     color: #fff
 </style>

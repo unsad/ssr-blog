@@ -5,6 +5,7 @@
       <blog-summary v-for="item of tagPager" :key="item.pathname" :article="item" :support-webp="supportWebp"></blog-summary>
       <pagination :page="1" :total-page="1"></pagination>
     </section>
+    <back></back>
     <my-footer></my-footer>
   </div>
 </template>
@@ -15,6 +16,7 @@
   import myFooter from './Footer.vue';
   import blogSummary from './BlogSummary.vue';
   import pagination from './Pagination.vue';
+  import back from './Back.vue';
 
   function getItems({store, route: {path, query, params}}, callback) {
     return store.dispatch('FETCH_TAG_PAGER', {
@@ -47,7 +49,8 @@
     components: {
       myFooter,
       blogSummary,
-      pagination
+      pagination,
+      back
     },
     metaInfo() {
       return {

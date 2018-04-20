@@ -2,7 +2,7 @@
   <div id="tag">
     <article class="tag-main">
       <h1 class="title">{{title}}</h1>
-      <second-title second-text="the sky , the earth , the sun , a wind"></second-title>
+      <second-title second-text="My game's always so fast so fine"></second-title>
       <div class="entry-content">
         <section>
           <router-link class="tag" tag="span" v-for="key of sortedKeys" :key="key" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">

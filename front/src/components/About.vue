@@ -114,6 +114,11 @@ export default {
       title: '关于'
     };
   },
+  metaInfo() {
+    return {
+      title: this.title
+    };
+  },
   components: {
     myFooter,
     secondTitle,

@@ -22,6 +22,11 @@ import secondTitle from './SecondTitle.vue';
 
 export default {
   name: 'Link',
+  metaInfo() {
+    return {
+      title: this.title
+    };
+  },
   data() {
     return {
       title: '友链',

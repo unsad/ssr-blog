@@ -80,6 +80,8 @@
 
 @media only screen and (max-width : 768px)
   #archive 
+    background: linear-gradient(40deg, transparent 52%, red 0),
+                linear-gradient(30deg, transparent 28%, #000 0)
     display: flex 
     flex-direction: column
     .archive-main
@@ -112,6 +114,7 @@
 
 @media only screen and (min-width : 769px)
   #archive 
+  
     display: flex 
     flex-direction: column
     .archive-main

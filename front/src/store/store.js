@@ -4,6 +4,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import api from './index';
+import utils from '../utils/utils';
 
 Vue.use(Vuex);
 
@@ -141,6 +142,7 @@ export function createStore() {
       },
       FETCH_MUSIC: ({commit, state}) => {
         return api.fetch('music').then(musicArr => {
+          musicArr = utils.shuffle(musicArr);
           commit('SET_MUSIC', { musicArr });
         });
       },

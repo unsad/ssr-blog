@@ -2,12 +2,12 @@
   <div id="catchme">
      <ul class="top-box">
          <li class="clear-inline-style" v-for="(value, key, index) of topBoxData" :key="key" :style="{'padding-left': `${32 - index * 4}vh`}">
-             <span class="top-box-key">{{key}}</span><a :href="value">{{value}}</a>
+             <span class="top-box-key">{{key}}</span><a target="_blank" :href="value">{{value}}</a>
         </li>
      </ul>
      <ul class="bottom-box">
           <li  v-for="(value, key, index) of bottomBoxData" :key="key">
-             <a :href="value">{{value}}</a><span :style="{'margin-right': `${index * 8 - 15}vh`}" class="bottom-box-key clear-inline-style">{{key}}</span>
+             <a :href="value" target="_blank">{{value}}</a><span :style="{'margin-right': `${index * 8 - 15}vh`}" class="bottom-box-key clear-inline-style">{{key}}</span>
         </li>
      </ul>
       <second-title class="catchme-title" second-text="Switch my current from DC to AC "></second-title>

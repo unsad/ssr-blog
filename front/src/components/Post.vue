@@ -100,6 +100,10 @@
         order: -1
         background: #1e1e1e
         border-bottom: 1px solid #c6c6c6
+        ul 
+          list-style-type: disc;
+          color: #c6c6c6;
+          margin-left: 1.5rem;
       .post-back
         position: absolute
         top: 0
@@ -110,8 +114,14 @@
   #page-post 
     .post-main 
       .post-index
-         background: url(../../static/post-bg.svg) no-repeat bottom left/80%,
-                     linear-gradient(to left, #000 30%, #1e1e1e)  
+        ul 
+          list-style-type: disc 
+          color: #c6c6c6
+          margin-left: 1.5rem
+        background: url(../../static/post-bg.svg) no-repeat bottom left/80%,
+                    linear-gradient(to left, #000 30%, #1e1e1e)  
+      ul 
+        margin-left: 1rem
       .post-detail
         flex-grow: 1
         padding: 1rem 1rem 0
@@ -164,7 +174,7 @@
       blockquote 
         border-left: 5px solid #c6c6c6
         margin: 0.5rem 0
-        padding: 0.5rem 0
+        padding: 0.5rem 0 0.5rem 1rem
       h2,h3,h4,h5,h6 
         margin: 1rem 0
       ol,ul 

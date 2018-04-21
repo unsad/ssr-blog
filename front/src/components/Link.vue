@@ -7,7 +7,7 @@
         <li class="clear-inline-style" v-for="(item, index) of linkitems" :key="item" :style="{'margin-left': `-${index * 5}rem`}">{{item}}</li>
       </ul>
       <div class="object-box no-phone">
-        <object class="second-title-deco" type="image/svg+xml" data="../../static/link-bg.svg">This browser sucks</object>
+        <object type="image/svg+xml" data="../../static/link-bg.svg">This browser sucks</object>
       </div>
     </div>
     <back></back>
@@ -99,5 +99,5 @@ export default {
           two-color-border(0.4rem, 0.3rem)
     .object-box 
         width: 50rem
-
+        min-height: 412px;
 </style>

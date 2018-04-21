@@ -72,8 +72,6 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 #tag-index
-  background: linear-gradient(-50deg, transparent 82%, red 0),
-              linear-gradient(-30deg, transparent 18%, #000 0)
   padding: 0 1rem
   overflow: hidden
 </style>

@@ -78,7 +78,24 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
-
+@media only screen and (max-width : 768px) 
+  #blogpager
+    background: linear-gradient(-50deg, transparent 82%, red 0),
+                linear-gradient(-30deg, transparent 18%, #000 0)
+    #main
+      position: relative
+      display: flex 
+      flex-direction: column
+      flex-grow: 1
+      min-width: 0
+      #page-index
+        color: #fff
+        border: none
+        .summary
+          border-bottom: 2px solid #fff
+          margin: 1rem
+        .blogpager-pagi
+          margin: 1rem
 @media only screen and (min-width : 769px) 
   #blogpager
     display: flex

@@ -149,8 +149,8 @@ export default {
 @media only screen and (max-width : 768px) 
   #about
     .object-box 
-      width: 60%
       display: flex
+      min-height: 528px
     .direct-content 
       font-size: 1rem
       two-color-border(0.2rem, 0.1rem)

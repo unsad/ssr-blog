@@ -51,53 +51,57 @@ export default {
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
+ #link    
+    display: flex 
+    flex-direction: column 
+    background: linear-gradient(-40deg, transparent 42%, red 0),
+                linear-gradient(-30deg, transparent 22%, #090909 0)
+    .title
+      title-base() 
+      margin: 0  
+    .content 
+      display: flex
+      flex-grow: 1
+      font-size: 0
+      justify-content: center
+      .linklist-box
+        font-size: 1rem
+        position: absolute
+        li 
+          position: relative
+          z-index: 1
+          line-height: 3rem
+          width: 25rem
+          margin-bottom: 1rem
+          color: #fff
+          padding: 0 1rem
+          &::after
+            content: ''
+            position: absolute
+            top: 0
+            right: 0
+            bottom: 0
+            left: 0
+            z-index: -1
+            transform: skew(-25deg)
+            two-color-border(0.4rem, 0.3rem)
+      .object-box 
+          width: 50rem
+          min-height: 412px;
 
 @media only screen and (max-width : 768px)
-  .clear-inline-style 
-    margin-left: 0!important
+  #link
+    .clear-inline-style 
+      margin-left: 0!important
 
-#link    
-  display: flex 
-  flex-direction: column 
-  background: linear-gradient(-40deg, transparent 42%, red 0),
-              linear-gradient(-30deg, transparent 22%, #090909 0)
-  .title
-    title-base() 
-    margin: 0  
-  .content 
-    display: flex
-    border-top: 0.4rem solid #fff
-    border-bottom: 0.4rem solid #fff
-    box-shadow:0 0 0 1rem #000, 0 0 0 1.4rem #fff
-    margin: 6rem 0
-    flex-grow: 1
-    padding-left: 15rem
-    align-items: flex-end
-    font-size: 0
-    justify-content: center
-    .linklist-box
-      font-size: 1rem
+@media only screen and (min-width : 769px)
+  #link  
+    .content 
+      margin: 6rem 0
+      padding-left: 15rem  
+      align-items: flex-end
       margin-left: -5rem
-      position: absolute
-      li 
-        position: relative
-        z-index: 1
-        line-height: 3rem
-        width: 25rem
-        margin-bottom: 1rem
-        color: #fff
-        padding: 0 1rem
-        &::after
-          content: ''
-          position: absolute
-          top: 0
-          right: 0
-          bottom: 0
-          left: 0
-          z-index: -1
-          transform: skew(-25deg)
-          two-color-border(0.4rem, 0.3rem)
-    .object-box 
-        width: 50rem
-        min-height: 412px;
+      border-top: 0.4rem solid #fff
+      border-bottom: 0.4rem solid #fff
+      box-shadow:0 0 0 1rem #000, 0 0 0 1.4rem #fff
 </style>

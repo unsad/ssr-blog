@@ -85,9 +85,7 @@
       cursor: pointer
       position: relative
       display: inline-block
-      margin: 1rem 4rem
       z-index: 1
-      font-size: 2rem
       padding: 1rem
       color: #fff
       .tag-number 
@@ -107,4 +105,16 @@
         z-index: -1
         transform: skew(-25deg)
         two-color-border(0.4rem, 0.3rem)
+
+@media only screen and (max-width: 768px)
+  #tag 
+    .tag
+      font-size: 1rem
+      margin:0.5rem 2rem
+
+@media only screen and (min-width: 769px)
+  #tag 
+    .tag
+      font-size: 2rem
+      margin: 1rem 4rem
 </style>

@@ -25,19 +25,6 @@
             :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
         </div>
       </el-col>
-      <el-col :offset="4" :span="10">
-        <div class="blog">
-          <el-alert
-            title="博客源码：https://github.com/smallpath/blog"
-            type="success">
-          </el-alert>
-          <el-alert
-            style="margin-top: 20px;"
-            title="问题反馈：https://github.com/smallpath/blog/issues"
-            type="info">
-          </el-alert>
-        </div>
-      </el-col>
     </el-row>
   </div>
 </template>

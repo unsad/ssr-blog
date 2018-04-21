@@ -15,10 +15,19 @@
   };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-.pagination 
-  margin: 1rem 3rem
-  display: flex 
-  justify-content: space-around
+@import '../assets/css/mixin.styl';
+
+ .pagination
+    display: flex 
+    padding: 1rem 0
+    align-items: center 
+    justify-content: space-between
   a
     color: #fff
+
+@media only screen and (max-width : 768px)
+  .pagination 
+    a
+      max-width: 30%
+      no-wrap()
 </style>

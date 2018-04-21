@@ -610,6 +610,6 @@ export default {
     top: 1rem
 @media only screen and (max-width: 768px)
   .aplayer 
-    bottom: 3rem
+    bottom: 5rem
 </style>
 

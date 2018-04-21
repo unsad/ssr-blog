@@ -96,6 +96,8 @@
   #page-post 
     .post-main 
       flex-direction: column
+      .post-detail 
+        padding: 1rem
       .post-index
         order: -1
         background: #1e1e1e
@@ -156,10 +158,6 @@
       .entry-content 
         margin-top: 1rem
       .pagination
-        display: flex 
-        padding: 1rem 0
-        align-items: center 
-        justify-content: space-between
         .prev,.next 
           background: #d9d9d9
           color: #000

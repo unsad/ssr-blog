@@ -19,7 +19,6 @@
 
  .pagination
     display: flex 
-    padding: 1rem 0
     align-items: center 
     justify-content: space-between
   a

@@ -158,6 +158,7 @@
       .entry-content 
         margin-top: 1rem
       .pagination
+        padding: 1rem 0
         .prev,.next 
           background: #d9d9d9
           color: #000

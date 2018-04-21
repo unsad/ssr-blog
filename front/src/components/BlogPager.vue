@@ -6,7 +6,7 @@
         <blog-summary class="summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
 
         </blog-summary>
-        <pagination :page='page' :total-page="totalPage"></pagination>
+        <pagination :page='page' :total-page="totalPage" class="blogpager-pagi"></pagination>
       </section>
       <div class="deco deco-1"></div>
       <div class="deco deco-2"></div>
@@ -102,6 +102,8 @@
         height: 100%
         .summary
           border-bottom: 2px solid #fff
+          margin: 1rem
+        .blogpager-pagi
           margin: 1rem
 
   .deco

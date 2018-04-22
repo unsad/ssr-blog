@@ -4,7 +4,7 @@
     <second-title second-text="I was turning my back on you my friend"></second-title>
     <div class="content">
       <ul class="linklist-box">
-        <li class="clear-inline-style" v-for="(item, index) of linkitems" :key="item" :style="{'margin-left': `-${index * 5}rem`}">{{item}}</li>
+        <li class="clear-inline-style" v-for="(item, index) of linkitems" :key="item" :style="{'margin-left': `-${index * 5}rem`}"><a :href="item.link" target="_blank">{{item.sitename}}</a></li>
       </ul>
       <div class="object-box no-phone">
         <object type="image/svg+xml" data="../../static/link-bg.svg">This browser sucks</object>
@@ -31,14 +31,38 @@ export default {
     return {
       title: '友链',
       linkitems: [
-        'a',
-        'b',
-        'c',
-        'd',
-        'e',
-        'f',
-        'g',
-        'h'
+        {
+          link: 'https://smallpath.me',
+          sitename: 'Smallpath的小站'
+        },
+        {
+          link: 'http://uniclown.com/blog/',
+          sitename: 'AKAGI PROJECT'
+        },
+        {
+          link: 'https://jesor.me/about/',
+          sitename: '大破进击'
+        },
+        {
+          link: '',
+          sitename: ''
+        },
+        {
+          link: '',
+          sitename: ''
+        },
+        {
+          link: '',
+          sitename: ''
+        },
+        {
+          link: '',
+          sitename: ''
+        },
+        {
+          link: '',
+          sitename: ''
+        }
       ]
     };
   },
@@ -70,6 +94,7 @@ export default {
         li 
           position: relative
           z-index: 1
+          min-height: 3rem
           line-height: 3rem
           width: 25rem
           margin-bottom: 1rem
@@ -85,6 +110,8 @@ export default {
             z-index: -1
             transform: skew(-25deg)
             two-color-border(0.4rem, 0.3rem)
+          a 
+            color: #fff
       .object-box 
           width: 50rem
           min-height: 412px;

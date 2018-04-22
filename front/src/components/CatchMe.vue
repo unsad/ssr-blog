@@ -7,7 +7,10 @@
      </ul>
      <ul class="bottom-box">
           <li  v-for="(value, key, index) of bottomBoxData" :key="key">
-             <a :href="value" target="_blank">{{value}}</a><span :style="{'margin-right': `${index * 8 - 15}vh`}" class="no-phone bottom-box-key clear-inline-style">{{key}}</span>
+            
+             <a v-if="value.startsWith('http')" :href="value" target="_blank">{{value}}</a>
+             <span v-else>{{value}}</span>
+             <span :style="{'margin-right': `${index * 8 - 15}vh`}" class="no-phone bottom-box-key clear-inline-style">{{key}}</span>
         </li>
      </ul>
       <second-title class="catchme-title" second-text="Switch my current from DC to AC "></second-title>
@@ -33,7 +36,7 @@ export default {
         'Zhihu': 'https://www.zhihu.com/people/axunwa/activities',
         'Pixiv': 'https://www.pixiv.net/member.php?id=8208657',
         'NetEase Cloud Music': 'http://music.163.com/#/user/home?id=74380527',
-        'Twitter': 'https://twitter.com/sunnyunsad',
+        'Email': 'wzxaylryw@hotmail.com',
         'Nintendo Switch': 'SW-4276-5641-6320',
         'PSN': 'pre-unsad'
       }

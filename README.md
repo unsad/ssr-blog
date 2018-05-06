@@ -1,8 +1,49 @@
-## client_side/back-control
-博客后台管理单页
+# ssr-blog
 
-## client_side/front
-博客前端单页
+A server-side-rending blog based on Vue2 && Koa2 && MongoDB with Persona5 theme.
 
-## server_side
-博客RESTful API后端
+## Preview
+
+[preview](https://www.sweetalkos.com)
+
+## What You Need Before Getting Started 
+
+* Node.js
+* MongoDB
+* Redis
+* pm2
+
+## Usage
+
+### server
+
+```
+cd server
+npm install
+npm start // default serve at localhost: 3000
+```
+
+You can change config options at `server/conf/config.js`
+
+### admin
+
+```
+cd admin
+npm install
+npm run dev // default serve at localhost: 8082
+```
+
+### front
+
+```
+cd front
+npm staill
+npm run dev //default serve at localhost: 8080
+```
+
+## Lisence
+
+```
+[MIT](https://opensource.org/licenses/MIT)
+```
+

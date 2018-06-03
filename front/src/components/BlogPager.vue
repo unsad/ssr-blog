@@ -1,15 +1,15 @@
 <template>
-  <div id="blogpager">
-    <sidebar class="sidebar"></sidebar>
-    <div id="main"> 
-      <section id="page-index">
-        <blog-summary class="summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
+  <div :id="$style.blogpager">
+    <sidebar :class="$style.sidebar"></sidebar>
+    <div :id="$style.main"> 
+      <section :id="$style.pageIndex">
+        <blog-summary :class="$style.summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
 
         </blog-summary>
-        <pagination :page='page' :total-page="totalPage" class="blogpager-pagi"></pagination>
+        <pagination :page='page' :total-page="totalPage" :class="$style.blogpagerPagi"></pagination>
       </section>
-      <div class="deco deco-1"></div>
-      <div class="deco deco-2"></div>
+      <div :class="[$style.deco, $style.deco1]"></div>
+      <div :class="[$style.deco, $style.deco2]"></div>
       <my-footer></my-footer>
     </div>
   </div>
@@ -68,6 +68,9 @@
         'supportWebp'
       ])
     },
+    created() {
+      console.log(this.$style);
+    },
     components: {
       myFooter,
       blogSummary,
@@ -76,8 +79,9 @@
     }
   };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style module lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
+
 @media only screen and (max-width : 768px) 
   #blogpager
     background: linear-gradient(-50deg, transparent 82%, red 0),
@@ -88,13 +92,13 @@
       flex-direction: column
       flex-grow: 1
       min-width: 0
-      #page-index
+      #pageIndex
         color: #fff
         border: none
         .summary
           border-bottom: 2px solid #fff
           margin: 1rem
-        .blogpager-pagi
+        .blogpagerPagi
           margin: 1rem
 @media only screen and (min-width : 769px) 
   #blogpager
@@ -113,14 +117,14 @@
       flex-direction: column
       flex-grow: 1
       min-width: 0
-      #page-index
+      #pageIndex
         two-color-border()
         overflow: auto
         height: 100%
         .summary
           border-bottom: 2px solid #fff
           margin: 1rem
-        .blogpager-pagi
+        .blogpagerPagi
           margin: 1rem
 
   .deco
@@ -140,8 +144,8 @@
       bottom: 0
       background: #fff
       clip-path: polygon(2% 50%, 98% 24%, 98% 80%, 2% 68%);
-  .deco-2 
+  .deco2 
     transform: rotate(-20deg) translate(10%, -70%)
-  .deco-1 
+  .deco1 
     transform: rotate(30deg) translate(0, 80%) scaleX(0.7)
 </style>

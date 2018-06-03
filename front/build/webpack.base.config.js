@@ -9,6 +9,15 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
+const cssLoader = {
+  loader: 'css-loader',
+  options: {
+    minimize: isProd,
+    modules: true,
+    localIdentName: '[local]_[hash:base64:8]'
+  }
+};
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir);
 }
@@ -58,13 +67,13 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(styl(us)?|css)$/,
         use: isProd
           ? ExtractTextPlugin.extract({
-            use: 'css-loader?minimize',
+            use: [cssLoader, 'stylus-loader'],
             fallback: 'vue-style-loader'
           })
-          : ['vue-style-loader', 'css-loader']
+          : ['vue-style-loader', cssLoader, 'stylus-loader']
       }
     ]
   },

@@ -1,15 +1,15 @@
 <template>
-  <div :id="$style.blogpager">
-    <sidebar :class="$style.sidebar"></sidebar>
-    <div :id="$style.main"> 
-      <section :id="$style.pageIndex">
-        <blog-summary :class="$style.summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
+  <div :class="blogPager.container">
+    <sidebar :class="blogPager.sidebar"></sidebar>
+    <div :class="blogPager.main"> 
+      <section :class="blogPager.pageIndex">
+        <blog-summary :class="blogPager.summary" v-for="item of items" :support-webp="supportWebp" :key="item._id" :article="item">
 
         </blog-summary>
-        <pagination :page='page' :total-page="totalPage" :class="$style.blogpagerPagi"></pagination>
+        <pagination :page='page' :total-page="totalPage" :class="blogPager.blogpagerPagi"></pagination>
       </section>
-      <div :class="[$style.deco, $style.deco1]"></div>
-      <div :class="[$style.deco, $style.deco2]"></div>
+      <div :class="[blogPager.deco, blogPager.deco1]"></div>
+      <div :class="[blogPager.deco, blogPager.deco2]"></div>
       <my-footer></my-footer>
     </div>
   </div>
@@ -68,9 +68,6 @@
         'supportWebp'
       ])
     },
-    created() {
-      console.log(this.$style);
-    },
     components: {
       myFooter,
       blogSummary,
@@ -79,20 +76,20 @@
     }
   };
 </script>
-<style module lang="stylus" rel="stylesheet/stylus">
+<style module="blogPager" lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
 @media only screen and (max-width : 768px) 
-  #blogpager
+  .container
     background: linear-gradient(-50deg, transparent 82%, red 0),
                 linear-gradient(-30deg, transparent 18%, #000 0)
-    #main
+    .main
       position: relative
       display: flex 
       flex-direction: column
       flex-grow: 1
       min-width: 0
-      #pageIndex
+      .pageIndex
         color: #fff
         border: none
         .summary
@@ -101,7 +98,7 @@
         .blogpagerPagi
           margin: 1rem
 @media only screen and (min-width : 769px) 
-  #blogpager
+  .container
     display: flex
     overflow: hidden
     height: 100vh 
@@ -109,7 +106,7 @@
                 linear-gradient(-30deg, transparent 28%, #000 0)
     .sidebar
       min-width: 30%
-    #main
+    .main
       padding: 4rem 5% 0 10%
       position: relative
       display: flex 
@@ -117,7 +114,7 @@
       flex-direction: column
       flex-grow: 1
       min-width: 0
-      #pageIndex
+      .pageIndex
         two-color-border()
         overflow: auto
         height: 100%

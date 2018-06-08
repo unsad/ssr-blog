@@ -159,6 +159,9 @@
         margin-top: 1rem
       .pagination
         padding: 1rem 0
+        display: flex 
+        align-items: center 
+        justify-content: space-between
         .prev,.next 
           background: #d9d9d9
           color: #000

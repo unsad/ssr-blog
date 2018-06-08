@@ -5,7 +5,6 @@
       <music-player 
         theme="rgb(0, 0, 0)"
         mode="circulation"
-        autoplay
         :music="music[0]"
         :list="music"
       />

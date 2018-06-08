@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="app.container">
     <loading-bar :progress="progress"></loading-bar>
     <my-header v-if="false"></my-header>
       <music-player 
@@ -8,8 +8,8 @@
         :music="music[0]"
         :list="music"
       />
-    <router-view class="switch-content"></router-view>
-    <div class="page-move" :class="{'page-access': progress !== 100 && tran}"></div>
+    <router-view :class="app.appContent"></router-view>
+    <div :class="{[app.pageAccess]: progress !== 100 && tran, [app.pageTrans]: true}"></div>
   </div>
 </template>
 
@@ -18,6 +18,7 @@
   import musicPlayer from './components/musicplayer/MusicPlayer';
   import myHeader from './components/Header';
   import { mapGetters } from 'vuex';
+  import './assets/css/index.styl';
 
   function fetchInfo({store, route: {path, params, query}}) {
     return Promise.all([store.dispatch('FETCH_OPTIONS'), store.dispatch('FETCH_FIREKYLIN'), store.dispatch('FETCH_MUSIC', {
@@ -70,15 +71,14 @@
   };
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
-  @import './assets/css/index.styl';
-
-  #app
+<style lang="stylus" module="app" rel="stylesheet/stylus">
+  
+  .container
     background: red
-    .switch-content 
+    .appContent 
       min-height: 100vh
 
-  .page-move
+  .pageTrans
     position: fixed 
     left: 0 
     top: 0 
@@ -86,13 +86,13 @@
     right: 0
     z-index: -1
     transition: z-index ease .5s
-    &.page-access 
+    &.pageAccess
       z-index: 2
-    &.page-access::before
+    &.pageAccess::before
       width: 0
       height: 0
       border-width: 0
-    &.page-access::after
+    &.pageAccess::after
       border-width: 1500px
     &::before 
       content: ''
@@ -120,5 +120,4 @@
       top: 50%
       transform: translate(-50%, -50%)
       transition: border-width .43s ease .05s
-
 </style>

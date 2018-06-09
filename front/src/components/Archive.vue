@@ -1,10 +1,10 @@
 <template>
-  <div id='archive'>
-    <article class="archive-main">
-      <h1 class="title">{{title}}</h1>
+  <div :class="archive.container">
+    <article :class="archive.main">
+      <h1 :class="archive.title">{{title}}</h1>
       <second-title second-text="Dust to Dust , Ash to Ash"></second-title>
-      <div class="timeline" v-for="(item, key) of achieves" :key="key">
-        <div class="content">
+      <div :class="archive.timeline" v-for="(item, key) of achieves" :key="key">
+        <div :class="archive.content">
           <h3>{{key}} ({{item.length}})</h3>
           <ul>
             <li v-for="subItem of item" :key="subItem.title">
@@ -75,16 +75,16 @@
     }
   };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style module="archive" lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
 @media only screen and (max-width : 768px)
-  #archive 
+  .container
     background: linear-gradient(40deg, transparent 52%, red 0),
                 linear-gradient(30deg, transparent 28%, #000 0)
     display: flex 
     flex-direction: column
-    .archive-main
+    .main
       flex-grow: 1
       .title 
         title-base()
@@ -113,11 +113,10 @@
             border-bottom: 1px solid #fff;
 
 @media only screen and (min-width : 769px)
-  #archive 
-  
+  .container 
     display: flex 
     flex-direction: column
-    .archive-main
+    .main
       flex-grow: 1
       .title 
         title-base()

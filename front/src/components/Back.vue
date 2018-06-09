@@ -1,6 +1,6 @@
 <template>
-    <router-link tag="div" :to="{path: '/'}" id="back" :style="position">
-        <object class="back-deco" type="image/svg+xml" data="../../static/back.svg">This browser sucks</object>
+    <router-link tag="div" :to="{path: '/'}" :class="back.container" :style="position">
+        <object :class="back.backDeco" type="image/svg+xml" data="../../static/back.svg">This browser sucks</object>
     </router-link>
 </template>
 <script>
@@ -22,20 +22,20 @@ export default {
   }
 };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
-#back
+<style module="back" lang="stylus" rel="stylesheet/stylus">
+.container
   position: fixed
   cursor: pointer
-  .back-deco
+  .backDeco
     pointer-events: none
 
 @media only screen and (min-width : 769px)
-  #back 
+  .container
     width: 10rem
 
 
 @media only screen and (max-width : 768px)
-  #back 
+  .container
     width: 6rem
 
 </style>

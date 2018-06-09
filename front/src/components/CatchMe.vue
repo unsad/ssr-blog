@@ -1,20 +1,20 @@
 <template>
-  <div id="catchme">
-     <ul class="top-box">
-         <li class="clear-inline-style" v-for="(value, key, index) of topBoxData" :key="key" :style="{'padding-left': `${32 - index * 4}vh`}">
-             <span class="top-box-key no-phone">{{key}}</span><a target="_blank" :href="value">{{value}}</a>
+  <div :class="catchme.container">
+     <ul :class="catchme.topBox">
+         <li :class="catchme.clearInlineStyle" v-for="(value, key, index) of topBoxData" :key="key" :style="{'padding-left': `${32 - index * 4}vh`}">
+             <span :class="catchme.topBoxKey" class="no-phone">{{key}}</span><a target="_blank" :href="value">{{value}}</a>
         </li>
      </ul>
-     <ul class="bottom-box">
+     <ul :class="catchme.bottomBox">
           <li  v-for="(value, key, index) of bottomBoxData" :key="key">
             
              <a v-if="value.startsWith('http')" :href="value" target="_blank">{{value}}</a>
              <span v-else>{{value}}</span>
-             <span :style="{'margin-right': `${index * 8 - 15}vh`}" class="no-phone bottom-box-key clear-inline-style">{{key}}</span>
+             <span :style="{'margin-right': `${index * 8 - 15}vh`}" class="no-phone" :class="[catchme.bottomBoxKey, catchme.clearInlineStyle]">{{key}}</span>
         </li>
      </ul>
-      <second-title class="catchme-title" second-text="Switch my current from DC to AC "></second-title>
-     <back class="clear-inline-style" :position="{right: '1rem', bottom: '1rem'}"></back>
+      <second-title :class="catchme.title" second-text="Switch my current from DC to AC "></second-title>
+     <back :class="catchme.clearInlineStyle" :position="{right: '1rem', bottom: '1rem'}"></back>
   </div>
 </template>
 <script>
@@ -48,9 +48,9 @@ export default {
   }
 };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style module="catchme" lang="stylus" rel="stylesheet/stylus">
 @media only screen and (min-width : 769px)
-  #catchme 
+  .container
     font-size: 2rem 
     color: #fff
     font-family: 'jackey_handwriteregular'
@@ -63,17 +63,17 @@ export default {
                 linear-gradient(110deg, red, red 48vh, white 0)
     display: flex
     flex-direction: column
-    .catchme-title 
+    .title 
         position: absolute 
         bottom: 0 
         right: 5%
-    .bottom-box 
+    .bottomBox 
       clip-path: polygon(40% 0, 100% 0, 100% 100%, 51% 100%)
       overflow: hidden
       height: 48vh
       display: flex 
       flex-direction: column 
-      .bottom-box-key
+      .bottomBoxKey
         min-width: 15rem
         margin-left: 10vh
       li 
@@ -86,13 +86,13 @@ export default {
             flex-grow: 1
             color: #fff
             text-align: right
-    .top-box 
+    .topBox 
       border-bottom: 0.3rem solid white
       clip-path: polygon(28vh 0, 60% 0, 70% 100%, -8vh 100%)
       height: 40vh
       display: flex 
       flex-direction: column 
-      .top-box-key
+      .topBoxKey
         text-align: right
         min-width: 6rem
         margin-right: 16vh
@@ -106,18 +106,18 @@ export default {
             color: #fff
 
 @media only screen and (max-width : 768px)
-  #catchme 
+  .container
     font-size: 1.5rem 
     color: #fff
     font-family: 'jackey_handwriteregular'
     display: flex
     flex-direction: column
-    .bottom-box 
+    .bottomBox 
       overflow: hidden
       height: 48vh
       display: flex 
       flex-direction: column 
-      .bottom-box-key
+      .bottomBoxKey
         min-width: 15rem
         margin-left: 10vh
       li 
@@ -130,12 +130,12 @@ export default {
           flex-grow: 1
           color: #fff
           margin-left: 1rem
-    .top-box 
+    .topBox 
       border-bottom: 0.3rem solid white
       height: 40vh
       display: flex 
       flex-direction: column 
-      .top-box-key
+      .topBoxKey
         text-align: right
         min-width: 6rem
         margin-right: 16vh
@@ -149,7 +149,7 @@ export default {
           color: #fff
           margin-left: 1rem
 
-    .clear-inline-style 
+    .clearInlineStyle 
       margin-right: 0!important
       padding-left: 0!important
       left: 1rem

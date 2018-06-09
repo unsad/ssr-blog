@@ -1,14 +1,14 @@
 <template>
-  <article id="post-summary">
-    <h1 class="title">
-      <router-link class="title-link" :to="{name:'post', params: {pathName: article.pathName}}">{{article.title}}</router-link>
-      <div class="meta no-phone">
+  <article :class="summary.container">
+    <h1 :class="summary.title">
+      <router-link :class="summary.link" :to="{name:'post', params: {pathName: article.pathName}}">{{article.title}}</router-link>
+      <div class="no-phone" :class="summary.meta">
         <div class="date">{{article.createdAt}}</div>
       </div>
     </h1>
-    <div class="entry-content">
+    <div>
       <div v-html="filterWebp(article.summary)"></div>
-      <router-link class="more" :to="{name: 'post', params: {pathName: article.pathName}}">阅读全文 »</router-link>
+      <router-link :class="summary.more" :to="{name: 'post', params: {pathName: article.pathName}}">阅读全文 »</router-link>
     </div>
   </article>
 </template>
@@ -36,10 +36,10 @@
     }
   };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style module="summary" lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
-#post-summary
+.container
   font-size: 1.1rem
   line-height: 1.6
   h1 
@@ -50,7 +50,7 @@
     .meta 
       flex-shrink: 0
       font-size: 1.1rem
-    .title-link 
+    .link 
       min-width: 50%
       no-wrap()
   .title a

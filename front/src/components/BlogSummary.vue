@@ -30,9 +30,6 @@
         }
         return content;
       }
-    },
-    serverCacheKey: props => {
-      return `${props.article.pathName}::${props.article.updatedAt}::webp::${props.supportWebp}`;
     }
   };
 </script>

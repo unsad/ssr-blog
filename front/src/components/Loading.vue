@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-if="show" class="loading-bar loading-bar--to_right"
-       :class="{'loading-bar--full': full}" :style="styling()">
-      <div class="loading-bar-glow"></div>
+    <div v-if="show"
+       :class="{[loading.loadingBarFull]: full, [loading.loadingBar]: true, [loading.loadingBarToRight]: true}" :style="styling()">
+      <div :class="loading.loadingBarGlow"></div>
     </div>
   </div>
 </template>
@@ -63,8 +63,8 @@
     }
   };
 </script>
-<style scoped lang="stylus" rel="stylesheet/stylus">
-  .loading-bar
+<style module="loading" lang="stylus" rel="stylesheet/stylus">
+  .loadingBar
     transition: all .4s ease
     position: fixed
     top: 0
@@ -72,22 +72,22 @@
     height: 5px
     opacity: 1
 
-  .loading-bar-glow
+  .loadingBarGlow
     top: 0
     position: absolute
     width: 100%
     height: 100%
     box-shadow: -4px 0 15px 1px rgba(119, 182, 255, 0.7)
 
-  .loading-bar--to_right
+  .loadingBarToRight
     left: 0
     z-index: 1000
 
-  .loading-bar--to_right .loading-bar-glow
+  .loadingBarToRight .loadingBarGlow
     right: 0
     z-index: 1000
 
-  .loading-bar--full
+  .loadingBarFull
     transition: all .3s ease
     height: 0
     opacity: 0

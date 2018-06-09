@@ -1,6 +1,6 @@
 <template>
-  <footer id="footer"> 
-    <div class="inner">
+  <footer :class="footer.container"> 
+    <div :class="footer.main">
       <span>&copy;2018&nbsp;&nbsp; {{siteInfo.title.value}}</span> &nbsp;<br> 
       <span>Powered by
         <a target="_blank" href="https://github.com/vuejs/vue">Vue</a>&nbsp;&amp;&nbsp;<a target="_blank" href="https://github.com/koajs/koa">Koa</a>
@@ -21,11 +21,11 @@
     }
   };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
-#footer 
+<style lang="stylus" module="footer" rel="stylesheet/stylus">
+.container 
   margin-top: 1rem
   text-align: center
-  .inner 
+  .main
     display: inline-block
     width: 30%
     min-width: max-content

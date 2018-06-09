@@ -1,12 +1,12 @@
 <template>
-  <div id="link">
-    <h1 class="title">{{title}}</h1>
+  <div :class="link.container">
+    <h1 :class="link.title">{{title}}</h1>
     <second-title second-text="I was turning my back on you my friend"></second-title>
-    <div class="content">
-      <ul class="linklist-box">
-        <li class="clear-inline-style" v-for="(item, index) of linkitems" :key="item" :style="{'margin-left': `-${index * 5}rem`}"><a :href="item.link" target="_blank">{{item.sitename}}</a></li>
+    <div :class="link.content">
+      <ul :class="link.linklistBox">
+        <li :class="link.clearInlineStyle" v-for="(item, index) of linkitems" :key="item.link" :style="{'margin-left': `-${index * 5}rem`}"><a :href="item.link" target="_blank">{{item.sitename}}</a></li>
       </ul>
-      <div class="object-box no-phone">
+      <div class="no-phone" :class="link.objectBox">
         <object type="image/svg+xml" data="../../static/link-bg.svg">This browser sucks</object>
       </div>
     </div>
@@ -73,9 +73,9 @@ export default {
   }
 };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" module="link" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
- #link    
+ .container    
     display: flex 
     flex-direction: column 
     background: linear-gradient(-40deg, transparent 42%, red 0),
@@ -88,7 +88,7 @@ export default {
       flex-grow: 1
       font-size: 0
       justify-content: center
-      .linklist-box
+      .linklistBox
         font-size: 1rem
         position: absolute
         li 
@@ -112,17 +112,17 @@ export default {
             two-color-border(0.4rem, 0.3rem)
           a 
             color: #fff
-      .object-box 
+      .objectBox 
           width: 50rem
           min-height: 412px;
 
 @media only screen and (max-width : 768px)
-  #link
-    .clear-inline-style 
+  .container
+    .clearInlineStyle 
       margin-left: 0!important
 
 @media only screen and (min-width : 769px)
-  #link  
+  .container  
     .content 
       margin: 6rem 0
       padding-left: 15rem  

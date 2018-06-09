@@ -1,20 +1,19 @@
 <template>
-  <div class="wrapper">
-     <div class="pic no-phone">
+  <div :class="sidebar.container">
+     <div :class="sidebar.pic" class="no-phone">
         <img src="../../static/sidebar.svg" alt="" width="125%">
     </div>
-    <nav id="sidebar"
-        :class="{'sidebar-image': sidebarUrl !== ''}">
+    <nav :class="{[sidebar.image]: sidebarUrl !== '', [sidebar.content]: true}">
       <div class="profile" v-if="false">
         <a href="/">
           <img :src="logoUrl" :alt="siteInfo.title.value">
         </a>
         <span :style="{'color': sidebarUrl ? option.sidebarFontColor : ''}">{{siteInfo.title.value}}</span>
       </div>
-      <ul class="sidebar-link" v-if="option && option.menu">
+      <ul :class="sidebar.link" v-if="option && option.menu">
         <li v-for="menu of option.menu" :key="menu.label">
-          <router-link class="sidebar-link-item" :to="{path: menu.url}" :title="menu.label">
-            <span class="rotate-1">{{menu.label[0]}}</span><span class="rotate-2">{{menu.label[1]}}</span>
+          <router-link :class="sidebar.linkItem" :to="{path: menu.url}" :title="menu.label">
+            <span :class="sidebar.rotate1">{{menu.label[0]}}</span><span :class="sidebar.rotate2">{{menu.label[1]}}</span>
           </router-link>
         </li>
       </ul>
@@ -63,20 +62,20 @@
     mixins: [mixin]
   };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style module="sidebar" lang="stylus" rel="stylesheet/stylus">
 @media only screen and (max-width: 768px)
-  .wrapper
+  .container
     font-family: 'special-for-me'
     a
       color: #fff
-    .sidebar-link
+    .link
       display: flex
       justify-content: space-around
       line-height: 2
       background: #000
       font-size: 2rem
 @media only screen and (min-width: 769px)
-  .wrapper 
+  .container
     position: relative
     font-family: 'special-for-me'
     &::before
@@ -94,7 +93,7 @@
       bottom: 0
       left: calc(75% - 30vh)
       width: 100%
-    #sidebar 
+    .content
       height: 100vh
       position: relative
       &::before
@@ -108,23 +107,23 @@
         clip-path: polygon(97% 0, 100% 0, calc(100% - 30vh) 100%, calc(97% - 30vh) 100%)
       a
         color: #fff
-      .sidebar-link
+      .link
         padding: 0
         text-align: center
         font-size: 4rem
         transform: rotate(20deg) translate(26%)
         line-height: 2
-        .sidebar-link-item:hover 
-          .rotate-1
+        .linkItem:hover 
+          .rotate1
             transform: rotate(-20deg) translate(-10%, 10%)
-          .rotate-2
+          .rotate2
             transform: rotate(-20deg) translate(10%)
-        .rotate-1 
+        .rotate1 
           display: inline-block
           transition: all .2s ease-out
           transform: rotate(-40deg)
           -webkit-text-stroke: 2px black;
-        .rotate-2 
+        .rotate2 
           display: inline-block
           transition: all .2s ease-out
           color: black

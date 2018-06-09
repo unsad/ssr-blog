@@ -1,8 +1,8 @@
 <template>
-  <div id="tagpager">
-    <section id="tag-index">
+  <div :class="tagPager.container">
+    <section :class="tagPager.index">
       <h1 class="intro">标签<a href="javascript: void(0)">{{$route.params.tagName}}</a>下的文章</h1>
-      <blog-summary class="tag-summary" v-for="item of tagPager" :key="item.pathname" :article="item" :support-webp="supportWebp"></blog-summary>
+      <blog-summary :class="tagPager.summary" v-for="item of tagPager" :key="item.pathname" :article="item" :support-webp="supportWebp"></blog-summary>
       <pagination :page="1" :total-page="1"></pagination>
     </section>
     <back></back>
@@ -70,19 +70,19 @@
     }
   };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
-#tagpager
+<style lang="stylus" module="tagPager" rel="stylesheet/stylus">
+.container
   background: linear-gradient(60deg, transparent 62%, red 0),
               linear-gradient(40deg, transparent 18%, #000 0)
   min-height: 100vh
   display: flex 
   flex-direction: column
-  #tag-index
+  .index
     h1 
       color: #fff
     flex-grow: 1
     padding: 0 1rem
     overflow: hidden
-    .tag-summary
+    .summary
       color: #fff
 </style>

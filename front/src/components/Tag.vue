@@ -1,13 +1,13 @@
 <template>
-  <div id="tag">
-    <article class="tag-main">
-      <h1 class="title">{{title}}</h1>
+  <div :class="tag.container">
+    <article :class="tag.main">
+      <h1 :class="tag.title">{{title}}</h1>
       <second-title second-text="My game's always so fast so fine"></second-title>
-      <div class="entry-content">
+      <div>
         <section>
-          <router-link class="tag" tag="span" v-for="key of sortedKeys" :key="key" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">
+          <router-link :class="tag.tag" tag="span" v-for="key of sortedKeys" :key="key" :to="{name: 'tagPager', params: {tagName: key}}" :data-tag="key">
             {{key}}
-            <span class="tag-number">{{tags[key]}}</span>
+            <span :class="tag.number">{{tags[key]}}</span>
           </router-link>
         </section>
       </div>
@@ -72,12 +72,12 @@
     }
   };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" module="tag" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
-#tag 
+.container 
   display: flex 
   flex-direction: column
-  .tag-main 
+  .main 
     flex-grow: 1
     .title 
       title-base()
@@ -88,7 +88,7 @@
       z-index: 1
       padding: 1rem
       color: #fff
-      .tag-number 
+      .number 
         position: absolute
         right: 0
         bottom: -40%
@@ -107,13 +107,13 @@
         two-color-border(0.4rem, 0.3rem)
 
 @media only screen and (max-width: 768px)
-  #tag 
+  .container 
     .tag
       font-size: 1rem
       margin:0.5rem 2rem
 
 @media only screen and (min-width: 769px)
-  #tag 
+  .container 
     .tag
       font-size: 2rem
       margin: 1rem 4rem

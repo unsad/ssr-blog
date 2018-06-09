@@ -1,52 +1,50 @@
 <template>
-  <div id="post">
-    <div id="page-post">
-      <div class="post-main">
-        <article class="post-detail">
-          <div class="meta no-phone">
-            <div class="date">
-              {{post.createdAt}}
-            </div>
+  <div :class="$post.container">
+    <div :class="$post.main">
+      <article :class="$post.detail">
+        <div :class="$post.meta" class="no-phone">
+          <div :class="$post.date">
+            {{post.createdAt}}
           </div>
-          <h1 class="title">{{post.title}}</h1>
-          <div class="entry-content" v-html="content">
-          </div>
-          <template v-if="shouldShow">
-            <p>--
-              <dfn title="End of File">EOF</dfn>
-              --
-            </p>
-            <div class="post-info">
-              添加在分类「
-                <a :data-cate="post.category">
-                  <code class="notebook">{{post.category}}</code>
-                </a> 」下，并被添加
-                <router-link v-for="tag of post.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
-                            :data-tag="tag"><code class="notebook">「{{tag}}」</code>
-                </router-link>
-                  标签。
-            </div>
-          </template>
-
-            <nav class="pagination" v-if="shouldShow">
-              <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
-                          class="prev">&laquo; {{prev.title}}
-              </router-link>
-              <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof next.pathName !== 'undefined'"
-                          class="next">{{next.title}} &raquo;
-              </router-link>
-            </nav>
-        </article>
-        <div class="post-index">
-          <div class="toc" id="toc" v-if="post.toc" v-html="post.toc"></div>
-            <router-link class="post-back" :to="{path: '/'}">
-              回到首页
-            </router-link>
         </div>
+        <h1 :class="$post.title">{{post.title}}</h1>
+        <div :class="$post.content" v-html="content">
+        </div>
+        <template v-if="shouldShow">
+          <p>--
+            <dfn title="End of File">EOF</dfn>
+            --
+          </p>
+          <div :class="$post.info">
+            添加在分类「
+              <a :data-cate="post.category">
+                <code :class="$post.notebook">{{post.category}}</code>
+              </a> 」下，并被添加
+              <router-link v-for="tag of post.tags" :key="tag" :to="{name: 'tagPager', params: {tagName: tag}}"
+                          :data-tag="tag"><code :class="$post.notebook">「{{tag}}」</code>
+              </router-link>
+                标签。
+          </div>
+        </template>
+
+          <nav :class="$post.pagination" v-if="shouldShow">
+            <router-link :to="{name: 'post', params: {pathName: prev.pathName}}" v-if="typeof prev.pathName !== 'undefined'"
+                        :class="$post.prev">&laquo; {{prev.title}}
+            </router-link>
+            <router-link :to="{name: 'post', params: {pathName: next.pathName}}" v-if="typeof next.pathName !== 'undefined'"
+                        :class="$post.next">{{next.title}} &raquo;
+            </router-link>
+          </nav>
+      </article>
+      <div :class="$post.index">
+        <div :class="$post.toc" v-if="post.toc" v-html="post.toc"></div>
+          <router-link :class="$post.back" :to="{path: '/'}">
+            回到首页
+          </router-link>
       </div>
-      <div class="comments" v-if="post.allowComment === true && commentName!== ''">
-        <disqus :shortname="commentName"></disqus>
-      </div>
+    </div>
+    <div :class="$post.comments" v-if="post.allowComment === true && commentName!== ''">
+      <disqus :shortname="commentName"></disqus>
     </div>
   </div>
 </template>
@@ -60,9 +58,6 @@
     name: 'Post',
     props: ['post', 'prev', 'next', 'siteInfo', 'type', 'supportWebp'],
     mixins: [mixin],
-    serverCacheKey: props => {
-      return `${props.post.pathName}::${props.post.updateAt}::webp::${props.supportWebp}`;
-    },
     computed: {
       shouldShow() {
         return this.post.pathName !== 404 && this.type === 'post';
@@ -89,16 +84,16 @@
     }
   };
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" module="$post" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';
 
 @media only screen and (max-width : 768px)
-  #page-post 
-    .post-main 
+  .container 
+    .main 
       flex-direction: column
-      .post-detail 
+      .detail 
         padding: 1rem
-      .post-index
+      .index
         order: -1
         background: #1e1e1e
         border-bottom: 1px solid #c6c6c6
@@ -113,9 +108,9 @@
 
 
 @media only screen and (min-width : 769px)  
-  #page-post 
-    .post-main 
-      .post-index
+  .container 
+    .main 
+      .index
         ul 
           list-style-type: disc 
           color: #c6c6c6
@@ -124,30 +119,30 @@
                     linear-gradient(to left, #000 30%, #1e1e1e)  
       ul 
         margin-left: 1rem
-      .post-detail
+      .detail
         flex-grow: 1
         padding: 1rem 1rem 0
         max-height: 100vh
         overflow: auto
-#page-post
-  .post-main
+.container
+  .main
     min-height: 100vh
     font-size: 1.1rem
     line-height: 1.6
     a
       color: #d9d9d9
     display: flex 
-    .post-index 
+    .index 
       min-width: 35%
-      #toc 
+      .toc 
         padding: 1rem 1rem 0
         strong 
           font-size: 2rem
           color: #d9d9d9
-    .post-back
+    .back
       padding: 1rem
       line-height: 2
-    .post-detail
+    .detail
       background: #1e1e1e
       color: #c6c6c6
       h1 
@@ -155,7 +150,7 @@
         margin: 0
       .meta 
         float: right
-      .entry-content 
+      .content 
         margin-top: 1rem
       .pagination
         padding: 1rem 0
@@ -208,7 +203,7 @@
         padding: 6px 20px
       
 
-.hljs 
+:global(.hljs) 
   display: block
   overflow-x: auto
   margin: 0.5rem 0
@@ -217,74 +212,74 @@
   background: #282c34
 
 
-.hljs-comment 
+:global(.hljs-comment) 
   color: #61aeee
 
 
-.hljs-quote 
+:global(.hljs-quote) 
   color: #5c6370
   font-style: italic
 
 
-.hljs-doctag,
-.hljs-keyword,
-.hljs-formula 
+:global(.hljs-doctag),
+:global(.hljs-keyword),
+:global(.hljs-formula) 
   color: #c678dd
 
 
-.hljs-section,
-.hljs-name,
-.hljs-selector-tag,
-.hljs-deletion,
-.hljs-subst 
+:global(.hljs-section),
+:global(.hljs-name),
+:global(.hljs-selector-tag),
+:global(.hljs-deletion),
+:global(.hljs-subst) 
   color: #e06c75
 
 
-.hljs-literal 
+:global(.hljs-literal) 
   color: #56b6c2
 
 
-.hljs-string,
-.hljs-regexp,
-.hljs-addition,
-.hljs-attribute,
-.hljs-meta-string 
+:global(.hljs-string),
+:global(.hljs-regexp),
+:global(.hljs-addition),
+:global(.hljs-attribute),
+:global(.hljs-meta-string) 
   color: #98c379
 
 
-.hljs-built_in,
-.hljs-class .hljs-title 
+:global(.hljs-built_in),
+:global(.hljs-class .hljs-title) 
   color: #e6c07b
 
-.hljs-attr,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-type,
-.hljs-selector-class,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-number 
+:global(.hljs-attr),
+:global(.hljs-variable),
+:global(.hljs-template-variable),
+:global(.hljs-type),
+:global(.hljs-selector-class),
+:global(.hljs-selector-attr),
+:global(.hljs-selector-pseudo),
+:global(.hljs-number) 
   color: #d19a66
 
 
-.hljs-symbol,
-.hljs-bullet,
-.hljs-link,
-.hljs-meta,
-.hljs-selector-id,
-.hljs-title 
+:global(.hljs-symbol),
+:global(.hljs-bullet),
+:global(.hljs-link),
+:global(.hljs-meta),
+:global(.hljs-selector-id),
+:global(.hljs-title) 
   color: #61aeee
 
 
-.hljs-emphasis 
+:global(.hljs-emphasis) 
   font-style: italic
 
 
-.hljs-strong 
+:global(.hljs-strong) 
   font-weight: bold
 
 
-.hljs-link 
+:global(.hljs-link) 
   text-decoration: underline
 
 </style>

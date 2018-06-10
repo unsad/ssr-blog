@@ -81,7 +81,7 @@ module.exports = {
     maxEntrypointSize: 300000,
     hints: isProd ? 'warning' : false
   },
-  plugins: isProd ? [
+  plugins: (isProd ? [
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false }
     }),
@@ -91,5 +91,13 @@ module.exports = {
     })
   ] : [
     new FriendlyErrorsPlugin()
-  ]
+  ]).concat([
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        stylus: {
+          import: [path.resolve(__dirname, '../src/assets/css/variable.styl')]
+        }
+      }
+    })
+  ])
 };

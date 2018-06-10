@@ -176,7 +176,7 @@ export default {
 .container
   display: flex 
   flex-direction: column
-  background: radial-gradient(circle, red, red 50%, transparent 50%, transparent 80%, red 80%),
+  background: radial-gradient(circle, $main-color, red 50%, transparent 50%, transparent 80%, red 80%),
               repeating-radial-gradient(circle, black, black 5%, transparent 5%, transparent 10%)
   .title
     title-base()

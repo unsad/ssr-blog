@@ -70,11 +70,9 @@
     }
   };
 </script>
-
 <style lang="stylus" module="app" rel="stylesheet/stylus">
-  
   .container
-    background: red
+    background: $main-color
     .appContent 
       min-height: 100vh
 

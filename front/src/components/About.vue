@@ -140,9 +140,9 @@ export default {
       width: max-content
       align-items: center
       .directContent 
-        font-size: 2rem
+        font-size: $font-size-middle
         two-color-border(0.5rem, 0.2rem)
-        padding: 0.5rem
+        padding: $space-small
       .directLine 
         width: 200px
 
@@ -152,12 +152,12 @@ export default {
       display: flex
       min-height: 528px
     .directContent 
-      font-size: 1rem
+      font-size: $font-size-small
       two-color-border(0.2rem, 0.1rem)
-      padding: 0.5rem
+      padding: $space-small
     .directBox
       display: inline-block
-      margin: 0.5rem 1rem
+      margin: $space-small $space-middle
       .direct-content 
         display: inline-block
     .directLine 
@@ -176,8 +176,8 @@ export default {
 .container
   display: flex 
   flex-direction: column
-  background: radial-gradient(circle, $main-color, red 50%, transparent 50%, transparent 80%, red 80%),
-              repeating-radial-gradient(circle, black, black 5%, transparent 5%, transparent 10%)
+  background: radial-gradient(circle, $main-color, $main-color 50%, transparent 50%, transparent 80%, $main-color 80%),
+              repeating-radial-gradient(circle, $main-second-color, $main-second-color 5%, transparent 5%, transparent 10%)
   .title
     title-base()
     margin: 0

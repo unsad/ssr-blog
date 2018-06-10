@@ -80,7 +80,7 @@
 
 @media only screen and (max-width : 768px)
   .container
-    background: linear-gradient(40deg, transparent 52%, red 0),
+    background: linear-gradient(40deg, transparent 52%, $main-color 0),
                 linear-gradient(30deg, transparent 28%, #000 0)
     display: flex 
     flex-direction: column
@@ -89,17 +89,17 @@
       .title 
         title-base()
       .timeline
-        margin: 1rem
+        margin: $space-middle
         .content 
           two-color-border()
-          color: #fff
-          background: #000
+          color: $main-third-color
+          background: $main-second-color
           position: relative 
-          padding: 1rem
-          top: 0.5rem
+          padding: $space-middle
+          top: $space-small
           ul
             line-height: 1.7
-            font-size: 1.2rem
+            font-size: $font-size-small-u
             li 
               display: flex 
               justify-content: space-between
@@ -108,9 +108,9 @@
                 no-wrap()
           h3 
             text-align: center
-            font-size: 1.5rem
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #fff;
+            font-size: $font-size-middle-d
+            padding-bottom: $space-middle;
+            border-bottom: 1px solid $main-third-color;
 
 @media only screen and (min-width : 769px)
   .container 
@@ -126,40 +126,40 @@
         margin: 0 auto 
         background: #000
         &:before
-          content: '';
-          background: red;
-          position: absolute;
-          left: 50%;
-          top: 0;
-          transform: translateX(-50%);
-          width: 2rem;
-          height: 2rem;
-          border: 3px solid #000;
-          border-radius: 50%;
+          content: ''
+          background: $main-color
+          position: absolute
+          left: 50%
+          top: 0
+          transform: translateX(-50%)
+          width: 2rem
+          height: 2rem
+          border: 3px solid #000
+          border-radius: 50%
         .content 
           two-color-border()
-          color: #fff
-          background: #000
+          color: $main-third-color
+          background: $main-second-color
           position: relative 
           width: 40rem
-          padding: 1rem
-          top: 0.5rem
+          padding: $space-middle
+          top: $space-small
           ul
             line-height: 1.7
-            font-size: 1.2rem
+            font-size: $font-size-small-u
             li 
               display: flex 
               justify-content: space-between
               a
-                color: #fff
+                color: $main-third-color
           h3 
             text-align: center
-            font-size: 1.5rem
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #fff;
+            font-size: $font-size-middle-d
+            padding-bottom: $space-middle
+            border-bottom: 1px solid $main-third-color
           &:before 
             content: ''
-            background: #000 
+            background: $main-second-color
             position: absolute 
             top: -0.7rem
             width: 3rem 

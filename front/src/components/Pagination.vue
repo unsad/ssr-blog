@@ -15,14 +15,14 @@
   };
 </script>
 <style module="pagination" lang="stylus" rel="stylesheet/stylus">
-@import '../assets/css/mixin.styl';
+@import '../assets/css/mixin.styl'
 
  .container
     display: flex 
     align-items: center 
     justify-content: space-between
   a
-    color: #fff
+    color: $main-third-color
 
 @media only screen and (max-width : 768px)
   .container

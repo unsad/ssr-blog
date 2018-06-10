@@ -23,17 +23,17 @@
 </script>
 <style lang="stylus" module="footer" rel="stylesheet/stylus">
 .container 
-  margin-top: 1rem
   text-align: center
+  margin-top: $space-middle
   .main
     display: inline-block
     width: 30%
     min-width: max-content
     border-top: .1rem solid #fff
-    font-size: 1rem
+    font-size: $font-size-small
     line-height: 1.5
-    padding: 0.5rem 0
-    color: #fff
+    padding: $space-small 0
+    color: $main-third-color
     a 
-      color: #fff
+      color: $main-third-color
 </style>

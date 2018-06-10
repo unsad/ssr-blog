@@ -74,47 +74,48 @@ export default {
 };
 </script>
 <style lang="stylus" module="link" rel="stylesheet/stylus">
-@import '../assets/css/mixin.styl';
- .container    
-    display: flex 
-    flex-direction: column 
-    background: linear-gradient(-40deg, transparent 42%, red 0),
-                linear-gradient(-30deg, transparent 22%, #090909 0)
-    .title
-      title-base() 
-      margin: 0  
-    .content 
-      display: flex
-      flex-grow: 1
-      font-size: 0
-      justify-content: center
-      .linklistBox
-        font-size: 1rem
-        position: absolute
-        li 
-          position: relative
-          z-index: 1
-          min-height: 3rem
-          line-height: 3rem
-          width: 25rem
-          margin-bottom: 1rem
-          color: #fff
-          padding: 0 1rem
-          &::after
-            content: ''
-            position: absolute
-            top: 0
-            right: 0
-            bottom: 0
-            left: 0
-            z-index: -1
-            transform: skew(-25deg)
-            two-color-border(0.4rem, 0.3rem)
-          a 
-            color: #fff
-      .objectBox 
-          width: 50rem
-          min-height: 412px;
+@import '../assets/css/mixin.styl'
+
+.container    
+  display: flex 
+  flex-direction: column 
+  background: linear-gradient(-40deg, transparent 42%, $main-color 0),
+              linear-gradient(-30deg, transparent 22%, $main-second-color 0)
+  .title
+    title-base() 
+    margin: 0  
+  .content 
+    display: flex
+    flex-grow: 1
+    font-size: 0
+    justify-content: center
+    .linklistBox
+      font-size: $font-size-small
+      position: absolute
+      li 
+        position: relative
+        z-index: 1
+        min-height: 3rem
+        line-height: 3rem
+        width: 25rem
+        margin-bottom: $space-middle
+        color: $main-third-color
+        padding: 0 $space-middle
+        &::after
+          content: ''
+          position: absolute
+          top: 0
+          right: 0
+          bottom: 0
+          left: 0
+          z-index: -1
+          transform: skew(-25deg)
+          two-color-border(0.4rem, 0.3rem)
+        a 
+          color: $main-third-color
+    .objectBox 
+        width: 50rem
+        min-height: 412px;
 
 @media only screen and (max-width : 768px)
   .container
@@ -128,7 +129,7 @@ export default {
       padding-left: 15rem  
       align-items: flex-end
       margin-left: -5rem
-      border-top: 0.4rem solid #fff
-      border-bottom: 0.4rem solid #fff
-      box-shadow:0 0 0 1rem #000, 0 0 0 1.4rem #fff
+      border-top: 0.4rem solid $main-third-color
+      border-bottom: 0.4rem solid $main-third-color
+      box-shadow:0 0 0 $space-middle $main-second-color, 0 0 0 1.4rem $main-third-color
 </style>

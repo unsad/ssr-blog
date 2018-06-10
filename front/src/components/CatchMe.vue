@@ -51,16 +51,16 @@ export default {
 <style module="catchme" lang="stylus" rel="stylesheet/stylus">
 @media only screen and (min-width : 769px)
   .container
-    font-size: 2rem 
-    color: #fff
+    font-size: $font-size-middle
+    color: $main-third-color
     font-family: 'jackey_handwriteregular'
     background: url(../../static/catchme.svg) no-repeat left bottom/78vh,
-                linear-gradient(135deg, transparent, transparent calc(65vw + 30vh + 1rem), red 0),
-                linear-gradient(135deg, transparent, transparent calc(65vw + 30vh), white 0),
-                linear-gradient(130deg, black, black 20vh, transparent 0),
-                linear-gradient(-50deg, transparent, transparent calc(100% - 20vh - 1rem), white 0),
-                linear-gradient(110deg, transparent, transparent calc(48vh + 1rem), black 0),
-                linear-gradient(110deg, red, red 48vh, white 0)
+                linear-gradient(135deg, transparent, transparent calc(65vw + 30vh + 1rem), $main-color 0),
+                linear-gradient(135deg, transparent, transparent calc(65vw + 30vh), $main-third-color 0),
+                linear-gradient(130deg, $main-second-color, $main-second-color 20vh, transparent 0),
+                linear-gradient(-50deg, transparent, transparent calc(100% - 20vh - 1rem), $main-third-color 0),
+                linear-gradient(110deg, transparent, transparent calc(48vh + 1rem), $main-second-color 0),
+                linear-gradient(110deg, $main-color, $main-color 48vh, $main-third-color 0)
     display: flex
     flex-direction: column
     .title 
@@ -81,13 +81,13 @@ export default {
         justify-content: flex-end
         display: flex 
         align-items: center
-        border-bottom: 0.3rem solid white
+        border-bottom: 0.3rem solid $main-third-color
         a 
             flex-grow: 1
-            color: #fff
+            color: $main-third-color
             text-align: right
     .topBox 
-      border-bottom: 0.3rem solid white
+      border-bottom: 0.3rem solid $main-third-color
       clip-path: polygon(28vh 0, 60% 0, 70% 100%, -8vh 100%)
       height: 40vh
       display: flex 
@@ -101,14 +101,14 @@ export default {
         display: flex 
         align-items: center
         &:not(:last-child)
-            border-bottom: 0.3rem solid white
+            border-bottom: 0.3rem solid $main-third-color
         a 
-            color: #fff
+            color: $main-third-color
 
 @media only screen and (max-width : 768px)
   .container
-    font-size: 1.5rem 
-    color: #fff
+    font-size: $font-size-middle-d
+    color: $main-third-color
     font-family: 'jackey_handwriteregular'
     display: flex
     flex-direction: column
@@ -125,13 +125,13 @@ export default {
         justify-content: flex-end
         display: flex 
         align-items: center
-        border-bottom: 0.3rem solid white
+        border-bottom: 0.3rem solid $main-third-color
         a 
           flex-grow: 1
-          color: #fff
-          margin-left: 1rem
+          color: $main-third-color
+          margin-left: $space-middle
     .topBox 
-      border-bottom: 0.3rem solid white
+      border-bottom: 0.3rem solid $main-third-color
       height: 40vh
       display: flex 
       flex-direction: column 
@@ -144,13 +144,13 @@ export default {
         display: flex 
         align-items: center
         &:not(:last-child)
-          border-bottom: 0.3rem solid white
+          border-bottom: 0.3rem solid $main-third-color
         a 
-          color: #fff
-          margin-left: 1rem
+          color: $main-third-color
+          margin-left: $space-middle
 
     .clearInlineStyle 
       margin-right: 0!important
       padding-left: 0!important
-      left: 1rem
+      left: $space-middle
 </style>

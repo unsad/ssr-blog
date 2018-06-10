@@ -85,27 +85,26 @@
   };
 </script>
 <style lang="stylus" module="$post" rel="stylesheet/stylus">
-@import '../assets/css/mixin.styl';
+@import '../assets/css/mixin.styl'
 
 @media only screen and (max-width : 768px)
   .container 
     .main 
       flex-direction: column
       .detail 
-        padding: 1rem
+        padding: $space-middle
       .index
         order: -1
-        background: #1e1e1e
-        border-bottom: 1px solid #c6c6c6
+        background: $content-bg-color
+        border-bottom: 1px solid #$content-main-color
         ul 
-          list-style-type: disc;
-          color: #c6c6c6;
-          margin-left: 1.5rem;
-      .post-back
-        position: absolute
-        top: 0
-        right: 0
-
+          list-style-type: disc
+          color: $content-main-color
+          margin-left: $space-middle-u
+        .back
+          position: absolute
+          top: 0
+          right: 0
 
 @media only screen and (min-width : 769px)  
   .container 
@@ -113,67 +112,67 @@
       .index
         ul 
           list-style-type: disc 
-          color: #c6c6c6
-          margin-left: 1.5rem
+          color: $content-main-color
+          margin-left: $space-middle-u
         background: url(../../static/post-bg.svg) no-repeat bottom left/80%,
-                    linear-gradient(to left, #000 30%, #1e1e1e)  
+                    linear-gradient(to left, $main-second-color 30%, $content-bg-color)  
       ul 
         margin-left: 1rem
       .detail
         flex-grow: 1
-        padding: 1rem 1rem 0
+        padding: $space-middle $space-middle 0
         max-height: 100vh
         overflow: auto
 .container
   .main
     min-height: 100vh
-    font-size: 1.1rem
+    font-size: $font-size-small-u
     line-height: 1.6
     a
-      color: #d9d9d9
+      color: $content-strong-color
     display: flex 
     .index 
       min-width: 35%
       .toc 
-        padding: 1rem 1rem 0
+        padding: $space-middle $space-middle 0
         strong 
-          font-size: 2rem
-          color: #d9d9d9
+          font-size: $font-size-middle
+          color: $content-strong-color
     .back
-      padding: 1rem
+      padding: $space-middle
       line-height: 2
     .detail
-      background: #1e1e1e
-      color: #c6c6c6
+      background: $content-bg-color
+      color: $content-main-color
       h1 
-        color: #d9d9d9
+        color: $content-strong-color
         margin: 0
       .meta 
         float: right
       .content 
-        margin-top: 1rem
+        margin-top: $space-middle
       .pagination
-        padding: 1rem 0
+        padding: $space-middle 0
         display: flex 
         align-items: center 
         justify-content: space-between
         .prev,.next 
-          background: #d9d9d9
-          color: #000
+          background: $content-strong-color
+          color: $main-second-color
           display: inline-block 
-          padding: 0.5rem
+          padding: $space-small
 
       img 
         max-width: 100%
         height: auto
-        border:1px solid #c6c6c6
+        border:1px solid $content-main-color
         padding: 3px
       blockquote 
-        border-left: 5px solid #c6c6c6
-        margin: 0.5rem 0
-        padding: 0.5rem 0 0.5rem 1rem
+        border-left: 5px solid $content-main-color
+        margin: $space-small 0
+        padding: $space-small 0 $space-small $space-middle
       h2,h3,h4,h5,h6 
-        margin: 1rem 0
+        margin: $space-middle 0
       ol,ul 
         padding-left: 40px
       ol 
@@ -206,8 +205,8 @@
 :global(.hljs) 
   display: block
   overflow-x: auto
-  margin: 0.5rem 0
-  padding: 0.5em
+  margin: $space-small 0
+  padding: $space-msall
   color: #abb2bf
   background: #282c34
 

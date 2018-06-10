@@ -34,28 +34,28 @@
   };
 </script>
 <style module="summary" lang="stylus" rel="stylesheet/stylus">
-@import '../assets/css/mixin.styl';
+@import '../assets/css/mixin.styl'
 
 .container
-  font-size: 1.1rem
+  font-size: $font-size-small-u
   line-height: 1.6
   h1 
     display: flex
     justify-content: space-between
-    font-size: 2rem
-    margin: 0.5rem 0
+    font-size: $font-size-middle
+    margin: $space-small 0
     .meta 
       flex-shrink: 0
-      font-size: 1.1rem
+      font-size: $font-size-small-u
     .link 
       min-width: 50%
       no-wrap()
   .title a
-    color: #fff
+    color: $main-third-color
   .more 
-    margin: 0.5rem 0
-    padding: 0 0.5rem
+    margin: $space-small 0
+    padding: 0 $space-small
     display: inline-block
-    background: #fff
-    color: #000
+    background: $main-third-color
+    color: $main-second-color
 </style>

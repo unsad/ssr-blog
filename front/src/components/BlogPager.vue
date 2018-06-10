@@ -81,8 +81,8 @@
 
 @media only screen and (max-width : 768px) 
   .container
-    background: linear-gradient(-50deg, transparent 82%, red 0),
-                linear-gradient(-30deg, transparent 18%, #000 0)
+    background: linear-gradient(-50deg, transparent 82%, $main-color 0),
+                linear-gradient(-30deg, transparent 18%, $main-second-color 0)
     .main
       position: relative
       display: flex 
@@ -90,20 +90,20 @@
       flex-grow: 1
       min-width: 0
       .pageIndex
-        color: #fff
+        color: $main-third-color
         border: none
         .summary
-          border-bottom: 2px solid #fff
-          margin: 1rem
+          border-bottom: 2px solid $main-third-color
+          margin: $space-middle
         .blogpagerPagi
-          margin: 1rem
+          margin: $space-middle
 @media only screen and (min-width : 769px) 
   .container
     display: flex
     overflow: hidden
     height: 100vh 
-    background: linear-gradient(-40deg, transparent 52%, red 0),
-                linear-gradient(-30deg, transparent 28%, #000 0)
+    background: linear-gradient(-40deg, transparent 52%, $main-color 0),
+                linear-gradient(-30deg, transparent 28%, $main-second-color 0)
     .sidebar
       min-width: 30%
     .main
@@ -119,19 +119,19 @@
         overflow: auto
         height: 100%
         .summary
-          border-bottom: 2px solid #fff
-          margin: 1rem
+          border-bottom: 2px solid $main-third-color
+          margin: $space-middle
         .blogpagerPagi
-          margin: 1rem
+          margin: $space-middle
 
   .deco
     width: 10rem
     height: 3rem 
-    background: #000
+    background: $main-second-color
     position: absolute 
     right: 0
     bottom: 10rem
-    clip-path: polygon(0 45%, 100% 19%, 100% 85%, 0 73%);
+    clip-path: polygon(0 45%, 100% 19%, 100% 85%, 0 73%)
     &::before 
       content: ''
       position: absolute
@@ -139,8 +139,8 @@
       left: 0 
       right: 0
       bottom: 0
-      background: #fff
-      clip-path: polygon(2% 50%, 98% 24%, 98% 80%, 2% 68%);
+      background: $main-third-color
+      clip-path: polygon(2% 50%, 98% 24%, 98% 80%, 2% 68%)
   .deco2 
     transform: rotate(-20deg) translate(10%, -70%)
   .deco1 

@@ -37,8 +37,8 @@ export default {
         'Pixiv': 'https://www.pixiv.net/member.php?id=8208657',
         'NetEase Cloud Music': 'http://music.163.com/#/user/home?id=74380527',
         'Email': 'wzxaylryw@hotmail.com',
-        'Nintendo Switch': 'SW-4276-5641-6320',
-        'PSN': 'pre-unsad'
+        'PSN': 'https://psnprofiles.com/per-unsad',
+        'Nintendo Switch': 'SW-4276-5641-6320'
       }
     };
   },

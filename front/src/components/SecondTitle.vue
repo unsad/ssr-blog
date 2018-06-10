@@ -20,15 +20,14 @@ export default {
 };
 </script>
 <style lang="stylus" module="secondTitle" rel="stylesheet/stylus">
-
 .container
-  color: #fff 
+  color: $main-third-color
   text-align: center
-  margin: 1rem 0
+  margin: $space-middle 0
   .text
     position: relative
-    font-family: 'jackey_handwriteregular';
-    background: #000
+    font-family: 'jackey_handwriteregular'
+    background: $main-second-color
     letter-spacing: 0.1rem 
     display: inline-block
   .deco 
@@ -40,12 +39,12 @@ export default {
 
 @media only screen and (min-width: 769px)
   .text
-    font-size: 2rem
-    padding: 1rem
+    font-size: $font-size-middle
+    padding: $space-middle
 
 
 @media only screen and (max-width: 768px)
   .text
-    font-size: 1.5rem
-    padding: 0.5rem
+    font-size: $font-size-middle-d
+    padding: $space-small
 </style>

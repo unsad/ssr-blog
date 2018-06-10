@@ -80,7 +80,7 @@
   width: 6rem
   height: 6rem 
   background: #000
-  border: 1rem solid red
+  border: 1rem solid rgb(230, 30, 30)
   box-shadow: 0 0 0 2px #fff
   border-radius: 50%
   display: flex 

@@ -73,7 +73,8 @@
   };
 </script>
 <style lang="stylus" module="tag" rel="stylesheet/stylus">
-@import '../assets/css/mixin.styl';
+@import '../assets/css/mixin.styl'
+
 .container 
   display: flex 
   flex-direction: column
@@ -86,15 +87,15 @@
       position: relative
       display: inline-block
       z-index: 1
-      padding: 1rem
-      color: #fff
+      padding: $space-middle
+      color: $main-third-color
       .number 
         position: absolute
         right: 0
         bottom: -40%
         padding: 0.3rem
         transform: translate(1rem, -0.5rem) rotate(15deg) skew(-5deg)
-        background: #000
+        background: $main-second-color
       &::after
         content: ''
         position: absolute
@@ -109,12 +110,12 @@
 @media only screen and (max-width: 768px)
   .container 
     .tag
-      font-size: 1rem
-      margin:0.5rem 2rem
+      font-size: $font-size-small
+      margin:$space-small $space-middle-u
 
 @media only screen and (min-width: 769px)
   .container 
     .tag
-      font-size: 2rem
-      margin: 1rem 4rem
+      font-size: $font-size-middle
+      margin: $space-middle $space-large
 </style>

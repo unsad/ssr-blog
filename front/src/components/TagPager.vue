@@ -72,17 +72,17 @@
 </script>
 <style lang="stylus" module="tagPager" rel="stylesheet/stylus">
 .container
-  background: linear-gradient(60deg, transparent 62%, red 0),
-              linear-gradient(40deg, transparent 18%, #000 0)
+  background: linear-gradient(60deg, transparent 62%, $main-color 0),
+              linear-gradient(40deg, transparent 18%, $main-second-color 0)
   min-height: 100vh
   display: flex 
   flex-direction: column
   .index
     h1 
-      color: #fff
+      color: $main-third-color
     flex-grow: 1
-    padding: 0 1rem
+    padding: 0 $space-middle
     overflow: hidden
     .summary
-      color: #fff
+      color: $main-third-color
 </style>

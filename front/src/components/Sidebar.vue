@@ -67,13 +67,13 @@
   .container
     font-family: 'special-for-me'
     a
-      color: #fff
+      color: $main-third-color
     .link
       display: flex
       justify-content: space-around
       line-height: 2
-      background: #000
-      font-size: 2rem
+      background: $main-second-color
+      font-size: $font-size-middle
 @media only screen and (min-width: 769px)
   .container
     position: relative
@@ -85,7 +85,7 @@
       right: 0
       top: 0
       bottom: 0
-      background: black
+      background: $main-second-color
       clip-path: polygon(0 0, 100% 0, calc(100% - 30vh) 100%, 0% 100%) 
     .pic 
       position: absolute
@@ -103,14 +103,14 @@
         right: 0
         top: 0
         bottom: 0
-        background: white
+        background: $main-third-color
         clip-path: polygon(97% 0, 100% 0, calc(100% - 30vh) 100%, calc(97% - 30vh) 100%)
       a
-        color: #fff
+        color: $main-third-color
       .link
         padding: 0
         text-align: center
-        font-size: 4rem
+        font-size: $font-size-large
         transform: rotate(20deg) translate(26%)
         line-height: 2
         .linkItem:hover 
@@ -122,12 +122,12 @@
           display: inline-block
           transition: all .2s ease-out
           transform: rotate(-40deg)
-          -webkit-text-stroke: 2px black;
+          -webkit-text-stroke: 2px $main-second-color
         .rotate2 
           display: inline-block
           transition: all .2s ease-out
-          color: black
-          -webkit-text-stroke: 2px white;
+          color: $main-second-color
+          -webkit-text-stroke: 2px $main-third-color
           transform: rotate(15deg) translate(5%)
 
 

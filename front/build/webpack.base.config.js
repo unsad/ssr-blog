@@ -30,7 +30,7 @@ module.exports = {
     filename: '[name].[chunkhash].js'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
       'public': path.resolve(__dirname, '../public'),
       '@': resolve('src')
@@ -57,6 +57,14 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/.vue$/]
+        }
       },
       {
         test: /\.(png|jpg|gif|svg|woff|woff2|ttf)$/,

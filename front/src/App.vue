@@ -13,7 +13,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { Component, Prop } from 'vue-property-decorator';
+  import { mixins } from 'vue-class-component';
+
   import LoadingBar from './components/Loading';
   import musicPlayer from './components/musicplayer/MusicPlayer';
   import myHeader from './components/Header';
@@ -26,11 +29,12 @@
     })]);
   }
 
-  import mixin from './mixin/image';
+  import myMixin from './mixin/image';
 
-  export default {
-    name: 'app',
-    asyncData: fetchInfo,
+  @Component({
+    asyncData: fetchInfo
+  })
+  export class App extends mixins(myMixin) {
     metaInfo () {
       const {
         title: { value: title },

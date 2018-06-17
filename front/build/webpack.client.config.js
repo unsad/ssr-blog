@@ -17,21 +17,23 @@ const config = merge(base, {
       'create-api': './create-api-client.js'
     }
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'process.env.VUE_ENV': '"client"'
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
+  optimization: {
+    splitChunks: {
       name: 'vendor',
       minChunks: function(module) {
         return (
           /node_modules/.test(module.context) && !/\.css$/.test(module.request)
-        )
+        );
       }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
+    },
+    runtimeChunk: {
       name: 'manifest'
+    }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.VUE_ENV': '"client"'
     }),
     new webpack.NamedModulesPlugin(),
     new VueSSRClientPlugin()
@@ -66,7 +68,7 @@ if (process.env.NODE_ENV === 'production') {
         }
       ]
     })
-  )
+  );
 }
 
 module.exports = config;

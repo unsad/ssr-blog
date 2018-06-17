@@ -16,6 +16,9 @@
 <script lang="ts">
   import { Component, Prop } from 'vue-property-decorator';
   import { mixins } from 'vue-class-component';
+  import {
+    Getter
+  } from 'vuex-class';
 
   import LoadingBar from './components/Loading';
   import musicPlayer from './components/musicplayer/MusicPlayer';
@@ -23,18 +26,19 @@
   import { mapGetters } from 'vuex';
   import './assets/css/index.styl';
 
-  function fetchInfo({store, route: {path, params, query}}) {
-    return Promise.all([store.dispatch('FETCH_OPTIONS'), store.dispatch('FETCH_FIREKYLIN'), store.dispatch('FETCH_MUSIC', {
-      model: 'music'
-    })]);
-  }
-
   import myMixin from './mixin/image';
 
   @Component({
-    asyncData: fetchInfo
-  })
-  export class App extends mixins(myMixin) {
+    asyncData({store, route: {path, params, query}}) {
+      return Promise.all([store.dispatch('FETCH_OPTIONS'), store.dispatch('FETCH_FIREKYLIN'), store.dispatch('FETCH_MUSIC', {
+        model: 'music'
+      })]);
+    },
+    components: {
+      LoadingBar,
+      myHeader,
+      musicPlayer
+    },
     metaInfo () {
       const {
         title: { value: title },
@@ -58,20 +62,12 @@
           { rel: 'alternate', type: 'application/rss+xml', title: 'RSS 2.0', href: '/rss.xml' }
         ]
       };
-    },
-    mixins: [mixin],
-    components: {
-      LoadingBar,
-      myHeader,
-      musicPlayer
-    },
-    computed: {
-      ...mapGetters([
-        'progress',
-        'tran',
-        'music'
-      ])
     }
+  })
+  export default class App extends mixins(myMixin) {
+    @Getter progress
+    @Getter tran
+    @Getter music
   };
 </script>
 <style lang="stylus" module="app" rel="stylesheet/stylus">

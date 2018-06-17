@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "strict": true,
+    "noImplicitThis": true,
     "module": "es2015",
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "allowJs": true
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "pretty": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "build"
   ],
   "include": [
     "./src/**/*"

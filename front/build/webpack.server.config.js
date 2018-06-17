@@ -1,7 +1,8 @@
 /**
  * Created by unsad on 2017/9/21.
  */
-const webpack = require('webpack')
+const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const merge = require('webpack-merge');
 const nodeExtenals = require('webpack-node-externals');
 const baseConfig = require('./webpack.base.config.js');
@@ -23,6 +24,19 @@ module.exports = merge(baseConfig, {
   externals: nodeExtenals({
     whitelist: /\.css$/
   }),
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        compress: {
+          warnings: false
+        },
+        output: {
+          comments: false
+        },
+        sourceMap: false
+      })
+    ]
+  },
   plugins: [
     new VueSSRServerPlugin(),
     new webpack.DefinePlugin({
@@ -31,15 +45,6 @@ module.exports = merge(baseConfig, {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      output: {
-        comments: false
-      },
-      sourceMap: false
     })
   ]
 });

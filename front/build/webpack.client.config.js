@@ -10,7 +10,7 @@ const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 
 const config = merge(base, {
   entry: {
-    app: './src/client-entry.js'
+    app: './src/client-entry.ts'
   },
   resolve: {
     alias: {
@@ -18,14 +18,6 @@ const config = merge(base, {
     }
   },
   optimization: {
-    splitChunks: {
-      name: 'vendor',
-      minChunks: function(module) {
-        return (
-          /node_modules/.test(module.context) && !/\.css$/.test(module.request)
-        );
-      }
-    },
     runtimeChunk: {
       name: 'manifest'
     }

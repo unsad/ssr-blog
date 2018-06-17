@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "noImplicitThis": true,
     "module": "es2015",
     "moduleResolution": "node",
@@ -9,10 +9,6 @@
     "allowJs": true,
     "pretty": true
   },
-  "exclude": [
-    "node_modules",
-    "build"
-  ],
   "include": [
     "./src/**/*"
   ],
@@ -21,6 +17,6 @@
     "es5",
     "es6",
     "es7",
-    "es2015.promise"
+    "es2015"
   ]
 }

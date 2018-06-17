@@ -12,6 +12,7 @@
     "start": "cross-env NODE_ENV=production node server"
   },
   "dependencies": {
+    "@types/node": "^10.3.3",
     "axios": "^0.16.1",
     "body-parser": "^1.18.2",
     "compression": "^1.7.0",
@@ -98,9 +99,10 @@
     "sinon-chai": "^2.8.0",
     "ts-loader": "^4.4.1",
     "typescript": "^2.9.2",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",
     "uuid": "^3.1.0",
-    "vue-loader": "^14.2.1",
+    "vue-loader": "^15.2.4",
     "vue-server-renderer": "^2.5.16",
     "vue-style-loader": "^4.0.2",
     "vue-template-compiler": "^2.5.16",

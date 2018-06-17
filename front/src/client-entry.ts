@@ -49,7 +49,7 @@ router.onReady(() => {
     }
 
     let loadingPromise = store.dispatch('START_LOADING');
-    let endLoadingCallback = (path) => {
+    let endLoadingCallback = (path?) => {
       return loadingPromise.then(interval => {
         clearInterval(interval);
         setTimeout(() => {

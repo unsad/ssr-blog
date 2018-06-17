@@ -9,7 +9,7 @@ const baseConfig = require('./webpack.base.config.js');
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 
 module.exports = merge(baseConfig, {
-  entry: './src/server-entry.js',
+  entry: './src/server-entry.ts',
   target: 'node',
   devtool: '#source-map',
   output: {
@@ -27,11 +27,13 @@ module.exports = merge(baseConfig, {
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
-        compress: {
-          warnings: false
-        },
-        output: {
-          comments: false
+        uglifyOptions: {
+          compress: {
+            warnings: false
+          },
+          output: {
+            comments: false
+          }
         },
         sourceMap: false
       })

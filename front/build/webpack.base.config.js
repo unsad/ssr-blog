@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const vueConfig = require('./vue-loader.config');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -23,6 +24,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+  mode: isProd ? 'production' : 'development',
   devtool: isProd ? false : '#cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -54,16 +56,11 @@ module.exports = {
         options: vueConfig
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
         options: {
-          appendTsSuffixTo: [/.vue$/]
+          appendTsSuffixTo: [/\.vue$/]
         }
       },
       {
@@ -106,6 +103,7 @@ module.exports = {
           import: [path.resolve(__dirname, '../src/assets/css/variable.styl')]
         }
       }
-    })
+    }),
+    new VueLoaderPlugin()
   ])
 };

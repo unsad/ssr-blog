@@ -5,3 +5,4 @@ declare module '*.vue' {
     asyncData?: any
   }
 }
+

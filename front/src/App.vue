@@ -20,9 +20,9 @@
     Getter
   } from 'vuex-class';
 
-  import LoadingBar from './components/Loading';
-  import musicPlayer from './components/musicplayer/MusicPlayer';
-  import myHeader from './components/Header';
+  import LoadingBar from '@/components/Loading';
+  import musicPlayer from '@/components/musicplayer/MusicPlayer';
+  import myHeader from '@/components/Header';
   import { mapGetters } from 'vuex';
   import './assets/css/index.styl';
 
@@ -48,7 +48,7 @@
         faviconUrl: { value: favicon }
       } = this.siteInfo;
       return {
-        title,
+        title: title,
         titleTemplate: `%s - ${title}`,
         meta: [
           { name: 'charset', content: 'UTF-8' },

@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "allowJs": true,
     "target": "es6",
     "noImplicitThis": true,
     "module": "es2015",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "allowJs": true,
     "pretty": true
   },
   "include": [

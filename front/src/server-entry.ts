@@ -25,7 +25,7 @@ export default context => {
       const matchedComponents = router.getMatchedComponents();
       if (!matchedComponents.length) return reject({code: 404});
 
-      Promise.all(preFetchComponent.concat(matchedComponents).map(({asyncData}) => asyncData && asyncData({
+      Promise.all((<any> preFetchComponent).concat(matchedComponents).map(({asyncData}) => asyncData && asyncData({
         store,
         route: router.currentRoute
       }))).then(() => {

@@ -54,13 +54,13 @@
   </div>
 </template>
 
-<script>
-  import mixin from '../mixin/image';
+<script lang="ts">
+  import { Component } from 'vue-property-decorator';
+  import { mixins } from 'vue-class-component';
+  import myMixin from '../mixin/image';
 
-  export default {
-    name: 'sideBar',
-    mixins: [mixin]
-  };
+  @Component
+  export default class Sidebar extends mixins(myMixin) {};
 </script>
 <style module="sidebar" lang="stylus" rel="stylesheet/stylus">
 @media only screen and (max-width: 768px)

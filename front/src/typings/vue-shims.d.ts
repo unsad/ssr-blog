@@ -9,11 +9,11 @@ declare module '*.vue' {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $meta: () => any;
-    siteInfo: any;
+    $meta?: () => any;
+    siteInfo?: any;
   }
   interface VueConstructor {
-
+    asyncData?: any;
   }
 }
 

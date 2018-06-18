@@ -4,7 +4,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const vueConfig = require('./vue-loader.config');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
@@ -16,6 +16,18 @@ const cssLoader = {
     minimize: isProd,
     modules: true,
     localIdentName: '[local]_[hash:base64:8]'
+  }
+};
+
+const postcssLoader = {
+  loader: 'postcss-loader',
+  options: {
+    ident: 'postcss',
+    plugins: [
+      require('postcss-cssnext')(),
+      require('autoprefixer')(),
+      require('cssnano')()
+    ]
   }
 };
 
@@ -73,12 +85,10 @@ module.exports = {
       },
       {
         test: /\.(styl(us)?|css)$/,
-        use: isProd
-          ? ExtractTextPlugin.extract({
-            use: [cssLoader, 'stylus-loader'],
-            fallback: 'vue-style-loader'
-          })
-          : ['vue-style-loader', cssLoader, 'stylus-loader']
+        use: [isProd ? MiniCssExtractPlugin : 'style-loader', 'vue-style-loader',
+          cssLoader,
+          postcssLoader,
+          'stylus-loader']
       }
     ]
   },
@@ -91,8 +101,9 @@ module.exports = {
       compress: { warnings: false }
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new ExtractTextPlugin({
-      filename: 'common.[chunkhash].css'
+    new MiniCssExtractPlugin({
+      filename: 'common.[name].[hash].css',
+      chunkFilename: '[id].[hash].css'
     })
   ] : [
     new FriendlyErrorsPlugin()

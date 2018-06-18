@@ -1,8 +1,19 @@
+import Vue from 'vue';
 declare module '*.vue' {
-  import Vue from 'vue';
   export default Vue;
-  export interface VueClass<V extends Vue> {
-    asyncData?: any
+}
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $meta: () => any;
+  }
+  interface VueConstructor {
+
   }
 }
 
+declare module 'vue/types/options' {
+  interface ComponentOptions<V extends Vue> {
+    asyncData?: any 
+  }
+}

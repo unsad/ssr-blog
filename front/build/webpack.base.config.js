@@ -24,8 +24,9 @@ const postcssLoader = {
   options: {
     ident: 'postcss',
     plugins: [
-      require('postcss-cssnext')(),
-      require('autoprefixer')(),
+      require('postcss-cssnext')({
+        warnForDuplicates: false
+      }),
       require('cssnano')()
     ]
   }

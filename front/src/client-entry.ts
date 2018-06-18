@@ -8,10 +8,10 @@ import makeResponsive from './assets/js/base';
 
 Vue.mixin({
   beforeRouteUpdate(to, from, next) {
-    const {asyncData} = this.$options;
+    const {asyncData} = (<Vue>this).$options;
     if (asyncData) {
       asyncData({
-        store: this.$store,
+        store: (<Vue>this).$store,
         route: to
       }).then(next).catch(next);
     } else {
@@ -40,7 +40,7 @@ router.onReady(() => {
     const activated = matched.filter((c, i) => {
       return diffed || (diffed = (prevMatched[i] !== c));
     });
-    const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _);
+    const asyncDataHooks = activated.map(c => (<any>c).asyncData).filter(_ => _);
 
     store.dispatch('SET_TRAN', to.name !== from.name);
 
@@ -85,7 +85,7 @@ router.onReady(() => {
   if (typeof window.__INITIAL_STATE__ === 'undefined') {
     beforeResolveHook(router.currentRoute, {}, () => {});
     Promise.all(
-      preFetchComponent.map(component => component.asyncData(store, store.state.route))
+      preFetchComponent.map(component => component.asyncData(store, router.currentRoute))
     ).then(() => makeResponsive());
   }
   app.$mount('#app');

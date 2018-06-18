@@ -31,6 +31,8 @@ let sitemap = '';
 let rss = '';
 let robots = '';
 
+process.on('warning', e => console.warn(e.stack));
+
 global.window = dom.window;
 global.document = window.document;
 global.navigator = window.navigator;

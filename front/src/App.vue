@@ -1,7 +1,6 @@
 <template>
   <div id="app" :class="app.container">
     <loading-bar :progress="progress"></loading-bar>
-    <my-header v-if="false"></my-header>
       <music-player 
         theme="rgb(0, 0, 0)"
         mode="circulation"
@@ -22,7 +21,6 @@
 
   import LoadingBar from '@/components/Loading';
   import musicPlayer from '@/components/musicplayer/MusicPlayer';
-  import myHeader from '@/components/Header';
   import { mapGetters } from 'vuex';
   import './assets/css/index.styl';
 
@@ -36,7 +34,6 @@
     },
     components: {
       LoadingBar,
-      myHeader,
       musicPlayer
     },
     metaInfo () {

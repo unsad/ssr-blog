@@ -102,18 +102,13 @@
     <my-footer></my-footer>
   </div>
 </template>
-<script>
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import myFooter from './Footer.vue';
 import back from './Back.vue';
 import secondTitle from './SecondTitle.vue';
 
-export default {
-  name: 'about',
-  data() {
-    return {
-      title: '关于'
-    };
-  },
+@Component({
   metaInfo() {
     return {
       title: this.title
@@ -124,6 +119,9 @@ export default {
     secondTitle,
     back
   }
+})
+export default class About extends Vue {
+  title = '关于';
 };
 </script>
 <style lang="stylus" module="about" rel="stylesheet/stylus">

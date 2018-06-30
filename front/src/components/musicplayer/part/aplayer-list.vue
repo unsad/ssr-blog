@@ -24,27 +24,29 @@
   </div>
 </template>
 
-<script>
-  export default {
-    props: {
-      show: {
-        type: Boolean,
-        default: true
-      },
-      currentMusic: Object,
-      musicList: {
-        type: Array,
-        default () {
-          return [];
-        }
-      },
-      playIndex: {
-        type: Number,
-        default: 0
-      },
-      theme: String,
-      listmaxheight: String
-    },
+<script lang="ts">
+  import { Vue, Component, Prop } from 'vue-property-decorator';
+
+  @Component
+  export default class MusicList extends Vue {
+    @Prop({default: true})
+    show: boolean
+
+    @Prop()
+    currentMusic: Object
+
+    @Prop({default: []})
+    musicList: any[]
+
+    @Prop({default: 0})
+    playIndex: number
+
+    @Prop()
+    theme: string
+
+    @Prop()
+    listmaxheight: string
+
     mounted () {
       this.$el.style.height = `${this.$el.offsetHeight}px`;
       this.$refs.ol.style.height = `${this.$el.offsetHeight}px`;
@@ -54,5 +56,4 @@
 <style lang="stylus" rel="stylesheet/stylus">
 .aplayer-list-hide
   display: none
-  
 </style>

@@ -73,26 +73,26 @@
 
   let activeMutex = null;
 
-@Component({
-   components: {
+  @Component({
+    components: {
       Thumbnail,
       Controls,
       MusicList,
       Lyrics
-    }  
-})
+    }
+  })
 export default class Player extends Vue {
   @Prop({
-     required: true,
-      validator (value) {
-        let song = value;
-        if (!song.url || !song.title || !song.author) {
-          song.title = song.title || 'Untitled';
-          song.author = song.author || 'Unknown';
-          return false;
-        }
-        return true;
+    required: true,
+    validator (value) {
+      let song = value;
+      if (!song.url || !song.title || !song.author) {
+        song.title = song.title || 'Untitled';
+        song.author = song.author || 'Unknown';
+        return false;
       }
+      return true;
+    }
   })
   music: Object
 

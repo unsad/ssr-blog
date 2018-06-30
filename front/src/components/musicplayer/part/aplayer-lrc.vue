@@ -15,81 +15,78 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
   import {parseLrc} from '../utils';
   import axios from 'axios';
-  export default {
-    props: {
-      currentMusic: {
-        type: Object,
-        required: true
-      },
-      playStat: {
-        type: Object,
-        required: true
+
+  @Component
+  export default class Lyrics extends Vue {
+    @Prop({required: true})
+    currentMusic: Object
+
+    @Prop({required: true})
+    playStat: Object
+
+    displayLrc = '';
+    currentLineIndex = 0;
+   
+    get lrcLines () {
+      return parseLrc(this.displayLrc);
+    }
+    get currentLine () {
+      if (this.currentLineIndex > this.lrcLines.length - 1) {
+        return null;
       }
-    },
-    data () {
+      return this.lrcLines[this.currentLineIndex];
+    }
+    get transformStyle () {
+      // transform: translateY(0); -webkit-transform: translateY(0);
       return {
-        displayLrc: '',
-        currentLineIndex: 0
+        transform: `translateY(${-this.currentLineIndex * 16}px)`,
+        webkitTransform: `translateY(${-this.currentLineIndex * 16}px)`
       };
-    },
-    computed: {
-      lrcLines () {
-        return parseLrc(this.displayLrc);
-      },
-      currentLine () {
-        if (this.currentLineIndex > this.lrcLines.length - 1) {
-          return null;
-        }
-        return this.lrcLines[this.currentLineIndex];
-      },
-      transformStyle () {
-        // transform: translateY(0); -webkit-transform: translateY(0);
-        return {
-          transform: `translateY(${-this.currentLineIndex * 16}px)`,
-          webkitTransform: `translateY(${-this.currentLineIndex * 16}px)`
-        };
+    }
+
+    applyLrc (lrc) {
+      if (/^https?:\/\//.test(lrc)) {
+        this.fetchLrc(lrc);
+      } else {
+        this.displayLrc = lrc;
       }
-    },
-    methods: {
-      applyLrc (lrc) {
-        if (/^https?:\/\//.test(lrc)) {
-          this.fetchLrc(lrc);
+    }
+    fetchLrc (src) {
+      axios(src).then(response => response.data).then((lrc) => {
+        this.displayLrc = lrc;
+      }).catch(err => console.log(err));
+    }
+    hideLrc () {
+      this.displayLrc = '';
+    }
+
+    @Watch('currentMusic', {immediate: true})
+    handler(music) {
+      this.currentLineIndex = 0;
+        if (music.lrc) {
+          this.applyLrc(music.lrc);
         } else {
-          this.displayLrc = lrc;
+          this.hideLrc();
         }
-      },
-      fetchLrc (src) {
-        axios(src).then(response => response.data).then((lrc) => {
-          this.displayLrc = lrc;
-        }).catch(err => console.log(err));
-      },
-      hideLrc () {
-        this.displayLrc = '';
+    }
+
+    @Watch('playStat.playedTime')
+    handler(playedTime) {
+      for (let i = 0; i < this.lrcLines.length; i++) {
+        const line = this.lrcLines[i];
+        const nextLine = this.lrcLines[i + 1];
+        if (playedTime >= line[0] && (!nextLine || playedTime < nextLine[0])) {
+          this.currentLineIndex = i;
+        }
       }
-    },
+    }
     watch: {
-      currentMusic: {
-        immediate: true,
-        handler (music) {
-          this.currentLineIndex = 0;
-          if (music.lrc) {
-            this.applyLrc(music.lrc);
-          } else {
-            this.hideLrc();
-          }
-        }
-      },
       'playStat.playedTime' (playedTime) {
-        for (let i = 0; i < this.lrcLines.length; i++) {
-          const line = this.lrcLines[i];
-          const nextLine = this.lrcLines[i + 1];
-          if (playedTime >= line[0] && (!nextLine || playedTime < nextLine[0])) {
-            this.currentLineIndex = i;
-          }
-        }
+        
       }
     }
   };

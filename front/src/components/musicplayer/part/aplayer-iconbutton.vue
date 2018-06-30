@@ -7,13 +7,18 @@
   </button>
 </template>
 
-<script>
+<script lang="ts">
+  import { Vue, Component, Prop } from 'vue-property-decorator';
   import Icon from './aplayer-icon.vue';
-  export default {
+
+  @Component({
     components: {
       Icon
-    },
-    props: ['icon']
+    }
+  })
+  export default class IconButton extends Vue {
+    @Prop()
+    icon
   };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">

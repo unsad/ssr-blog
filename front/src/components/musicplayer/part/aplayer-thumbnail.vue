@@ -13,62 +13,57 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
+  import { Vue, Component, Prop } from 'vue-property-decorator';
   import IconButton from './aplayer-iconbutton.vue';
-  export default {
+  @Component({
     components: {
       IconButton
-    },
-    props: {
-      pic: String,
-      playing: {
-        type: Boolean,
-        default: false
-      },
-      enableDrag: {
-        type: Boolean,
-        default: false
-      }
-    },
-    data () {
+    }
+  })
+  export default class Thumbnail extends Vue {
+    @Prop()
+    pic: string
+
+    @Prop({default: false})
+    playing: boolean
+
+    @Prop({default: false})
+    enableDrag: boolean
+   
+    hasMovedSinceMouseDown = false;
+    dragStartX = 0;
+    dragStartY = 0;
+
+    get currentPicStyleObj () {
+      if (!this.pic) return {};
       return {
-        hasMovedSinceMouseDown: false,
-        dragStartX: 0,
-        dragStartY: 0
+        backgroundImage: `url(${this.pic})`
       };
-    },
-    computed: {
-      currentPicStyleObj () {
-        if (!this.pic) return {};
-        return {
-          backgroundImage: `url(${this.pic})`
-        };
+    }
+
+    onDragBegin (e) {
+      if (this.enableDrag) {
+        this.hasMovedSinceMouseDown = false;
+        this.$emit('dragbegin');
+        this.dragStartX = e.clientX;
+        this.dragStartY = e.clientY;
+        document.addEventListener('mousemove', this.onDocumentMouseMove);
+        document.addEventListener('mouseup', this.onDocumentMouseUp);
       }
-    },
-    methods: {
-      onDragBegin (e) {
-        if (this.enableDrag) {
-          this.hasMovedSinceMouseDown = false;
-          this.$emit('dragbegin');
-          this.dragStartX = e.clientX;
-          this.dragStartY = e.clientY;
-          document.addEventListener('mousemove', this.onDocumentMouseMove);
-          document.addEventListener('mouseup', this.onDocumentMouseUp);
-        }
-      },
-      onDocumentMouseMove (e) {
-        this.hasMovedSinceMouseDown = true;
-        this.$emit('dragging', {offsetLeft: e.clientX - this.dragStartX, offsetTop: e.clientY - this.dragStartY});
-      },
-      onDocumentMouseUp (e) {
-        document.removeEventListener('mouseup', this.onDocumentMouseUp);
-        document.removeEventListener('mousemove', this.onDocumentMouseMove);
-        this.$emit('dragend');
-      },
-      onClick () {
-        if (!this.hasMovedSinceMouseDown) {
-          this.$emit('toggleplay');
-        }
+    }
+    onDocumentMouseMove (e) {
+      this.hasMovedSinceMouseDown = true;
+      this.$emit('dragging', {offsetLeft: e.clientX - this.dragStartX, offsetTop: e.clientY - this.dragStartY});
+    }
+    onDocumentMouseUp (e) {
+      document.removeEventListener('mouseup', this.onDocumentMouseUp);
+      document.removeEventListener('mousemove', this.onDocumentMouseMove);
+      this.$emit('dragend');
+    }
+    onClick () {
+      if (!this.hasMovedSinceMouseDown) {
+        this.$emit('toggleplay');
       }
     }
   };

@@ -2,10 +2,11 @@
   <blog-post type="post" :post="post" :prev="prev" :next="next" :site-info="siteInfo"></blog-post>
 </template>
 
-<script>
+<script lang="ts">
+  import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+  import { Getter } from 'vuex-class';
   import mock404 from '../utils/404';
-  import blogPost from './Post';
-  import { mapGetters } from 'vuex';
+  import blogPost from './Post.vue';
 
   function fetchBlog ({store, route: {path: pathName, params, query}}, callback) {
     pathName = pathName.replace(/^\/post\//g, '');
@@ -29,29 +30,29 @@
       callback
     });
   }
-  export default {
+
+  @Component({
     metaInfo() {
       return {
         title: this.post.title
       };
     },
-    computed: {
-      post () {
-        return this.$store.state.blog.pathName
-          ? this.$store.state.blog
-          : mock404;
-      },
-      ...mapGetters([
-        'prev',
-        'next',
-        'siteInfo'
-      ])
+    components: {
+      blogPost
     },
     asyncData(context) {
       return fetchBlog(context);
-    },
-    components: {
-      blogPost
+    }
+  })
+  export default class PostContainer extends Vue {
+    @Getter prev
+    @Getter next
+    @Getter siteInfo  
+
+    post() {
+      return this.$store.state.blog.pathName
+        ? this.$store.state.blog
+        : mock404;
     }
   };
 </script>

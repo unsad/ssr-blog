@@ -49,38 +49,55 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+  import { mixins } from 'vue-class-component';
+
   import myFooter from './Footer.vue';
   import disqus from './Disqus.vue';
-  import mixin from '../mixin/disqus';
+  import myMixin from '../mixin/disqus';
 
-  export default {
-    name: 'Post',
-    props: ['post', 'prev', 'next', 'siteInfo', 'type', 'supportWebp'],
-    mixins: [mixin],
-    computed: {
-      shouldShow() {
-        return this.post.pathName !== 404 && this.type === 'post';
-      },
-      commentName() {
-        return this.siteInfo.commentName.value || '';
-      },
-      siteURL() {
-        return this.siteInfo.siteUrl.value || 'localhost';
-      },
-      content() {
-        return this.filterWebp(this.post.content);
-      }
-    },
-    methods: {
-      filterWebp(content) {
-        if (!this.supportWebp) return content.replace(/\/webp/gm, '');
-        return content;
-      }
-    },
+  @Component({
     components: {
       myFooter,
       disqus
+    }
+  })
+  export default class Post extends mixins(myMixin) {
+    @Prop()
+    post
+
+    @Prop()
+    prev
+
+    @Prop()
+    next
+
+    @Prop()
+    siteInfo
+
+    @Prop()
+    type
+
+    @Prop()
+    supportWebp
+
+    get shouldShow() {
+      return this.post.pathName !== 404 && this.type === 'post';
+    }
+    get commentName() {
+      return this.siteInfo.commentName.value || '';
+    }
+    get siteURL() {
+      return this.siteInfo.siteUrl.value || 'localhost';
+    }
+    get content() {
+      return this.filterWebp(this.post.content);
+    }
+
+    filterWebp(content) {
+      if (!this.supportWebp) return content.replace(/\/webp/gm, '');
+      return content;
     }
   };
 </script>

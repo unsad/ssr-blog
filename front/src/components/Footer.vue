@@ -9,16 +9,13 @@
   </footer>
 </template>
 
-<script>
-  import { mapGetters } from 'vuex';
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
+  import { Getter } from 'vuex-class';
 
-  export default {
-    name: 'myFooter',
-    computed: {
-      ...mapGetters([
-        'siteInfo'
-      ])
-    }
+  @Component
+  export default class MyFooter extends Vue {
+    @Getter siteInfo
   };
 </script>
 <style lang="stylus" module="footer" rel="stylesheet/stylus">

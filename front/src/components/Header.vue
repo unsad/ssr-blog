@@ -9,12 +9,13 @@
   </div>
 </template>
 
-<script>
-  import mixin from '../mixin/image';
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
+  import { mixins } from 'vue-class-component';
+  import myMixin from '../mixin/image';
 
-  export default {
-    name: 'myHeader',
-    mixins: [mixin]
+  export default class MyHeader extends mixins(myMixin) {
+
   };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">

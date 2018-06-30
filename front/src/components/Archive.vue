@@ -20,7 +20,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
+  import {
+    Getter
+  } from 'vuex-class';
   import myFooter from './Footer.vue';
   import secondTitle from './SecondTitle.vue';
   import back from './Back.vue';
@@ -47,32 +51,24 @@
       callback
     });
   }
-
-  export default {
-    name: 'archive',
+  @Component({
     metaInfo() {
       return {
         title: this.title
       };
     },
-    computed: {
-      ...mapGetters([
-        'achieves'
-      ])
-    },
-    data() {
-      return {
-        title: '归档'
-      };
-    },
-    asyncData(context) {
-      return fetchArchive(context);
-    },
     components: {
       myFooter,
       secondTitle,
       back
+    },
+    asyncData(context) {
+      return fetchArchive(context);
     }
+  })
+  export default class Archive extends Vue {
+    title = '归档';
+    @Getter achieves
   };
 </script>
 <style module="archive" lang="stylus" rel="stylesheet/stylus">

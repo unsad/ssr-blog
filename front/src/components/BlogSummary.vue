@@ -13,23 +13,22 @@
   </article>
 </template>
 
-<script>
-  export default {
-    name: 'blogSummary',
-    props: {
-      article: {
-        type: Object, // 字符串
-        required: true
-      },
-      supprotWebp: Boolean
-    },
-    methods: {
-      filterWebp(content) {
-        if (!this.supportWebp) {
-          return content.replace(/\/webp/gm, '');
-        }
-        return content;
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
+
+  @Component
+  export default class BlogSummary extends Vue {
+    @Prop({required: true})
+    article: Object
+
+    @Prop()
+    supportWebp: boolean
+
+    filterWebp(content) {
+      if (!this.supportWebp) {
+        return content.replace(/\/webp/gm, '');
       }
+      return content;
     }
   };
 </script>

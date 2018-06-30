@@ -17,35 +17,33 @@
      <back :class="catchme.clearInlineStyle" :position="{right: '1rem', bottom: '1rem'}"></back>
   </div>
 </template>
-<script>
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import back from './Back.vue';
 import secondTitle from './SecondTitle.vue';
 
-export default {
-  name: 'catchme',
-  data() {
-    return {
-      topBoxData: {
-        'Github': 'https://github.com/unsad',
-        'Blog': 'https://www.sweetalkos.com',
-        'Dribbble': 'https://dribbble.com/unsad',
-        'Bilibili': 'https://space.bilibili.com/2428560/#/',
-        'Bangumi': 'https://bgm.tv/user/365090'
-      },
-      bottomBoxData: {
-        'Zhihu': 'https://www.zhihu.com/people/axunwa/activities',
-        'Pixiv': 'https://www.pixiv.net/member.php?id=8208657',
-        'NetEase Cloud Music': 'http://music.163.com/#/user/home?id=74380527',
-        'Email': 'wzxaylryw@hotmail.com',
-        'PSN': 'https://psnprofiles.com/per-unsad',
-        'Nintendo Switch': 'SW-4276-5641-6320'
-      }
-    };
-  },
+@Component({
   components: {
     back,
     secondTitle
   }
+})
+export default class CatchMe extends Vue {
+  topBoxData = {
+    'Github': 'https://github.com/unsad',
+    'Blog': 'https://www.sweetalkos.com',
+    'Dribbble': 'https://dribbble.com/unsad',
+    'Bilibili': 'https://space.bilibili.com/2428560/#/',
+    'Bangumi': 'https://bgm.tv/user/365090'
+  };
+  bottomBoxData = {
+    'Zhihu': 'https://www.zhihu.com/people/axunwa/activities',
+    'Pixiv': 'https://www.pixiv.net/member.php?id=8208657',
+    'NetEase Cloud Music': 'http://music.163.com/#/user/home?id=74380527',
+    'Email': 'wzxaylryw@hotmail.com',
+    'PSN': 'https://psnprofiles.com/per-unsad',
+    'Nintendo Switch': 'SW-4276-5641-6320'
+  };
 };
 </script>
 <style module="catchme" lang="stylus" rel="stylesheet/stylus">

@@ -17,12 +17,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
   import store from '../store/index';
   import back from './Back.vue';
   import myFooter from './Footer.vue';
   import secondTitle from './SecondTitle.vue';
-  import { mapGetters } from 'vuex';
 
   function fetchTags({store, route: {path: pathName, params, query}}, callback) {
     return store.dispatch('FETCH_TAGS', {
@@ -40,35 +40,28 @@
       callback
     });
   }
-
-  export default {
-    name: 'tag',
-    data() {
-      return {
-        title: '标签'
-      };
-    },
+  @Component({
     metaInfo() {
       return {
         title: this.title
       };
     },
+    asyncData(context) {
+      return fetchTags(context);
+    },
     components: {
       myFooter,
       secondTitle,
       back
-    },
-    computed: {
-      ...mapGetters([
-        'tags'
-      ]),
-      sortedKeys() {
-        let ref = this.tags;
-        return Object.keys(ref).sort((a, b) => ref[b] < ref[a]);
-      }
-    },
-    asyncData(context) {
-      return fetchTags(context);
+    }
+  })
+  export default class Tag extends Vue {
+    title = '标签';
+    @Getter tags
+
+    get sortedKeys() {
+      let ref = this.tags;
+      return Object.keys(ref).sort((a, b) => ref[b] < ref[a]);
     }
   };
 </script>

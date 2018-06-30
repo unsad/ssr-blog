@@ -8,15 +8,12 @@
       </h2>
   </div>
 </template>
-<script>
-export default {
-  name: 'secondTitle',
-  data() {
-    return {
-
-    };
-  },
-  props: ['secondText']
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+@Component
+export default class SecondTitle extends Vue {
+  @Prop()
+  secondText
 };
 </script>
 <style lang="stylus" module="secondTitle" rel="stylesheet/stylus">

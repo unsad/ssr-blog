@@ -10,8 +10,9 @@
   </div>
 </template>
 
-<script>
-  import { mapGetters } from 'vuex';
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
+  import { Getter } from 'vuex-class';
   import store from '../store/index';
   import myFooter from './Footer.vue';
   import blogSummary from './BlogSummary.vue';
@@ -44,8 +45,7 @@
     });
   }
 
-  export default {
-    name: 'tagPager',
+  @Component({
     components: {
       myFooter,
       blogSummary,
@@ -57,17 +57,15 @@
         title: `标签${this.$route.params.tagName}下的文章`
       };
     },
-    computed: {
-      ...mapGetters([
-        'tagPager',
-        'page',
-        'totalPage',
-        'supportWebp'
-      ])
-    },
     asyncData(context) {
       return getItems(context);
     }
+  })
+  export default class TagPager extends Vue {
+    @Getter tagPager 
+    @Getter page 
+    @Getter totalpage 
+    @Getter supportWebp
   };
 </script>
 <style lang="stylus" module="tagPager" rel="stylesheet/stylus">

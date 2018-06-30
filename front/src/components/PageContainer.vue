@@ -1,9 +1,10 @@
 <template>
   <blog-post type="page" :post="page" :siteInfo="siteInfo"></blog-post>
 </template>
-<script>
-  import { mapGetters } from 'vuex';
-  import blogPost from './Post';
+<script lang="ts">
+  import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+  import { Getter } from 'vuex-class';
+  import blogPost from './Post.vue';
   import mock404 from '../utils/404';
 
   function fetchPage({store, route: {path: pathName, params, query}}, callback) {
@@ -28,8 +29,7 @@
     });
   }
 
-  export default {
-    name: 'pageContainer',
+  @Component({
     asyncData(context) {
       return fetchPage(context);
     },
@@ -38,15 +38,12 @@
         title: this.page.title
       };
     },
-    computed: {
-      ...mapGetters([
-        'siteInfo'
-      ])
-    },
     components: {
-      pager,
       blogPost
     }
+  })
+  export default class PageContainer extends Vue {
+    @Getter siteInfo
   };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">

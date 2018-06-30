@@ -5,13 +5,16 @@
   </nav>
 </template>
 
-<script>
-  export default {
-    name: 'pagination',
-    props: {
-      totalPage: Number,
-      page: Number
-    }
+<script lang="ts">
+  import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+
+  @Component
+  export default class Pagination extends Vue {
+    @Prop()
+    totalPage: number
+
+    @Prop()
+    page: number
   };
 </script>
 <style module="pagination" lang="stylus" rel="stylesheet/stylus">

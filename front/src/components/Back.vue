@@ -3,23 +3,17 @@
         <object :class="back.backDeco" type="image/svg+xml" data="../../static/back.svg">This browser sucks</object>
     </router-link>
 </template>
-<script>
-export default {
-  name: 'back',
-  props: {
-    position: {
-      type: Object,
-      default: () => ({
-        left: '1rem',
-        bottom: '1rem'
-      })
-    }
-  },
-  data() {
-    return {
-
-    };
-  }
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+@Component
+export default class Back extends Vue {
+  @Prop({
+    default: () => ({
+      left: '1rem',
+      bottom: '1rem'
+    })
+  })
+  position: Object
 };
 </script>
 <style module="back" lang="stylus" rel="stylesheet/stylus">

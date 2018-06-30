@@ -15,15 +15,15 @@
   </div>
 </template>
 
-<script>
-  import myFooter from './Footer';
-  import blogSummary from './BlogSummary';
-  import Sidebar from './Sidebar';
-  import pagination from './Pagination';
-  import { mapGetters } from 'vuex';
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
+  import { Getter } from 'vuex-class';
+  import myFooter from './Footer.vue';
+  import blogSummary from './BlogSummary.vue';
+  import Sidebar from './Sidebar.vue';
+  import pagination from './Pagination.vue';
 
-  export default {
-    name: 'blogPager',
+  @Component({
     asyncData({store, route: {path, query, params}}, callback) {
       if (path !== '/') return resolve();
       let page = query ? (typeof query.page !== 'undefined') ? parseInt(query.page) : 1 : 1;
@@ -59,21 +59,19 @@
         title: '首页'
       };
     },
-    computed: {
-      ...mapGetters([
-        'items',
-        'page',
-        'totalPage',
-        'siteInfo',
-        'supportWebp'
-      ])
-    },
     components: {
       myFooter,
       blogSummary,
       pagination,
       Sidebar
     }
+  })
+  export default class BlogPager extends Vue {
+    @Getter items
+    @Getter page 
+    @Getter totalPage
+    @Getter siteInfo 
+    @Getter supportWebp
   };
 </script>
 <style module="blogPager" lang="stylus" rel="stylesheet/stylus">

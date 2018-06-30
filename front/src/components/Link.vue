@@ -15,55 +15,16 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import myFooter from './Footer.vue';
 import back from './Back.vue';
 import secondTitle from './SecondTitle.vue';
 
-export default {
-  name: 'Link',
+@Component({
   metaInfo() {
     return {
       title: this.title
-    };
-  },
-  data() {
-    return {
-      title: '友链',
-      linkitems: [
-        {
-          link: 'https://smallpath.me',
-          sitename: 'Smallpath的小站'
-        },
-        {
-          link: 'http://uniclown.com/blog/',
-          sitename: 'AKAGI PROJECT'
-        },
-        {
-          link: 'https://jesor.me/about/',
-          sitename: '大破进击'
-        },
-        {
-          link: '',
-          sitename: ''
-        },
-        {
-          link: '',
-          sitename: ''
-        },
-        {
-          link: '',
-          sitename: ''
-        },
-        {
-          link: '',
-          sitename: ''
-        },
-        {
-          link: '',
-          sitename: ''
-        }
-      ]
     };
   },
   components: {
@@ -71,6 +32,43 @@ export default {
     secondTitle,
     back
   }
+})
+export default class Link extends Vue {
+  title = '友链';
+  linkitems = [
+    {
+      link: 'https://smallpath.me',
+      sitename: 'Smallpath的小站'
+    },
+    {
+      link: 'http://uniclown.com/blog/',
+      sitename: 'AKAGI PROJECT'
+    },
+    {
+      link: 'https://jesor.me/about/',
+      sitename: '大破进击'
+    },
+    {
+      link: '',
+      sitename: ''
+    },
+    {
+      link: '',
+      sitename: ''
+    },
+    {
+      link: '',
+      sitename: ''
+    },
+    {
+      link: '',
+      sitename: ''
+    },
+    {
+      link: '',
+      sitename: ''
+    }
+  ]
 };
 </script>
 <style lang="stylus" module="link" rel="stylesheet/stylus">

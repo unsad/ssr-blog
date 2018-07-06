@@ -8,7 +8,7 @@
   import mock404 from '../utils/404';
   import blogPost from './Post.vue';
 
-  function fetchBlog ({store, route: {path: pathName, params, query}}, callback) {
+  function fetchBlog ({store, route: {path: pathName, params, query}}, callback?) {
     pathName = pathName.replace(/^\/post\//g, '');
     return store.dispatch('FETCH_BLOG', {
       conditions: {

@@ -49,7 +49,7 @@
 
     mounted () {
       this.$el.style.height = `${this.$el.offsetHeight}px`;
-      this.$refs.ol.style.height = `${this.$el.offsetHeight}px`;
+      (<HTMLElement>this.$refs.ol).style.height = `${this.$el.offsetHeight}px`;
     }
   };
 </script>

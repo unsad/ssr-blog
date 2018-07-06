@@ -45,7 +45,7 @@
     thumbHovered = false;
 
     onThumbMouseDown (e) {
-      const barWidth = this.$refs.barWrap.clientWidth;
+      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
       let percentage = (e.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
@@ -55,7 +55,7 @@
       document.addEventListener('mouseup', this.onDocumentMouseUp);
     }
     onDocumentMouseMove (e) {
-      const barWidth = this.$refs.barWrap.clientWidth;
+      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
       let percentage = (e.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
@@ -64,14 +64,14 @@
     onDocumentMouseUp (e) {
       document.removeEventListener('mouseup', this.onDocumentMouseUp);
       document.removeEventListener('mousemove', this.onDocumentMouseMove);
-      const barWidth = this.$refs.barWrap.clientWidth;
+      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
       let percentage = (e.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
       this.$emit('dragend', percentage);
     }
     onThumbTouchStart (e) {
-      const barWidth = this.$refs.barWrap.clientWidth;
+      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
       let percentage = (e.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
@@ -81,7 +81,7 @@
     }
     onDocumentTouchMove (e) {
       const touch = e.changedTouches[0];
-      const barWidth = this.$refs.barWrap.clientWidth;
+      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
       let percentage = (touch.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
@@ -91,7 +91,7 @@
       document.removeEventListener('touchend', this.onDocumentTouchEnd);
       document.removeEventListener('touchmove', this.onDocumentTouchMove);
       const touch = e.changedTouches[0];
-      const barWidth = this.$refs.barWrap.clientWidth;
+      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
       let percentage = (touch.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;

@@ -65,7 +65,7 @@
     }
 
     @Watch('currentMusic', {immediate: true})
-    handler(music) {
+    currentMusicHandler(music) {
       this.currentLineIndex = 0;
         if (music.lrc) {
           this.applyLrc(music.lrc);
@@ -75,18 +75,13 @@
     }
 
     @Watch('playStat.playedTime')
-    handler(playedTime) {
+    playedTimeHandler(playedTime) {
       for (let i = 0; i < this.lrcLines.length; i++) {
         const line = this.lrcLines[i];
         const nextLine = this.lrcLines[i + 1];
         if (playedTime >= line[0] && (!nextLine || playedTime < nextLine[0])) {
           this.currentLineIndex = i;
         }
-      }
-    }
-    watch: {
-      'playStat.playedTime' (playedTime) {
-        
       }
     }
   };

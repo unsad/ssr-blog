@@ -37,12 +37,12 @@
         this.page.url = self.$el.baseURI;
       };
       setTimeout(() => {
-        let d = documents;
+        let d = document;
         let s = d.createElement('script');
         s.type = 'text/javascript';
         s.async = true;
         s.setAttribute('id', 'embed-disqus');
-        s.setAttribute('data-timestamp', +new Date());
+        s.setAttribute('data-timestamp', `${new Date()}`);
         s.src = `//${this.shortname}.disqus.com/embed.js`;
         (d.head || d.body).appendChild(s);
       }, 0);

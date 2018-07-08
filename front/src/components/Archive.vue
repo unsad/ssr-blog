@@ -28,9 +28,8 @@
   import myFooter from './Footer.vue';
   import secondTitle from './SecondTitle.vue';
   import back from './Back.vue';
-  import { mapGetters } from 'vuex';
 
-  function fetchArchive({store, route}, callback) {
+  function fetchArchive({store, route}, callback?) {
     return store.dispatch('FETCH_ACHIEVE', {
       model: 'post',
       query: {
@@ -54,7 +53,7 @@
   @Component({
     metaInfo() {
       return {
-        title: this.title
+        title: (<Archive>this).title
       };
     },
     components: {

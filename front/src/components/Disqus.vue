@@ -24,8 +24,8 @@
       dsq.reset({
         reload: true,
         config: function () {
-          this.page.identifier = (self.$route.path || window.location.pathname);
-          this.page.url = self.$el.baseURI;
+          (<any>this).page.identifier = (self.$route.path || window.location.pathname);
+          (<any>this).page.url = self.$el.baseURI;
         }
       });
     }
@@ -33,8 +33,8 @@
     init () {
       const self = this;
       window.disqus_config = function() {
-        this.page.identifier = (self.$route.path || window.location.pathname);
-        this.page.url = self.$el.baseURI;
+        (<any>this).page.identifier = (self.$route.path || window.location.pathname);
+        (<any>this).page.url = self.$el.baseURI;
       };
       setTimeout(() => {
         let d = document;

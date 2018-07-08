@@ -24,7 +24,7 @@ import secondTitle from './SecondTitle.vue';
 @Component({
   metaInfo() {
     return {
-      title: this.title
+      title: (<Link>this).title
     };
   },
   components: {
@@ -68,7 +68,7 @@ export default class Link extends Vue {
       link: '',
       sitename: ''
     }
-  ]
+  ];
 };
 </script>
 <style lang="stylus" module="link" rel="stylesheet/stylus">

@@ -7,7 +7,7 @@
   import blogPost from './Post.vue';
   import mock404 from '../utils/404';
 
-  function fetchPage({store, route: {path: pathName, params, query}}, callback) {
+  function fetchPage({store, route: {path: pathName, params, query}}, callback?) {
     pathName = pathName.replace(/^\//g, '');
     return store.dispatch('FETCH_PAGE', {
       conditions: {
@@ -32,11 +32,6 @@
   @Component({
     asyncData(context) {
       return fetchPage(context);
-    },
-    metaInfo() {
-      return {
-        title: this.page.title
-      };
     },
     components: {
       blogPost

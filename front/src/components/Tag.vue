@@ -19,12 +19,13 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator';
+  import { Getter } from 'vuex-class';
   import store from '../store/index';
   import back from './Back.vue';
   import myFooter from './Footer.vue';
   import secondTitle from './SecondTitle.vue';
 
-  function fetchTags({store, route: {path: pathName, params, query}}, callback) {
+  function fetchTags({store, route: {path: pathName, params, query}}, callback?) {
     return store.dispatch('FETCH_TAGS', {
       model: 'post',
       query: {
@@ -43,7 +44,7 @@
   @Component({
     metaInfo() {
       return {
-        title: this.title
+        title: (<Tag>this).title
       };
     },
     asyncData(context) {
@@ -61,7 +62,7 @@
 
     get sortedKeys() {
       let ref = this.tags;
-      return Object.keys(ref).sort((a, b) => ref[b] < ref[a]);
+      return Object.keys(ref).sort((a, b) => ref[b] - ref[a]);
     }
   };
 </script>

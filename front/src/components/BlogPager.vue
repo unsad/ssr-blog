@@ -68,9 +68,9 @@
   })
   export default class BlogPager extends Vue {
     @Getter items
-    @Getter page 
+    @Getter page
     @Getter totalPage
-    @Getter siteInfo 
+    @Getter siteInfo
     @Getter supportWebp
   };
 </script>

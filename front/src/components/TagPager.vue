@@ -62,9 +62,9 @@
     }
   })
   export default class TagPager extends Vue {
-    @Getter tagPager 
-    @Getter page 
-    @Getter totalpage 
+    @Getter tagPager
+    @Getter page
+    @Getter totalpage
     @Getter supportWebp
   };
 </script>

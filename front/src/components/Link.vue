@@ -24,7 +24,7 @@ import secondTitle from './SecondTitle.vue';
 @Component({
   metaInfo() {
     return {
-      title: (<Link>this).title
+      title: this.title
     };
   },
   components: {
@@ -34,7 +34,7 @@ import secondTitle from './SecondTitle.vue';
   }
 })
 export default class Link extends Vue {
-  title = '友链';
+  title: string = '友链';
   linkitems = [
     {
       link: 'https://smallpath.me',

@@ -3,9 +3,9 @@
  */
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import { mapGetters } from 'vuex';
 import { Getter } from 'vuex-class';
 
+@Component
 export default class myMixin extends Vue {
   @Getter option
   @Getter siteInfo

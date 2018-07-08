@@ -21,7 +21,6 @@
 
   import LoadingBar from '@/components/Loading.vue';
   import musicPlayer from '@/components/musicplayer/MusicPlayer.vue';
-  import { mapGetters } from 'vuex';
   import './assets/css/index.styl';
 
   import myMixin from './mixin/image';

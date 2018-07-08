@@ -2,9 +2,10 @@
  * Created by unsad on 2017/11/10.
  */
 import Vue from 'vue';
-import { Watch } from 'vue-property-decorator';
+import { Watch, Component } from 'vue-property-decorator';
 const TYPES = ['post', 'page'];
 
+@Component
 export default class DisqusMixin extends Vue {
   @Watch('$route')
   resetDisqus (val, oldVal) {

@@ -111,7 +111,7 @@ import secondTitle from './SecondTitle.vue';
 @Component({
   metaInfo() {
     return {
-      title: (<About>this).title
+      title: this.title
     };
   },
   components: {

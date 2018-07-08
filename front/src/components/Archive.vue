@@ -56,13 +56,13 @@
         title: (<Archive>this).title
       };
     },
+    asyncData(context) {
+      return fetchArchive(context);
+    },
     components: {
       myFooter,
       secondTitle,
       back
-    },
-    asyncData(context) {
-      return fetchArchive(context);
     }
   })
   export default class Archive extends Vue {

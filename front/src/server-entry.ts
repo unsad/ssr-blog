@@ -29,6 +29,7 @@ export default context => {
         store,
         route: router.currentRoute
       }))).then(() => {
+        debugger;
         isDev && console.log(`data pre-fetch: ${Date.now() - s}ms`);
         context.state = store.state;
         resolve(app);

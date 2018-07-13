@@ -87,10 +87,10 @@ module.exports = {
       },
       {
         test: /\.(styl(us)?|css)$/,
-        use: [isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'vue-style-loader',
+        use: (isProd ? [MiniCssExtractPlugin.loader] : []).concat(['vue-style-loader',
           cssLoader,
           postcssLoader,
-          'stylus-loader']
+          'stylus-loader'])
       }
     ]
   },

@@ -10,7 +10,16 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const cssLoader = {
+function generateCssRules(cssLoaderOption) {
+  return (isProd ? [MiniCssExtractPlugin.loader] : []).concat([
+    'vue-style-loader',
+    cssLoaderOption,
+    postcssLoader,
+    'stylus-loader'
+  ]);
+}
+
+const cssLoaderWithModule = {
   loader: 'css-loader',
   options: {
     minimize: isProd,
@@ -87,10 +96,15 @@ module.exports = {
       },
       {
         test: /\.(styl(us)?|css)$/,
-        use: (isProd ? [MiniCssExtractPlugin.loader] : []).concat(['vue-style-loader',
-          cssLoader,
-          postcssLoader,
-          'stylus-loader'])
+        oneOf: [
+          {
+            resourceQuery: /module/,
+            use: generateCssRules(cssLoaderWithModule)
+          },
+          {
+            use: generateCssRules('css-loader')
+          }
+        ]
       }
     ]
   },

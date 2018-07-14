@@ -40,7 +40,7 @@ router.onReady(() => {
     const activated = matched.filter((c, i) => {
       return diffed || (diffed = (prevMatched[i] !== c));
     });
-    const asyncDataHooks = activated.map(c => (<any>c).asyncData).filter(_ => _);
+    const asyncDataHooks = activated.map(c => (((<any>c).options || {}).asyncData)).filter(_ => _);
 
     store.dispatch('SET_TRAN', to.name !== from.name);
 

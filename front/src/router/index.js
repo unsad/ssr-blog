@@ -10,26 +10,14 @@ if (isServer) {
   };
 }
 
-const CreatePostView = type => resolve => {
-  import('@/views/CreatePostView').then(component => {
-    const target = component.default(type);
-    resolve(target);
-  });
-};
-
 const BlogPager = () => import('@/components/BlogPager');
-const PageContainer = () => import('@/components/PageContainer');
 const PostContainer = () => import('@/components/PostContainer');
 const Archive = () => import('@/components/Archive');
 const Tag = () => import('@/components/Tag');
 const TagPager = () => import('@/components/TagPager');
-const Sidebar = () => import('@/components/Sidebar');
-const Header = () => import('@/components/Header');
 const About = () => import('@/components/About');
 const Link = () => import('@/components/Link');
 const CatchMe = () => import('@/components/CatchMe');
-const Post = CreatePostView('post');
-const Page = CreatePostView('page');
 
 Vue.use(Router);
 Vue.use(VueMeta);
@@ -57,7 +45,7 @@ export function createRouter() {
       {
         path: '/post/:pathName',
         name: 'post',
-        component: Post
+        component: PostContainer
       },
       {
         path: '/archive',
@@ -88,11 +76,6 @@ export function createRouter() {
         path: '/tag/:tagName',
         name: 'tagPager',
         component: TagPager
-      },
-      {
-        path: '/:page*',
-        name: 'page',
-        component: Page
       }
     ]
   });

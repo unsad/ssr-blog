@@ -55,7 +55,7 @@
 
   import myFooter from './Footer.vue';
   import disqus from './Disqus.vue';
-  import myMixin from '../mixin/disqus';
+  import MyMixin from '../mixin/disqus';
 
   @Component({
     components: {
@@ -63,7 +63,7 @@
       disqus
     }
   })
-  export default class Post extends mixins(myMixin) {
+  export default class Post extends mixins(MyMixin) {
     @Prop()
     post
 

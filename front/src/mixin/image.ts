@@ -6,7 +6,7 @@ import { Component } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 
 @Component
-export default class myMixin extends Vue {
+export default class MyMixin extends Vue {
   @Getter option
   @Getter siteInfo
   @Getter supportWebp
@@ -16,8 +16,8 @@ export default class myMixin extends Vue {
   get sidebarUrl() {
     return this.getValidImageUrl(this.option ? this.option.sidebarImageUrl || '' : '');
   }
-  getValidImageUrl (url) {
+  getValidImageUrl(url) {
     if (!this.supportWebp) return url.replace(/.webp$/, '.png').replace('/webp', '');
     return url;
   }
-};
+}

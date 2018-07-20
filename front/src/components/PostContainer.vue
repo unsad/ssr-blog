@@ -37,7 +37,7 @@
   @Component({
     metaInfo() {
       return {
-        title: (<any>(<PostContainer>this).post).title
+        title: this.post.title
       };
     },
     components: {

@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Prop } from 'vue-property-decorator';
+  import { Component } from 'vue-property-decorator';
   import { mixins } from 'vue-class-component';
   import {
     Getter
@@ -23,13 +23,17 @@
   import musicPlayer from './components/musicplayer/MusicPlayer.vue';
   import './assets/css/index.styl';
 
-  import myMixin from './mixin/image';
+  import MyMixin from './mixin/image';
 
   @Component({
     asyncData({store, route: {path, params, query}}) {
-      return Promise.all([store.dispatch('FETCH_OPTIONS'), store.dispatch('FETCH_FIREKYLIN'), store.dispatch('FETCH_MUSIC', {
+    return Promise.all([
+      store.dispatch('FETCH_OPTIONS'),
+      store.dispatch('FETCH_FIREKYLIN'),
+      store.dispatch('FETCH_MUSIC', {
         model: 'music'
-      })]);
+        })
+      ]);
     },
     components: {
       LoadingBar,
@@ -60,15 +64,15 @@
       };
     }
   })
-  export default class App extends mixins(myMixin) {
+  export default class App extends mixins(MyMixin) {
     @Getter progress
     @Getter tran
     @Getter music
-  };
+  }
 </script>
 <style lang="stylus" module="app" rel="stylesheet/stylus">
   .container
-    background: $main-color
+     background: $main-color
     .appContent 
       min-height: 100vh
 

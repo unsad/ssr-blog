@@ -4,7 +4,7 @@
     <second-title second-text="I was turning my back on you my friend"></second-title>
     <div :class="link.content">
       <ul :class="link.linklistBox">
-        <li :class="link.clearInlineStyle" v-for="(item, index) of linkitems" :key="item.link" :style="{'margin-left': `-${index * 5}rem`}"><a :href="item.link" target="_blank">{{item.sitename}}</a></li>
+        <li :class="link.clearInlineStyle" v-for="(item, index) of linkitems" :key="item.url + index" :style="{'margin-left': `-${index * 5}rem`}"><a :href="item.url" target="_blank">{{item.sitename}}</a></li>
       </ul>
       <div class="no-phone" :class="link.objectBox">
         <object type="image/svg+xml" data="../../static/link-bg.svg">This browser sucks</object>
@@ -37,35 +37,35 @@ export default class Link extends Vue {
   title: string = '友链';
   linkitems = [
     {
-      link: 'https://smallpath.me',
+      url: 'https://smallpath.me',
       sitename: 'Smallpath的小站'
     },
     {
-      link: 'http://uniclown.com/blog/',
+      url: 'http://uniclown.com/blog/',
       sitename: 'AKAGI PROJECT'
     },
     {
-      link: 'https://jesor.me/about/',
+      url: 'https://jesor.me/about/',
       sitename: '大破进击'
     },
     {
-      link: '',
+      url: '',
       sitename: ''
     },
     {
-      link: '',
+      url: '',
       sitename: ''
     },
     {
-      link: '',
+      url: '',
       sitename: ''
     },
     {
-      link: '',
+      url: '',
       sitename: ''
     },
     {
-      link: '',
+      url: '',
       sitename: ''
     }
   ];

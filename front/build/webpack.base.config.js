@@ -62,15 +62,15 @@ module.exports = {
   module: {
     noParse: /es-promise\.js$/,
     rules: [
-      // {
-      //   enforce: 'pre',
-      //   test: /\.(js|vue)$/,
-      //   loader: 'eslint-loader',
-      //   exclude: /node_modules/,
-      //   options: {
-      //     formatter: require('eslint-friendly-formatter')
-      //   }
-      // },
+      {
+        enforce: 'pre',
+        test: /\.(ts|js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',

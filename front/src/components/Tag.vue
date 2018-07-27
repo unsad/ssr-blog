@@ -21,7 +21,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator';
   import { Getter } from 'vuex-class';
   import store from '../store/index';
-  import back from './Back.vue';
+  import back from './Back';
   import myFooter from './Footer.vue';
   import secondTitle from './SecondTitle.vue';
 

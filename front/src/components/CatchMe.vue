@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import back from './Back.vue';
+import back from './Back';
 import secondTitle from './SecondTitle.vue';
 
 @Component({

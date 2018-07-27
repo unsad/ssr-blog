@@ -27,7 +27,7 @@
   } from 'vuex-class';
   import myFooter from './Footer.vue';
   import secondTitle from './SecondTitle.vue';
-  import back from './Back.vue';
+  import back from './Back';
 
   function fetchArchive({ store, route }, callback?) {
     return store.dispatch('FETCH_ACHIEVE', {

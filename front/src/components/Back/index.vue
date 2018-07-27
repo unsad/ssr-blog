@@ -1,8 +1,9 @@
 <template>
     <router-link tag="div" :to="{path: '/'}" :class="back.container" :style="position">
-        <object :class="back.backDeco" type="image/svg+xml" data="../../static/back.svg">This browser sucks</object>
+        <object :class="back.backDeco" type="image/svg+xml" data="./img/back.svg">Back</object>
     </router-link>
 </template>
+
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 @Component

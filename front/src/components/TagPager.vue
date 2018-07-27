@@ -17,7 +17,7 @@
   import myFooter from './Footer.vue';
   import blogSummary from './BlogSummary.vue';
   import pagination from './Pagination.vue';
-  import back from './Back.vue';
+  import back from './Back';
 
   function getItems({ store, route: { path, query, params }}, callback?) {
     return store.dispatch('FETCH_TAG_PAGER', {

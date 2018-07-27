@@ -17,9 +17,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import myFooter from './Footer.vue';
-import back from './Back';
-import secondTitle from './SecondTitle.vue';
+import myFooter from '@/components/Footer';
+import back from '@/components/Back';
+import secondTitle from '@/components/SecondTitle';
 
 @Component({
   metaInfo() {

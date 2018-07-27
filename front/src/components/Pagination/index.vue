@@ -18,7 +18,7 @@
   }
 </script>
 <style module="pagination" lang="stylus" rel="stylesheet/stylus">
-@import '../assets/css/mixin.styl'
+@import '~@/assets/css/mixin.styl'
 
  .container
     display: flex 

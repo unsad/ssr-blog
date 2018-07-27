@@ -21,9 +21,9 @@
   import { Component, Prop, Vue } from 'vue-property-decorator';
   import { Getter } from 'vuex-class';
   import store from '../store/index';
-  import back from './Back';
-  import myFooter from './Footer.vue';
-  import secondTitle from './SecondTitle.vue';
+  import back from '@/components/Back';
+  import myFooter from '@/components/Footer';
+  import secondTitle from '@/components/SecondTitle';
 
   function fetchTags({ store, route: { path: pathName, params, query }}, callback?) {
     return store.dispatch('FETCH_TAGS', {

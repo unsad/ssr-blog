@@ -14,10 +14,10 @@
   import { Component, Prop, Vue } from 'vue-property-decorator';
   import { Getter } from 'vuex-class';
   import store from '../store/index';
-  import myFooter from './Footer.vue';
-  import blogSummary from './BlogSummary.vue';
-  import pagination from './Pagination.vue';
-  import back from './Back';
+  import myFooter from '@/components/Footer';
+  import blogSummary from '@/components/BlogSummary';
+  import pagination from '@/components/Pagination';
+  import back from '@/compnents/Back';
 
   function getItems({ store, route: { path, query, params }}, callback?) {
     return store.dispatch('FETCH_TAG_PAGER', {

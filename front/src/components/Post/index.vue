@@ -53,8 +53,8 @@
   import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
   import { mixins } from 'vue-class-component';
 
-  import myFooter from './Footer.vue';
-  import disqus from './Disqus.vue';
+  import myFooter from '@/components/Footer';
+  import disqus from '@/components/Disqus';
   import MyMixin from '../mixin/disqus';
 
   @Component({
@@ -102,7 +102,7 @@
   }
 </script>
 <style lang="stylus" module="$post" rel="stylesheet/stylus">
-@import '../assets/css/mixin.styl'
+@import '~@/assets/css/mixin.styl'
 
 @media only screen and (max-width : 768px)
   .container 

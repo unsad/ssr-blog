@@ -4,10 +4,10 @@
 <script lang="ts">
   import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
   import { Getter } from 'vuex-class';
-  import blogPost from './Post.vue';
+  import blogPost from '@/components/Post.vue';
   import mock404 from '../utils/404';
 
-  function fetchPage({store, route: {path: pathName, params, query}}, callback?) {
+  function fetchPage({ store, route: { path: pathName, params, query }}, callback?) {
     pathName = pathName.replace(/^\//g, '');
     return store.dispatch('FETCH_PAGE', {
       conditions: {
@@ -39,7 +39,7 @@
   })
   export default class PageContainer extends Vue {
     @Getter siteInfo
-  };
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 

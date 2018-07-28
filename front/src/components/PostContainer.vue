@@ -9,12 +9,12 @@
   import blogPost from './Post.vue';
 
   function fetchBlog({ store, route: { path: pathName, params, query }}, callback?) {
-    let rePathName = pathName.replace(/^\/post\//g, '');
+    pathName = pathName.replace(/^\/post\//g, '');
     return store.dispatch('FETCH_BLOG', {
       model: 'post',
       query: {
         conditions: {
-          pathName: rePathName,
+          pathName,
           isPublic: true,
           type: 'post'
         },

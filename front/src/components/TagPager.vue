@@ -1,8 +1,8 @@
 <template>
-  <div :class="tagPager.container">
-    <section :class="tagPager.index">
+  <div :class="tagPagerCss.container">
+    <section :class="tagPagerCss.index">
       <h1 class="intro">标签<a href="javascript: void(0)">{{$route.params.tagName}}</a>下的文章</h1>
-      <blog-summary :class="tagPager.summary" v-for="item of tagPager" :key="item.pathname" :article="item" :support-webp="supportWebp"></blog-summary>
+      <blog-summary :class="tagPagerCss.summary" v-for="item of tagPager" :key="item.pathname" :article="item" :support-webp="supportWebp"></blog-summary>
       <pagination :page="1" :total-page="1"></pagination>
     </section>
     <back></back>
@@ -64,11 +64,10 @@
   export default class TagPager extends Vue {
     @Getter tagPager
     @Getter page
-    @Getter totalpage
     @Getter supportWebp
   }
 </script>
-<style lang="stylus" module="tagPager" rel="stylesheet/stylus">
+<style lang="stylus" module="tagPagerCss" rel="stylesheet/stylus">
 .container
   background: linear-gradient(60deg, transparent 62%, $main-color 0),
               linear-gradient(40deg, transparent 18%, $main-second-color 0)

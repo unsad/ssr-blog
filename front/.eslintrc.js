@@ -21,6 +21,7 @@ module.exports = {
     'no-unused-vars': 0,
     'prefer-promise-reject-errors': 0,
     'one-var': 0,
-    'no-param-reassign': 0
+    'no-param-reassign': 0,
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
 }

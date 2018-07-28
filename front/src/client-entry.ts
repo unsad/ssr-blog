@@ -34,15 +34,15 @@ router.onReady(() => {
   }
 
   const beforeResolveHook = (to, from, next) => {
+    debugger;
     const matched = router.getMatchedComponents(to);
     const prevMatched = router.getMatchedComponents(from);
     let diffed = false;
     const activated = matched.filter((c, i) => {
       if (!diffed) {
-        return prevMatched[i] !== c;
-      } else {
-        return diffed;
+        diffed = prevMatched[i] !== c;
       }
+      return diffed;
     });
     const asyncDataHooks = activated.map(c => ((c.options || {}).asyncData)).filter(_ => _);
 

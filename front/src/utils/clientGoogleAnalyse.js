@@ -15,7 +15,7 @@ export default function (fullPath) {
   };
 
   let queryArr = [];
-  for (let i of Object.ksys(params)) {
+  for (let i of Object.keys(params)) {
     queryArr.push(i + '=' + encodeURIComponent(params[i]));
   }
   let queryString = '?' + queryArr.join('&');

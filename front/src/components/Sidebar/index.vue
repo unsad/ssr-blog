@@ -1,7 +1,7 @@
 <template>
   <div :class="sidebar.container">
      <div :class="sidebar.pic" class="no-phone">
-        <img src="../../static/sidebar.svg" alt="" width="125%">
+        <img src="./img/sidebar.svg" alt="" width="125%">
     </div>
     <nav :class="{[sidebar.image]: sidebarUrl !== '', [sidebar.content]: true}">
       <div class="profile" v-if="false">
@@ -57,7 +57,7 @@
 <script lang="ts">
   import { Component } from 'vue-property-decorator';
   import { mixins } from 'vue-class-component';
-  import myMixin from '../mixin/image';
+  import myMixin from '@/mixin/image';
 
   @Component
   export default class Sidebar extends mixins(myMixin) {}

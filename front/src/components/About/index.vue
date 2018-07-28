@@ -4,7 +4,7 @@
       <second-title second-text="Took the mask off to feel free"></second-title>
       <div :class="about.content">
         <div :class="about.objectBox">
-          <object style="width: 100%" type="image/svg+xml" data="../../static/me.svg">This browser sucks</object>
+          <object style="width: 100%" type="image/svg+xml" data="./img/me.svg">This browser sucks</object>
           <div :class="[about.directBox, about.box1]">
             <svg :class="about.directLine" version="1.1" xmlns="http://www.w3.org/2000/svg">
               <polyline points="0,0 100,75 200,75"
@@ -104,9 +104,9 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import myFooter from '@/components/Footer';
-import back from '@/components/Back';
-import secondTitle from '@/components/SecondTitle';
+import myFooter from '@/components/footer';
+import back from '@/components/back';
+import secondTitle from '@/components/second-title';
 
 @Component({
   metaInfo() {
@@ -125,7 +125,7 @@ export default class About extends Vue {
 }
 </script>
 <style lang="stylus" module="about" rel="stylesheet/stylus">
-@import '~@/assets/css/mixin.styl';
+@import '../../assets/css/mixin.styl';
 
 @media only screen and (min-width : 769px) 
   .container

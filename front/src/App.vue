@@ -19,8 +19,8 @@
     Getter
   } from 'vuex-class';
 
-  import LoadingBar from './components/Loading.vue';
-  import musicPlayer from './components/musicplayer/MusicPlayer.vue';
+  import LoadingBar from '@/components/loading';
+  import musicPlayer from '@/components/musicplayer';
   import './assets/css/index.styl';
 
   import MyMixin from './mixin/image';

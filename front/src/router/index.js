@@ -10,14 +10,14 @@ if (isServer) {
   };
 }
 
-const BlogPager = () => import('@/components/BlogPager');
-const PostContainer = () => import('@/components/PostContainer');
-const Archive = () => import('@/components/Archive');
-const Tag = () => import('@/components/Tag');
-const TagPager = () => import('@/components/TagPager');
-const About = () => import('@/components/About');
-const Link = () => import('@/components/Link');
-const CatchMe = () => import('@/components/CatchMe');
+const BlogPager = () => import('@/components/blog-pager');
+const PostContainer = () => import('@/components/post-container');
+const Archive = () => import('@/components/archive');
+const Tag = () => import('@/components/tag');
+const TagPager = () => import('@/components/tag-pager');
+const About = () => import('@/components/about');
+const Link = () => import('@/components/link');
+const CatchMe = () => import('@/components/catchme');
 
 Vue.use(Router);
 Vue.use(VueMeta);

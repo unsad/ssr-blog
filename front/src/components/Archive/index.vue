@@ -25,9 +25,9 @@
   import {
     Getter
   } from 'vuex-class';
-  import myFooter from '@/components/Footer';
-  import secondTitle from '@/components/SecondTitle';
-  import back from '@/Components/Back';
+  import myFooter from '@/components/footer';
+  import secondTitle from '@/components/second-title';
+  import back from '@/components/back';
 
   function fetchArchive({ store, route }, callback?) {
     return store.dispatch('FETCH_ACHIEVE', {
@@ -71,7 +71,7 @@
   }
 </script>
 <style module="archive" lang="stylus" rel="stylesheet/stylus">
-@import '~@/assets/css/mixin.styl';
+@import '../../assets/css/mixin.styl';
 
 @media only screen and (max-width : 768px)
   .container

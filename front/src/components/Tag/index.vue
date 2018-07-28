@@ -21,9 +21,9 @@
   import { Component, Prop, Vue } from 'vue-property-decorator';
   import { Getter } from 'vuex-class';
   import store from '../store/index';
-  import back from '@/components/Back';
-  import myFooter from '@/components/Footer';
-  import secondTitle from '@/components/SecondTitle';
+  import back from '@/components/back';
+  import myFooter from '@/components/footer';
+  import secondTitle from '@/components/second-title';
 
   function fetchTags({ store, route: { path: pathName, params, query }}, callback?) {
     return store.dispatch('FETCH_TAGS', {
@@ -67,7 +67,7 @@
   }
 </script>
 <style lang="stylus" module="tag" rel="stylesheet/stylus">
-@import '../assets/css/mixin.styl'
+@import '../../assets/css/mixin.styl'
 
 .container 
   display: flex 

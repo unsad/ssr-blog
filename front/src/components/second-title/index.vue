@@ -2,7 +2,7 @@
   <div>
      <h2 :class="secondTitle.container">
         <span :class="secondTitle.text">
-          <object :class="secondTitle.deco" type="image/svg+xml" data="../../static/mask.svg">This browser sucks</object>
+          <object :class="secondTitle.deco" type="image/svg+xml" data="./img/mask.svg">This browser sucks</object>
           {{ `" ${secondText} "` }}
         </span>
       </h2>

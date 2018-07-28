@@ -4,7 +4,7 @@
 <script lang="ts">
   import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
   import { Getter } from 'vuex-class';
-  import blogPost from '@/components/Post.vue';
+  import blogPost from '@/components/post.vue';
   import mock404 from '../utils/404';
 
   function fetchPage({ store, route: { path: pathName, params, query }}, callback?) {

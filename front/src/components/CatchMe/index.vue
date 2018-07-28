@@ -19,8 +19,8 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import back from '@/components/Back';
-import secondTitle from '@/components/SecondTitle';
+import back from '@/components/back';
+import secondTitle from '@/components/second-title';
 
 @Component({
   components: {
@@ -52,7 +52,7 @@ export default class CatchMe extends Vue {
     font-size: $font-size-middle
     color: $main-third-color
     font-family: 'jackey_handwriteregular'
-    background: url(../../static/catchme.svg) no-repeat left bottom/78vh,
+    background: url(./img/catchme.svg) no-repeat left bottom/78vh,
                 linear-gradient(135deg, transparent, transparent calc(65vw + 30vh + 1rem), $main-color 0),
                 linear-gradient(135deg, transparent, transparent calc(65vw + 30vh), $main-third-color 0),
                 linear-gradient(130deg, $main-second-color, $main-second-color 20vh, transparent 0),

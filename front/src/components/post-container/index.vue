@@ -5,8 +5,8 @@
 <script lang="ts">
   import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
   import { Getter } from 'vuex-class';
-  import mock404 from '../utils/404';
-  import blogPost from '@/components/Post';
+  import mock404 from '@/utils/404';
+  import blogPost from '@/components/post';
 
   function fetchBlog({ store, route: { path: pathName, params, query }}, callback?) {
     pathName = pathName.replace(/^\/post\//g, '');

@@ -18,10 +18,10 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator';
   import { Getter } from 'vuex-class';
-  import myFooter from '@/components/Footer';
-  import blogSummary from '@/components/BlogSummary';
-  import Sidebar from '@/components/Sidebar';
-  import pagination from '@/components/Pagination';
+  import myFooter from '@/components/footer';
+  import blogSummary from '@/components/blog-summary';
+  import Sidebar from '@/components/sidebar';
+  import pagination from '@/components/pagination';
 
   @Component({
     asyncData({store, route: {path, query, params}}, callback) {
@@ -75,7 +75,7 @@
   }
 </script>
 <style module="blogPager" lang="stylus" rel="stylesheet/stylus">
-@import '~@/assets/css/mixin.styl';
+@import '../../assets/css/mixin.styl';
 
 @media only screen and (max-width : 768px) 
   .container

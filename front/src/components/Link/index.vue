@@ -7,7 +7,7 @@
         <li :class="link.clearInlineStyle" v-for="(item, index) of linkitems" :key="item.url + index" :style="{'margin-left': `-${index * 5}rem`}"><a :href="item.url" target="_blank">{{item.sitename}}</a></li>
       </ul>
       <div class="no-phone" :class="link.objectBox">
-        <object type="image/svg+xml" data="../../static/link-bg.svg">This browser sucks</object>
+        <object type="image/svg+xml" data="./img/link-bg.svg">This browser sucks</object>
       </div>
     </div>
     <back></back>
@@ -17,9 +17,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import myFooter from '@/components/Footer';
-import back from '@/components/Back';
-import secondTitle from '@/components/SecondTitle';
+import myFooter from '@/components/footer';
+import back from '@/components/back';
+import secondTitle from '@/components/second-title';
 
 @Component({
   metaInfo() {
@@ -72,7 +72,7 @@ export default class Link extends Vue {
 }
 </script>
 <style lang="stylus" module="link" rel="stylesheet/stylus">
-@import '../assets/css/mixin.styl'
+@import '../../assets/css/mixin.styl'
 
 .container    
   display: flex 

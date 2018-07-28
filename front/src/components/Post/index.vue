@@ -53,9 +53,9 @@
   import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
   import { mixins } from 'vue-class-component';
 
-  import myFooter from '@/components/Footer';
-  import disqus from '@/components/Disqus';
-  import MyMixin from '../mixin/disqus';
+  import myFooter from '@/components/footer';
+  import disqus from '@/components/disqus';
+  import MyMixin from '@/mixin/disqus';
 
   @Component({
     components: {
@@ -102,7 +102,7 @@
   }
 </script>
 <style lang="stylus" module="$post" rel="stylesheet/stylus">
-@import '~@/assets/css/mixin.styl'
+@import '../../assets/css/mixin.styl'
 
 @media only screen and (max-width : 768px)
   .container 
@@ -131,7 +131,7 @@
           list-style-type: disc 
           color: $content-main-color
           margin-left: $space-middle-u
-        background: url(../../static/post-bg.svg) no-repeat bottom left/80%,
+        background: url('./img/post-bg.svg') no-repeat bottom left/80%,
                     linear-gradient(to left, $main-second-color 30%, $content-bg-color)  
       ul 
         margin-left: 1rem

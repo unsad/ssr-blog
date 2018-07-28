@@ -33,7 +33,7 @@
   }
 </script>
 <style module="summary" lang="stylus" rel="stylesheet/stylus">
-@import '~@/assets/css/mixin.styl'
+@import '../../assets/css/mixin.styl'
 
 .container
   font-size: $font-size-small-u

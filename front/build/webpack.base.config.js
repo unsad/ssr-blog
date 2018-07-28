@@ -86,14 +86,6 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jpg|gif|svg|woff|woff2|ttf)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: '[name].[ext]?[hash]'
-        }
-      },
-      {
         test: /\.(styl(us)?|css)$/,
         oneOf: [
           {
@@ -104,6 +96,14 @@ module.exports = {
             use: generateCssRules('css-loader')
           }
         ]
+      },
+      {
+        test: /\.(png|jpg|gif|svg|woff|woff2|ttf)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: '[name].[ext]?[hash]'
+        }
       }
     ]
   },

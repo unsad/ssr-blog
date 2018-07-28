@@ -52,7 +52,7 @@ export default class CatchMe extends Vue {
     font-size: $font-size-middle
     color: $main-third-color
     font-family: 'jackey_handwriteregular'
-    background: url(./img/catchme.svg) no-repeat left bottom/78vh,
+    background: url(@/components/catchme/img/catchme.svg) no-repeat left bottom/78vh,
                 linear-gradient(135deg, transparent, transparent calc(65vw + 30vh + 1rem), $main-color 0),
                 linear-gradient(135deg, transparent, transparent calc(65vw + 30vh), $main-third-color 0),
                 linear-gradient(130deg, $main-second-color, $main-second-color 20vh, transparent 0),

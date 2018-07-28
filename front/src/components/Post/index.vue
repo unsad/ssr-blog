@@ -131,7 +131,7 @@
           list-style-type: disc 
           color: $content-main-color
           margin-left: $space-middle-u
-        background: url('./img/post-bg.svg') no-repeat bottom left/80%,
+        background: url('@/components/post/img/post-bg.svg') no-repeat bottom left/80%,
                     linear-gradient(to left, $main-second-color 30%, $content-bg-color)  
       ul 
         margin-left: 1rem

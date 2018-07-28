@@ -60,7 +60,7 @@
   import myMixin from '../mixin/image';
 
   @Component
-  export default class Sidebar extends mixins(myMixin) {};
+  export default class Sidebar extends mixins(myMixin) {}
 </script>
 <style module="sidebar" lang="stylus" rel="stylesheet/stylus">
 @media only screen and (max-width: 768px)

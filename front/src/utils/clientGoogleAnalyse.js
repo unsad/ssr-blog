@@ -11,11 +11,11 @@ export default function (fullPath) {
     sr: screen.width + 'x' + screen.height,
     dpr: window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || 1,
     dp: fullPath,
-    z: +new Date()
+    z: Number(new Date())
   };
 
   let queryArr = [];
-  for (let i in params) {
+  for (let i of Object.ksys(params)) {
     queryArr.push(i + '=' + encodeURIComponent(params[i]));
   }
   let queryString = '?' + queryArr.join('&');

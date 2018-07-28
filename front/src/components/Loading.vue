@@ -17,10 +17,12 @@
     width: number = 0;
     wait: boolean = false;
 
-    @Prop({default: {
-      type: Number,
-      default: 0
-    }})
+    @Prop({
+      default: {
+        type: Number,
+        default: 0
+      }
+    })
     progress: any
 
     @Watch('progress')
@@ -53,12 +55,12 @@
     }
     styling() {
       if (!this.wait) {
-        return {width: `${this.width}%`};
+        return { width: `${this.width}%` };
       } else {
-        return {width: `100%`};
+        return { width: `100%` };
       }
     }
-  };
+  }
 </script>
 <style module="loading" lang="stylus" rel="stylesheet/stylus">
   .loadingBar

@@ -14,7 +14,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 export default class SecondTitle extends Vue {
   @Prop()
   secondText
-};
+}
 </script>
 <style lang="stylus" module="secondTitle" rel="stylesheet/stylus">
 .container

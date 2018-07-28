@@ -99,7 +99,7 @@
       if (!this.supportWebp) return content.replace(/\/webp/gm, '');
       return content;
     }
-  };
+  }
 </script>
 <style lang="stylus" module="$post" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl'

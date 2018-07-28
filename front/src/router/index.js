@@ -28,12 +28,12 @@ export function createRouter() {
     fallback: false,
     scrollBehavior: function (to, from, savedPosition) {
       if (to.hash) {
-        return {selector: decodeURIComponent(to.hash)};
+        return { selector: decodeURIComponent(to.hash) };
       }
       if (savedPosition) {
         return savedPosition;
       } else {
-        return {x: 0, y: 0};
+        return { x: 0, y: 0 };
       }
     },
     routes: [
@@ -80,4 +80,4 @@ export function createRouter() {
     ]
   });
   return router;
-};
+}

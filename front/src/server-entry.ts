@@ -13,7 +13,7 @@ export default context => {
     const { fullPath } = router.resolve(url).route;
 
     if (fullPath !== url) {
-      return reject({url: fullPath});
+      return reject({ url: fullPath });
     }
 
     router.push(url);
@@ -23,8 +23,8 @@ export default context => {
 
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents();
-      if (!matchedComponents.length) return reject({code: 404});
-      Promise.all(preFetchComponent.concat(matchedComponents).map(({options: {asyncData}}) => asyncData && asyncData({
+      if (!matchedComponents.length) return reject({ code: 404 });
+      Promise.all(preFetchComponent.concat(matchedComponents).map(({ options: { asyncData }}) => asyncData && asyncData({
         store,
         route: router.currentRoute
       }))).then(() => {

@@ -26,14 +26,14 @@
     @Prop()
     type
 
-    get viewBox () {
+    get viewBox() {
       return SVG[this.type][0];
     }
 
-    get d () {
+    get d() {
       return SVG[this.type][1];
     }
-  };
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   .aplayer-icon 

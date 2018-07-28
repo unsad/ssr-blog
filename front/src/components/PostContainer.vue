@@ -8,13 +8,13 @@
   import mock404 from '../utils/404';
   import blogPost from './Post.vue';
 
-  function fetchBlog ({store, route: {path: pathName, params, query}}, callback?) {
-    pathName = pathName.replace(/^\/post\//g, '');
+  function fetchBlog({ store, route: { path: pathName, params, query }}, callback?) {
+    let rePathName = pathName.replace(/^\/post\//g, '');
     return store.dispatch('FETCH_BLOG', {
       model: 'post',
       query: {
         conditions: {
-          pathName,
+          pathName: rePathName,
           isPublic: true,
           type: 'post'
         },
@@ -50,14 +50,14 @@
   export default class PostContainer extends Vue {
     @Getter prev
     @Getter next
-    @Getter siteInfo  
+    @Getter siteInfo
 
     get post() {
       return this.$store.state.blog.pathName
         ? this.$store.state.blog
         : mock404;
     }
-  };
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 

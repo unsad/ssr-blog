@@ -51,13 +51,13 @@ export function createStore() {
       }
     },
     actions: {
-      SET_PROGRESS: ({commit, state}, progress) => {
+      SET_PROGRESS: ({ commit, state }, progress) => {
         commit('SET_PROGRESS_VALUE', progress);
       },
-      SET_TRAN: ({commit, state}, tran) => {
+      SET_TRAN: ({ commit, state }, tran) => {
         commit('SET_TRAN_VALUE', tran);
       },
-      START_LOADING: ({commit, state, dispatch}) => {
+      START_LOADING: ({ commit, state, dispatch }) => {
         dispatch('SET_PROGRESS', 30);
         let interval = setInterval(() => {
           let progress = state.progress;
@@ -68,17 +68,17 @@ export function createStore() {
         }, 400);
         return interval;
       },
-      FETCH_BLOG: ({commit, state, dispatch}, {model, query, callback}) => {
+      FETCH_BLOG: ({ commit, state, dispatch }, { model, query, callback }) => {
         return api.fetch(model, query).then(result => {
           let blog = result[0];
           if (!blog) {
             return Promise.reject('post not exist');
           }
-          commit('SET_BLOG', {blog});
+          commit('SET_BLOG', { blog });
           callback && callback();
           let first = api.fetch('post', {
             conditions: {
-              _id: {$lt: blog._id},
+              _id: { $lt: blog._id },
               type: 'post',
               isPublic: true
             },
@@ -95,7 +95,7 @@ export function createStore() {
           });
           let second = api.fetch('post', {
             conditions: {
-              _id: {$gt: blog._id},
+              _id: { $gt: blog._id },
               type: 'post',
               isPublic: true
             },
@@ -110,21 +110,21 @@ export function createStore() {
           return Promise.all([first, second]).then(result => {
             let prevPost = result[0][0];
             if (prevPost && prevPost.type === 'post') {
-              commit('SET_PREV', {post: prevPost});
+              commit('SET_PREV', { post: prevPost });
             } else {
-              commit('SET_PREV', {post: {}});
+              commit('SET_PREV', { post: {}});
             }
 
             let nextPost = result[1][0];
             if (nextPost && nextPost.type === 'post') {
-              commit('SET_NEXT', {post: nextPost});
+              commit('SET_NEXT', { post: nextPost });
             } else {
-              commit('SET_NEXT', {post: {}});
+              commit('SET_NEXT', { post: {}});
             }
           });
         });
       },
-      FETCH_TAGS: ({commit, state, dispatch}, {model, query, callback}) => {
+      FETCH_TAGS: ({ commit, state, dispatch }, { model, query, callback }) => {
         return api.fetch(model, query).then(result => {
           let tags = result.reduce((prev, curr) => {
             curr.tags.forEach(tag => {
@@ -136,28 +136,28 @@ export function createStore() {
             });
             return prev;
           }, {});
-          commit('SET_TAGS', {tags});
+          commit('SET_TAGS', { tags });
           callback && callback();
         });
       },
-      FETCH_MUSIC: ({commit, state}) => {
+      FETCH_MUSIC: ({ commit, state }) => {
         return api.fetch('music').then(musicArr => {
-          musicArr = utils.shuffle(musicArr);
-          commit('SET_MUSIC', { musicArr });
+          const reMusicArr = utils.shuffle(musicArr);
+          commit('SET_MUSIC', { musicArr: reMusicArr });
         });
       },
-      FETCH_PAGE: ({commit, state, dispatch}, {model, query, callback}) => {
+      FETCH_PAGE: ({ commit, state, dispatch }, { model, query, callback }) => {
         return api.fetch(model, query).then(result => {
           let blog = result[0];
           if (blog) {
-            commit('SET_PAGE', {blog});
+            commit('SET_PAGE', { blog });
           }
           callback && callback();
         });
       },
-      FETCH_ITEMS: ({commit, state, dispatch}, {model, query, callback}) => {
+      FETCH_ITEMS: ({ commit, state, dispatch }, { model, query, callback }) => {
         return api.fetch(model, query).then(items => {
-          commit('SET_ITEMS', {items});
+          commit('SET_ITEMS', { items });
           callback && callback();
           if (state.totalPage === -1) {
             return api.fetch(model, {
@@ -167,19 +167,19 @@ export function createStore() {
               },
               count: 1
             }).then(totalPage => {
-              commit('SET_PAGES', {totalPage: Math.ceil(totalPage / 10)});
+              commit('SET_PAGES', { totalPage: Math.ceil(totalPage / 10) });
             });
           }
           return Promise.resolve();
         });
       },
-      FETCH_TAG_PAGER: ({commit, state, dispatch}, {model, query, callback}) => {
+      FETCH_TAG_PAGER: ({ commit, state, dispatch }, { model, query, callback }) => {
         return api.fetch(model, query).then(items => {
-          commit('SET_TAG_PAGER', {items});
+          commit('SET_TAG_PAGER', { items });
           callback && callback();
         });
       },
-      FETCH_ACHIEVE: ({commit, state, dispatch}, {model, query, callback}) => {
+      FETCH_ACHIEVE: ({ commit, state, dispatch }, { model, query, callback }) => {
         return api.fetch(model, query).then(items => {
           let sortedItem = items.reduce((prev, curr) => {
             let time = curr.createdAt.slice(0, 7).replace('-', '年') + '月';
@@ -190,11 +190,11 @@ export function createStore() {
             }
             return prev;
           }, {});
-          commit('SET_ACHIEVE', {sortedItem});
+          commit('SET_ACHIEVE', { sortedItem });
           callback && callback();
         });
       },
-      FETCH_FIREKYLIN: ({commit, state}) => {
+      FETCH_FIREKYLIN: ({ commit, state }) => {
         return api.fetch('theme', {
           conditions: {
             name: 'firekylin'
@@ -204,11 +204,11 @@ export function createStore() {
           }
         }).then(obj => {
           if (obj[0]) {
-            commit('SET_FIREKYLIN', {obj: obj[0]});
+            commit('SET_FIREKYLIN', { obj: obj[0] });
           }
         });
       },
-      FETCH_OPTIONS: ({commit, state}) => {
+      FETCH_OPTIONS: ({ commit, state }) => {
         return api.fetch('option', {
           select: {
             _id: 0,
@@ -220,18 +220,18 @@ export function createStore() {
             prev[curr.key] = curr;
             return prev;
           }, {});
-          commit('SET_OPTIONS', {obj});
+          commit('SET_OPTIONS', { obj });
         });
       }
     },
     mutations: {
-      SET_BLOG: (state, {blog}) => {
+      SET_BLOG: (state, { blog }) => {
         Vue.set(state, 'blog', blog);
       },
-      SET_PREV: (state, {post}) => {
+      SET_PREV: (state, { post }) => {
         Vue.set(state, 'prev', post);
       },
-      SET_NEXT: (state, {post}) => {
+      SET_NEXT: (state, { post }) => {
         Vue.set(state, 'next', post);
       },
       SET_PROGRESS_VALUE: (state, progress) => {
@@ -240,39 +240,39 @@ export function createStore() {
       SET_TRAN_VALUE: (state, tran) => {
         Vue.set(state, 'tran', tran);
       },
-      SET_TAGS: (state, {tags}) => {
+      SET_TAGS: (state, { tags }) => {
         Vue.set(state, 'tags', tags);
       },
       SET_MUSIC: (state, { musicArr }) => {
         Vue.set(state, 'music', musicArr);
       },
-      SET_TAG_PAGER: (state, {items}) => {
+      SET_TAG_PAGER: (state, { items }) => {
         Vue.set(state, 'tagPager', items);
       },
-      SET_ITEMS: (state, {items}) => {
+      SET_ITEMS: (state, { items }) => {
         Vue.set(state, 'items', items);
       },
-      SET_PAGES: (state, {totalPage}) => {
+      SET_PAGES: (state, { totalPage }) => {
         Vue.set(state, 'totalPage', totalPage);
       },
-      SET_PAGE: (state, {blog}) => {
+      SET_PAGE: (state, { blog }) => {
         Vue.set(state, 'page', blog);
       },
-      SET_ACHIEVE: (state, {sortedItem}) => {
+      SET_ACHIEVE: (state, { sortedItem }) => {
         Vue.set(state, 'achieves', sortedItem);
       },
-      SET_FIREKYLIN: (state, {obj}) => {
+      SET_FIREKYLIN: (state, { obj }) => {
         Vue.set(state, 'theme', obj);
       },
-      SET_OPTIONS: (state, {obj}) => {
+      SET_OPTIONS: (state, { obj }) => {
         Vue.set(state, 'siteInfo', obj);
       }
     },
     getters: {
-      items (state) {
+      items(state) {
         return state.items;
       },
-      music (state) {
+      music(state) {
         return state.music;
       },
       siteInfo(state) {
@@ -285,30 +285,30 @@ export function createStore() {
         return state.menu;
       },
       page(state) {
-        return +state.route.query.page || 1;
+        return Number(state.route.query.page) || 1;
       },
       totalPage(state) {
         return state.totalPage;
       },
-      progress (state) {
+      progress(state) {
         return state.progress;
       },
       tran(state) {
         return state.tran;
       },
-      option (state) {
+      option(state) {
         return state.theme.option;
       },
-      prev (state) {
+      prev(state) {
         return state.prev;
       },
-      next (state) {
+      next(state) {
         return state.next;
       },
-      tags (state) {
+      tags(state) {
         return state.tags;
       },
-      tagPager (state) {
+      tagPager(state) {
         return state.tagPager;
       },
       supportWebp(state) {

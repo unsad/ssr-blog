@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-  import {getElementViewLeft} from '../utils';
+  import { getElementViewLeft } from '../utils';
   import { Vue, Component, Prop } from 'vue-property-decorator';
 
   @Component
@@ -44,8 +44,8 @@
 
     thumbHovered = false;
 
-    onThumbMouseDown (e) {
-      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
+    onThumbMouseDown(e) {
+      const barWidth = this.$refs.barWrap.clientWidth;
       let percentage = (e.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
@@ -54,24 +54,24 @@
       document.addEventListener('mousemove', this.onDocumentMouseMove);
       document.addEventListener('mouseup', this.onDocumentMouseUp);
     }
-    onDocumentMouseMove (e) {
-      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
+    onDocumentMouseMove(e) {
+      const barWidth = this.$refs.barWrap.clientWidth;
       let percentage = (e.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
       this.$emit('dragging', percentage);
     }
-    onDocumentMouseUp (e) {
+    onDocumentMouseUp(e) {
       document.removeEventListener('mouseup', this.onDocumentMouseUp);
       document.removeEventListener('mousemove', this.onDocumentMouseMove);
-      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
+      const barWidth = this.$refs.barWrap.clientWidth;
       let percentage = (e.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
       this.$emit('dragend', percentage);
     }
-    onThumbTouchStart (e) {
-      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
+    onThumbTouchStart(e) {
+      const barWidth = this.$refs.barWrap.clientWidth;
       let percentage = (e.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
@@ -79,25 +79,25 @@
       document.addEventListener('touchmove', this.onDocumentTouchMove);
       document.addEventListener('touchend', this.onDocumentTouchEnd);
     }
-    onDocumentTouchMove (e) {
+    onDocumentTouchMove(e) {
       const touch = e.changedTouches[0];
-      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
+      const barWidth = this.$refs.barWrap.clientWidth;
       let percentage = (touch.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
       this.$emit('dragging', percentage);
     }
-    onDocumentTouchEnd (e) {
+    onDocumentTouchEnd(e) {
       document.removeEventListener('touchend', this.onDocumentTouchEnd);
       document.removeEventListener('touchmove', this.onDocumentTouchMove);
       const touch = e.changedTouches[0];
-      const barWidth = (<HTMLElement>this.$refs.barWrap).clientWidth;
+      const barWidth = this.$refs.barWrap.clientWidth;
       let percentage = (touch.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
       this.$emit('dragend', percentage);
     }
-  };
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
  .aplayer-bar-wrap 

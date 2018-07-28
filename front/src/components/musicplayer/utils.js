@@ -14,8 +14,8 @@
  */
 export function parseLrc(lrcS) {
   if (lrcS) {
-    lrcS = lrcS.replace(/([^\]^\n])\[/g, (match, p1) => p1 + '\n[');
-    const lyric = lrcS.split('\n');
+    const reLrcS = lrcS.replace(/([^\]^\n])\[/g, (match, p1) => p1 + '\n[');
+    const lyric = reLrcS.split('\n');
     const lrc = [];
     const lyricLen = lyric.length;
     for (let i = 0; i < lyricLen; i++) {
@@ -29,8 +29,8 @@ export function parseLrc(lrcS) {
         for (let j = 0; j < timeLen; j++) {
           const oneTime = /\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/.exec(lrcTimes[j]);
           const min2sec = oneTime[1] * 60;
-          const sec2sec = parseInt(oneTime[2]);
-          const msec2sec = oneTime[4] ? parseInt(oneTime[4]) / ((oneTime[4] + '').length === 2 ? 100 : 1000) : 0;
+          const sec2sec = parseInt(oneTime[2], 10);
+          const msec2sec = oneTime[4] ? parseInt(oneTime[4], 10) / ((String(oneTime[4])).length === 2 ? 100 : 1000) : 0;
           const lrcTime = min2sec + sec2sec + msec2sec;
           lrc.push([lrcTime, lrcText]);
         }
@@ -97,4 +97,4 @@ export function getElementViewTop(element) {
   }
   elementScrollTop = document.body.scrollTop + document.documentElement.scrollTop;
   return actualTop - elementScrollTop;
-};
+}

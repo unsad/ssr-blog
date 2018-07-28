@@ -29,7 +29,7 @@
   import secondTitle from './SecondTitle.vue';
   import back from './Back.vue';
 
-  function fetchArchive({store, route}, callback?) {
+  function fetchArchive({ store, route }, callback?) {
     return store.dispatch('FETCH_ACHIEVE', {
       model: 'post',
       query: {
@@ -53,7 +53,7 @@
   @Component({
     metaInfo() {
       return {
-        title: (<Archive>this).title
+        title: this.title
       };
     },
     asyncData(context) {
@@ -68,7 +68,7 @@
   export default class Archive extends Vue {
     title = '归档';
     @Getter achieves
-  };
+  }
 </script>
 <style module="archive" lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';

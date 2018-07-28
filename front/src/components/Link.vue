@@ -69,7 +69,7 @@ export default class Link extends Vue {
       sitename: ''
     }
   ];
-};
+}
 </script>
 <style lang="stylus" module="link" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl'

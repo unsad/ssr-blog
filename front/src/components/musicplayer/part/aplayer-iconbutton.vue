@@ -19,7 +19,7 @@
   export default class IconButton extends Vue {
     @Prop()
     icon
-  };
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
  

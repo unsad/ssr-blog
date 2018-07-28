@@ -84,7 +84,7 @@
   export default class Player extends Vue {
     @Prop({
       required: true,
-      validator (value) {
+      validator(value) {
         let song = value;
         if (!song.url || !song.title || !song.author) {
           song.title = song.title || 'Untitled';
@@ -100,7 +100,7 @@
       default() {
         return [];
       },
-      validator (value) {
+      validator(value) {
         let songs = value;
         let valid = true;
         for (let i = 0; i < songs.length; i++) {
@@ -116,41 +116,41 @@
     })
     list: any[]
 
-    @Prop({default: false})
+    @Prop({ default: false })
     mini: boolean
 
-    @Prop({default: false})
+    @Prop({ default: false })
     showLrc: boolean
 
-    @Prop({default: true})
+    @Prop({ default: true })
     mutex: boolean
 
-    @Prop({default: '#41b883'})
+    @Prop({ default: '#41b883' })
     theme: string
   
-    @Prop({default: 'circulation'})
+    @Prop({ default: 'circulation' })
     mode: string
 
-    @Prop({default: 'auto'})
+    @Prop({ default: 'auto' })
     preload: 'auto'
 
     @Prop()
     listMaxHeight: string
 
-    @Prop({default: false})
+    @Prop({ default: false })
     float: boolean
 
     // Audio attributes as props
     // autoplay controls muted preload volume
     // muted and volume are observable
-    @Prop({default: false})
+    @Prop({ default: false })
     autoplay: boolean
 
     /**
      * whether to show native audio controls below Vue-APlayer
      * only work in development environment and not mini mode
      */
-    @Prop({default: false})
+    @Prop({ default: false })
     controls: boolean;
 
     internalMusic = this.music;
@@ -178,33 +178,33 @@
     rejectPlayPromise: any;
   
     // alias for $refs.audio
-    get audio () {
-      return <HTMLMediaElement>this.$refs.audio;
+    get audio() {
+      return this.$refs.audio;
     }
 
-    get currentMusic () {
+    get currentMusic() {
       return this.internalMusic;
     }
 
     // compatible for deprecated props
-    get isMiniMode () {
+    get isMiniMode() {
       return this.mini;
     }
 
-    get shouldShowLrc () {
+    get shouldShowLrc() {
       return this.showLrc;
     }
 
     // prop wrappers
-    get currentTheme () {
+    get currentTheme() {
       return this.currentMusic.theme || this.theme;
     }
 
-    get isFloatMode () {
+    get isFloatMode() {
       return this.float && !this.isMobile;
     }
 
-    get floatStyleObj () {
+    get floatStyleObj() {
       // transform: translate(floatOffsetLeft, floatOffsetY)
       return {
         transform: `translate(${this.floatOffsetLeft}px, ${this.floatOffsetTop}px)`,
@@ -212,21 +212,21 @@
       };
     }
 
-    get shouldAutoplay () {
+    get shouldAutoplay() {
       if (this.isMobile) return false;
       return this.autoplay;
     }
 
-    get playMode () {
+    get playMode() {
       return this.internalMode;
     }
 
-    get musicList () {
+    get musicList() {
       return this.list;
     }
 
     // useful
-    get currentPicStyleObj () {
+    get currentPicStyleObj() {
       if (this.currentMusic && this.currentMusic.pic) {
         return {
           backgroundImage: `url(${this.currentMusic.pic})`
@@ -235,12 +235,12 @@
       return {};
     }
 
-    get loadProgress () {
+    get loadProgress() {
       if (this.playStat.duration === 0) return 0;
       return this.playStat.loadedTime / this.playStat.duration;
     }
 
-    get playProgress () {
+    get playProgress() {
       if (this.playStat.duration === 0) return 0;
       return this.playStat.playedTime / this.playStat.duration;
     }
@@ -253,30 +253,30 @@
       this.setCurrentMusic(this.musicList[val]);
     }
 
-    onDragBegin () {
+    onDragBegin() {
       this.floatOriginX = this.floatOffsetLeft;
       this.floatOriginY = this.floatOffsetTop;
     }
-    onDragAround ({offsetLeft, offsetTop}) {
+    onDragAround({ offsetLeft, offsetTop }) {
       this.floatOffsetLeft = this.floatOriginX + offsetLeft;
       this.floatOffsetTop = this.floatOriginY + offsetTop;
     }
-    setCurrentMusic (music) {
+    setCurrentMusic(music) {
       canUseSync && this.$emit('update:music', music);
       this.internalMusic = music;
     }
-    setPlayMode (mode) {
+    setPlayMode(mode) {
       canUseSync && this.$emit('update:mode', mode);
       this.internalMode = mode;
     }
-    toggle () {
+    toggle() {
       if (!this.audio.paused) {
         this.pause();
       } else {
         this.play();
       }
     }
-    play () {
+    play() {
       if (this.mutex) {
         if (activeMutex && activeMutex !== this) {
           activeMutex.pause();
@@ -297,7 +297,7 @@
         return this.audioPlayPromise;
       }
     }
-    pause () {
+    pause() {
       this.audioPlayPromise
         .then(() => {
           this.audio.pause();
@@ -305,8 +305,8 @@
       // Avoid force rejection throws Uncaught
         .catch(() => {
           this.audio.pause();
-        })
-        
+        });
+  
       // audioPlayPromise is still pending
       if (this.rejectPlayPromise) {
         // force reject playPromise
@@ -314,12 +314,12 @@
         this.rejectPlayPromise = null;
       }
     }
-    thenPlay () {
+    thenPlay() {
       this.$nextTick(() => {
         this.play();
       });
     }
-    onSelectSong (song) {
+    onSelectSong(song) {
       if (this.currentMusic === song) {
         this.toggle();
       } else {
@@ -327,46 +327,46 @@
         this.thenPlay();
       }
     }
-    toggleMute () {
+    toggleMute() {
       this.setAudioMuted(!this.audio.muted);
     }
-    setAudioMuted (val) {
+    setAudioMuted(val) {
       this.audio.muted = val;
       this.muted = this.audio.muted;
     }
-    setAudioVolume (val) {
+    setAudioVolume(val) {
       this.audio.volume = val;
       if (val > 0) {
         this.setAudioMuted(false);
       }
     }
-    setProgress (val) {
+    setProgress(val) {
       if (isNaN(this.audio.duration)) {
         this.playStat.playedTime = 0;
       } else {
         this.audio.currentTime = this.audio.duration * val;
       }
     }
-    onProgressDragBegin (val) {
+    onProgressDragBegin(val) {
       this.wasPlayingBeforeSeeking = this.isPlaying;
       this.pause();
       this.isSeeking = true;
       this.audio.currentTime = this.audio.duration * val;
     }
-    onProgressDragging (val) {
+    onProgressDragging(val) {
       if (isNaN(this.audio.duration)) {
         this.playStat.playedTime = 0;
       } else {
         this.audio.currentTime = this.audio.duration * val;
       }
     }
-    onProgressDragEnd (val) {
+    onProgressDragEnd(val) {
       this.isSeeking = false;
       if (this.wasPlayingBeforeSeeking) {
         this.thenPlay();
       }
     }
-    setNextMode () {
+    setNextMode() {
       if (this.musicList.length) {
         if (this.playMode === 'random') {
           this.setPlayMode('single');
@@ -385,40 +385,40 @@
         }
       }
     }
-    onAudioPlay () {
+    onAudioPlay() {
       this.isPlaying = true;
       this.$emit('play');
     }
-    onAudioPause () {
+    onAudioPause() {
       this.isPlaying = false;
       this.$emit('pause');
     }
-    onAudioDurationChange () {
+    onAudioDurationChange() {
       if (this.audio.duration !== 1) {
         this.playStat.duration = this.audio.duration;
       }
     }
-    onAudioProgress () {
+    onAudioProgress() {
       if (this.audio.buffered.length) {
         this.playStat.loadedTime = this.audio.buffered.end(this.audio.buffered.length - 1);
       } else {
         this.playStat.loadedTime = 0;
       }
     }
-    onAudioTimeUpdate () {
+    onAudioTimeUpdate() {
       this.playStat.playedTime = this.audio.currentTime;
     }
-    onAudioSeeking () {
+    onAudioSeeking() {
       this.playStat.playedTime = this.audio.currentTime;
     }
-    onAudioSeeked () {
+    onAudioSeeked() {
       this.playStat.playedTime = this.audio.currentTime;
     }
-    onAudioVolumeChange () {
+    onAudioVolumeChange() {
       this.volume = this.audio.volume;
       this.muted = this.audio.muted;
     }
-    onAudioEnded () {
+    onAudioEnded() {
       // if (!this.musicList.includes(this.currentMusic)) {
       if (this.playIndex === -1) {
         // if music list doesn't contain current music
@@ -454,7 +454,7 @@
       }
       this.$emit('ended');
     }
-    setupAudio () {
+    setupAudio() {
       this.muted = this.audio.muted;
       // there's no point making preload configurable
       this.audio.preload = 'true'; // this.preload

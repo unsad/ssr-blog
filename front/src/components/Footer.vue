@@ -16,7 +16,7 @@
   @Component
   export default class MyFooter extends Vue {
     @Getter siteInfo
-  };
+  }
 </script>
 <style lang="stylus" module="footer" rel="stylesheet/stylus">
 .container 

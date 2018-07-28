@@ -17,30 +17,30 @@
 
 <script lang="ts">
   import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-  import {parseLrc} from '../utils';
+  import { parseLrc } from '../utils';
   import axios from 'axios';
 
   @Component
   export default class Lyrics extends Vue {
-    @Prop({required: true})
+    @Prop({ required: true })
     currentMusic: Object
 
-    @Prop({required: true})
+    @Prop({ required: true })
     playStat: Object
 
     displayLrc = '';
     currentLineIndex = 0;
-   
-    get lrcLines () {
+  
+    get lrcLines() {
       return parseLrc(this.displayLrc);
     }
-    get currentLine () {
+    get currentLine() {
       if (this.currentLineIndex > this.lrcLines.length - 1) {
         return null;
       }
       return this.lrcLines[this.currentLineIndex];
     }
-    get transformStyle () {
+    get transformStyle() {
       // transform: translateY(0); -webkit-transform: translateY(0);
       return {
         transform: `translateY(${-this.currentLineIndex * 16}px)`,
@@ -48,19 +48,19 @@
       };
     }
 
-    applyLrc (lrc) {
+    applyLrc(lrc) {
       if (/^https?:\/\//.test(lrc)) {
         this.fetchLrc(lrc);
       } else {
         this.displayLrc = lrc;
       }
     }
-    fetchLrc (src) {
+    fetchLrc(src) {
       axios(src).then(response => response.data).then((lrc) => {
         this.displayLrc = lrc;
       }).catch(err => console.log(err));
     }
-    hideLrc () {
+    hideLrc() {
       this.displayLrc = '';
     }
 
@@ -84,7 +84,7 @@
         }
       }
     }
-  };
+  }
 </script>
 <style lang="stylus" scoped rel="stylesheet/stylus">
  

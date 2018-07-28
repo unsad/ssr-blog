@@ -9,7 +9,7 @@ const prefix = `${api.host}/api`;
 const store = {};
 store.fetch = (model, query) => {
   const target = `${prefix}/${model}`;
-  return axios.get(target, {params: query}).then(response => response.data);
+  return axios.get(target, { params: query }).then(response => response.data);
 };
 
 export default store;

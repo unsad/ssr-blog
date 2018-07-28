@@ -18,7 +18,7 @@
 
   @Component
   export default class BlogSummary extends Vue {
-    @Prop({required: true})
+    @Prop({ required: true })
     article: Object
 
     @Prop()
@@ -30,7 +30,7 @@
       }
       return content;
     }
-  };
+  }
 </script>
 <style module="summary" lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl'

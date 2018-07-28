@@ -122,7 +122,7 @@ import secondTitle from './SecondTitle.vue';
 })
 export default class About extends Vue {
   title = '关于';
-};
+}
 </script>
 <style lang="stylus" module="about" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';

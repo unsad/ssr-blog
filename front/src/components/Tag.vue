@@ -25,7 +25,7 @@
   import myFooter from './Footer.vue';
   import secondTitle from './SecondTitle.vue';
 
-  function fetchTags({store, route: {path: pathName, params, query}}, callback?) {
+  function fetchTags({ store, route: { path: pathName, params, query }}, callback?) {
     return store.dispatch('FETCH_TAGS', {
       model: 'post',
       query: {
@@ -44,7 +44,7 @@
   @Component({
     metaInfo() {
       return {
-        title: (<Tag>this).title
+        title: this.title
       };
     },
     asyncData(context) {
@@ -64,7 +64,7 @@
       let ref = this.tags;
       return Object.keys(ref).sort((a, b) => ref[b] - ref[a]);
     }
-  };
+  }
 </script>
 <style lang="stylus" module="tag" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl'

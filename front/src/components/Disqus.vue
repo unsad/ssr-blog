@@ -8,10 +8,10 @@
 
   @Component
   export default class Disqus extends Vue {
-    @Prop({required: true})
+    @Prop({ required: true })
     shortname: string
   
-    mounted () {
+    mounted() {
       if (window.DISQUS) {
         this.reset(window.DISQUS);
         return;
@@ -19,22 +19,22 @@
       this.init();
     }
 
-    reset (dsq) {
+    reset(dsq) {
       const self = this;
       dsq.reset({
         reload: true,
         config: function () {
-          (<any>this).page.identifier = (self.$route.path || window.location.pathname);
-          (<any>this).page.url = self.$el.baseURI;
+          this.page.identifier = (self.$route.path || window.location.pathname);
+          this.page.url = self.$el.baseURI;
         }
       });
     }
 
-    init () {
+    init() {
       const self = this;
       window.disqus_config = function() {
-        (<any>this).page.identifier = (self.$route.path || window.location.pathname);
-        (<any>this).page.url = self.$el.baseURI;
+      this.page.identifier = (self.$route.path || window.location.pathname);
+      this.page.url = self.$el.baseURI;
       };
       setTimeout(() => {
         let d = document;
@@ -47,7 +47,7 @@
         (d.head || d.body).appendChild(s);
       }, 0);
     }
-  };
+  }
 </script>
 
 <style></style>

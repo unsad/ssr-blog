@@ -14,7 +14,7 @@ export default class Back extends Vue {
     })
   })
   position: Object
-};
+}
 </script>
 <style module="back" lang="stylus" rel="stylesheet/stylus">
 @media only screen and (min-width : 769px)

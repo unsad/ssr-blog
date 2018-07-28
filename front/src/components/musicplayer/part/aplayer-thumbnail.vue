@@ -25,24 +25,24 @@
     @Prop()
     pic: string
 
-    @Prop({default: false})
+    @Prop({ default: false })
     playing: boolean
 
-    @Prop({default: false})
+    @Prop({ default: false })
     enableDrag: boolean
-   
+  
     hasMovedSinceMouseDown = false;
     dragStartX = 0;
     dragStartY = 0;
 
-    get currentPicStyleObj () {
+    get currentPicStyleObj() {
       if (!this.pic) return {};
       return {
         backgroundImage: `url(${this.pic})`
       };
     }
 
-    onDragBegin (e) {
+    onDragBegin(e) {
       if (this.enableDrag) {
         this.hasMovedSinceMouseDown = false;
         this.$emit('dragbegin');
@@ -52,21 +52,21 @@
         document.addEventListener('mouseup', this.onDocumentMouseUp);
       }
     }
-    onDocumentMouseMove (e) {
+    onDocumentMouseMove(e) {
       this.hasMovedSinceMouseDown = true;
-      this.$emit('dragging', {offsetLeft: e.clientX - this.dragStartX, offsetTop: e.clientY - this.dragStartY});
+      this.$emit('dragging', { offsetLeft: e.clientX - this.dragStartX, offsetTop: e.clientY - this.dragStartY });
     }
-    onDocumentMouseUp (e) {
+    onDocumentMouseUp(e) {
       document.removeEventListener('mouseup', this.onDocumentMouseUp);
       document.removeEventListener('mousemove', this.onDocumentMouseMove);
       this.$emit('dragend');
     }
-    onClick () {
+    onClick() {
       if (!this.hasMovedSinceMouseDown) {
         this.$emit('toggleplay');
       }
     }
-  };
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .aplayer-pic

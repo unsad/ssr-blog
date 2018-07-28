@@ -8,7 +8,7 @@ const TYPES = ['post', 'page'];
 @Component
 export default class DisqusMixin extends Vue {
   @Watch('$route')
-  resetDisqus (val, oldVal) {
+  resetDisqus(val, oldVal) {
     if (TYPES.indexOf(val.name) === -1) return;
     if (val.path === oldVal.path) return;
     if (window.DISQUS) {
@@ -16,7 +16,7 @@ export default class DisqusMixin extends Vue {
     }
   }
 
-  reset (dsq) {
+  reset(dsq) {
     const self = this;
     dsq.reset({
       reload: true,
@@ -26,4 +26,4 @@ export default class DisqusMixin extends Vue {
       }
     });
   }
-};
+}

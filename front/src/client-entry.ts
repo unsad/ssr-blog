@@ -2,16 +2,16 @@
  * Created by unsad on 2017/9/20.
  */
 import Vue from 'vue';
-import {createApp} from './main';
+import { createApp } from './main';
 import clientGoogleAnalyse from './utils/clientGoogleAnalyse';
 import makeResponsive from './assets/js/base';
 
 Vue.mixin({
   beforeRouteUpdate(to, from, next) {
-    const {asyncData} = (<Vue>this).$options;
+    const { asyncData } = this.$options;
     if (asyncData) {
       asyncData({
-        store: (<Vue>this).$store,
+        store: this.$store,
         route: to
       }).then(next).catch(next);
     } else {
@@ -19,7 +19,7 @@ Vue.mixin({
     }
   }
 });
-const {app, router, store, isProd, preFetchComponent} = createApp();
+const { app, router, store, isProd, preFetchComponent } = createApp();
 
 router.onReady(() => {
   if (window.__INITIAL_STATE__) {
@@ -38,9 +38,13 @@ router.onReady(() => {
     const prevMatched = router.getMatchedComponents(from);
     let diffed = false;
     const activated = matched.filter((c, i) => {
-      return diffed || (diffed = (prevMatched[i] !== c));
+      if (!diffed) {
+        return prevMatched[i] !== c;
+      } else {
+        return diffed;
+      }
     });
-    const asyncDataHooks = activated.map(c => (((<any>c).options || {}).asyncData)).filter(_ => _);
+    const asyncDataHooks = activated.map(c => ((c.options || {}).asyncData)).filter(_ => _);
 
     store.dispatch('SET_TRAN', to.name !== from.name);
 
@@ -61,7 +65,7 @@ router.onReady(() => {
 
     if (!asyncDataHooks.length) return endLoadingCallback();
 
-    Promise.all(asyncDataHooks.map(hook => hook({store, route: to}))).then(endLoadingCallback).catch(err => {
+    Promise.all(asyncDataHooks.map(hook => hook({ store, route: to }))).then(endLoadingCallback).catch(err => {
       console.error(Date.now().toLocaleString(), err);
       endLoadingCallback(false);
     });

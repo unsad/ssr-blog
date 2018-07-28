@@ -29,16 +29,16 @@
 
   @Component
   export default class MusicList extends Vue {
-    @Prop({default: true})
+    @Prop({ default: true })
     show: boolean
 
     @Prop()
     currentMusic: Object
 
-    @Prop({default: []})
+    @Prop({ default: [] })
     musicList: any[]
 
-    @Prop({default: 0})
+    @Prop({ default: 0 })
     playIndex: number
 
     @Prop()
@@ -47,10 +47,10 @@
     @Prop()
     listmaxheight: string
 
-    mounted () {
+    mounted() {
       this.$el.style.height = `${this.$el.offsetHeight}px`;
     }
-  };
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .aplayer-list-hide

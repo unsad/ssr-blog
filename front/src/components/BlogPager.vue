@@ -72,7 +72,7 @@
     @Getter totalPage
     @Getter siteInfo
     @Getter supportWebp
-  };
+  }
 </script>
 <style module="blogPager" lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl';

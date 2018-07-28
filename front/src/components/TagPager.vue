@@ -19,7 +19,7 @@
   import pagination from './Pagination.vue';
   import back from './Back.vue';
 
-  function getItems({store, route: {path, query, params}}, callback?) {
+  function getItems({ store, route: { path, query, params }}, callback?) {
     return store.dispatch('FETCH_TAG_PAGER', {
       model: 'post',
       query: {
@@ -66,7 +66,7 @@
     @Getter page
     @Getter totalpage
     @Getter supportWebp
-  };
+  }
 </script>
 <style lang="stylus" module="tagPager" rel="stylesheet/stylus">
 .container

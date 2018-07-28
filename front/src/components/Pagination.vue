@@ -15,7 +15,7 @@
 
     @Prop()
     page: number
-  };
+  }
 </script>
 <style module="pagination" lang="stylus" rel="stylesheet/stylus">
 @import '../assets/css/mixin.styl'

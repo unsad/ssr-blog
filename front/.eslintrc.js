@@ -17,6 +17,10 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    'indent': 0
+    'indent': 0,
+    'no-unused-vars': 0,
+    'prefer-promise-reject-errors': 0,
+    'one-var': 0,
+    'no-param-reassign': 0
   }
 }

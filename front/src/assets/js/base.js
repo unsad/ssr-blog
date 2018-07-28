@@ -1,14 +1,14 @@
 export default function () {
   if (typeof window !== 'undefined') {
     (function (win, doc) {
-      var getById = function (el) {
+      let getById = function (el) {
         return document.getElementById(el);
       };
 
       // from qwrap
-      var getDocRect = function (doc) {
+      let getDocRect = function (doc) {
         doc = doc || document;
-        var win = doc.defaultView || doc.parentWindow,
+        let win = doc.defaultView || doc.parentWindow,
           mode = doc.compatMode,
           root = doc.documentElement,
           h = win.innerHeight || 0,
@@ -40,8 +40,8 @@ export default function () {
         };
       };
 
-      var getXY = function (node) {
-        var doc = node.ownerDocument,
+      let getXY = function (node) {
+        let doc = node.ownerDocument,
           docRect = getDocRect(doc),
           scrollLeft = docRect.scrollX,
           scrollTop = docRect.scrollY,
@@ -57,12 +57,12 @@ export default function () {
         return xy;
       };
 
-      var getRect = function (el) {
-        var p = getXY(el);
-        var x = p[0];
-        var y = p[1];
-        var w = el.offsetWidth;
-        var h = el.offsetHeight;
+      let getRect = function (el) {
+        let p = getXY(el);
+        let x = p[0];
+        let y = p[1];
+        let w = el.offsetWidth;
+        let h = el.offsetHeight;
         return {
           'width': w,
           'height': h,
@@ -73,12 +73,12 @@ export default function () {
         };
       };
 
-      var utils = {
+      let utils = {
         isMob: (function () {
-          var ua = navigator.userAgent.toLowerCase();
-          var agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod'];
-          var result = false;
-          for (var i = 0; i < agents.length; i++) {
+          let ua = navigator.userAgent.toLowerCase();
+          let agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod'];
+          let result = false;
+          for (let i = 0; i < agents.length; i++) {
             if (ua.indexOf(agents[i].toLowerCase()) > -1) {
               result = true;
             }
@@ -93,7 +93,7 @@ export default function () {
         document.documentElement.className += ' pc';
       }
 
-      var Dom = {
+      let Dom = {
         $sidebar: document.querySelector('#sidebar'),
         $main: document.querySelector('#main'),
         $sidebar_mask: document.querySelector('#sidebar-mask'),
@@ -103,7 +103,7 @@ export default function () {
       };
 
       Dom.bindEvent = function () {
-        var _this = this,
+        let _this = this,
           bodyClassName = 'side',
           eventFirst = 'click',
           eventSecond = 'click';

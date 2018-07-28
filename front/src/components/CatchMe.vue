@@ -44,7 +44,7 @@ export default class CatchMe extends Vue {
     'PSN': 'https://psnprofiles.com/per-unsad',
     'Nintendo Switch': 'SW-4276-5641-6320'
   };
-};
+}
 </script>
 <style module="catchme" lang="stylus" rel="stylesheet/stylus">
 @media only screen and (min-width : 769px)

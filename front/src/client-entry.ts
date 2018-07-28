@@ -34,7 +34,6 @@ router.onReady(() => {
   }
 
   const beforeResolveHook = (to, from, next) => {
-    debugger;
     const matched = router.getMatchedComponents(to);
     const prevMatched = router.getMatchedComponents(from);
     let diffed = false;

@@ -277,6 +277,9 @@
       }
     }
     play() {
+      if (this.currentMusic && !this.audio.src) {
+        this.audio.src = this.currentMusic.url;
+      }
       if (this.mutex) {
         if (activeMutex && activeMutex !== this) {
           activeMutex.pause();
@@ -468,9 +471,6 @@
       this.audio.addEventListener('seeking', this.onAudioSeeking);
       this.audio.addEventListener('seeked', this.onAudioSeeked);
       this.audio.addEventListener('ended', this.onAudioEnded);
-      if (this.currentMusic) {
-        this.audio.src = this.currentMusic.url;
-      }
     }
 
     mounted() {

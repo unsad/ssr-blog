@@ -37,7 +37,7 @@ npm run dev // default serve at localhost: 8082
 
 ```
 cd front
-npm staill
+npm install
 npm run dev //default serve at localhost: 8080
 ```
 

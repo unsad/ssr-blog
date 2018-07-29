@@ -49,7 +49,6 @@
       let percentage = (e.clientX - getElementViewLeft(this.$refs.barWrap)) / barWidth;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
-      console.log(e.clientX, getElementViewLeft(this.$refs.barWrap));
       this.$emit('dragbegin', percentage);
       document.addEventListener('mousemove', this.onDocumentMouseMove);
       document.addEventListener('mouseup', this.onDocumentMouseUp);

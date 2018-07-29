@@ -40,23 +40,48 @@ if (process.env.NODE_ENV === 'production') {
       filename: 'service-worker.js',
       minify: true,
       dontCacheBustUrlsMatching: false,
-      staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
+      staticFileGlobsIgnorePatterns: [
+        /\.json$/, 
+        /index\.html$/,
+        /\.map$/,
+        /\.css$/,
+        /\.eot$/],
+      mergeStaticsConfig: true,
+      staticFileGlobs: [
+        path.join(__dirname, '../dist/static/*.*')
+      ],
+      stripPrefixMulti: {
+        [path.join(__dirname, '../dist/static')]: '/static'
+      },
       runtimeCaching: [
         {
           urlPattern: '/',
           handler: 'networkFirst'
         },
         {
-          urlPattern: /\/(top|new|show|ask|jobs)/,
-          handler: 'networkFirst'
+          urlPattern: /service-worker.js/,
+          handler: 'networkOnly'
         },
         {
-          urlPattern: '/item/:id',
-          handler: 'networkFirst'
+          // note that this pattern will cache ajax request
+          urlPattern: /(.+\/[^\.]*$)/,
+          handler: 'networkFirst',
+          options: {
+            cache: {
+              maxEntries: 30,
+              name: 'blog-runtime-cache'
+            }
+          }
         },
         {
-          urlPattern: '/user/:id',
-          handler: 'networkFirst'
+          urlPattern: /\.(png|jpg|webp|gif)/,
+          handler: 'cacheFirst',
+          options: {
+            cache: {
+              maxEntries: 20,
+              name: 'blog-picture-cache'
+            }
+          }
         }
       ]
     })

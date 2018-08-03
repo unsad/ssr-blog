@@ -6,16 +6,17 @@ COPY . /app
 
 # install mongo & redis
 
-RUN apt-get update
-RUN apt-get install -y mongodb
-RUN apt-get install -y redis-server
-RUN mkdir -p /data/db/
+RUN apt-get update \
+    && apt-get install -y mongodb \
+    && apt-get install -y redis-server \
+    && mkdir -p /data/db/ 
 
 # install npm packages
 RUN npm i -g pm2
 # install dependences
-RUN cd /app/server && sed 's/admin/coucou/' conf/config.tpl >conf/config.js && npm install
-RUN cd /app/front && cp server/mongo.tpl server/mongo.js && npm install && npm run build
+RUN cd /app/server && npm install
+RUN cd /app/front && npm install && npm run build
+RUN cd /app/admin && npm install && npm run build
 
 # clean cache
 RUN npm cache clean
@@ -24,6 +25,7 @@ WORKDIR /app
 
 EXPOSE 3000
 EXPOSE 8080
+EXPOSE 8082
 
 
 CMD mongod --logpath=/tmp/mongolog --fork&&redis-server /etc/redis/redis.conf&&pm2-docker start pm2.json

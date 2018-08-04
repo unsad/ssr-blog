@@ -73,6 +73,11 @@ let music = new Schema({
   lyric: String
 });
 
+let photo = new Schema({
+  type: String,
+  url: String, 
+  title: String
+});
 
 post = mongoose.model('post', post);
 category = mongoose.model('category', category);
@@ -81,6 +86,7 @@ theme = mongoose.model('theme', theme);
 tag = mongoose.model('tag', tag);
 user = mongoose.model('user', user);
 music = mongoose.model('music', music);
+photo = mongoose.model('photo', photo);
 
 module.exports = {
   post,
@@ -89,7 +95,8 @@ module.exports = {
   tag,
   user,
   theme,
-  music
+  music,
+  photo
 };
 
 

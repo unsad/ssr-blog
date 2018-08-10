@@ -21,6 +21,7 @@ export function createStore() {
       next: {},
       page: {},
       music: [],
+      album: [],
       tagPager: [],
       tags: [],
       theme: {},
@@ -146,6 +147,11 @@ export function createStore() {
           commit('SET_MUSIC', { musicArr: reMusicArr });
         });
       },
+      FETCH_ALBUM: ({ commit, state }) => {
+        return api.fetch('album').then(albumArr => {
+          commit('SET_ALBUM', { albumArr });
+        });
+      },
       FETCH_PAGE: ({ commit, state, dispatch }, { model, query, callback }) => {
         return api.fetch(model, query).then(result => {
           let blog = result[0];
@@ -246,6 +252,9 @@ export function createStore() {
       SET_MUSIC: (state, { musicArr }) => {
         Vue.set(state, 'music', musicArr);
       },
+      SET_ALBUM: (state, { albumArr }) => {
+        Vue.set(state, 'album', albumArr);
+      },
       SET_TAG_PAGER: (state, { items }) => {
         Vue.set(state, 'tagPager', items);
       },
@@ -274,6 +283,9 @@ export function createStore() {
       },
       music(state) {
         return state.music;
+      },
+      album(state) {
+        return state.album;
       },
       siteInfo(state) {
         return state.siteInfo;

@@ -16,6 +16,7 @@ const Archive = () => import('@/components/archive');
 const Tag = () => import('@/components/tag');
 const TagPager = () => import('@/components/tag-pager');
 const About = () => import('@/components/about');
+const Album = () => import('@/components/album');
 const Link = () => import('@/components/link');
 const CatchMe = () => import('@/components/catchme');
 
@@ -56,6 +57,11 @@ export function createRouter() {
         path: '/about',
         name: 'about',
         component: About
+      },
+      {
+        path: '/album',
+        name: 'album',
+        component: Album
       },
       {
         path: '/link',

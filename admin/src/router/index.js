@@ -9,6 +9,7 @@ import Login from '@/components/pages/Login';
 import Logout from '@/components/pages/Logout';
 import Dashboard from '@/components/pages/Dashboard';
 import Main from '@/components/Main';
+import AlbumCreate from '@/components/pages/AlbumCreate';
 
 Vue.use(Router);
 
@@ -182,188 +183,6 @@ export default new Router({
       ]
     },
     {
-      path: '/page',
-      name: 'page',
-      component: Main,
-      children: [
-        {
-          path: 'list',
-          name: 'pageList',
-          component: createListView({
-            name: 'page',
-            model: 'post',
-            items: [
-              {
-                prop: 'pathName',
-                label: '路径',
-                width: 170
-              },
-              {
-                prop: 'createdAt',
-                label: '创建日期',
-                width: 170
-              },
-              {
-                prop: 'updatedAt',
-                label: '修改日期',
-                width: 170
-              }
-            ],
-            query: {
-              conditions: {
-                type: 'page'
-              },
-              select: {
-                title: 1,
-                pathName: 1,
-                createdAt: 1,
-                updatedAt: 1
-              },
-              sort: {
-                createdAt: -1
-              }
-            }
-          })
-        },
-        {
-          path: 'create/:id?',
-          name: 'pageCreate',
-          component: createMarkdownView({
-            name: 'page',
-            model: 'post',
-            items: [
-              {
-                prop: 'title',
-                label: '标题',
-                type: 'input',
-                default: '',
-                width: 250
-              },
-              {
-                prop: 'pathName',
-                label: '路径',
-                type: 'input',
-                default: '',
-                width: 250,
-                description: '前端路径标志'
-              },
-              {
-                prop: 'markdownContent',
-                label: '内容',
-                type: 'markdown',
-                default: '',
-                width: 170,
-                subProp: 'markdownToc'
-              },
-              {
-                type: 'split'
-              },
-              {
-                prop: 'createdAt',
-                label: '创建日期',
-                type: 'date-picker',
-                default: '',
-                width: 170
-              },
-              {
-                prop: 'updatedAt',
-                label: '修改日期',
-                type: 'date-picker',
-                default: '',
-                width: 170
-              },
-              {
-                prop: 'isPublic',
-                label: '是否公开',
-                type: 'switch',
-                default: true,
-                width: 170
-              },
-              {
-                prop: 'allowComment',
-                label: '允许评论',
-                type: 'switch',
-                default: true,
-                width: 170
-              }
-            ],
-            query: {
-              conditions: {
-                type: 'page'
-              },
-              select: {
-                title: 1,
-                pathName: 1,
-                isPublic: 1,
-                allowComment: 1,
-                updatedAt: 1,
-                createdAt: 1,
-                markdownContent: 1,
-                type: 1,
-                markdownToc: 1
-              }
-            }
-          })
-        }
-      ]
-    },
-    {
-      path: '/theme',
-      name: 'theme',
-      component: Main,
-      children: [
-        {
-          path: 'list',
-          name: 'themeList',
-          component: createListView({
-            name: 'theme',
-            model: 'theme',
-            items: [
-              {
-                prop: 'name',
-                label: '主题',
-                width: 250
-              },
-              {
-                prop: 'author',
-                label: '作者'
-              }
-            ],
-            query: {}
-          })
-        },
-        {
-          path: 'create/:id',
-          name: 'themeEdit',
-          component: createEditView({
-            name: 'theme',
-            model: 'theme',
-            items: [
-              {
-                prop: 'name',
-                label: '主题名称',
-                width: 250
-              },
-              {
-                prop: 'author',
-                label: '作者',
-                width: 170
-              },
-              {
-                prop: 'option',
-                label: '配置',
-                width: 170,
-                type: 'textarea',
-                sourceType: 'Object',
-                description: '配置内容应为一个JSON对象，不符合JSON格式时提交将被忽略'
-              }
-            ],
-            query: {}
-          })
-        }
-      ]
-    },
-    {
       path: '/cate',
       name: 'cate',
       component: Main,
@@ -492,6 +311,34 @@ export default new Router({
             ],
             query: {}
           })
+        }
+      ]
+    },
+    {
+      path: '/album',
+      name: 'album',
+      component: Main,
+      children: [
+        {
+          path: 'list',
+          name: 'albumList',
+          component: createListView({
+            name: 'album',
+            model: 'album',
+            items: [
+              {
+                prop: 'title',
+                label: '相片名称',
+                width: 250
+              }
+            ],
+            query: {}
+          })
+        },
+        {
+          path: 'create/:id?',
+          name: 'albumCreate',
+          component: AlbumCreate
         }
       ]
     },

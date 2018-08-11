@@ -338,7 +338,10 @@ export default new Router({
         {
           path: 'create/:id?',
           name: 'albumCreate',
-          component: AlbumCreate
+          component: AlbumCreate,
+          props: {
+            model: 'album'
+          }
         }
       ]
     },

@@ -28,4 +28,4 @@ EXPOSE 8080
 EXPOSE 8082
 
 
-CMD mongod --logpath=/tmp/mongolog --fork&&redis-server /etc/redis/redis.conf&&pm2-docker start pm2.json
+CMD mongod --logpath=/tmp/mongolog --fork --port 19999&&redis-server /etc/redis/redis.conf&&pm2-docker start pm2.json

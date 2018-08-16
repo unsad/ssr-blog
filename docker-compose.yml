@@ -6,11 +6,22 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - 80:80
+      - 4000:80
     links:
       - web:nginxserver
+  mongo_db:
+    image: mongo:3.4
+    restart: always
+    volumes:
+      - /data/db:/data/db
+    ports:
+      - 19999:27017
+
   web:
     build:
       context: .
       dockerfile: ./Dockerfile
+      depends_on:
+        - mongo_db
+        - nginx_proxy
   

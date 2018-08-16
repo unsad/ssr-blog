@@ -7,10 +7,7 @@ COPY . /app
 # install mongo & redis
 
 RUN apt-get update \
-    && apt-get install -y mongodb \
     && apt-get install -y redis-server \
-    && mkdir -p /data/db/ 
-
 # install npm packages
 RUN npm i -g pm2
 # install dependences
@@ -26,4 +23,4 @@ EXPOSE 3000
 EXPOSE 8080
 
 
-CMD mongod --logpath=/tmp/mongolog --fork --port 19999&&redis-server /etc/redis/redis.conf&&pm2-docker start pm2.json
+CMD redis-server /etc/redis/redis.conf&&pm2-docker start pm2.json

@@ -16,7 +16,11 @@ services:
       - /data/db:/data/db
     ports:
       - 19999:27017
-
+  redis:
+    image: redis:3.2
+    restart: always
+    ports:
+      - 6379:6379
   web:
     build:
       context: .
@@ -24,4 +28,5 @@ services:
       depends_on:
         - mongo_db
         - nginx_proxy
+        - redis
   

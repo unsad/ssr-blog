@@ -16,4 +16,4 @@ EXPOSE 3000
 EXPOSE 8080
 
 
-CMD pm2-docker start pm2.json
+CMD ["pm2-docker", "start", "pm2.json", "--env", "production"] 

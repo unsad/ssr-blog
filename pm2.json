@@ -14,7 +14,9 @@
         "HOST": "localhost"
       },
       "env_production": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "redisHost": "redis",
+        "mongoHost": "mongo_db"
       }
     },
     {

@@ -2,6 +2,7 @@
  * Created by unsad on 2017/9/21.
  */
 const glob = require('glob');
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const base = require('./webpack.base.config');

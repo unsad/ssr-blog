@@ -111,12 +111,7 @@ module.exports = {
     maxEntrypointSize: 300000,
     hints: isProd ? 'warning' : false
   },
-  plugins: (isProd ? [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin()
-  ] : [
+  plugins: (isProd ? [] : [
     new FriendlyErrorsPlugin()
   ]).concat([
     new webpack.LoaderOptionsPlugin({

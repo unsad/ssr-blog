@@ -3,10 +3,11 @@
  */
 let head = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\r\n`
+const { serverHost, serverPort } = require('./config');
 
-let tail = `</urlset>`
+let tail = `</urlset>`;
 
-let api = 'http://localhost:3000/api/post';
+let api = `http://${serverHost}:${serverPort}/api/post`;
 
 let params = {
   conditions: {

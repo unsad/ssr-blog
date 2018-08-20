@@ -202,7 +202,7 @@ config.flushOption().then(() => {
     const url = decodeURIComponent(req.url);
     if (!isProd) return next();
     if (url.startsWith(prefix)) {
-      const rewriteUrl = ` http://localhost:${config.serverPort}/${url.replace(prefix, '')}`;
+      const rewriteUrl = ` http://${config.serverHost}:${config.serverPort}/${url.replace(prefix, '')}`;
       console.log('rewrite', rewriteUrl);
       axios.get(rewriteUrl).on('error', err => {
         res.end(err);

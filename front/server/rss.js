@@ -3,10 +3,12 @@
  */
 let getUpdatedDate = date => `<lastBuildDate>${date}</lastBuildDate>\r\n`
 
-let tail = `  </channel>
-</rss>`
+const { serverHost, serverPort } = require('./config');
 
-let api = 'http://localhost:3000/api/post';
+let tail = `  </channel>
+</rss>`;
+
+let api = `http://${serverHost}:${serverPort}/api/post`;
 
 let params = {
   conditions: {

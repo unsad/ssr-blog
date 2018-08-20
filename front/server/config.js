@@ -3,7 +3,7 @@
  */
 const isProd = process.env.NODE_ENV === 'production';
 let axios = require('axios');
-const { ssrPort, serverPort, enableServerSideGA } = require('./mongo');
+const { ssrPort, serverPort, serverHost, enableServerSideGA } = require('./mongo');
 
 let siteUrl = 'http://localhost:8080';
 let title = 'Blog';
@@ -25,7 +25,7 @@ let ga = {
 }
 
 function flushOption() {
-  return axios.get('http://localhost:3000/api/option').then(res => {
+  return axios.get(`http://${serverHost}:${serverPort}/api/option`).then(res => {
     let options = res.data.reduce((prev, curr) => {
       prev[curr.key] = curr.value;
       return prev;
@@ -39,6 +39,7 @@ function flushOption() {
 }
 
 exports.ssrPort = ssrPort;
+exports.serverHost = serverHost;
 exports.serverPort = serverPort;
 exports.enableServerSideGA = enableServerSideGA;
 

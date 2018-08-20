@@ -12,10 +12,10 @@ const RatelimitPlugin = require(`${useRoutesPrefix}/ratelimit`)
 config.plugins.unshift(
   // beforeUseRoutes
   new RatelimitPlugin({
-    duration: 1000,
+    duration: 10000,
     errorMessage: 'Slow Down Your Request',
     id: ctx => ctx.ip,
-    max: 10
+    max: 100
   })
 )
 

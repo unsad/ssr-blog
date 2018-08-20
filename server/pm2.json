@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "backend",
-      "script": "server/app.js",
+      "script": "app.js",
       "cwd": "",
       "exec_mode": "cluster",
       "instances": 0,
@@ -17,23 +17,6 @@
         "NODE_ENV": "production",
         "redisHost": "redis",
         "mongoHost": "mongo_db"
-      }
-    },
-    {
-      "name": "frontend",
-      "script": "front/server.js",
-      "cwd": "",
-      "exec_mode": "cluster",
-      "instances": 0,
-      "max_memory_restart": "256M",
-      "autorestart": true,
-      "node_args": [],
-      "args": [],
-      "env": {
-        "HOST": "localhost"
-      },
-      "env_production": {
-        "NODE_ENV": "production"
       }
     }
   ]

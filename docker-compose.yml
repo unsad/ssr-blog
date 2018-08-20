@@ -7,8 +7,6 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
-    depends_on:
-      - web
   mongo_db:
     image: mongo:3.4
     restart: always
@@ -22,15 +20,22 @@ services:
     restart: always
     expose:
       - "6379"
-  web:
+  web_front:
     build:
-      context: .
+      context: ./front
+      dockerfile: ./Dockerfile
+    depends_on:
+      - web_back 
+    expose:
+      - "8080"
+  web_back:
+    build:
+      context: ./server
       dockerfile: ./Dockerfile
     depends_on:
       - mongo_db
       - redis
     expose:
-      - "8080"
       - "3000"
 
   

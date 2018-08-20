@@ -1,0 +1,21 @@
+{
+  "apps": [
+    {
+      "name": "frontend",
+      "script": "server.js",
+      "cwd": "",
+      "exec_mode": "cluster",
+      "instances": 0,
+      "max_memory_restart": "256M",
+      "autorestart": true,
+      "node_args": [],
+      "args": [],
+      "env": {
+        "HOST": "localhost"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

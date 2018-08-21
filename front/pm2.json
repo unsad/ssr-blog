@@ -14,7 +14,8 @@
         "HOST": "localhost"
       },
       "env_production": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "serverHost": "web_back"
       }
     }
   ]

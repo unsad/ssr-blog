@@ -2,9 +2,8 @@
  * Created by unsad on 2017/9/24.
  */
 const isProd = process.env.NODE_ENV === 'production';
-
 const log = require('log4js').getLogger('ssr server');
-log.level = 'debug';
+log.level = 'info';
 const fs = require('fs');
 const path = require('path');
 const resolve = file => path.resolve(__dirname, file);
@@ -19,8 +18,8 @@ const { JSDOM } = require('jsdom');
 const sendGoogleAnalytic = require('./middleware/serverGoogleAnalytic');
 const favicon = require('./middleware/favicon');
 const getRobotsFromConfig = require('./server/robots.js');
-const {api: sitemapApi, params: sitemapParams, getSitemapFromBody} = require('./server/sitemap.js');
-const {api: rssApi, params: rssParams, getRssBodyFromBody} = require('./server/rss.js');
+const { api: sitemapApi, params: sitemapParams, getSitemapFromBody } = require('./server/sitemap.js');
+const { api: rssApi, params: rssParams, getRssBodyFromBody } = require('./server/rss.js');
 const config = require('./server/config');
 
 const uuid = require('uuid');
@@ -63,7 +62,7 @@ config.flushOption().then(() => {
     };
   }
 
-  const {createBundleRenderer} = require('vue-server-renderer');
+  const { createBundleRenderer } = require('vue-server-renderer');
 
   const useMicroCache = process.env.MIRCO_CACHE !== 'false';
 
@@ -103,17 +102,17 @@ config.flushOption().then(() => {
     maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
   });
 
-  app.use(compression({threshold: 0}));
+  app.use(compression({ threshold: 0 }));
 
   app.use(require('cookie-parser')());
 
   app.use((req, res, next) => {
-    log.debug(`${req.method} ${decodeURIComponent(req.url)}`);
+    log.info(`${req.method} ${decodeURIComponent(req.url)}`);
     return next();
   });
 
   app.get('/favicon.ico', favicon(config.favicon));
-  app.use('./dist', serve('./dist', true));
+  app.use('/dist', serve('./dist', true));
   app.use('/public', serve('./public', true));
   app.use('/static', serve('./static', true));
   app.use('/service-worker.js', serve('./dist/service-worker.js'));
@@ -147,7 +146,7 @@ config.flushOption().then(() => {
     const renderStream = renderer.renderToStream(context);
 
     renderStream.once('data', () => {
-      const {title, link, meta} = context.meta.inject();
+      const { title, link, meta } = context.meta.inject();
       const titleText = title.text();
       const metaData = `${title.text()}${meta.text()}${link.text()}`;
       const matched = titleText.match(titleReg);
@@ -162,7 +161,7 @@ config.flushOption().then(() => {
         dt: matched ? matched[1] : config.title,
         dr: req.url,
         dp: req.url,
-        z: +Date.now(),
+        z: Number(Date.now()),
         cid: clientId
       });
     });
@@ -172,7 +171,7 @@ config.flushOption().then(() => {
 
     renderStream.on('end', () => {
       res.end();
-      log.debug(`whole request: ${Date.now() - s}ms`);
+      log.info(`whole request: ${Date.now() - s}ms`);
     });
 
     renderStream.on('error', err => {
@@ -218,7 +217,7 @@ config.flushOption().then(() => {
 
   const port = config.ssrPort;
   app.listen(port, () => {
-    log.debug(`server started at localhost:${port}`);
+    log.info(`server started at localhost:${port}`);
   });
 }).catch(err => log.error(err));
 

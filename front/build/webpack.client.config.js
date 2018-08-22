@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === 'production') {
       minify: true,
       dontCacheBustUrlsMatching: false,
       staticFileGlobsIgnorePatterns: [
-        /\.json$/, 
+        /\.json$/,
         /index\.html$/,
         /\.map$/,
         /\.css$/,
@@ -74,7 +74,7 @@ if (process.env.NODE_ENV === 'production') {
             }
           }
         },
-        {
+        { 
           urlPattern: /\.(png|jpg|webp|gif)/,
           handler: 'cacheFirst',
           options: {

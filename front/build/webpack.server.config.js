@@ -11,7 +11,7 @@ const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 module.exports = merge(baseConfig, {
   entry: './src/server-entry.ts',
   target: 'node',
-  devtool: '#source-map',
+  devtool: 'source-map',
   output: {
     libraryTarget: 'commonjs2',
     filename: 'server-bundle.js'
@@ -24,21 +24,6 @@ module.exports = merge(baseConfig, {
   externals: nodeExtenals({
     whitelist: /\.css$/
   }),
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            warnings: false
-          },
-          output: {
-            comments: false
-          }
-        },
-        sourceMap: false
-      })
-    ]
-  },
   plugins: [
     new VueSSRServerPlugin(),
     new webpack.DefinePlugin({

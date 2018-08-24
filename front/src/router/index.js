@@ -25,7 +25,7 @@ Vue.use(VueMeta);
 
 export function createRouter() {
   let router = new Router({
-    mode: 'history',
+    mode: isServer ? 'abstract' : 'history',
     fallback: false,
     scrollBehavior: function (to, from, savedPosition) {
       if (to.hash) {

@@ -9,9 +9,10 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
+const isServer = process.env.VUE_ENV === 'server';
 
 function generateCssRules(cssLoaderOption) {
-  return (isProd ? [MiniCssExtractPlugin.loader] : ['vue-style-loader']).concat([
+  return (isProd && !isServer ? [MiniCssExtractPlugin.loader] : ['vue-style-loader']).concat([
     cssLoaderOption,
     postcssLoader,
     'stylus-loader'
@@ -120,10 +121,6 @@ module.exports = {
           import: [path.resolve(__dirname, '../src/assets/css/variable.styl')]
         }
       }
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'common.[name].[hash].css',
-      chunkFilename: '[id].[hash].css'
     }),
     new VueLoaderPlugin()
   ])

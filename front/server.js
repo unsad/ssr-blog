@@ -175,7 +175,7 @@ config.flushOption().then(() => {
     });
 
     renderStream.on('error', err => {
-      res.end('err');
+      res.end(err);
       log.error(err);
     });
   }

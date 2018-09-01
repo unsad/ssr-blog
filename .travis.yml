@@ -3,8 +3,7 @@ language: node_js
 services:
 - docker
 install: true
-script:
-- docker-compose up
+script: true
 addons:
   ssh_known_hosts: 47.100.112.11:3999
 node_js:
@@ -12,6 +11,6 @@ node_js:
 after_success:
 - ssh unsad@47.100.112.11 -p 3999 "./docker_start.sh"
 before_install:
-- chmod 600 ~/.ssh/id_rsa
 - openssl aes-256-cbc -K $encrypted_111bdbda2220_key -iv $encrypted_111bdbda2220_iv
-  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa

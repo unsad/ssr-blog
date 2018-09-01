@@ -1,5 +1,7 @@
 # ssr-blog
 
+[![Build Status](https://travis-ci.org/unsad/ssr-blog.svg?branch=master)](https://travis-ci.org/unsad/ssr-blog)
+
 A server-side-rending blog based on Vue2 && Koa2 && MongoDB with Persona5 theme.
 
 ## Preview

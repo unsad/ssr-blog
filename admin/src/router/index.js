@@ -222,6 +222,63 @@ export default new Router({
       ]
     },
     {
+      path: '/theme',
+      name: 'theme',
+      component: Main,
+      children: [
+        {
+          path: 'list',
+          name: 'themeList',
+          component: createListView({
+            name: 'theme',
+            model: 'theme',
+            items: [
+              {
+                prop: 'name',
+                label: '主题',
+                width: 250
+              },
+              {
+                prop: 'author',
+                label: '作者',
+                width: 170
+              }
+            ],
+            query: {}
+          })
+        },
+        {
+          path: 'create/:id?',
+          name: 'themeEdit',
+          component: createEditView({
+            name: 'theme',
+            model: 'theme',
+            items: [
+              {
+                prop: 'name',
+                label: '主题名称',
+                width: 250
+              },
+              {
+                prop: 'author',
+                label: '作者',
+                width: 170
+              },
+              {
+                prop: 'option',
+                label: '配置',
+                width: 170,
+                type: 'textarea',
+                sourceType: 'Object',
+                description: '配置内容应为一个JSON对象，不符合JSON格式时提交将被忽略'
+              }
+            ],
+            query: {}
+          })
+        }
+      ]
+    },
+    {
       path: '/tag',
       name: 'tag',
       component: Main,

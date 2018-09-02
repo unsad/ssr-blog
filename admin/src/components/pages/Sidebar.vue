@@ -36,6 +36,12 @@
           </el-submenu>
 
           <el-submenu index="7">
+            <template slot="title"><i class="el-icon-menu"></i>主题管理</template>
+            <el-menu-item index="/theme/list">主题列表</el-menu-item>
+            <el-menu-item index="/theme/create">编辑主题</el-menu-item>
+          </el-submenu>
+
+          <el-submenu index="8">
             <template slot="title"><i class="el-icon-setting"></i>系统设置</template>
             <el-menu-item index="/option/general">基本设置</el-menu-item>
             <el-menu-item index="/option/comment">评论设置</el-menu-item>

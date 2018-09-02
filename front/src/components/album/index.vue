@@ -1,7 +1,9 @@
 <template>
     <div>
-      <div v-for="(item, index) of album" :class="albumCss.previewBox">
-        <img :class="albumCss.previewContent" :key="item.url" :src="getPreviewUrl(item.url, 200)" @click="selectedIndex = index"/>
+      <h1 :class="albumCss.title">{{title}}</h1>
+      <second-title second-text="Why can't you see the flowers in her eyes?"></second-title>
+      <div v-for="(item, index) of album" :key="item.url" :class="albumCss.previewBox">
+        <img :class="albumCss.previewContent" :src="getPreviewUrl(item.url, 200)" @click="selectedIndex = index"/>
       </div>
       <transition name="fade">
         <div :class="albumCss.selectedBox" v-show="selectedIndex >= 0">
@@ -10,6 +12,8 @@
           <span @click="next">next</span>
         </div>
       </transition>
+       <back></back>
+       <my-footer></my-footer>
     </div>
 </template>
 
@@ -18,16 +22,25 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import {
   Getter
 } from 'vuex-class';
+import secondTitle from '@/components/second-title';
+import myFooter from '@/components/footer';
+import back from '@/components/back';
 
 @Component({
   asyncData({store, route: {path, params, query}}) {
     return store.dispatch('FETCH_ALBUM', {
       model: 'album'
     });
+  },
+  components: {
+    myFooter,
+    secondTitle,
+    back
   }
 })
 export default class Album extends Vue {
   selectedIndex: number = -1;
+  title: string = '相册';
   @Getter album
   getPreviewUrl(url, width) {
     return `${url}?imageView2/2/w/${width}`;
@@ -42,6 +55,9 @@ export default class Album extends Vue {
 </script>
 <style module="albumCss" lang="stylus" rel="stylesheet/stylus">
 @import '../../assets/css/mixin.styl'
+
+.title 
+  title-base() 
 .previewBox
   margin: $space-middle
   display: inline-block

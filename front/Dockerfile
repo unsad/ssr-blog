@@ -5,9 +5,6 @@ FROM node:7.7
 COPY . /app
 RUN npm set registry https://registry.npm.taobao.org
 RUN npm i -g pm2
-RUN cd /app && npm install chromedriver --chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver && npm install phantomjs-prebuilt --ingore-scripts && npm install && npm run build
-
-# clean cache
 RUN npm cache clean
 
 WORKDIR /app

@@ -21,6 +21,7 @@ services:
     expose:
       - "6379"
   web_front:
+    image: unsad/web_front
     build:
       context: ./front
       dockerfile: ./Dockerfile
@@ -29,6 +30,7 @@ services:
     expose:
       - "8080"
   web_back:
+    image: unsad/web_back
     build:
       context: ./server
       dockerfile: ./Dockerfile

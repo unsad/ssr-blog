@@ -12,11 +12,12 @@ const isProd = process.env.NODE_ENV === 'production';
 const isServer = process.env.VUE_ENV === 'server';
 
 function generateCssRules(cssLoaderOption) {
-  return (isProd && !isServer ? [MiniCssExtractPlugin.loader] : ['vue-style-loader']).concat([
+  return [
+    'vue-style-loader',
     cssLoaderOption,
     postcssLoader,
     'stylus-loader'
-  ]);
+  ];
 }
 
 const cssLoaderWithModule = {

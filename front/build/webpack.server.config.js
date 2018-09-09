@@ -22,7 +22,7 @@ module.exports = merge(baseConfig, {
     }
   },
   externals: nodeExtenals({
-    whitelist: /\.css$/
+    whitelist: [/\.css$/, /\?vue&type=style/]
   }),
   plugins: [
     new VueSSRServerPlugin(),

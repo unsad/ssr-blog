@@ -41,7 +41,7 @@ const postcssLoader = {
   }
 };
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir);
 }
 

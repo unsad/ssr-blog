@@ -5,6 +5,9 @@ FROM node:7.7
 COPY . /app
 RUN npm set registry https://registry.npm.taobao.org
 RUN npm i -g pm2
+RUN cd /app && npm install && npm run build
+
+# clean cache
 RUN npm cache clean
 
 WORKDIR /app

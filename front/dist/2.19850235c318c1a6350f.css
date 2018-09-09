@@ -1,0 +1,51 @@
+
+.container_ngTuEkIT{margin-top:1rem;text-align:center
+}
+.container_ngTuEkIT .main_2qj_N5Bw{border-top:.1rem solid #fff;color:#fff;display:inline-block;font-size:16px;font-size:1rem;line-height:1.5;min-width:-webkit-max-content;min-width:-moz-max-content;min-width:max-content;padding:.5rem 0;width:30%
+}
+.container_ngTuEkIT .main_2qj_N5Bw a{color:#fff
+}
+
+.container_ZAedpHQZ{color:#fff;margin:1rem 0;text-align:center
+}
+.container_ZAedpHQZ .text_2AQYWdZp{background:#000;display:inline-block;font-family:jackey_handwriteregular;letter-spacing:1.6px;letter-spacing:.1rem;position:relative
+}
+.container_ZAedpHQZ .deco_2RGy5o2t{-webkit-transform:rotate(-20deg);height:100%;left:-10%;position:absolute;top:-50%;transform:rotate(-20deg)
+}
+@media only screen and (min-width:769px){
+.text_2AQYWdZp{font-size:2rem;padding:1rem
+}
+}
+@media only screen and (max-width:768px){
+.text_2AQYWdZp{font-size:1.5rem;padding:.5rem
+}
+}
+
+@media only screen and (min-width:769px){
+.container_XgEOrDe-{width:10rem
+}
+}
+@media only screen and (max-width:768px){
+.container_XgEOrDe-{width:6rem
+}
+}
+.container_XgEOrDe-{cursor:pointer;position:fixed
+}
+.container_XgEOrDe- .backDeco_3GaTQRnh{pointer-events:none
+}
+
+.title_kpiFk3AA{background:url(/dist/title_base.3282b88edd673444ffaae10292c03615.png);color:#fff;font-family:special-for-me;line-height:96px;line-height:6rem;margin:0 auto 1rem;text-align:center
+}
+.previewBox_2A4usbUj{background:#000;border:.3rem solid #fff;color:#fff;display:inline-block;font-size:0;margin:1rem;outline:3.2px solid #000;outline:.2rem solid #000
+}
+.previewBox_2A4usbUj .previewContent_oA-H6IcY{-webkit-filter:grayscale(100%);filter:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /></filter></svg>#filter');filter:grayscale(100%);padding:.2rem
+}
+.selectedBox_oNCYpgyg{-ms-flex-align:center;-ms-flex-pack:center;-webkit-box-align:center;-webkit-box-pack:center;align-items:center;background:#000;bottom:0;color:#fff;display:-webkit-box;display:-ms-flexbox;display:flex;justify-content:center;left:0;position:absolute;right:0;top:0
+}
+.selectedBox_oNCYpgyg .selectedContent_AaS3OjIW{height:auto;width:90%
+}
+
+.fade-enter-active,.fade-leave-active{-webkit-transition:opacity .3s ease;transition:opacity .3s ease
+}
+.fade-enter,.fade-leave-to{opacity:0
+}

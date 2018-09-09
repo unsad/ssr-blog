@@ -53,6 +53,7 @@ module.exports = {
     publicPath: '/dist/',
     filename: '[name].[chunkhash].js'
   },
+  context: path.resolve(__dirname, '..'),
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {

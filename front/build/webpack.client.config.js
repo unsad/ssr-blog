@@ -25,11 +25,18 @@ const config = merge(base, {
     },
     splitChunks: {
       cacheGroups: {
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true
+        commons: {
+          minChunks: 2,
+          name: 'commons',
+          chunks: 'async',
+          reuseExistingChunk: true,
+          priority: 3,
+        },
+        vendors: {
+          priority: 1,
+          name: 'vendors',
+          chunks: 'initial',
+          test: /[\\/]node_modules[\\/]/
         }
       }
     }

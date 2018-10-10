@@ -6,7 +6,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - 80:80
+      - 4000:80
   mongo_db:
     image: mongo:3.4
     restart: always

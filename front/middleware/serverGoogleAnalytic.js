@@ -5,7 +5,7 @@ const log = require('log4js').getLogger('google analytic')
 
 const config = require('../server/config')
 const request = require('axios')
-const EMPTY_GIF = new Buffer('R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==', 'base64')
+const EMPTY_GIF = Buffer.from('R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==', 'base64')
 const uuid = require('uuid')
 const expires = 3600 * 1000 * 24 * 365 * 2
 const ipReg = /\d+\.\d+\.\d+\.\d+/

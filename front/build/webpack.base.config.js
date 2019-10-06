@@ -23,9 +23,10 @@ function generateCssRules(cssLoaderOption) {
 const cssLoaderWithModule = {
   loader: 'css-loader',
   options: {
-    minimize: isProd,
-    modules: true,
-    localIdentName: '[local]_[hash:base64:8]'
+    url: true,
+    modules: {
+      localIdentName: '[local]_[hash:base64:8]'
+    }
   }
 };
 
@@ -65,15 +66,15 @@ module.exports = {
   module: {
     noParse: /es-promise\.js$/,
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.(ts|js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.(ts|js|vue)$/,
+      //   loader: 'eslint-loader',
+      //   exclude: /node_modules/,
+      //   options: {
+      //     formatter: require('eslint-friendly-formatter')
+      //   }
+      // },
       {
         test: /\.vue$/,
         loader: 'vue-loader',

@@ -101,7 +101,7 @@
     }
   }
 </script>
-<style lang="stylus" module="$post" rel="stylesheet/stylus">
+<style lang="stylus" module="post" rel="stylesheet/stylus">
 @import '../../assets/css/mixin.styl'
 
 @media only screen and (max-width : 768px)
@@ -131,7 +131,7 @@
           list-style-type: disc 
           color: $content-main-color
           margin-left: $space-middle-u
-        background: url('@/components/post/img/post-bg.svg') no-repeat bottom left/80%,
+        background: url('./img/post-bg.svg') no-repeat bottom left/80%,
                     linear-gradient(to left, $main-second-color 30%, $content-bg-color)  
       ul 
         margin-left: 1rem

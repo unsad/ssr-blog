@@ -33,6 +33,7 @@ let robots = '';
 process.on('warning', e => console.warn(e.stack));
 
 global.window = dom.window;
+global.window.Date = Date;
 global.document = window.document;
 global.navigator = window.navigator;
 
@@ -74,7 +75,7 @@ config.flushOption().then(() => {
   function createRenderer(bundle, options) {
     return createBundleRenderer(bundle, Object.assign(options, {
       template,
-      cache: LRU({
+      cache: new LRU({
         max: 1000,
         maxAge: 1000 * 60 * 15
       }),

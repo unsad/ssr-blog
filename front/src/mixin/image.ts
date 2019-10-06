@@ -7,16 +7,16 @@ import { Getter } from 'vuex-class';
 
 @Component
 export default class MyMixin extends Vue {
-  @Getter option
-  @Getter siteInfo
-  @Getter supportWebp
-  get logoUrl() {
+  @Getter public option
+  @Getter public siteInfo
+  @Getter public supportWebp
+  public get logoUrl() {
     return this.getValidImageUrl(this.option ? this.option.logoUrl || '' : '');
   }
-  get sidebarUrl() {
+  public get sidebarUrl() {
     return this.getValidImageUrl(this.option ? this.option.sidebarImageUrl || '' : '');
   }
-  getValidImageUrl(url) {
+  public getValidImageUrl(url) {
     if (!this.supportWebp) return url.replace(/.webp$/, '.png').replace('/webp', '');
     return url;
   }

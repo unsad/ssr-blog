@@ -89,6 +89,13 @@
                   stroke="black" fill="transparent" stroke-width="6"/>
             </svg>
           </div>
+          <div :class="[about.directBox, about.box13]">
+            <span :class="about.directContent">编曲</span>
+            <svg :class="about.directLine" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="0,75 100,75 200,20"
+                  stroke="black" fill="transparent" stroke-width="6"/>
+            </svg>
+          </div>
           <router-link to="/catchme" tag="div" :class="about.catchBox">
              <svg width="200" height="80" version="1.1" xmlns="http://www.w3.org/2000/svg">
               <polyline points="0,50 50,50 45,60 155,55 150,80 200,40 140,0 150,25 120,25 122,15 0,50"
@@ -230,6 +237,9 @@ export default class About extends Vue {
   .box12
     left: -30% 
     bottom: 18rem
+  .box13
+    left: -22%
+    bottom: 13rem
   .catchBox 
     position: absolute
     z-index: 1

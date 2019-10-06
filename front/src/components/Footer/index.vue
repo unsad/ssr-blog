@@ -1,7 +1,7 @@
 <template>
   <footer :class="footer.container"> 
     <div :class="footer.main">
-      <span>&copy;2018&nbsp;&nbsp; {{siteInfo.title.value}}</span> &nbsp;<br> 
+      <span>&copy;2019&nbsp;&nbsp; {{siteInfo.title.value}}</span> &nbsp;<br> 
       <span>Powered by
         <a target="_blank" href="https://github.com/vuejs/vue">Vue</a>&nbsp;&amp;&nbsp;<a target="_blank" href="https://github.com/koajs/koa">Koa</a>
       </span>

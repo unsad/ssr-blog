@@ -3,51 +3,19 @@
      <div :class="sidebar.pic" class="no-phone">
         <img src="./img/sidebar.svg" alt="" width="125%">
     </div>
-    <nav :class="{[sidebar.image]: sidebarUrl !== '', [sidebar.content]: true}">
-      <div class="profile" v-if="false">
-        <a href="/">
-          <img :src="logoUrl" :alt="siteInfo.title.value">
-        </a>
-        <span :style="{'color': sidebarUrl ? option.sidebarFontColor : ''}">{{siteInfo.title.value}}</span>
-      </div>
+    <nav :class="sidebar.content">
+      <ul :class="sidebar.icons">
+        <li>
+          <a href="/rss.xml" target="_blank" class="inline">
+            <img src="./img/rss.svg" alt="RSS" width="20px">
+          </a>
+        </li>
+      </ul>
       <ul :class="sidebar.link" v-if="option && option.menu">
         <li v-for="menu of option.menu" :key="menu.label">
           <router-link :class="sidebar.linkItem" :to="{path: menu.url}" :title="menu.label">
             <span :class="sidebar.rotate1">{{menu.label[0]}}</span><span :class="sidebar.rotate2">{{menu.label[1]}}</span>
           </router-link>
-        </li>
-      </ul>
-      <ul class="sidebar-buttons" v-if="siteInfo && siteInfo.weiboUrl">
-        <li>
-          <a :href="'https://github.com' + siteInfo.githubUrl.value"
-            target="_blank"
-            class="inline"
-            v-if="siteInfo.githubUrl.value"
-            ref="nofollow">
-            <i title="GitHub"></i>
-          </a>
-        </li>
-        <li>
-          <a :href="siteInfo.weiboUrl.value"
-            target="_blank"
-            class="inline"
-            v-if="siteInfo.weiboUrl.value"
-            ref="nofollow">
-            <i title="GitHub"></i>
-          </a>
-        </li>
-        <li>
-          <a href="/rss.xml" target="_blank" class="inline">
-            <i title="RSS"></i>
-          </a>
-        </li>
-        <li>
-          <a :href="'https://www.google.com/webhp#newwindow=1&safe=strict&q=site:' + siteInfo.siteUrl.value"
-            target="_blank"
-            class="inline"
-            v-if="siteInfo.siteUrl.value">
-            <i title="Search"></i>
-          </a>
         </li>
       </ul>
     </nav>
@@ -93,6 +61,9 @@
       bottom: 0
       left: calc(75% - 30vh)
       width: 100%
+    .icons
+      position: absolute
+      padding: 1rem
     .content
       height: 100vh
       position: relative
@@ -129,6 +100,4 @@
           color: $main-second-color
           -webkit-text-stroke: 2px $main-third-color
           transform: rotate(15deg) translate(5%)
-
-
 </style>

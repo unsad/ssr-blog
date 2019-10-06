@@ -186,7 +186,7 @@ config.flushOption().then(() => {
     return res.end(robots);
   });
 
-  app.get('./rss.xml', (req, res, next) => {
+  app.get('/rss.xml', (req, res, next) => {
     res.header('Content-Type', 'application/xml');
     res.end(rss);
   });

@@ -4,7 +4,7 @@
         <img src="./img/sidebar.svg" alt="" width="125%">
     </div>
     <nav :class="sidebar.content">
-      <ul :class="sidebar.icons">
+      <ul :class="sidebar.icons" class="no-phone">
         <li>
           <a href="/rss.xml" target="_blank" class="inline">
             <img src="./img/rss.svg" alt="RSS" width="20px">

@@ -39,10 +39,14 @@ global.navigator = window.navigator;
 
 config.flushOption().then(() => {
   robots = getRobotsFromConfig(config);
-  const flushSitemap = () => axios.get(sitemapApi, sitemapParams).then(result => {
+  const flushSitemap = () => axios.get(sitemapApi, {
+    params: sitemapParams
+  }).then(result => {
     sitemap = getSitemapFromBody(result, config);
   });
-  const flushRss = () => axios.get(rssApi, rssParams).then(result => {
+  const flushRss = () => axios.get(rssApi, {
+    params: rssParams
+  }).then(result => {
     rss = getRssBodyFromBody(result, config);
   });
 

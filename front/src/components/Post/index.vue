@@ -101,7 +101,7 @@
     }
   }
 </script>
-<style lang="stylus" module="post" rel="stylesheet/stylus">
+<style lang="stylus" module="$post" rel="stylesheet/stylus">
 @import '../../assets/css/mixin.styl'
 
 @media only screen and (max-width : 768px)

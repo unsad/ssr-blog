@@ -1,9 +1,12 @@
 <template>
   <footer :class="footer.container"> 
     <div :class="footer.main">
-      <span>&copy;2019&nbsp;&nbsp; {{siteInfo.title.value}}</span> &nbsp;<br> 
+      <span>&copy;2020&nbsp;&nbsp; {{siteInfo.title.value}}</span> &nbsp;<br> 
       <span>Powered by
         <a target="_blank" href="https://github.com/vuejs/vue">Vue</a>&nbsp;&amp;&nbsp;<a target="_blank" href="https://github.com/koajs/koa">Koa</a>
+      </span> &nbsp;<br>
+      <span>
+        <a href="http://beian.miit.gov.cn" target="_blank" rel="nofollow">粤ICP备18005505</a>
       </span>
     </div>
   </footer>

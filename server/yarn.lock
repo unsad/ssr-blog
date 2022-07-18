@@ -722,8 +722,8 @@ string_decoder@~1.0.0:
     buffer-shims "~1.0.0"
 
 thenify@^3.2.0:
-  version "3.3.0"
-  resolved "http://registry.npm.taobao.org/thenify/download/thenify-3.3.0.tgz#e69e38a1babe969b0108207978b9f62b88604839"
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/thenify/-/thenify-3.3.1.tgz#8932e686a4066038a016dd9e2ca46add9838a95f"
   dependencies:
     any-promise "^1.0.0"
 

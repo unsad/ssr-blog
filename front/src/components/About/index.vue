@@ -24,7 +24,14 @@
               <polyline points="0,180 100,75 200,75"
                   stroke="black" fill="transparent" stroke-width="6"/>
             </svg>
-            <span :class="about.directContent">前端开发</span>
+            <span :class="about.directContent">独立开发</span>
+          </div>
+          <div :class="[about.directBox, about.box14]">
+            <svg :class="about.directLine" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="0,26 260,75 360,75"
+                  stroke="black" fill="transparent" stroke-width="6"/>
+            </svg>
+            <span :class="about.directContent">键盘手</span>
           </div>
           <div :class="[about.directBox, about.box4]">
             <svg :class="about.directLine" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -156,6 +163,7 @@ export default class About extends Vue {
     .objectBox 
       display: flex
       min-height: 528px
+      text-align: center
     .directContent 
       font-size: $font-size-small
       two-color-border(0.2rem, 0.1rem)
@@ -163,7 +171,7 @@ export default class About extends Vue {
     .directBox
       display: inline-block
       margin: $space-small $space-middle
-      .direct-content 
+      .directContent
         display: inline-block
     .directLine 
       display: none
@@ -240,6 +248,11 @@ export default class About extends Vue {
   .box13
     left: -22%
     bottom: 13rem
+  .container .box14
+    left: 50%
+    top: 21rem
+    .directLine
+      width: 360px
   .catchBox 
     position: absolute
     z-index: 1

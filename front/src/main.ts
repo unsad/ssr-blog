@@ -21,6 +21,8 @@ export function createApp() {
   const app = new Vue({
     router,
     store,
+    // Initialize vue-meta before mounting children so it adopts the SSR tags.
+    metaInfo: {},
     render: h => h(App)
   });
   const preFetchComponent = [

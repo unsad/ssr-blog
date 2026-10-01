@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html {{{ meta.inject().htmlAttrs.text(true) }}}>
   <head>
     <meta charset="utf-8">
-    <title>ssr-blog</title>
+    {{{ meta.inject().title.text() }}}
+    {{{ meta.inject().meta.text() }}}
+    {{{ meta.inject().link.text() }}}
   </head>
   <body>
     <!--vue-ssr-outlet-->

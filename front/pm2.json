@@ -8,6 +8,9 @@
       "instances": 0,
       "max_memory_restart": "256M",
       "autorestart": true,
+      "restart_delay": 5000,
+      "wait_ready": true,
+      "listen_timeout": 60000,
       "node_args": [],
       "args": [],
       "env": {

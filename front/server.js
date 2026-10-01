@@ -11,7 +11,6 @@ const LRU = require('lru-cache');
 const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
-const microcache = require('route-cache');
 const schedule = require('node-schedule');
 const axios = require('axios');
 const { JSDOM } = require('jsdom');
@@ -21,6 +20,7 @@ const getRobotsFromConfig = require('./server/robots.js');
 const { api: sitemapApi, params: sitemapParams, getSitemapFromBody } = require('./server/sitemap.js');
 const { api: rssApi, params: rssParams, getRssBodyFromBody } = require('./server/rss.js');
 const config = require('./server/config');
+const { retry, sendRenderError } = require('./server/runtime');
 
 const uuid = require('uuid');
 const titleReg = /<.*?>(.+?)<.*?>/;
@@ -37,18 +37,30 @@ global.window.Date = Date;
 global.document = window.document;
 global.navigator = window.navigator;
 
-config.flushOption().then(() => {
+function failStartup(err) {
+  // stderr remains visible under PM2 even if the cluster logger is unavailable.
+  console.error('[startup] failed:', err && (err.stack || err.message) || err);
+  process.exit(1);
+}
+
+retry(() => config.flushOption(), {
+  onRetry: (err, attempt, delay) => {
+    console.error(`[startup] configuration attempt ${attempt} failed; retry in ${delay}ms:`, err.message);
+  }
+}).then(() => {
   robots = getRobotsFromConfig(config);
   const flushSitemap = () => axios.get(sitemapApi, {
-    params: sitemapParams
+    params: sitemapParams,
+    timeout: 5000
   }).then(result => {
     sitemap = getSitemapFromBody(result, config);
-  });
+  }).catch(err => console.error('[sitemap] refresh failed:', err.message));
   const flushRss = () => axios.get(rssApi, {
-    params: rssParams
+    params: rssParams,
+    timeout: 5000
   }).then(result => {
     rss = getRssBodyFromBody(result, config);
-  });
+  }).catch(err => console.error('[rss] refresh failed:', err.message));
 
   flushSitemap();
   flushRss();
@@ -68,8 +80,6 @@ config.flushOption().then(() => {
   }
 
   const { createBundleRenderer } = require('vue-server-renderer');
-
-  const useMicroCache = process.env.MIRCO_CACHE !== 'false';
 
   const app = express();
   app.enable('trust proxy');
@@ -121,26 +131,28 @@ config.flushOption().then(() => {
   app.use('/public', serve('./public', true));
   app.use('/static', serve('./static', true));
   app.use('/service-worker.js', serve('./dist/service-worker.js'));
-  app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl));
+  // route-cache does not buffer res.write() and can strand its request queue
+  // when a streamed response is aborted. Keep streaming responses unwrapped.
   app.use(bodyParser.json());
   function render(req, res, next) {
     const s = Date.now();
 
     res.header('Content-Type', 'text/html;charset=utf-8');
 
+    let renderStream;
+    let failed = false;
+    const stopRendering = () => {
+      if (renderStream && !renderStream.destroyed) renderStream.destroy();
+    };
     const handleError = err => {
-      if (err.url) {
-        res.redirect(err.url);
-      } else if (err.code === 404) {
-        res.status(404).send('404 | Page Not Found');
-      } else {
-        res.status(500).send('500 | Internal Server Error');
-        console.error(`error during render: ${req.url}`);
-        console.error(err.stack);
-      }
+      if (failed) return;
+      failed = true;
+      console.error(`error during render: ${req.url}`, err && (err.stack || err.message) || err);
+      stopRendering();
+      sendRenderError(err, res);
     };
 
-    const supportWebp = req.header('accept').includes('image/webp');
+    const supportWebp = (req.header('accept') || '').includes('image/webp');
 
     const context = {
       title: 'Vue HN 2.0',
@@ -148,41 +160,54 @@ config.flushOption().then(() => {
       supportWebp
     };
 
-    const renderStream = renderer.renderToStream(context);
+    try {
+      renderStream = renderer.renderToStream(context);
+    } catch (err) {
+      return handleError(err);
+    }
+    res.once('close', stopRendering);
+    renderStream.on('error', handleError);
 
     renderStream.once('data', () => {
-      const { title, link, meta } = context.meta.inject();
-      const titleText = title.text();
-      const metaData = `${title.text()}${meta.text()}${link.text()}`;
-      const matched = titleText.match(titleReg);
-      let clientId = req.cookies.id;
-      if (!clientId) {
-        clientId = uuid.v4();
-        res.cookie('id', clientId, {
-          expires: new Date(Date.now() + expires)
+      if (failed || res.finished || res.destroyed) return;
+      try {
+        const { title, link, meta } = context.meta.inject();
+        const titleText = title.text();
+        const metaData = `${title.text()}${meta.text()}${link.text()}`;
+        const matched = titleText.match(titleReg);
+        let clientId = req.cookies.id;
+        if (!clientId) {
+          clientId = uuid.v4();
+          res.cookie('id', clientId, {
+            expires: new Date(Date.now() + expires)
+          });
+        }
+        sendGoogleAnalytic(req, res, next, {
+          dt: matched ? matched[1] : config.title,
+          dr: req.url,
+          dp: req.url,
+          z: Number(Date.now()),
+          cid: clientId
         });
+      } catch (err) {
+        handleError(err);
       }
-      sendGoogleAnalytic(req, res, next, {
-        dt: matched ? matched[1] : config.title,
-        dr: req.url,
-        dp: req.url,
-        z: Number(Date.now()),
-        cid: clientId
-      });
     });
     renderStream.on('data', chunk => {
-      res.write(chunk);
+      if (failed || res.finished || res.destroyed) return;
+      try {
+        res.write(chunk);
+      } catch (err) {
+        handleError(err);
+      }
     });
 
     renderStream.on('end', () => {
+      if (failed || res.finished || res.destroyed) return;
       res.end();
       log.info(`whole request: ${Date.now() - s}ms`);
     });
 
-    renderStream.on('error', err => {
-      res.end(err);
-      log.error(err);
-    });
   }
 
   app.get('/_.gif', (req, res, next) => sendGoogleAnalytic(req, res, next));
@@ -217,12 +242,16 @@ config.flushOption().then(() => {
     }
   });
   app.get('*', isProd ? render : (req, res) => {
-    readyPromise.then(() => render(req, res));
+    readyPromise.then(() => render(req, res)).catch(err => {
+      console.error('[development] renderer failed:', err && err.stack || err);
+      sendRenderError(err, res);
+    });
   });
 
   const port = config.ssrPort;
   app.listen(port, () => {
-    log.info(`server started at localhost:${port}`);
-  });
-}).catch(err => log.error(err));
+    console.info(`server started at localhost:${port}`);
+    if (process.send) process.send('ready');
+  }).on('error', failStartup);
+}).catch(failStartup);
 

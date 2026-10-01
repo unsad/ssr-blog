@@ -25,7 +25,12 @@ let ga = {
 }
 
 function flushOption() {
-  return axios.get(`http://${serverHost}:${serverPort}/api/option`).then(res => {
+  return axios.get(`http://${serverHost}:${serverPort}/api/option`, {
+    timeout: 5000
+  }).then(res => {
+    if (!Array.isArray(res.data)) {
+      throw new Error('Invalid site configuration: expected an array');
+    }
     let options = res.data.reduce((prev, curr) => {
       prev[curr.key] = curr.value;
       return prev;
@@ -34,7 +39,7 @@ function flushOption() {
     title = options['title'];
     description = options['description'];
     googleTrackID = options['analyzeCode'];
-    favicon += options['faviconUrl'];
+    favicon = (isProd ? './dist' : '.') + options['faviconUrl'];
   });
 }
 
